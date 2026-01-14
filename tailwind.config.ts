@@ -57,6 +57,23 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Custom semantic colors
+        "surface-elevated": "hsl(var(--surface-elevated))",
+        "text-subtle": "hsl(var(--text-subtle))",
+        "text-highlight": "hsl(var(--text-highlight))",
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          muted: "hsl(var(--success-muted))",
+        },
+        warning: {
+          DEFAULT: "hsl(var(--warning))",
+          muted: "hsl(var(--warning-muted))",
+        },
+      },
+      fontFamily: {
+        serif: ["var(--font-serif)", "Georgia", "serif"],
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "monospace"],
       },
       borderRadius: {
         lg: "var(--radius)",
