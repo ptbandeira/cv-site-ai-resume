@@ -6,8 +6,8 @@ const Footer = () => {
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
-            <p className="text-2xl font-serif text-foreground mb-2">Marcus Chen</p>
-            <p className="text-muted-foreground">Staff Engineer · Platform Infrastructure</p>
+            <p className="text-2xl font-serif text-foreground mb-2">Pedro Bandeira</p>
+            <p className="text-muted-foreground">The Human-AI Bridge</p>
           </div>
 
           <div className="flex items-center gap-4">
@@ -28,7 +28,7 @@ const Footer = () => {
               <Linkedin className="w-5 h-5" />
             </a>
             <a
-              href="mailto:marcus@example.com"
+              href="mailto:contact@pedrobandeira.ai"
               className="p-3 bg-secondary rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
             >
               <Mail className="w-5 h-5" />
@@ -38,9 +38,7 @@ const Footer = () => {
 
         <div className="mt-12 pt-8 border-t border-border text-center">
           <p className="text-sm text-muted-foreground">
-            This portfolio demonstrates AI-queryable professional presentation.
-            <br />
-            <span className="text-text-subtle">The interface is the proof.</span>
+            © 2026 Pedro Bandeira. Built with Vibe Coding & Strategic Intent.
           </p>
         </div>
       </div>

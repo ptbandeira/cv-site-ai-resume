@@ -9,18 +9,17 @@ const SaaSAudit = () => {
     const [seats, setSeats] = useState(10);
     const [monthlySpend, setMonthlySpend] = useState(500); // Per seat or total? Let's say Total monthly SaaS bill for the function.
 
+    const annualSaasCost = monthlySpend * 12;
+    const buildCost = annualSaasCost * 0.25; // 25% of annual cost for one-time build
+    const year1Savings = annualSaasCost - buildCost;
+    const year2Savings = annualSaasCost * 0.95; // 95% reduction
+
     // Logic: 
     // Traditional SaaS: Monthly Spend * 12
-    // Agentic Build: One-time cost (e.g. $15k) + Maintenance ($100/mo)
+    // Agentic Build: One-time cost (e.g. 25% of Annual SaaS) + Maintenance (5%)
     // This is a rough heuristic for the "Audit".
 
-    const annualSaasCost = monthlySpend * 12;
-    const agenticBuildCost = 5000 + (seats * 100); // Base build + low per-seat implementation
-    const agenticMaintenance = 200 * 12; // Hosting/API costs
-    const firstYearAgentic = agenticBuildCost + agenticMaintenance;
-
-    const savings = annualSaasCost - firstYearAgentic;
-    const isPositive = savings > 0;
+    const isPositive = year1Savings > 0;
 
     return (
         <section id="saas-audit" className="py-20 bg-secondary/30">
@@ -28,7 +27,7 @@ const SaaSAudit = () => {
                 <div className="mb-12">
                     <h2 className="text-3xl font-serif text-foreground mb-4">The SaaS Audit</h2>
                     <p className="text-muted-foreground max-w-2xl text-lg">
-                        Are you renting intelligence or building equity? Compare your perpetual SaaS rent against a custom-owned Agentic Asset.
+                        You are paying for the vendor's overhead. I build you the engine so you own the asset.
                     </p>
                 </div>
 
@@ -65,12 +64,12 @@ const SaaSAudit = () => {
 
                             <div className="pt-4 border-t border-border">
                                 <div className="flex justify-between items-center text-sm mb-2">
-                                    <span className="text-muted-foreground">3-Year SaaS Rent:</span>
-                                    <span className="font-mono font-medium">${(annualSaasCost * 3).toLocaleString()}</span>
+                                    <span className="text-muted-foreground">Annual SaaS Rent:</span>
+                                    <span className="font-mono font-medium">${annualSaasCost.toLocaleString()}</span>
                                 </div>
                                 <div className="flex justify-between items-center text-sm">
-                                    <span className="text-muted-foreground">OWNED Asset Cost (Est):</span>
-                                    <span className="font-mono font-medium text-primary">${(firstYearAgentic + (agenticMaintenance * 2)).toLocaleString()}</span>
+                                    <span className="text-muted-foreground">Bespoke Build Cost (Est):</span>
+                                    <span className="font-mono font-medium text-primary">${buildCost.toLocaleString()}</span>
                                 </div>
                             </div>
                         </div>
@@ -79,16 +78,20 @@ const SaaSAudit = () => {
                     <div className="space-y-8">
                         <div className="space-y-2">
                             <h3 className="text-sm font-sans font-bold text-muted-foreground uppercase tracking-wider">The Verdict</h3>
-                            <div className="flex items-baseline gap-2">
-                                <span className="text-5xl font-serif text-foreground font-medium">
-                                    {isPositive ? "Build" : "Keep Renting"}
-                                </span>
+                            <div className="space-y-1">
+                                <div className="flex justify-between items-baseline border-b border-border/50 pb-2">
+                                    <span className="text-foreground/80">Year 1 Savings:</span>
+                                    <span className="text-3xl font-serif text-primary font-medium">
+                                        ${year1Savings.toLocaleString()}
+                                    </span>
+                                </div>
+                                <div className="flex justify-between items-baseline pt-2">
+                                    <span className="text-foreground/80">Year 2+ Savings:</span>
+                                    <span className="text-3xl font-serif text-primary font-medium">
+                                        ${year2Savings.toLocaleString()}
+                                    </span>
+                                </div>
                             </div>
-                            <p className="text-lg text-foreground/80">
-                                {isPositive
-                                    ? `By building your own Agentic workflow, you could save projected $${savings.toLocaleString()} in Year 1.`
-                                    : "At this scale, off-the-shelf SaaS might still be efficient. But do you own your data?"}
-                            </p>
                         </div>
 
                         <div className="space-y-4">
@@ -96,7 +99,7 @@ const SaaSAudit = () => {
                                 <div className="mt-1 bg-primary/10 p-1 rounded-full">
                                     <Check className="w-4 h-4 text-primary" />
                                 </div>
-                                <div>
+                                <div className="text-left">
                                     <h4 className="font-medium text-foreground">Data Sovereignty</h4>
                                     <p className="text-sm text-muted-foreground">Your customized LLM doesn't train your competitors.</p>
                                 </div>
@@ -105,7 +108,7 @@ const SaaSAudit = () => {
                                 <div className="mt-1 bg-primary/10 p-1 rounded-full">
                                     <Check className="w-4 h-4 text-primary" />
                                 </div>
-                                <div>
+                                <div className="text-left">
                                     <h4 className="font-medium text-foreground">Zero Seat Fees</h4>
                                     <p className="text-sm text-muted-foreground">Scale agent usage without per-user penalties.</p>
                                 </div>

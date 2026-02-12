@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import MiniAppSandbox from "@/components/MiniAppSandbox";
 import Experience from "@/components/Experience";
 import FitAssessment from "@/components/FitAssessment";
 import SaaSAudit from "@/components/SaaSAudit";
@@ -18,6 +19,7 @@ const Index = () => {
       <Header onOpenChat={openChat} />
       <main>
         <Hero onOpenChat={openChat} />
+        <MiniAppSandbox />
         <AnalogAdvantage />
         <SaaSAudit />
         <FitAssessment />
