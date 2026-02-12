@@ -8,60 +8,93 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Deep, sophisticated dark palette inspired by lucis.life */
+    /* Studio Light Palette - Clean, White-Paper Efficiency */
+    
+    /* Background: Off-white/Gray-50 */
+    --background: 210 20% 98%; 
+    /* Text: Deep Slate/Gray-900 */
+    --foreground: 222 47% 11%;
+
+    /* Cards: White with subtle border */
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Primary: Navy/Slate-900 */
+    --primary: 222 47% 11%;
+    --primary-foreground: 210 40% 98%;
+
+    /* Secondary: Light Gray/Slate-100 */
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222 47% 11%;
+
+    /* Muted: Gray-200 / Gray-500 */
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215 16% 47%;
+
+    /* Accent: Slate-200 (for hovers) */
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Borders: Slate-200 */
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 222 47% 11%;
+
+    --radius: 0.5rem;
+
+    /* Custom tokens */
+    --surface-elevated: 0 0% 100%;
+    --text-subtle: 215 16% 47%;
+    --text-highlight: 222 47% 11%;
+    
+    /* Semantic Colors */
+    --success: 142 76% 36%;
+    --success-muted: 142 70% 95%;
+    --warning: 38 92% 50%;
+    --warning-muted: 38 92% 95%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Keeping dark mode as fallback or alternate if needed manually, 
+       but root is now Light by default */
     --background: 240 10% 4%;
     --foreground: 60 9% 98%;
-
     --card: 240 8% 8%;
     --card-foreground: 60 9% 98%;
-
     --popover: 240 8% 8%;
     --popover-foreground: 60 9% 98%;
-
-    /* Warm cream accent - premium feel */
     --primary: 45 30% 70%;
     --primary-foreground: 240 10% 4%;
-
     --secondary: 240 6% 12%;
     --secondary-foreground: 60 9% 90%;
-
     --muted: 240 6% 15%;
     --muted-foreground: 240 5% 55%;
-
-    /* Teal accent for interactive elements */
-    --accent: 173 58% 39%;
-    --accent-foreground: 60 9% 98%;
-
-    --destructive: 0 72% 51%;
+    --accent: 240 6% 12%;
+    --accent-foreground: 60 9% 90%;
+    --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 60 9% 98%;
-
     --border: 240 6% 18%;
     --input: 240 6% 15%;
-    --ring: 173 58% 39%;
-
-    --radius: 0.75rem;
-
-    /* Custom tokens for this design */
-    --surface-elevated: 240 8% 10%;
-    --text-subtle: 240 5% 45%;
-    --text-highlight: 45 80% 80%;
-    --success: 158 64% 52%;
-    --success-muted: 158 40% 20%;
-    --warning: 38 92% 50%;
-    --warning-muted: 38 50% 20%;
-
-    --sidebar-background: 240 10% 4%;
-    --sidebar-foreground: 60 9% 90%;
-    --sidebar-primary: 173 58% 39%;
-    --sidebar-primary-foreground: 60 9% 98%;
-    --sidebar-accent: 240 6% 12%;
-    --sidebar-accent-foreground: 60 9% 90%;
-    --sidebar-border: 240 6% 18%;
-    --sidebar-ring: 173 58% 39%;
+    --ring: 45 30% 70%;
   }
 }
 
-/* Typography - premium feel with serif headings */
+/* Typography */
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
@@ -121,11 +154,6 @@ All colors MUST be HSL.
   }
 }
 
-@keyframes typing-cursor {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
-}
-
 @keyframes pulse-soft {
   0%, 100% { opacity: 0.4; }
   50% { opacity: 1; }
@@ -143,10 +171,6 @@ All colors MUST be HSL.
   animation: slide-down 0.3s ease-out forwards;
 }
 
-.animate-typing-cursor {
-  animation: typing-cursor 1s step-end infinite;
-}
-
 .animate-pulse-soft {
   animation: pulse-soft 2s ease-in-out infinite;
 }
@@ -157,8 +181,8 @@ All colors MUST be HSL.
 .stagger-3 { animation-delay: 0.3s; }
 .stagger-4 { animation-delay: 0.4s; }
 
-/* Gradient text utility */
+/* Gradient text utility - adjusted for light mode visibility */
 .text-gradient {
   @apply bg-clip-text text-transparent;
-  background-image: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+  background-image: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(215 25% 40%) 100%);
 }

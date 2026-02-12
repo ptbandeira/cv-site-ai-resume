@@ -1,25 +1,28 @@
 import { useState } from "react";
-import { Calculator, ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 
 const SaaSAudit = () => {
+    // State is wired for interactivity
     const [seats, setSeats] = useState(10);
-    const [monthlySpend, setMonthlySpend] = useState(500); // Per seat or total? Let's say Total monthly SaaS bill for the function.
+    const [monthlySpend, setMonthlySpend] = useState(500);
+
+    // Logic:
+    // Annual SaaS = Monthly * 12
+    // Bespoke Build = 25% of Annual SaaS (One-time)
+    // Maintenance = 10% of Bespoke Build (Annual)
+    // Year 1 Savings = Annual SaaS - (Bespoke Build + Maintenance)
+    // Year 2+ Savings = Annual SaaS - Maintenance
 
     const annualSaasCost = monthlySpend * 12;
-    const buildCost = annualSaasCost * 0.25; // 25% of annual cost for one-time build
-    const year1Savings = annualSaasCost - buildCost;
-    const year2Savings = annualSaasCost * 0.95; // 95% reduction
+    const bespokeBuildCost = annualSaasCost * 0.25;
+    const maintenanceCost = bespokeBuildCost * 0.10;
 
-    // Logic: 
-    // Traditional SaaS: Monthly Spend * 12
-    // Agentic Build: One-time cost (e.g. 25% of Annual SaaS) + Maintenance (5%)
-    // This is a rough heuristic for the "Audit".
-
-    const isPositive = year1Savings > 0;
+    const year1Savings = annualSaasCost - (bespokeBuildCost + maintenanceCost);
+    const year2Savings = annualSaasCost - maintenanceCost;
 
     return (
         <section id="saas-audit" className="py-20 bg-secondary/30">
@@ -62,14 +65,18 @@ const SaaSAudit = () => {
                                 />
                             </div>
 
-                            <div className="pt-4 border-t border-border">
-                                <div className="flex justify-between items-center text-sm mb-2">
+                            <div className="pt-4 border-t border-border space-y-2">
+                                <div className="flex justify-between items-center text-sm">
                                     <span className="text-muted-foreground">Annual SaaS Rent:</span>
                                     <span className="font-mono font-medium">${annualSaasCost.toLocaleString()}</span>
                                 </div>
                                 <div className="flex justify-between items-center text-sm">
                                     <span className="text-muted-foreground">Bespoke Build Cost (Est):</span>
-                                    <span className="font-mono font-medium text-primary">${buildCost.toLocaleString()}</span>
+                                    <span className="font-mono font-medium text-primary">${bespokeBuildCost.toLocaleString()}</span>
+                                </div>
+                                <div className="flex justify-between items-center text-sm">
+                                    <span className="text-muted-foreground">Annual Maintenance (10%):</span>
+                                    <span className="font-mono font-medium text-muted-foreground">${maintenanceCost.toLocaleString()}</span>
                                 </div>
                             </div>
                         </div>
