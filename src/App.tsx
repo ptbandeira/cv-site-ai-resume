@@ -12,6 +12,18 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      {/* Chess Knight Watermark */}
+      <div
+        className="fixed inset-0 pointer-events-none z-0 flex items-center justify-center"
+        aria-hidden="true"
+      >
+        <img
+          src="/Chess Knight icon.png"
+          alt=""
+          className="w-[600px] h-[600px] object-contain"
+          style={{ opacity: 0.03 }}
+        />
+      </div>
       <Toaster />
       <Sonner />
       <BrowserRouter>

@@ -28,8 +28,9 @@ const Hero = ({ onOpenChat }: HeroProps) => {
 
         {/* Subtitle */}
         <p className="text-xl md:text-2xl text-foreground/80 max-w-2xl font-light leading-relaxed animate-slide-up stagger-1">
-          Stop treating AI like a magic trick. Start treating it like infrastructure.
-          I bridge the gap between "Prompt Engineering" and enterprise-grade reliability.
+          No Magic. Just Engineering. I bridge the AI Implementation Gap for
+          regulated industries by replacing &ldquo;SaaS Taxes&rdquo; with owned assets
+          and Human-in-the-Loop governance.
         </p>
 
         {/* CTA Buttons */}

@@ -51,7 +51,7 @@ const Header = ({ onOpenChat }: HeaderProps) => {
               Pedro Bandeira
             </h1>
             <span className="text-xs font-sans text-muted-foreground tracking-wide uppercase mt-0.5">
-              The Human-AI Bridge
+              Strategic AI Operations
             </span>
           </button>
         </div>
