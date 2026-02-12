@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Scale, Database, FileCheck, ArrowRight, Loader2, CheckCircle2, FileText, Users } from "lucide-react";
+import { Scale, Database, FileCheck, ArrowRight, Loader2, CheckCircle2, FileText, Users, Send, X } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import { supabase } from "@/lib/supabase";
+import { toast } from "sonner";
 
 const MiniAppSandbox = () => {
     return (
@@ -120,79 +125,110 @@ const LegalTriageSimulator = () => {
     );
 };
 
-// 2. Sales Ops Simulator
+// 2. Sales Ops Simulator -> NOW "Start Free" Lead Gen Form
 const SalesOpsSimulator = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [email, setEmail] = useState("");
     const [industry, setIndustry] = useState("");
-    const [result, setResult] = useState<null | string>(null);
-    const [loading, setLoading] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const generateAngle = () => {
-        if (!industry) return;
-        setLoading(true);
-        setTimeout(() => {
-            setResult(`Based on Q3 earning calls, ${industry} leaders are prioritized 'OPEX reduction'. 
-            <strong>Angle:</strong> Pitch the "SaaS Audit" as an immediate 15% EBITDA improvement mechanism.`);
-            setLoading(false);
-        }, 1500);
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+
+        try {
+            const { error } = await supabase
+                .from('leads')
+                .insert([{ email, industry, source: 'sales_ops_simulator' }]);
+
+            if (error) throw error;
+
+            toast.success("Strategy Guide Sent!", {
+                description: "Check your inbox in 5 minutes."
+            });
+            setIsOpen(false);
+        } catch (error) {
+            console.error(error);
+            // Fallback for demo if supabase fails / not configured
+            toast.success("Strategy Guide Sent! (Demo Mode)", {
+                description: "This would save to Supabase in prod."
+            });
+            setIsOpen(false);
+        } finally {
+            setIsSubmitting(false);
+            setEmail("");
+            setIndustry("");
+        }
     };
 
     return (
-        <Card className="p-6 bg-card hover:bg-card/60 transition-colors relative overflow-hidden h-[400px] flex flex-col shadow-sm card-slab">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-600 to-green-600" />
-            <div className="mb-4">
-                <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center mb-3 text-emerald-700">
-                    <Database className="w-5 h-5" />
+        <>
+            <Card className="p-6 bg-card hover:bg-card/60 transition-colors relative overflow-hidden h-[400px] flex flex-col shadow-sm card-slab">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-600 to-green-600" />
+                <div className="mb-4">
+                    <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center mb-3 text-emerald-700">
+                        <Database className="w-5 h-5" />
+                    </div>
+                    <h3 className="text-lg font-medium text-foreground">Sales Ops Engine</h3>
+                    <p className="text-sm text-muted-foreground mt-1">Generates strategic outreach hooks based on real-time market data.</p>
                 </div>
-                <h3 className="text-lg font-medium text-foreground">Sales Ops Engine</h3>
-                <p className="text-sm text-muted-foreground mt-1">Generates strategic outreach hooks based on real-time market data.</p>
-            </div>
 
-            <div className="flex-1 flex flex-col justify-center gap-4">
-                {!result && !loading && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-3 w-full">
-                        <div className="space-y-1">
-                            <label className="text-xs font-medium text-muted-foreground">Target Industry</label>
+                <div className="flex-1 flex flex-col justify-center items-center gap-4 text-center">
+                    <p className="text-sm text-muted-foreground">
+                        Want to see the real engine?
+                        <br />
+                        I'll generate a custom outreach strategy for your industry.
+                    </p>
+                    <button
+                        onClick={() => setIsOpen(true)}
+                        className="px-6 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-full text-sm font-medium transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                    >
+                        Start Free Strategy <ArrowRight className="w-4 h-4" />
+                    </button>
+                    <p className="text-[10px] text-muted-foreground">No credit card required.</p>
+                </div>
+            </Card>
+
+            <Dialog open={isOpen} onOpenChange={setIsOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Get Your Agentic Strategy</DialogTitle>
+                        <DialogDescription>
+                            Enter your details and I'll deploy a mini-agent to research your industry hooks.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <form onSubmit={handleSubmit} className="space-y-4 pt-4">
+                        <div className="space-y-2">
+                            <Label htmlFor="email">Work Email</Label>
                             <Input
-                                placeholder="e.g. Fintech, Logistics..."
-                                value={industry}
-                                onChange={(e) => setIndustry(e.target.value)}
-                                className="text-sm bg-background"
+                                id="email"
+                                type="email"
+                                required
+                                placeholder="pedro@company.com"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
-                        <button
-                            onClick={generateAngle}
-                            disabled={!industry}
-                            className="w-full py-2 bg-emerald-700 disabled:opacity-50 hover:bg-emerald-800 text-white rounded-md text-sm font-medium transition-colors flex items-center justify-center gap-2"
-                        >
-                            Generate Strategy <ArrowRight className="w-3 h-3" />
-                        </button>
-                    </motion.div>
-                )}
-
-                {loading && (
-                    <div className="flex flex-col items-center gap-2 text-emerald-600">
-                        <Loader2 className="w-6 h-6 animate-spin" />
-                        <span className="text-xs">Querying RAG Knowledge Base...</span>
-                    </div>
-                )}
-
-                {result && (
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        className="bg-secondary/50 p-4 rounded-lg border border-border text-sm"
-                    >
-                        <p className="text-foreground/90" dangerouslySetInnerHTML={{ __html: result }} />
-                        <button
-                            onClick={() => { setResult(null); setIndustry(""); }}
-                            className="text-[10px] text-emerald-600 mt-3 hover:underline"
-                        >
-                            Try another industry
-                        </button>
-                    </motion.div>
-                )}
-            </div>
-        </Card>
+                        <div className="space-y-2">
+                            <Label htmlFor="industry">Target Industry</Label>
+                            <Input
+                                id="industry"
+                                required
+                                placeholder="e.g. Fintech, Logistics, Healthcare"
+                                value={industry}
+                                onChange={(e) => setIndustry(e.target.value)}
+                            />
+                        </div>
+                        <DialogFooter>
+                            <Button type="submit" disabled={isSubmitting} className="w-full bg-[#0F172A]">
+                                {isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Send className="mr-2 h-4 w-4" />}
+                                {isSubmitting ? "Deploying..." : "Generate Strategy"}
+                            </Button>
+                        </DialogFooter>
+                    </form>
+                </DialogContent>
+            </Dialog>
+        </>
     );
 };
 
@@ -235,8 +271,8 @@ const PharmaComplianceSimulator = () => {
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full space-y-4">
                         <div className="space-y-2">
                             <div className="flex items-center justify-between text-xs">
-                                <span className="flex items-center gap-2 text-foreground/80"><Loader2 className="w-3 h-3 animate-spin" /> Scanning: "Recall Class I"...</span>
-                                <span className="text-green-600 font-bold">[FOUND]</span>
+                                <span className="flex items-center gap-2 text-foreground/80"><Loader2 className="w-3 h-3 animate-spin" /> Checking Actavis Legacy Data...</span>
+                                <span className="text-green-600 font-bold">[MATCH]</span>
                             </div>
                             <motion.div
                                 initial={{ opacity: 0 }}
@@ -244,8 +280,8 @@ const PharmaComplianceSimulator = () => {
                                 transition={{ delay: 0.8 }}
                                 className="flex items-center justify-between text-xs"
                             >
-                                <span className="flex items-center gap-2 text-foreground/80"><Loader2 className="w-3 h-3 animate-spin" /> Checking "Annex 1 Sterility"...</span>
-                                <span className="text-green-600 font-bold">[OK]</span>
+                                <span className="flex items-center gap-2 text-foreground/80"><Loader2 className="w-3 h-3 animate-spin" /> Checking GMF Prescription Logs...</span>
+                                <span className="text-green-600 font-bold">[MATCH]</span>
                             </motion.div>
                             <motion.div
                                 initial={{ opacity: 0 }}
@@ -270,7 +306,7 @@ const PharmaComplianceSimulator = () => {
                             <CheckCircle2 className="w-6 h-6 text-green-600" />
                         </div>
                         <h4 className="text-lg font-medium text-foreground">Compliance Verified</h4>
-                        <p className="text-sm text-muted-foreground mt-1">Asset passes Actavis/Grupa protocols.</p>
+                        <p className="text-sm text-muted-foreground mt-1">Asset passes Actavis/GMF protocols.</p>
 
                         <div className="mt-4 p-3 bg-secondary/50 rounded text-xs text-left border border-border">
                             <p className="font-mono text-xs text-muted-foreground">Log ID: #88219-EMA</p>

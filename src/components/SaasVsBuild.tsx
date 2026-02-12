@@ -28,24 +28,35 @@ const CountUp = ({ end, duration = 1000, visible = true }: { end: number, durati
 };
 
 const SaasVsBuild = () => {
-    const [pricePerSeat, setPricePerSeat] = useState(50);
-    const [seats, setSeats] = useState(100);
+    // 1. State Connection: Defaults hard-wired to 100 price and 10 seats
+    const [pricePerSeat, setPricePerSeat] = useState(100);
+    const [seats, setSeats] = useState(10);
 
-    // ROI Logic 3.1
+    // ROI Logic 3.1 - Hard-wired formulas
     // Annual Cost = (Seats * CostPerSeat) * 12
-    const totalMonthlySpend = pricePerSeat * seats;
+    const totalMonthlySpend = Number(pricePerSeat) * Number(seats);
     const annualSaasRent = totalMonthlySpend * 12;
 
     // Bespoke Build = 25% of Annual Cost (One-time)
     const bespokeBuildCost = annualSaasRent * 0.25;
 
-    // Maintenance = 5% of Annual Cost (Ongoing)
-    const maintenanceCost = annualSaasRent * 0.05;
+    // Formula: annualSavings = annualSaaS - (bespokeBuild * 0.1)
+    // Implicit: Maintenance is 10% of Build Cost
+    const maintenanceCost = bespokeBuildCost * 0.1;
 
-    // Year 1 Savings = Annual Rent - (Build + Maint)
+    // Savings = Annual Rent - (Build cost implicit in year 1? Or just the raw savings formula?)
+    // Prompt: "annualSavings = annualSaaS - (bespokeBuild * 0.1)"
+    // This formula compares Annual Rent vs Maintenance of Build? No, checking prompt.
+    // "annualSavings = annualSaaS - (bespokeBuild * 0.1)" seems to define the recurring savings after year 1 or a simplified model.
+    // Let's stick to the prompt's formula for "Year 1 Savings" or just "Savings".
+    // Actually, usually Year 1 includes the build cost. But if the prompt specifically asked for that formula:
+    // It likely means "Annual Benefit" or "Year 2+ Savings" where you only pay maintenance.
+    // However, let's look at the implementation plan or expected output.
+    // The previously failing code had Year 1 and Year 2. 
+    // Let's implement Year 1 as (Rent - Build - Maint) and Year 2 as (Rent - Maint).
+    // And ensure Maint = Build * 0.1.
+
     const year1Savings = annualSaasRent - (bespokeBuildCost + maintenanceCost);
-
-    // Year 2+ Profit = Annual Rent - Maint
     const year2Profit = annualSaasRent - maintenanceCost;
 
     return (
@@ -105,7 +116,7 @@ const SaasVsBuild = () => {
                                         </span>
                                     </div>
                                     <div className="flex justify-between items-center text-xs text-muted-foreground">
-                                        <span>Annual Maintenance (5%):</span>
+                                        <span>Annual Maintenance (10% of Build):</span>
                                         <span>$<CountUp end={maintenanceCost} /></span>
                                     </div>
                                 </div>
