@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useChat } from "ai/react";
+import { useChat } from "@ai-sdk/react";
 import { BRIDGE_ARCHITECT_PERSONA } from "@/lib/persona";
 import { Loader2, CheckCircle, XCircle, ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";

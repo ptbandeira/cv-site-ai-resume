@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { X, Send, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useChat } from "ai/react";
+import { useChat } from "@ai-sdk/react";
 import { BRIDGE_ARCHITECT_PERSONA } from "@/lib/persona";
 
 interface AIChatProps {
