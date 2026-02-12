@@ -36,7 +36,7 @@ const LegalTriageSimulator = () => {
     };
 
     return (
-        <Card className="p-6 border-slate-200 bg-card hover:bg-card/60 transition-colors relative overflow-hidden h-[400px] flex flex-col shadow-sm">
+        <Card className="p-6 bg-card hover:bg-card/60 transition-colors relative overflow-hidden h-[400px] flex flex-col shadow-sm card-slab">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-indigo-600" />
             <div className="mb-4">
                 <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mb-3 text-blue-700">
@@ -69,7 +69,7 @@ const LegalTriageSimulator = () => {
                         >
                             <div className="flex items-center gap-2 text-sm text-blue-600">
                                 <Loader2 className="w-4 h-4 animate-spin" />
-                                <span>Parsing EU AI Act updates...</span>
+                                <span>Parsing Law Bulletin...</span>
                             </div>
                             <div className="h-1.5 w-full bg-secondary rounded-full overflow-hidden">
                                 <motion.div
@@ -80,8 +80,8 @@ const LegalTriageSimulator = () => {
                                 />
                             </div>
                             <p className="text-xs text-muted-foreground font-mono">
-                                &gt; Analyzing 124 articles<br />
-                                &gt; Cross-referencing client portfolio...
+                                &gt; Analyzing Cross-Practice Data<br />
+                                &gt; Identifying M&A Synergies...
                             </p>
                         </motion.div>
                     )}
@@ -103,11 +103,9 @@ const LegalTriageSimulator = () => {
                                 <span className="text-[10px] text-muted-foreground ml-auto">Just now</span>
                             </div>
                             <p className="text-xs text-foreground/90 leading-relaxed font-medium">
-                                🚨 <strong>Action Required:</strong> New EU AI Act amendment affects our "Candidate Screening" module.
+                                <strong>Opportunity Detected:</strong> Found 3 cross-practice opportunities between M&A and Real Estate based on today's Law Bulletin.
                             </p>
-                            <p className="text-xs text-muted-foreground leading-relaxed mt-2 pl-2 border-l-2 border-indigo-300">
-                                "Clause 14b requires human oversight logs for high-risk systems..."
-                            </p>
+
                             <button
                                 onClick={() => setStep("idle")}
                                 className="text-[10px] text-muted-foreground mt-3 hover:text-foreground underline w-full text-center"
@@ -139,7 +137,7 @@ const SalesOpsSimulator = () => {
     };
 
     return (
-        <Card className="p-6 border-slate-200 bg-card hover:bg-card/60 transition-colors relative overflow-hidden h-[400px] flex flex-col shadow-sm">
+        <Card className="p-6 bg-card hover:bg-card/60 transition-colors relative overflow-hidden h-[400px] flex flex-col shadow-sm card-slab">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-600 to-green-600" />
             <div className="mb-4">
                 <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center mb-3 text-emerald-700">
@@ -208,7 +206,7 @@ const PharmaComplianceSimulator = () => {
     };
 
     return (
-        <Card className="p-6 border-slate-200 bg-card hover:bg-card/60 transition-colors relative overflow-hidden h-[400px] flex flex-col shadow-sm">
+        <Card className="p-6 bg-card hover:bg-card/60 transition-colors relative overflow-hidden h-[400px] flex flex-col shadow-sm card-slab">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-600 to-pink-600" />
             <div className="mb-4">
                 <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mb-3 text-purple-700">

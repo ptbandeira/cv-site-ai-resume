@@ -1,24 +1,52 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowRight, Check, DollarSign, Users } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
+// Simple CountUp Component
+const CountUp = ({ end, duration = 1000, visible = true }: { end: number, duration?: number, visible?: boolean }) => {
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        if (!visible) return;
+        let start = 0;
+        const increment = end / (duration / 16);
+        const timer = setInterval(() => {
+            start += increment;
+            if (start >= end) {
+                setCount(end);
+                clearInterval(timer);
+            } else {
+                setCount(Math.floor(start));
+            }
+        }, 16);
+        return () => clearInterval(timer);
+    }, [end, duration, visible]);
+
+    return <span>{count.toLocaleString()}</span>;
+};
+
 const SaasVsBuild = () => {
     const [pricePerSeat, setPricePerSeat] = useState(50);
     const [seats, setSeats] = useState(100);
 
-    // ROI Logic 3.0
-    // Total Monthly = Price * Seats
+    // ROI Logic 3.1
+    // Annual Cost = (Seats * CostPerSeat) * 12
     const totalMonthlySpend = pricePerSeat * seats;
     const annualSaasRent = totalMonthlySpend * 12;
 
-    // Bespoke Build = 25% of Annual SaaS (One-time)
+    // Bespoke Build = 25% of Annual Cost (One-time)
     const bespokeBuildCost = annualSaasRent * 0.25;
 
-    // Payback Period (Months) = Build Cost / Monthly Spend
-    // If Build is 3 months of rent (which 25% of 12 months IS), then payback is 3.0
-    const paybackPeriod = bespokeBuildCost / totalMonthlySpend;
+    // Maintenance = 5% of Annual Cost (Ongoing)
+    const maintenanceCost = annualSaasRent * 0.05;
+
+    // Year 1 Savings = Annual Rent - (Build + Maint)
+    const year1Savings = annualSaasRent - (bespokeBuildCost + maintenanceCost);
+
+    // Year 2+ Profit = Annual Rent - Maint
+    const year2Profit = annualSaasRent - maintenanceCost;
 
     return (
         <section id="saas-killer" className="py-20 bg-secondary/30">
@@ -31,11 +59,11 @@ const SaasVsBuild = () => {
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-12 items-center">
-                    <Card className="p-8 border-slate-200 bg-card shadow-sm">
+                    <Card className="p-8 bg-card shadow-sm card-slab">
                         <div className="space-y-6">
                             <div className="grid grid-cols-2 gap-6">
                                 <div className="space-y-2">
-                                    <Label>Price Per Seat</Label>
+                                    <Label>Monthly Cost Per Seat</Label>
                                     <div className="relative">
                                         <span className="absolute left-3 top-2.5 text-muted-foreground">$</span>
                                         <Input
@@ -63,64 +91,56 @@ const SaasVsBuild = () => {
 
                             <div className="pt-6 border-t border-border space-y-3">
                                 <div className="flex justify-between items-center text-sm">
-                                    <span className="text-muted-foreground">Monthly Burn:</span>
-                                    <span className="font-mono font-medium text-foreground">${totalMonthlySpend.toLocaleString()}</span>
+                                    <span className="text-muted-foreground">Annual SaaS Rent:</span>
+                                    <span className="font-mono font-medium text-foreground text-lg">
+                                        $<CountUp end={annualSaasRent} />
+                                    </span>
                                 </div>
-                                <div className="flex justify-between items-center text-sm">
-                                    <span className="text-muted-foreground">Annual Rent:</span>
-                                    <span className="font-mono font-medium text-foreground">${annualSaasRent.toLocaleString()}</span>
-                                </div>
-                                <div className="p-3 bg-secondary rounded-lg border border-border mt-2">
+
+                                <div className="p-4 bg-secondary rounded-lg border border-border mt-4 space-y-2">
                                     <div className="flex justify-between items-center text-sm">
-                                        <span className="font-medium text-primary">Bespoke Build Cost (Est):</span>
-                                        <span className="font-mono font-bold text-lg text-primary">${bespokeBuildCost.toLocaleString()}</span>
+                                        <span className="font-medium text-primary">One-Time Build Fee:</span>
+                                        <span className="font-mono font-bold text-lg text-primary">
+                                            $<CountUp end={bespokeBuildCost} />
+                                        </span>
                                     </div>
-                                    <p className="text-[10px] text-muted-foreground mt-1 text-right">One-time investment (25% of annual rent)</p>
+                                    <div className="flex justify-between items-center text-xs text-muted-foreground">
+                                        <span>Annual Maintenance (5%):</span>
+                                        <span>$<CountUp end={maintenanceCost} /></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </Card>
 
                     <div className="space-y-8">
-                        <div className="space-y-2">
-                            <h3 className="text-sm font-sans font-bold text-muted-foreground uppercase tracking-wider">The Verdict</h3>
-                            <div className="space-y-1">
-                                <div className="flex justify-between items-baseline border-b border-border/50 pb-2">
-                                    <span className="text-foreground/80">Payback Period:</span>
-                                    <span className="text-4xl font-serif text-primary font-medium">
-                                        {paybackPeriod.toFixed(1)} Months
-                                    </span>
-                                </div>
-                            </div>
-                            <p className="text-sm text-emerald-700 mt-2 font-medium bg-emerald-50 inline-block px-2 py-1 rounded">
-                                After month 3, you are 100% profitable.
-                            </p>
-                        </div>
-
                         <div className="space-y-4">
-                            <div className="flex gap-3">
-                                <div className="mt-1 bg-primary/10 p-1 rounded-full">
-                                    <Check className="w-4 h-4 text-primary" />
+                            <h3 className="text-sm font-sans font-bold text-muted-foreground uppercase tracking-wider">The ROI Model</h3>
+
+                            <div className="space-y-4">
+                                <div className="p-4 bg-emerald-50/50 border border-emerald-100 rounded-lg">
+                                    <p className="text-sm text-emerald-800 font-medium mb-1">Year 1 Savings</p>
+                                    <div className="text-3xl font-serif text-emerald-700">
+                                        $<CountUp end={year1Savings} />
+                                    </div>
+                                    <p className="text-xs text-emerald-600/80 mt-1">Immediate cash flow positive.</p>
                                 </div>
-                                <div className="text-left">
-                                    <h4 className="font-medium text-foreground">Asset Ownership</h4>
-                                    <p className="text-sm text-muted-foreground">Stop renting intelligence. Own the weights.</p>
-                                </div>
-                            </div>
-                            <div className="flex gap-3">
-                                <div className="mt-1 bg-primary/10 p-1 rounded-full">
-                                    <Check className="w-4 h-4 text-primary" />
-                                </div>
-                                <div className="text-left">
-                                    <h4 className="font-medium text-foreground">Unlimited Scale</h4>
-                                    <p className="text-sm text-muted-foreground">Add 1,000 users for $0 extra license fees.</p>
+
+                                <div className="p-4 bg-blue-50/50 border border-blue-100 rounded-lg">
+                                    <p className="text-sm text-blue-800 font-medium mb-1">Year 2+ Ownership Profit</p>
+                                    <div className="text-3xl font-serif text-blue-700">
+                                        $<CountUp end={year2Profit} />
+                                    </div>
+                                    <p className="text-xs text-blue-600/80 mt-1">Per year, forever. You own the code.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <button className="flex items-center gap-2 text-primary font-medium hover:underline group">
-                            Start Your Architecture Review <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </button>
+                        <div className="flex gap-4 pt-2">
+                            <button className="flex-1 py-3 px-4 bg-[#0F172A] text-white font-medium rounded-lg hover:bg-[#1e293b] transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+                                Start Your Rationalization <ArrowRight className="w-4 h-4" />
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
