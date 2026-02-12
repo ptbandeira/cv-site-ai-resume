@@ -4,7 +4,8 @@ import Hero from "@/components/Hero";
 import MiniAppSandbox from "@/components/MiniAppSandbox";
 import Experience from "@/components/Experience";
 import FitAssessment from "@/components/FitAssessment";
-import SaaSAudit from "@/components/SaaSAudit";
+import SaasVsBuild from "@/components/SaasVsBuild";
+import AutomationAuditor from "@/components/AutomationAuditor"; // New
 import AnalogAdvantage from "@/components/AnalogAdvantage";
 import AIChat from "@/components/AIChat";
 import Footer from "@/components/Footer";
@@ -19,11 +20,18 @@ const Index = () => {
       <Header onOpenChat={openChat} />
       <main>
         <Hero onOpenChat={openChat} />
-        <MiniAppSandbox />
         <AnalogAdvantage />
-        <SaaSAudit />
-        <FitAssessment />
+        <div id="saas-killer">
+          <SaasVsBuild />
+        </div>
+        <div id="automation-auditor">
+          <AutomationAuditor />
+        </div>
+        <div id="sandbox">
+          <MiniAppSandbox />
+        </div>
         <Experience />
+        <FitAssessment />
       </main>
       <Footer />
       <AIChat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />

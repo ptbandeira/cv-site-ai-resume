@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Scale, Database, FileCheck, ArrowRight, Loader2, CheckCircle2, AlertCircle, FileText } from "lucide-react";
+import { Scale, Database, FileCheck, ArrowRight, Loader2, CheckCircle2, FileText, Users } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 
@@ -32,12 +32,11 @@ const LegalTriageSimulator = () => {
 
     const runSim = () => {
         setStep("scanning");
-        // 3-second delay as requested
         setTimeout(() => setStep("done"), 3000);
     };
 
     return (
-        <Card className="p-6 border-border/60 bg-card hover:bg-card/60 transition-colors relative overflow-hidden h-[400px] flex flex-col shadow-sm">
+        <Card className="p-6 border-slate-200 bg-card hover:bg-card/60 transition-colors relative overflow-hidden h-[400px] flex flex-col shadow-sm">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-indigo-600" />
             <div className="mb-4">
                 <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mb-3 text-blue-700">
@@ -55,7 +54,7 @@ const LegalTriageSimulator = () => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
                             onClick={runSim}
-                            className="px-6 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-full text-sm font-medium transition-colors"
+                            className="px-6 py-2 bg-[#0F172A] hover:bg-[#1e293b] text-white rounded-full text-sm font-medium transition-colors"
                         >
                             Scan Regulatory Feeds
                         </motion.button>
@@ -93,21 +92,25 @@ const LegalTriageSimulator = () => {
                             animate={{ opacity: 1, scale: 1 }}
                             className="w-full bg-blue-50/50 rounded-lg p-4 border border-blue-100"
                         >
-                            <div className="flex items-center gap-2 mb-3">
-                                <div className="w-5 h-5 bg-blue-600 rounded flex items-center justify-center text-white text-[10px] font-bold">T</div>
-                                <span className="text-xs font-bold text-foreground">Teams Briefing</span>
+                            <div className="flex items-center gap-2 mb-3 border-b border-blue-200/50 pb-2">
+                                <div className="w-6 h-6 bg-indigo-600 rounded flex items-center justify-center text-white text-[10px] font-bold">
+                                    <Users className="w-3 h-3" />
+                                </div>
+                                <div>
+                                    <span className="text-xs font-bold text-foreground block">AgenticOS Daily Briefing</span>
+                                    <span className="text-[10px] text-muted-foreground block">General Channel</span>
+                                </div>
                                 <span className="text-[10px] text-muted-foreground ml-auto">Just now</span>
                             </div>
                             <p className="text-xs text-foreground/90 leading-relaxed font-medium">
-                                Found 3 matching precedents in SharePoint for your latest newsletter update.
+                                🚨 <strong>Action Required:</strong> New EU AI Act amendment affects our "Candidate Screening" module.
                             </p>
-                            <p className="text-xs text-muted-foreground leading-relaxed mt-2">
-                                - Case 24-B (GDPR) <br />
-                                - Policy Memo 102 (Retention)
+                            <p className="text-xs text-muted-foreground leading-relaxed mt-2 pl-2 border-l-2 border-indigo-300">
+                                "Clause 14b requires human oversight logs for high-risk systems..."
                             </p>
                             <button
                                 onClick={() => setStep("idle")}
-                                className="text-[10px] text-muted-foreground mt-3 hover:text-foreground underline"
+                                className="text-[10px] text-muted-foreground mt-3 hover:text-foreground underline w-full text-center"
                             >
                                 Reset Simulator
                             </button>
@@ -136,7 +139,7 @@ const SalesOpsSimulator = () => {
     };
 
     return (
-        <Card className="p-6 border-border/60 bg-card hover:bg-card/60 transition-colors relative overflow-hidden h-[400px] flex flex-col shadow-sm">
+        <Card className="p-6 border-slate-200 bg-card hover:bg-card/60 transition-colors relative overflow-hidden h-[400px] flex flex-col shadow-sm">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-600 to-green-600" />
             <div className="mb-4">
                 <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center mb-3 text-emerald-700">
@@ -201,12 +204,11 @@ const PharmaComplianceSimulator = () => {
 
     const handleDrop = () => {
         setStatus("validating");
-        // Simulate checking process
         setTimeout(() => setStatus("success"), 2500);
     };
 
     return (
-        <Card className="p-6 border-border/60 bg-card hover:bg-card/60 transition-colors relative overflow-hidden h-[400px] flex flex-col shadow-sm">
+        <Card className="p-6 border-slate-200 bg-card hover:bg-card/60 transition-colors relative overflow-hidden h-[400px] flex flex-col shadow-sm">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-600 to-pink-600" />
             <div className="mb-4">
                 <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mb-3 text-purple-700">
@@ -233,18 +235,27 @@ const PharmaComplianceSimulator = () => {
 
                 {status === "validating" && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full space-y-4">
-                        <div className="space-y-3">
+                        <div className="space-y-2">
                             <div className="flex items-center justify-between text-xs">
-                                <span className="flex items-center gap-2 text-foreground/80"><Loader2 className="w-3 h-3 animate-spin" /> Checking EMA Annex 1...</span>
-                                <span className="text-green-600 font-bold">[OK]</span>
+                                <span className="flex items-center gap-2 text-foreground/80"><Loader2 className="w-3 h-3 animate-spin" /> Scanning: "Recall Class I"...</span>
+                                <span className="text-green-600 font-bold">[FOUND]</span>
                             </div>
                             <motion.div
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
-                                transition={{ delay: 1 }}
+                                transition={{ delay: 0.8 }}
                                 className="flex items-center justify-between text-xs"
                             >
-                                <span className="flex items-center gap-2 text-foreground/80"><Loader2 className="w-3 h-3 animate-spin" /> Checking FDA Title 21...</span>
+                                <span className="flex items-center gap-2 text-foreground/80"><Loader2 className="w-3 h-3 animate-spin" /> Checking "Annex 1 Sterility"...</span>
+                                <span className="text-green-600 font-bold">[OK]</span>
+                            </motion.div>
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 1.6 }}
+                                className="flex items-center justify-between text-xs"
+                            >
+                                <span className="flex items-center gap-2 text-foreground/80"><Loader2 className="w-3 h-3 animate-spin" /> Verifying "GDP" Compliance...</span>
                                 <span className="text-green-600 font-bold">[OK]</span>
                             </motion.div>
                         </div>
@@ -260,12 +271,12 @@ const PharmaComplianceSimulator = () => {
                         <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
                             <CheckCircle2 className="w-6 h-6 text-green-600" />
                         </div>
-                        <h4 className="text-lg font-medium text-foreground">Validated</h4>
-                        <p className="text-sm text-muted-foreground mt-1">Asset passes all compliance checks.</p>
+                        <h4 className="text-lg font-medium text-foreground">Compliance Verified</h4>
+                        <p className="text-sm text-muted-foreground mt-1">Asset passes Actavis/Grupa protocols.</p>
 
                         <div className="mt-4 p-3 bg-secondary/50 rounded text-xs text-left border border-border">
                             <p className="font-mono text-xs text-muted-foreground">Log ID: #88219-EMA</p>
-                            <p className="font-mono text-xs text-muted-foreground">Status: Approved</p>
+                            <p className="font-mono text-xs text-muted-foreground">Status: Approved (FDA Title 21)</p>
                         </div>
 
                         <button
