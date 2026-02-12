@@ -3,6 +3,8 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Experience from "@/components/Experience";
 import FitAssessment from "@/components/FitAssessment";
+import SaaSAudit from "@/components/SaaSAudit";
+import AnalogAdvantage from "@/components/AnalogAdvantage";
 import AIChat from "@/components/AIChat";
 import Footer from "@/components/Footer";
 
@@ -12,12 +14,14 @@ const Index = () => {
   const openChat = () => setIsChatOpen(true);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background font-sans selection:bg-primary/20">
       <Header onOpenChat={openChat} />
       <main>
         <Hero onOpenChat={openChat} />
-        <Experience />
+        <AnalogAdvantage />
+        <SaaSAudit />
         <FitAssessment />
+        <Experience />
       </main>
       <Footer />
       <AIChat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
