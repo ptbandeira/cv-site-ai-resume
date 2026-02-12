@@ -1,266 +1,139 @@
 import { useState } from "react";
-import { FileText, Check, AlertTriangle, Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { fitAssessments } from "@/data/marcus-profile";
-
-type FitType = "strong" | "weak";
-
-const jobDescriptions = {
-  strong: `Senior Platform Engineer — Series B Fintech
-
-We're looking for someone with deep API design experience, comfort with ambiguity, and the ability to lead cross-functional initiatives. You'll own our integration platform serving hundreds of partners...`,
-  weak: `Head of Product, Consumer — Series C Mobile App
-
-We need a consumer product leader with mobile-first experience and deep growth/experimentation background. You'll own our core mobile experience and drive user acquisition...`,
-};
+import { useChat } from "ai/react";
+import { BRIDGE_ARCHITECT_PERSONA } from "@/lib/persona";
+import { Loader2, CheckCircle, XCircle, ArrowRight } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 const FitAssessment = () => {
-  const [activeTab, setActiveTab] = useState<FitType>("strong");
-  const [analyzing, setAnalyzing] = useState(false);
-  const [result, setResult] = useState<typeof fitAssessments.strong | typeof fitAssessments.weak | null>(null);
+  const [jd, setJd] = useState("");
+  const [showResults, setShowResults] = useState(false);
 
-  const handleAnalyze = (type: FitType) => {
-    setActiveTab(type);
-    setAnalyzing(true);
-    setResult(null);
+  // We use useChat to leverage the existing infrastructure, even though this is a single turn.
+  // We will force the AI to return JSON.
+  const { messages, append, isLoading } = useChat({
+    api: import.meta.env.VITE_CHAT_API_URL || '/functions/v1/chat',
+    initialMessages: [
+      {
+        id: 'system-fit',
+        role: 'system',
+        content: `${BRIDGE_ARCHITECT_PERSONA}
+        
+        SPECIAL INSTRUCTION:
+        The user will provide a Job Description. You MUST analyze it against Pedro's context.
+        You MUST return ONLY a strict JSON object (no markdown formatting, no other text) with this structure:
+        {
+          "strengths": ["string", "string"],
+          "gaps": ["string", "string"]
+        }
+        Be honest. Finding gaps is the "Honest Fit" protocol.
+        `
+      }
+    ],
+  });
 
-    setTimeout(() => {
-      setResult(fitAssessments[type]);
-      setAnalyzing(false);
-    }, 1500);
+  const handleAnalyze = async () => {
+    if (!jd.trim()) return;
+    setShowResults(true);
+    await append({
+      role: 'user',
+      content: `Analyze this Job Description:\n\n${jd}`
+    });
   };
 
+  // Extract the last message from assistant
+  const lastMessage = messages[messages.length - 1];
+  const isAssistant = lastMessage?.role === 'assistant';
+
+  let analysis = { strengths: [], gaps: [] };
+  if (isAssistant && !isLoading) {
+    try {
+      // Clean up potential markdown code blocks
+      const cleanContent = lastMessage.content.replace(/```json/g, '').replace(/```/g, '').trim();
+      analysis = JSON.parse(cleanContent);
+    } catch (e) {
+      console.error("Failed to parse JSON", e);
+      // Fallback or error state
+    }
+  }
+
   return (
-    <section id="fit-assessment" className="py-24 px-6 bg-secondary/30">
-      <div className="max-w-4xl mx-auto">
-        {/* Section header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-serif text-foreground mb-4">
-            Honest Fit Assessment
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Paste a job description. Get an honest assessment of whether I'm the right person—including when I'm not.
+    <div id="fit-assessment" className="w-full max-w-4xl mx-auto p-6 space-y-8 animate-fade-in">
+      {!showResults ? (
+        <Card className="p-8 border-accent/20 bg-card/50 backdrop-blur">
+          <h2 className="text-3xl font-serif text-foreground mb-4">Fit Assessment Protocol</h2>
+          <p className="text-muted-foreground mb-6">
+            Paste your Job Description below. I will run a semantic analysis against Pedro's neural context ("The Cortex") to identify
+            <span className="text-success font-medium"> aligned strengths</span> and
+            <span className="text-destructive font-medium"> honest gaps</span>.
           </p>
-        </div>
 
-        {/* Tab buttons */}
-        <div className="flex justify-center gap-4 mb-8">
-          <button
-            onClick={() => handleAnalyze("strong")}
-            className={cn(
-              "px-6 py-3 rounded-xl font-medium transition-all border",
-              activeTab === "strong"
-                ? "bg-success-muted text-success border-success/30"
-                : "bg-card text-muted-foreground border-border hover:border-muted-foreground"
-            )}
+          <Textarea
+            value={jd}
+            onChange={(e) => setJd(e.target.value)}
+            placeholder="Paste Job Description here..."
+            className="min-h-[200px] mb-6 bg-secondary/50 border-border/50 focus:border-accent"
+          />
+
+          <Button
+            onClick={handleAnalyze}
+            disabled={!jd.trim()}
+            className="w-full bg-accent hover:bg-accent/90 text-accent-foreground py-6 text-lg"
           >
-            Strong Fit Example
-          </button>
-          <button
-            onClick={() => handleAnalyze("weak")}
-            className={cn(
-              "px-6 py-3 rounded-xl font-medium transition-all border",
-              activeTab === "weak"
-                ? "bg-warning-muted text-warning border-warning/30"
-                : "bg-card text-muted-foreground border-border hover:border-muted-foreground"
-            )}
-          >
-            Weak Fit Example
-          </button>
-        </div>
+            Run Fit Analysis <ArrowRight className="ml-2 w-5 h-5" />
+          </Button>
+        </Card>
+      ) : (
+        <div className="space-y-6">
+          <div className="flex justify-between items-center">
+            <h3 className="text-2xl font-serif">Analysis Results</h3>
+            <Button variant="ghost" onClick={() => setShowResults(false)}>New Analysis</Button>
+          </div>
 
-        {/* Main interface */}
-        <div className="bg-card border border-border rounded-2xl overflow-hidden">
-          {/* Input section */}
-          <div className="p-6 border-b border-border">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-accent/20 flex items-center justify-center">
-                <FileText className="w-4 h-4 text-accent" />
-              </div>
-              <span className="text-muted-foreground text-sm">
-                Job description to analyze
-              </span>
+          {isLoading ? (
+            <div className="flex flex-col items-center justify-center py-20 space-y-4">
+              <Loader2 className="w-12 h-12 text-accent animate-spin" />
+              <p className="text-muted-foreground animate-pulse">Scanning AgenticOS Context...</p>
             </div>
-            <div className="bg-secondary rounded-xl p-4 border border-border">
-              <p className="text-sm font-mono text-muted-foreground leading-relaxed whitespace-pre-wrap">
-                {jobDescriptions[activeTab]}
-              </p>
+          ) : (
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Strengths */}
+              <Card className="p-6 border-success/20 bg-success/5">
+                <div className="flex items-center gap-3 mb-4">
+                  <CheckCircle className="w-6 h-6 text-success" />
+                  <h4 className="text-xl font-medium text-success">Core Strengths</h4>
+                </div>
+                <ul className="space-y-3">
+                  {analysis.strengths?.map((item: string, i: number) => (
+                    <li key={i} className="flex items-start gap-2 text-foreground/90">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-success/60" />
+                      {item}
+                    </li>
+                  )) || <p className="text-muted-foreground italic">Parsing response...</p>}
+                </ul>
+              </Card>
+
+              {/* Gaps */}
+              <Card className="p-6 border-destructive/20 bg-destructive/5">
+                <div className="flex items-center gap-3 mb-4">
+                  <XCircle className="w-6 h-6 text-destructive" />
+                  <h4 className="text-xl font-medium text-destructive">Potential Gaps</h4>
+                </div>
+                <ul className="space-y-3">
+                  {analysis.gaps?.map((item: string, i: number) => (
+                    <li key={i} className="flex items-start gap-2 text-foreground/90">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-destructive/60" />
+                      {item}
+                    </li>
+                  )) || <p className="text-muted-foreground italic">Parsing response...</p>}
+                </ul>
+              </Card>
             </div>
-          </div>
-
-          {/* Analysis section */}
-          <div className="p-6">
-            {analyzing && (
-              <div className="flex items-center justify-center py-12">
-                <div className="flex items-center gap-3 text-muted-foreground">
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  <span>Analyzing against my experience...</span>
-                </div>
-              </div>
-            )}
-
-            {result && !analyzing && (
-              <div className="animate-slide-up">
-                {/* Verdict header */}
-                <div
-                  className={cn(
-                    "flex items-center gap-4 mb-6 p-4 rounded-xl border",
-                    result.verdict === "strong"
-                      ? "bg-success-muted border-success/20"
-                      : "bg-warning-muted border-warning/20"
-                  )}
-                >
-                  <div
-                    className={cn(
-                      "w-12 h-12 rounded-full flex items-center justify-center",
-                      result.verdict === "strong" ? "bg-success/20" : "bg-warning/20"
-                    )}
-                  >
-                    {result.verdict === "strong" ? (
-                      <Check className="w-6 h-6 text-success" />
-                    ) : (
-                      <AlertTriangle className="w-6 h-6 text-warning" />
-                    )}
-                  </div>
-                  <div>
-                    <h3
-                      className={cn(
-                        "text-xl font-serif",
-                        result.verdict === "strong" ? "text-success" : "text-warning"
-                      )}
-                    >
-                      {result.title}
-                    </h3>
-                    <p className="text-muted-foreground text-sm mt-1">{result.summary}</p>
-                  </div>
-                </div>
-
-                {/* Strong fit content */}
-                {result.verdict === "strong" && "matches" in result && (
-                  <>
-                    <div className="space-y-4 mb-6">
-                      <h4 className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
-                        Where I Match
-                      </h4>
-                      {result.matches.map((match, i) => (
-                        <div
-                          key={i}
-                          className="p-4 bg-secondary rounded-xl border border-border"
-                        >
-                          <div className="flex items-start gap-3">
-                            <span className="text-success mt-0.5">✓</span>
-                            <div>
-                              <p className="text-success font-medium mb-2">
-                                {match.requirement}
-                              </p>
-                              <p className="text-muted-foreground text-sm leading-relaxed">
-                                {match.evidence}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="space-y-4 mb-6">
-                      <h4 className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
-                        Gaps to Note
-                      </h4>
-                      {result.gaps.map((gap, i) => (
-                        <div
-                          key={i}
-                          className="p-4 bg-secondary rounded-xl border border-border"
-                        >
-                          <div className="flex items-start gap-3">
-                            <span className="text-muted-foreground mt-0.5">○</span>
-                            <div>
-                              <p className="text-foreground font-medium mb-1">{gap.area}</p>
-                              <p className="text-muted-foreground text-sm">{gap.note}</p>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </>
-                )}
-
-                {/* Weak fit content */}
-                {result.verdict === "weak" && "mismatches" in result && (
-                  <>
-                    <div className="space-y-4 mb-6">
-                      <h4 className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
-                        Where I Don't Fit
-                      </h4>
-                      {result.mismatches.map((mismatch, i) => (
-                        <div
-                          key={i}
-                          className="p-4 bg-secondary rounded-xl border border-border"
-                        >
-                          <div className="flex items-start gap-3">
-                            <span className="text-warning mt-0.5">✗</span>
-                            <div>
-                              <p className="text-warning font-medium mb-2">
-                                {mismatch.requirement}
-                              </p>
-                              <p className="text-muted-foreground text-sm leading-relaxed">
-                                {mismatch.reality}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="p-4 bg-secondary rounded-xl border border-border mb-6">
-                      <h4 className="text-xs font-mono uppercase tracking-wider text-muted-foreground mb-2">
-                        What Does Transfer
-                      </h4>
-                      <p className="text-muted-foreground text-sm">{result.whatTransfers}</p>
-                    </div>
-                  </>
-                )}
-
-                {/* Recommendation */}
-                <div
-                  className={cn(
-                    "p-4 rounded-xl border",
-                    result.verdict === "strong"
-                      ? "bg-success-muted border-success/20"
-                      : "bg-warning-muted border-warning/20"
-                  )}
-                >
-                  <h4 className="text-xs font-mono uppercase tracking-wider text-muted-foreground mb-2">
-                    My Recommendation
-                  </h4>
-                  <p
-                    className={cn(
-                      "leading-relaxed",
-                      result.verdict === "strong" ? "text-success" : "text-warning"
-                    )}
-                  >
-                    {result.recommendation}
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
+          )}
         </div>
-
-        {/* Bottom insight */}
-        <div className="mt-8 text-center">
-          <div className="inline-block p-6 bg-card rounded-2xl border border-border max-w-2xl">
-            <p className="text-muted-foreground leading-relaxed">
-              This signals something completely different than "please consider my resume."
-              <br />
-              <br />
-              <span className="text-foreground font-medium">
-                You're qualifying them. Your time is valuable too.
-              </span>
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+      )}
+    </div>
   );
 };
 

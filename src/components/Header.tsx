@@ -12,7 +12,7 @@ const Header = ({ onOpenChat }: HeaderProps) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -35,39 +35,52 @@ const Header = ({ onOpenChat }: HeaderProps) => {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
         scrolled
-          ? "bg-background/80 backdrop-blur-lg border-b border-border"
-          : "bg-transparent"
+          ? "bg-background/95 backdrop-blur-md border-border/40 py-3"
+          : "bg-background border-transparent py-5"
       )}
     >
-      <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <button
-          onClick={() => scrollToSection("hero")}
-          className="font-serif text-xl text-foreground hover:text-primary transition-colors"
-        >
-          MC
-        </button>
+      <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+        <div className="flex flex-col">
+          <button
+            onClick={() => scrollToSection("hero")}
+            className="text-left group"
+          >
+            <h1 className="font-serif text-xl font-medium tracking-tight text-foreground group-hover:text-primary transition-colors">
+              Pedro Bandeira
+            </h1>
+            <span className="text-xs font-sans text-muted-foreground tracking-wide uppercase mt-0.5">
+              The Human-AI Bridge
+            </span>
+          </button>
+        </div>
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
           <button
-            onClick={() => scrollToSection("experience")}
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            onClick={() => scrollToSection("analog-advantage")}
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
-            Experience
+            Analog Advantage
+          </button>
+          <button
+            onClick={() => scrollToSection("saas-audit")}
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            SaaS Audit
           </button>
           <button
             onClick={() => scrollToSection("fit-assessment")}
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
             Fit Check
           </button>
           <button
             onClick={handleAskAI}
-            className="text-sm px-4 py-2 bg-accent text-accent-foreground rounded-full hover:opacity-90 transition-opacity"
+            className="text-sm font-medium px-5 py-2.5 bg-primary text-primary-foreground rounded-full hover:shadow-lg transition-all duration-300"
           >
-            Ask AI
+            Consult The Architect
           </button>
         </div>
 
@@ -82,25 +95,31 @@ const Header = ({ onOpenChat }: HeaderProps) => {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-card border-b border-border animate-slide-down">
-          <div className="px-6 py-4 space-y-4">
+        <div className="md:hidden bg-background border-b border-border animate-slide-down absolute w-full">
+          <div className="px-6 py-6 space-y-6">
             <button
-              onClick={() => scrollToSection("experience")}
-              className="block w-full text-left text-muted-foreground hover:text-foreground transition-colors"
+              onClick={() => scrollToSection("analog-advantage")}
+              className="block w-full text-left font-medium text-muted-foreground hover:text-foreground"
             >
-              Experience
+              Analog Advantage
+            </button>
+            <button
+              onClick={() => scrollToSection("saas-audit")}
+              className="block w-full text-left font-medium text-muted-foreground hover:text-foreground"
+            >
+              SaaS Audit
             </button>
             <button
               onClick={() => scrollToSection("fit-assessment")}
-              className="block w-full text-left text-muted-foreground hover:text-foreground transition-colors"
+              className="block w-full text-left font-medium text-muted-foreground hover:text-foreground"
             >
               Fit Check
             </button>
             <button
               onClick={handleAskAI}
-              className="block w-full text-left text-accent hover:opacity-80 transition-opacity"
+              className="block w-full text-left font-medium text-primary"
             >
-              Ask AI About Me
+              Consult The Architect
             </button>
           </div>
         </div>

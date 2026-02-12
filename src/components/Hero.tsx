@@ -1,5 +1,4 @@
-import { MessageSquare } from "lucide-react";
-import { marcusProfile } from "@/data/marcus-profile";
+import { ArrowRight } from "lucide-react";
 
 interface HeroProps {
   onOpenChat: () => void;
@@ -9,58 +8,66 @@ const Hero = ({ onOpenChat }: HeroProps) => {
   return (
     <section
       id="hero"
-      className="min-h-screen flex flex-col justify-center px-6 pt-20"
+      className="min-h-screen flex flex-col justify-center px-6 pt-20 bg-background"
     >
-      <div className="max-w-4xl mx-auto w-full">
-        {/* Status badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary rounded-full mb-8 animate-fade-in">
-          <span className="w-2 h-2 rounded-full bg-success animate-pulse-soft" />
-          <span className="text-sm text-muted-foreground">{marcusProfile.status}</span>
+      <div className="max-w-5xl mx-auto w-full space-y-8">
+
+        {/* Anti-Hype Badge */}
+        <div className="inline-flex items-center gap-2 px-3 py-1 border border-primary/20 rounded-full animate-fade-in">
+          <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+          <span className="text-xs font-medium text-foreground uppercase tracking-widest">
+            AI Strategy & Architecture
+          </span>
         </div>
 
         {/* Main heading */}
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-foreground mb-6 animate-slide-up">
-          {marcusProfile.name}
+        <h1 className="text-5xl md:text-7xl font-serif font-medium text-foreground tracking-tight leading-[1.1] animate-slide-up">
+          Dismantling AI Magic. <br />
+          <span className="text-muted-foreground">Building Business Utility.</span>
         </h1>
 
-        {/* Role */}
-        <p className="text-2xl md:text-3xl text-primary font-serif mb-4 animate-slide-up stagger-1">
-          {marcusProfile.title}
-        </p>
-
         {/* Subtitle */}
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-8 animate-slide-up stagger-2">
-          {marcusProfile.subtitle}
+        <p className="text-xl md:text-2xl text-foreground/80 max-w-2xl font-light leading-relaxed animate-slide-up stagger-1">
+          Stop treating AI like a magic trick. Start treating it like infrastructure.
+          I bridge the gap between "Prompt Engineering" and enterprise-grade reliability.
         </p>
 
-        {/* Company badges */}
-        <div className="flex flex-wrap gap-3 mb-12 animate-slide-up stagger-3">
-          {marcusProfile.companies.map((company) => (
-            <span
-              key={company}
-              className="px-4 py-2 bg-card border border-border rounded-full text-sm text-foreground"
-            >
-              {company}
-            </span>
-          ))}
+        {/* CTA Buttons */}
+        <div className="flex flex-wrap gap-4 pt-4 animate-slide-up stagger-2">
+          <button
+            onClick={onOpenChat}
+            className="group inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-full font-medium transition-all hover:shadow-lg hover:shadow-primary/20"
+          >
+            <span>Consult The Architect</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </button>
+
+          <button
+            onClick={() => document.getElementById('saas-audit')?.scrollIntoView({ behavior: 'smooth' })}
+            className="inline-flex items-center gap-2 px-8 py-4 bg-secondary text-secondary-foreground rounded-full font-medium transition-colors hover:bg-secondary/80"
+          >
+            Audit Your SaaS Spend
+          </button>
         </div>
 
-        {/* CTA Button */}
-        <button
-          onClick={onOpenChat}
-          className="group relative inline-flex items-center gap-3 px-8 py-4 bg-accent text-accent-foreground rounded-2xl font-medium transition-all hover:scale-[1.02] hover:shadow-lg hover:shadow-accent/20 animate-slide-up stagger-4"
-        >
-          <MessageSquare className="w-5 h-5" />
-          <span>Ask AI About Me</span>
-          <span className="absolute -top-2 -right-2 px-2 py-0.5 bg-success text-primary-foreground rounded-full text-xs font-medium">
-            New
-          </span>
-        </button>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground animate-fade-in opacity-0" style={{ animationDelay: "1.5s", animationFillMode: "forwards" }}>
-          <span className="text-xs uppercase tracking-widest">Scroll to explore</span>
-          <div className="w-px h-8 bg-gradient-to-b from-muted-foreground to-transparent" />
+        {/* Social Proof / Capability Badges */}
+        <div className="pt-12 border-t border-border mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 opacity-0 animate-fade-in" style={{ animationDelay: "1s", animationFillMode: "forwards" }}>
+          <div>
+            <h4 className="font-serif text-lg text-foreground">AgenticOS</h4>
+            <p className="text-sm text-muted-foreground">Autonomous Workflows</p>
+          </div>
+          <div>
+            <h4 className="font-serif text-lg text-foreground">RAG pipelines</h4>
+            <p className="text-sm text-muted-foreground">Enterprise Context</p>
+          </div>
+          <div>
+            <h4 className="font-serif text-lg text-foreground">Bridge Architecture</h4>
+            <p className="text-sm text-muted-foreground">Human-in-the-loop</p>
+          </div>
+          <div>
+            <h4 className="font-serif text-lg text-foreground">Guardrails</h4>
+            <p className="text-sm text-muted-foreground">Deterministic Output</p>
+          </div>
         </div>
       </div>
     </section>
