@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Shield, Cpu } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface HeaderProps {
@@ -56,6 +56,20 @@ const Header = ({ onOpenChat }: HeaderProps) => {
           </button>
         </div>
 
+        {/* System Status Badge — desktop only */}
+        <div className="hidden lg:flex items-center gap-3 px-4 py-2 glass-card rounded-full">
+          <div className="flex items-center gap-1.5">
+            <Cpu className="w-3 h-3 text-indigo-500" />
+            <span className="text-[10px] font-mono text-muted-foreground">AI Stack: <span className="text-foreground font-semibold">Hybrid</span></span>
+          </div>
+          <div className="w-px h-3 bg-border" />
+          <div className="flex items-center gap-1.5">
+            <Shield className="w-3 h-3 text-emerald-500" />
+            <span className="text-[10px] font-mono text-muted-foreground">Privacy: <span className="text-emerald-600 font-semibold">High</span></span>
+          </div>
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+        </div>
+
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
           <button
@@ -65,10 +79,10 @@ const Header = ({ onOpenChat }: HeaderProps) => {
             Analog Advantage
           </button>
           <button
-            onClick={() => scrollToSection("saas-audit")}
+            onClick={() => scrollToSection("resource-audit")}
             className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
-            SaaS Audit
+            ROI Audit
           </button>
           <button
             onClick={() => scrollToSection("fit-assessment")}
@@ -104,10 +118,10 @@ const Header = ({ onOpenChat }: HeaderProps) => {
               Analog Advantage
             </button>
             <button
-              onClick={() => scrollToSection("saas-audit")}
+              onClick={() => scrollToSection("resource-audit")}
               className="block w-full text-left font-medium text-muted-foreground hover:text-foreground"
             >
-              SaaS Audit
+              ROI Audit
             </button>
             <button
               onClick={() => scrollToSection("fit-assessment")}

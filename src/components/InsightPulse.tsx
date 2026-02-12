@@ -1,25 +1,24 @@
-import { Zap, Globe } from "lucide-react";
-import { Card } from "@/components/ui/card";
+import { Zap, Globe, ArrowRight } from "lucide-react";
 
 const insights = [
     {
         id: "anthropic-enterprise",
         icon: <Zap className="w-5 h-5" />,
-        color: "from-amber-600 to-orange-600",
+        color: "from-amber-500 to-orange-500",
         iconBg: "bg-amber-100 text-amber-700",
-        headline: "Anthropic 4.6 & Enterprise Reasoning",
-        translation:
-            "Why this model finally makes legal document triaging reliable enough for a Managing Partner's desk. The reasoning chain is now deterministic enough to pass a compliance audit — not just impressive in a demo.",
+        noise: "OpenAI releases o3, Anthropic releases Claude 4.6.",
+        translation: "Models are getting cheaper, not just smarter. Enterprise reasoning is now reliable enough for a Managing Partner's desk.",
+        action: "We can move your document review from GPT-4 to Claude Haiku, saving 90% on API costs without losing accuracy. I can implement this switch in 24 hours.",
         date: "Feb 2026",
     },
     {
         id: "openclaw-sovereignty",
         icon: <Globe className="w-5 h-5" />,
-        color: "from-emerald-600 to-teal-600",
+        color: "from-emerald-500 to-teal-500",
         iconBg: "bg-emerald-100 text-emerald-700",
-        headline: "OpenClaw & The Sovereignty Shift",
-        translation:
-            "Why the new open-source movement means you can soon stop sending your client data to US-based servers entirely. Self-hosted models are now good enough for production legal and pharma workloads.",
+        noise: "Meta releases Llama 4, OpenClaw launches open-source agent framework.",
+        translation: "Self-hosted models are now good enough for production workloads. You can stop sending client data to US servers.",
+        action: "I can redeploy your document processing pipeline to run on-premise using Llama 4 + OpenClaw — same accuracy, full data sovereignty, zero API costs.",
         date: "Feb 2026",
     },
 ];
@@ -33,27 +32,23 @@ const InsightPulse = () => {
                         The 60-Day Pulse
                     </h2>
                     <p className="text-muted-foreground text-lg max-w-2xl">
-                        Not a blog. A translation layer — what the latest AI breakthroughs actually mean for your business.
+                        Not a blog. A translation layer — cutting through AI noise to show what actually matters for your business.
                     </p>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-8">
                     {insights.map((insight) => (
-                        <Card
+                        <div
                             key={insight.id}
-                            className="p-0 overflow-hidden border-border card-slab flex flex-col"
+                            className="glass-card rounded-2xl overflow-hidden flex flex-col"
                         >
                             {/* Color bar */}
-                            <div
-                                className={`h-1.5 bg-gradient-to-r ${insight.color}`}
-                            />
+                            <div className={`h-1.5 bg-gradient-to-r ${insight.color}`} />
 
                             <div className="p-6 flex flex-col flex-1">
                                 {/* Icon + Date */}
-                                <div className="flex items-center justify-between mb-4">
-                                    <div
-                                        className={`w-10 h-10 rounded-full ${insight.iconBg} flex items-center justify-center`}
-                                    >
+                                <div className="flex items-center justify-between mb-5">
+                                    <div className={`w-10 h-10 rounded-full ${insight.iconBg} flex items-center justify-center`}>
                                         {insight.icon}
                                     </div>
                                     <span className="text-xs font-mono text-muted-foreground border border-border rounded-full px-3 py-1">
@@ -61,22 +56,37 @@ const InsightPulse = () => {
                                     </span>
                                 </div>
 
-                                {/* Headline */}
-                                <h3 className="text-lg font-serif font-medium text-foreground mb-4">
-                                    {insight.headline}
-                                </h3>
-
-                                {/* Translation */}
-                                <div className="flex-1">
-                                    <p className="text-xs font-mono uppercase tracking-wider text-primary font-bold mb-2">
-                                        Translation
+                                {/* The Noise */}
+                                <div className="mb-4">
+                                    <p className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground font-bold mb-1.5">
+                                        The Noise
                                     </p>
-                                    <p className="text-sm text-muted-foreground leading-relaxed">
+                                    <p className="text-sm text-foreground font-medium leading-relaxed">
+                                        {insight.noise}
+                                    </p>
+                                </div>
+
+                                {/* The Translation */}
+                                <div className="mb-4 p-3 bg-primary/5 rounded-lg border-l-4 border-primary">
+                                    <p className="text-[10px] font-mono uppercase tracking-wider text-primary font-bold mb-1.5">
+                                        The Translation
+                                    </p>
+                                    <p className="text-sm text-foreground/80 leading-relaxed">
                                         {insight.translation}
                                     </p>
                                 </div>
+
+                                {/* The Action */}
+                                <div className="mt-auto p-3 bg-emerald-50/50 rounded-lg border border-emerald-200">
+                                    <p className="text-[10px] font-mono uppercase tracking-wider text-emerald-700 font-bold mb-1.5">
+                                        The Action
+                                    </p>
+                                    <p className="agent-text text-emerald-800/80 leading-relaxed">
+                                        {insight.action}
+                                    </p>
+                                </div>
                             </div>
-                        </Card>
+                        </div>
                     ))}
                 </div>
             </div>

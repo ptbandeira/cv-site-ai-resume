@@ -38,7 +38,7 @@ const Footer = () => {
 
         <div className="mt-12 pt-8 border-t border-border text-center">
           <p className="text-sm text-muted-foreground">
-            © 2026 Pedro Bandeira. Built with Vibe Coding & Strategic Intent.
+            © 2026 Pedro Bandeira. Built with Sovereign Architecture.
           </p>
         </div>
       </div>

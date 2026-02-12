@@ -8,6 +8,9 @@ import SaasVsBuild from "@/components/SaasVsBuild";
 import AutomationAuditor from "@/components/AutomationAuditor";
 import AnalogAdvantage from "@/components/AnalogAdvantage";
 import InsightPulse from "@/components/InsightPulse";
+import TeamsAgentDemo from "@/components/TeamsAgentDemo";
+import DataTransformation from "@/components/DataTransformation";
+import SavingsCalculator from "@/components/SavingsCalculator";
 import AIChat from "@/components/AIChat";
 import Footer from "@/components/Footer";
 
@@ -22,7 +25,10 @@ const Index = () => {
       <main>
         <Hero onOpenChat={openChat} />
         <AnalogAdvantage />
+        <TeamsAgentDemo />
+        <DataTransformation />
         <div id="resource-audit">
+          <SavingsCalculator />
           <SaasVsBuild />
         </div>
         <div id="automation-auditor">

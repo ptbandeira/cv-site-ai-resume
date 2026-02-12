@@ -41,7 +41,7 @@ const ExperienceCard = ({
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
         <div>
-          <h3 className="text-2xl font-serif text-foreground mb-1">{challenge}</h3>
+          <h3 className="text-2xl font-sans font-bold text-foreground mb-1">{challenge}</h3>
           <p className="text-primary">{role}</p>
         </div>
         <span className="text-sm font-mono text-muted-foreground">{period}</span>
