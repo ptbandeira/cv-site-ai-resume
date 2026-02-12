@@ -1,43 +1,45 @@
 import ExperienceCard from "./ExperienceCard";
 
 const Experience = () => {
-  const experiences = [
+  const milestones = [
     {
-      company: "Microsoft / Accenture",
-      role: "Solutions Architect & Consultant",
+      challenge: "Enterprise Data Gridlock: 10 Years Bridging Engineering & C-Suite",
+      role: "Solutions Architect & Consultant — Microsoft / Accenture",
       period: "2010 - 2020",
       highlights: [
-        "Led enterprise digital transformation projects for Fortune 500 clients.",
-        "Architected scalable Azure cloud solutions for complex data environments.",
-        "Bridged the gap between technical engineering teams and C-suite strategy."
+        "Translated C-suite strategic goals into technical architecture across Fortune 500 engagements.",
+        "Architected scalable Azure cloud solutions for complex, siloed data environments.",
+        "Delivered multi-year digital transformation programs — the 'boring' infrastructure that keeps enterprises alive."
       ],
       aiContext: {
-        situation: "Large-scale organizational silos preventing data agility.",
-        approach: "Implemented unified cloud data strategies using Azure.",
-        technicalWork: "Azure Synapse, Cosmos DB, Microservices Architecture.",
-        lessonsLearned: "Technology is easy; organizational change is hard."
-      }
+        situation: "Large-scale organizational silos preventing data agility across multinational enterprises.",
+        approach: "Implemented unified cloud data strategies using Azure, bridging legacy systems to modern architectures.",
+        technicalWork: "Azure Synapse, Cosmos DB, Microservices Architecture, Enterprise Integration Patterns.",
+        lessonsLearned: "Technology is easy; organizational change is hard. The bottleneck is always human adoption, not infrastructure."
+      },
+      perspective2026: "How I'd solve this today: Human-in-the-Loop agents that automate the 40% of administrative waste I handled manually between 2010-2020. Enterprise data reconciliation that took weeks now takes hours with deterministic RAG pipelines — but still requires a human to sign off."
     },
     {
-      company: "Grupa Moja Farmacja",
-      role: "CIO / Strategic Leader",
+      challenge: "Scaling Regulated Retail: From 1 to 10 Units",
+      role: "CIO / Strategic Leader — Grupa Moja Farmacja",
       period: "2020 - 2024",
       highlights: [
-        "Directed IT strategy for a major pharmaceutical network.",
-        "Implemented e-commerce and logistics optimization systems.",
-        "Managed compliance and data security for sensitive healthcare data."
+        "Built the digital backbone for a pharmaceutical retail network scaling from single-site to multi-unit operations.",
+        "Implemented compliance-first e-commerce and logistics systems for regulated healthcare products.",
+        "Managed data security and regulatory frameworks (GDP, GMP) for sensitive patient and prescription data."
       ],
       aiContext: {
-        situation: "Rapid operational scaling required robust digital backbone.",
-        approach: "Full digital transformation of logistics and sales channels.",
-        technicalWork: "Custom ERP integrations, Secure Health Data Pipelines.",
-        lessonsLearned: "Operational efficiency drives the bottom line."
-      }
+        situation: "Rapid operational scaling required robust digital infrastructure with zero tolerance for compliance failure.",
+        approach: "Full digital transformation of logistics, sales channels, and supply chain — with pharmaceutical regulations as the design constraint, not an afterthought.",
+        technicalWork: "Custom ERP integrations, Secure Health Data Pipelines, Multi-site POS systems, Regulatory Reporting Automation.",
+        lessonsLearned: "In regulated industries, the cost of a compliance failure dwarfs any technology investment. Build for the auditor first."
+      },
+      perspective2026: "How I'd solve this today: The Compliance Guardrail agent I now build can flag non-compliant marketing copy in 0.5 seconds — work that required manual review by me and two pharmacists in 2022. The A-V-C Framework I use for clients was born from this experience."
     }
   ];
 
   const skills = {
-    strong: ["Azure Architecture", "Strategic Leadership", "Vibe Coding", "AI Orchestration"],
+    strong: ["Azure Architecture", "Strategic Leadership", "AI Orchestration", "Regulated Industry Ops"],
     moderate: ["React/TypeScript", "Python (GenAI)", "Node.js"],
     gaps: ["Legacy Mainframe", "Manual QA", "Pixel-Perfect CSS"]
   };
@@ -48,23 +50,24 @@ const Experience = () => {
         {/* Section header */}
         <div className="mb-12">
           <h2 className="text-4xl md:text-5xl font-serif text-foreground mb-4">
-            Experience
+            Operational Milestones
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl">
-            Each role includes queryable AI context—the real story behind the bullet points.
+            The analog scars that inform the digital architecture.
           </p>
         </div>
 
         {/* Experience cards */}
         <div className="space-y-6">
-          {experiences.map((exp, index) => (
+          {milestones.map((milestone, index) => (
             <ExperienceCard
-              key={exp.company}
-              company={exp.company}
-              role={exp.role}
-              period={exp.period}
-              highlights={exp.highlights}
-              aiContext={exp.aiContext}
+              key={milestone.challenge}
+              challenge={milestone.challenge}
+              role={milestone.role}
+              period={milestone.period}
+              highlights={milestone.highlights}
+              aiContext={milestone.aiContext}
+              perspective2026={milestone.perspective2026}
               index={index}
             />
           ))}

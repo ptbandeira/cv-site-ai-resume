@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, ChevronUp, Sparkles } from "lucide-react";
+import { ChevronDown, ChevronUp, Sparkles, Lightbulb } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface AIContext {
@@ -10,20 +10,22 @@ interface AIContext {
 }
 
 interface ExperienceCardProps {
-  company: string;
+  challenge: string;
   role: string;
   period: string;
   highlights: string[];
   aiContext: AIContext;
+  perspective2026: string;
   index: number;
 }
 
 const ExperienceCard = ({
-  company,
+  challenge,
   role,
   period,
   highlights,
   aiContext,
+  perspective2026,
   index,
 }: ExperienceCardProps) => {
   const [expanded, setExpanded] = useState(false);
@@ -39,7 +41,7 @@ const ExperienceCard = ({
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
         <div>
-          <h3 className="text-2xl font-serif text-foreground mb-1">{company}</h3>
+          <h3 className="text-2xl font-serif text-foreground mb-1">{challenge}</h3>
           <p className="text-primary">{role}</p>
         </div>
         <span className="text-sm font-mono text-muted-foreground">{period}</span>
@@ -54,6 +56,15 @@ const ExperienceCard = ({
           </li>
         ))}
       </ul>
+
+      {/* 2026 Perspective */}
+      <div className="mb-6 p-4 bg-primary/5 border-l-4 border-primary rounded-r-lg">
+        <div className="flex items-center gap-2 mb-2">
+          <Lightbulb className="w-4 h-4 text-primary" />
+          <span className="text-xs font-mono uppercase tracking-wider text-primary font-bold">2026 Perspective</span>
+        </div>
+        <p className="text-sm text-foreground/80 italic leading-relaxed">{perspective2026}</p>
+      </div>
 
       {/* AI Context Toggle */}
       <button

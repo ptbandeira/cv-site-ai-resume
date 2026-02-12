@@ -44,10 +44,10 @@ const Hero = ({ onOpenChat }: HeroProps) => {
           </button>
 
           <button
-            onClick={() => document.getElementById('saas-audit')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => document.getElementById('resource-audit')?.scrollIntoView({ behavior: 'smooth' })}
             className="inline-flex items-center gap-2 px-8 py-4 bg-secondary text-secondary-foreground rounded-full font-medium transition-colors hover:bg-secondary/80"
           >
-            Audit Your SaaS Spend
+            Optimize Your Stack
           </button>
         </div>
 

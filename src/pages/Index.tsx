@@ -5,8 +5,9 @@ import MiniAppSandbox from "@/components/MiniAppSandbox";
 import Experience from "@/components/Experience";
 import FitAssessment from "@/components/FitAssessment";
 import SaasVsBuild from "@/components/SaasVsBuild";
-import AutomationAuditor from "@/components/AutomationAuditor"; // New
+import AutomationAuditor from "@/components/AutomationAuditor";
 import AnalogAdvantage from "@/components/AnalogAdvantage";
+import InsightPulse from "@/components/InsightPulse";
 import AIChat from "@/components/AIChat";
 import Footer from "@/components/Footer";
 
@@ -21,7 +22,7 @@ const Index = () => {
       <main>
         <Hero onOpenChat={openChat} />
         <AnalogAdvantage />
-        <div id="saas-killer">
+        <div id="resource-audit">
           <SaasVsBuild />
         </div>
         <div id="automation-auditor">
@@ -31,6 +32,7 @@ const Index = () => {
           <MiniAppSandbox />
         </div>
         <Experience />
+        <InsightPulse />
         <FitAssessment />
       </main>
       <Footer />
