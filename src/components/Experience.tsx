@@ -1,7 +1,47 @@
-import { marcusProfile } from "@/data/marcus-profile";
 import ExperienceCard from "./ExperienceCard";
 
 const Experience = () => {
+  const experiences = [
+    {
+      company: "Microsoft / Accenture",
+      role: "Solutions Architect & Consultant",
+      period: "2010 - 2020",
+      highlights: [
+        "Led enterprise digital transformation projects for Fortune 500 clients.",
+        "Architected scalable Azure cloud solutions for complex data environments.",
+        "Bridged the gap between technical engineering teams and C-suite strategy."
+      ],
+      aiContext: {
+        situation: "Large-scale organizational silos preventing data agility.",
+        approach: "Implemented unified cloud data strategies using Azure.",
+        technicalWork: "Azure Synapse, Cosmos DB, Microservices Architecture.",
+        lessonsLearned: "Technology is easy; organizational change is hard."
+      }
+    },
+    {
+      company: "Grupa Moja Farmacja",
+      role: "CIO / Strategic Leaer",
+      period: "2020 - 2024",
+      highlights: [
+        "Directed IT strategy for a major pharmaceutical network.",
+        "Implemented e-commerce and logistics optimization systems.",
+        "Managed compliance and data security for sensitive healthcare data."
+      ],
+      aiContext: {
+        situation: "Rapid operational scaling required robust digital backbone.",
+        approach: "Full digital transformation of logistics and sales channels.",
+        technicalWork: "Custom ERP integrations, Secure Health Data Pipelines.",
+        lessonsLearned: "Operational efficiency drives the bottom line."
+      }
+    }
+  ];
+
+  const skills = {
+    strong: ["Azure Architecture", "Strategic Leadership", "Vibe Coding", "AI Orchestration"],
+    moderate: ["React/TypeScript", "Python (GenAI)", "Node.js"],
+    gaps: ["Legacy Mainframe", "Manual QA", "Pixel-Perfect CSS"]
+  };
+
   return (
     <section id="experience" className="py-24 px-6">
       <div className="max-w-4xl mx-auto">
@@ -17,10 +57,14 @@ const Experience = () => {
 
         {/* Experience cards */}
         <div className="space-y-6">
-          {marcusProfile.experience.map((exp, index) => (
+          {experiences.map((exp, index) => (
             <ExperienceCard
               key={exp.company}
-              {...exp}
+              company={exp.company}
+              role={exp.role}
+              period={exp.period}
+              highlights={exp.highlights}
+              aiContext={exp.aiContext}
               index={index}
             />
           ))}
@@ -28,14 +72,14 @@ const Experience = () => {
 
         {/* Skills Grid */}
         <div className="mt-16 grid md:grid-cols-3 gap-6">
-          <div className="p-6 bg-success-muted border border-success/20 rounded-2xl">
-            <h4 className="text-sm font-mono uppercase tracking-wider text-success mb-4">
+          <div className="p-6 bg-green-500/10 border border-green-500/20 rounded-2xl">
+            <h4 className="text-sm font-mono uppercase tracking-wider text-green-500 mb-4">
               Strong
             </h4>
             <ul className="space-y-2">
-              {marcusProfile.skills.strong.map((skill) => (
+              {skills.strong.map((skill) => (
                 <li key={skill} className="text-foreground flex items-center gap-2">
-                  <span className="text-success">✓</span>
+                  <span className="text-green-500">✓</span>
                   {skill}
                 </li>
               ))}
@@ -47,7 +91,7 @@ const Experience = () => {
               Moderate
             </h4>
             <ul className="space-y-2">
-              {marcusProfile.skills.moderate.map((skill) => (
+              {skills.moderate.map((skill) => (
                 <li key={skill} className="text-foreground flex items-center gap-2">
                   <span className="text-muted-foreground">○</span>
                   {skill}
@@ -56,14 +100,14 @@ const Experience = () => {
             </ul>
           </div>
 
-          <div className="p-6 bg-warning-muted border border-warning/20 rounded-2xl">
-            <h4 className="text-sm font-mono uppercase tracking-wider text-warning mb-4">
-              Gaps (I'll tell you)
+          <div className="p-6 bg-yellow-500/10 border border-yellow-500/20 rounded-2xl">
+            <h4 className="text-sm font-mono uppercase tracking-wider text-yellow-500 mb-4">
+              Gaps (Outsourced)
             </h4>
             <ul className="space-y-2">
-              {marcusProfile.skills.gaps.map((skill) => (
+              {skills.gaps.map((skill) => (
                 <li key={skill} className="text-foreground flex items-center gap-2">
-                  <span className="text-warning">✗</span>
+                  <span className="text-yellow-500">✗</span>
                   {skill}
                 </li>
               ))}
