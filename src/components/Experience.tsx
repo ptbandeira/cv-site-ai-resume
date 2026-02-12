@@ -20,7 +20,7 @@ const Experience = () => {
     },
     {
       company: "Grupa Moja Farmacja",
-      role: "CIO / Strategic Leaer",
+      role: "CIO / Strategic Leader",
       period: "2020 - 2024",
       highlights: [
         "Directed IT strategy for a major pharmaceutical network.",
