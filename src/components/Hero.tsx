@@ -16,22 +16,22 @@ const Hero = ({ onOpenChat }: HeroProps) => {
         {/* Tag Pill */}
         <div className="inline-flex items-center gap-2 px-3 py-1 border border-stone-300 rounded-full animate-fade-in">
           <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-          <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
+          <span className="text-xs font-mono text-stone-500 uppercase tracking-widest">
             AI Strategy &amp; Architecture
           </span>
         </div>
 
         {/* Main heading — Serif + Mono dual-font */}
-        <h1 className="text-5xl md:text-7xl tracking-tight leading-[1.1] animate-slide-up">
-          <span className="font-serif font-medium text-foreground">Analog Wisdom.</span>
+        <h1 className="font-serif text-6xl md:text-8xl italic text-black tracking-tight leading-[0.9] animate-slide-up">
+          Analog Wisdom.
           <br />
-          <span className="font-mono text-gradient">
+          <span className="not-italic text-gradient font-mono tracking-tighter">
             <ScrambleText text="Digital Scale." delay={600} duration={1400} />
           </span>
         </h1>
 
         {/* Subtitle — Mono, graphite */}
-        <p className="text-base md:text-lg font-mono text-[#555555] max-w-2xl leading-relaxed animate-slide-up stagger-1">
+        <p className="font-sans text-lg leading-relaxed text-stone-800 max-w-2xl animate-slide-up stagger-1">
           The AI revolution isn't about code; it's about context. I apply 20
           years of &ldquo;Analog&rdquo; management experience to steer
           &ldquo;Digital&rdquo; agent swarms, ensuring safety, ROI, and

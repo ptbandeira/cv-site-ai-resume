@@ -85,25 +85,25 @@ const ExperienceCard = ({
         <div className="mt-4 p-4 bg-secondary rounded-xl border border-border animate-slide-down">
           <div className="grid gap-4 text-sm">
             <div>
-              <span className="text-text-subtle font-mono text-xs uppercase tracking-wider">
+              <span className="text-stone-500 font-mono text-xs uppercase tracking-wider">
                 Situation
               </span>
               <p className="text-foreground mt-1">{aiContext.situation}</p>
             </div>
             <div>
-              <span className="text-text-subtle font-mono text-xs uppercase tracking-wider">
+              <span className="text-stone-500 font-mono text-xs uppercase tracking-wider">
                 Approach
               </span>
               <p className="text-foreground mt-1">{aiContext.approach}</p>
             </div>
             <div>
-              <span className="text-text-subtle font-mono text-xs uppercase tracking-wider">
+              <span className="text-stone-500 font-mono text-xs uppercase tracking-wider">
                 Technical Work
               </span>
               <p className="text-foreground mt-1">{aiContext.technicalWork}</p>
             </div>
             <div>
-              <span className="text-text-subtle font-mono text-xs uppercase tracking-wider">
+              <span className="text-stone-500 font-mono text-xs uppercase tracking-wider">
                 Lessons Learned
               </span>
               <p className="text-text-highlight mt-1 italic">"{aiContext.lessonsLearned}"</p>

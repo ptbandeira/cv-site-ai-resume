@@ -90,7 +90,7 @@ const Experience = () => {
           </div>
 
           <div className="p-6 bg-secondary border border-border rounded-2xl">
-            <h4 className="text-sm font-mono uppercase tracking-wider text-muted-foreground mb-4">
+            <h4 className="text-sm font-mono uppercase tracking-wider text-stone-500 mb-4">
               Moderate
             </h4>
             <ul className="space-y-2">

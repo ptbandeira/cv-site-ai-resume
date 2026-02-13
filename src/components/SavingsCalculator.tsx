@@ -194,7 +194,7 @@ const SavingsCalculator = () => {
 
                         {/* Assumptions */}
                         <div className="pt-4 border-t border-border space-y-1">
-                            <p className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground font-bold">
+                            <p className="text-[10px] font-mono uppercase tracking-wider text-stone-500 font-bold">
                                 Assumptions ({preset.label})
                             </p>
                             <p className="text-xs text-muted-foreground">
@@ -209,7 +209,7 @@ const SavingsCalculator = () => {
                     <div className="space-y-4">
                         {/* Main counter */}
                         <div className="bg-white border border-stone-200 shadow-xl shadow-stone-200/50 rounded-2xl p-8 text-center">
-                            <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-3">
+                            <p className="text-[10px] font-mono uppercase tracking-widest text-stone-500 mb-3">
                                 Money Saved Annually
                             </p>
                             <p className="text-5xl md:text-6xl font-serif text-emerald-600 font-medium tracking-tight">
@@ -224,7 +224,7 @@ const SavingsCalculator = () => {
                         {/* Sub-cards */}
                         <div className="grid grid-cols-2 gap-4">
                             <div className="bg-white border border-stone-200 shadow-xl shadow-stone-200/50 rounded-xl p-5 text-center">
-                                <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-2">
+                                <p className="text-[10px] font-mono uppercase tracking-widest text-stone-500 mb-2">
                                     One-Time Build
                                 </p>
                                 <p className="text-2xl font-serif text-foreground">
@@ -232,7 +232,7 @@ const SavingsCalculator = () => {
                                 </p>
                             </div>
                             <div className="bg-white border border-stone-200 shadow-xl shadow-stone-200/50 rounded-xl p-5 text-center">
-                                <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-2">
+                                <p className="text-[10px] font-mono uppercase tracking-widest text-stone-500 mb-2">
                                     Year 1 ROI
                                 </p>
                                 <div className="flex items-center justify-center gap-1">
@@ -249,7 +249,7 @@ const SavingsCalculator = () => {
                             ? "bg-emerald-50 border-emerald-200"
                             : "bg-red-50 border-red-200"
                             }`}>
-                            <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-1">
+                            <p className="text-[10px] font-mono uppercase tracking-widest text-stone-500 mb-1">
                                 Net Year 1 Return
                             </p>
                             <p className={`text-xl font-serif font-medium ${netReturn > 0 ? "text-emerald-700" : "text-red-700"

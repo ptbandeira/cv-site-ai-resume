@@ -71,9 +71,9 @@ export default {
         },
       },
       fontFamily: {
-        serif: ["var(--font-serif)", "Georgia", "serif"],
-        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
-        mono: ["var(--font-mono)", "monospace"],
+        serif: ['"Instrument Serif"', "serif"],
+        sans: ['"Inter"', "sans-serif"],
+        mono: ['"JetBrains Mono"', "monospace"],
       },
       borderRadius: {
         lg: "var(--radius)",

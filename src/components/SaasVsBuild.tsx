@@ -143,7 +143,7 @@ const SaasVsBuild = () => {
 
                             {/* Overlapping Tools */}
                             <div className="pt-4 border-t border-border">
-                                <p className="text-xs font-mono uppercase tracking-wider text-muted-foreground mb-3">Redundant SaaS You&apos;re Paying For</p>
+                                <p className="text-xs font-mono uppercase tracking-wider text-stone-500 mb-3">Redundant SaaS You&apos;re Paying For</p>
                                 <div className="space-y-2">
                                     {selectedStack.overlappingTools.map((tool) => (
                                         <div key={tool.name} className="flex justify-between items-center text-sm">
@@ -177,7 +177,7 @@ const SaasVsBuild = () => {
 
                         {/* ROI */}
                         <div className="space-y-4">
-                            <h3 className="text-sm font-sans font-bold text-muted-foreground uppercase tracking-wider">The Optimization Report</h3>
+                            <h3 className="text-sm font-sans font-bold text-stone-500 uppercase tracking-wider">The Optimization Report</h3>
 
                             <div className="space-y-4">
                                 <div className="p-4 bg-emerald-50/50 border border-emerald-100 rounded-lg">

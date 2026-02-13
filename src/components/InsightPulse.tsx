@@ -58,7 +58,7 @@ const InsightPulse = () => {
 
                                 {/* The Noise */}
                                 <div className="mb-4">
-                                    <p className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground font-bold mb-1.5">
+                                    <p className="text-[10px] font-mono uppercase tracking-wider text-stone-500 font-bold mb-1.5">
                                         The Noise
                                     </p>
                                     <p className="text-sm text-foreground font-medium leading-relaxed">
