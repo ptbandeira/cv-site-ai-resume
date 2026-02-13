@@ -3,29 +3,29 @@ import { useState } from "react";
 
 const cards = [
     {
-        id: "pharma",
-        analog: "Pharma Compliance / Regulated Ops",
-        digital: "Private LLM Security & Guardrails",
+        id: "compliance",
+        analog: "Compliance Governance",
+        digital: "Guardrailed LLMs",
         insight:
             "Regulatory rigor translates directly to prompt engineering for safety.",
         focus: "Safety",
         icon: Shield,
-        span: "md:col-span-2", // large card
+        span: "md:col-span-2",
     },
     {
-        id: "team",
-        analog: "Human Team Management",
-        digital: "Multi-Agent Orchestration",
-        insight: "Agents need clear roles, KPIs, and handoffs—just like humans.",
-        focus: "Orchestration",
+        id: "sales",
+        analog: "Deal Psychology",
+        digital: "Empathetic Sales Agents",
+        insight: "Understanding human motivation is the blueprint for persuasive AI.",
+        focus: "Empathy",
         icon: Users,
         span: "md:col-span-1",
     },
     {
-        id: "legacy",
-        analog: "Legacy Mainframe Migration",
-        digital: "RAG (Retrieval Augmented Generation)",
-        insight: "Connecting old data to new interfaces is the same core problem.",
+        id: "ops",
+        analog: "P&L Discipline",
+        digital: "ROI-Focused Automation",
+        insight: "Every automation must justify its cost — just like every hire.",
         focus: "ROI",
         icon: ArrowRightLeft,
         span: "md:col-span-1",
@@ -92,7 +92,7 @@ const AnalogAdvantage = () => {
             <div className="max-w-6xl mx-auto px-6">
                 <div className="mb-14 md:text-center max-w-3xl mx-auto">
                     <h2 className="text-3xl md:text-4xl font-serif text-white/90 mb-5">
-                        The Analog Advantage
+                        The Analog / Digital Bridge
                     </h2>
                     <p className="text-sm md:text-base font-mono text-white/40 leading-relaxed">
                         AI isn't magic — it's the next layer of abstraction. Decades of

@@ -76,7 +76,7 @@ const Header = ({ onOpenChat }: HeaderProps) => {
             onClick={() => scrollToSection("analog-advantage")}
             className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
-            Analog Advantage
+            A/D Bridge
           </button>
           <button
             onClick={() => scrollToSection("resource-audit")}
@@ -115,7 +115,7 @@ const Header = ({ onOpenChat }: HeaderProps) => {
               onClick={() => scrollToSection("analog-advantage")}
               className="block w-full text-left font-medium text-muted-foreground hover:text-foreground"
             >
-              Analog Advantage
+              A/D Bridge
             </button>
             <button
               onClick={() => scrollToSection("resource-audit")}

@@ -33,9 +33,10 @@ const Hero = ({ onOpenChat }: HeroProps) => {
 
         {/* Subtitle — Mono, neutral-400 */}
         <p className="text-base md:text-lg font-mono text-neutral-400 max-w-2xl leading-relaxed animate-slide-up stagger-1">
-          No Magic. Just Engineering. I bridge the AI Implementation Gap for
-          regulated industries by replacing &ldquo;SaaS Taxes&rdquo; with owned assets
-          and Human-in-the-Loop governance.
+          The AI revolution isn't about code; it's about context. I apply 20
+          years of &ldquo;Analog&rdquo; management experience to steer
+          &ldquo;Digital&rdquo; agent swarms, ensuring safety, ROI, and
+          operational sanity.
         </p>
 
         {/* CTA Buttons */}

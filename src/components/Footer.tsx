@@ -36,9 +36,13 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-border text-center">
+        <div className="mt-12 pt-8 border-t border-border text-center space-y-2">
           <p className="text-sm text-muted-foreground">
             © 2026 Analog AI. Built with Sovereign Architecture.
+          </p>
+          <p className="text-xs font-mono text-white/25 leading-relaxed max-w-xl mx-auto">
+            Pedro Bandeira: Senior AI Operations Architect. Specializing in Human-in-the-Loop
+            Workflows, Local LLMs, and Sovereign Data.
           </p>
         </div>
       </div>
