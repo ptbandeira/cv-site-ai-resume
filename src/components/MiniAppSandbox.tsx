@@ -11,7 +11,7 @@ import { toast } from "sonner";
 
 const MiniAppSandbox = () => {
     return (
-        <section id="sandbox" className="py-20 bg-background/50 backdrop-blur-sm">
+        <section className="py-20 bg-background/50 backdrop-blur-sm">
             <div className="max-w-6xl mx-auto px-6">
                 <div className="mb-16 md:text-center max-w-3xl mx-auto">
                     <h2 className="text-3xl font-serif text-foreground mb-6">

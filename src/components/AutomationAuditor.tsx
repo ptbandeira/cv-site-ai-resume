@@ -146,7 +146,7 @@ const AutomationAuditor = () => {
     };
 
     return (
-        <section className="py-24 bg-background border-t border-border/40" id="automation-auditor">
+        <section className="py-24 bg-background border-t border-border/40">
             <div className="max-w-4xl mx-auto px-6">
                 <div className="text-center mb-10">
                     <h2 className="text-3xl font-serif text-foreground mb-4">The &ldquo;Safe Automation&rdquo; Auditor</h2>

@@ -88,7 +88,7 @@ const SaasVsBuild = () => {
     const year2Savings = overlappingAnnual - maintenanceCost;
 
     return (
-        <section id="resource-audit" className="py-20 bg-secondary/30">
+        <section className="py-20 bg-secondary/30">
             <div className="max-w-5xl mx-auto px-6">
                 <div className="mb-12">
                     <h2 className="text-3xl font-serif text-foreground mb-4">Resource Optimization Audit</h2>
