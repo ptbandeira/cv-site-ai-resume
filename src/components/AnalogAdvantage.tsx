@@ -56,9 +56,9 @@ const AnalogAdvantage = ({ onOpenChat }: { onOpenChat?: () => void }) => {
                 </div>
 
                 {/* Bento grid: 2x2 Layout */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6" role="list">
                     {cards.map((card) => (
-                        <div
+                        <article
                             key={card.name}
                             onClick={'onClick' in card ? card.onClick : undefined}
                             className={`${card.className} relative group rounded-2xl p-6 md:p-8
@@ -67,6 +67,7 @@ const AnalogAdvantage = ({ onOpenChat }: { onOpenChat?: () => void }) => {
               ${'onClick' in card && card.onClick ? "hover:scale-[1.02] hover:shadow-primary/10 cursor-pointer" : "hover:scale-[1.01] cursor-default"}
               hover:border-stone-300
               shadow-xl shadow-stone-200/50 hover:shadow-2xl hover:shadow-stone-300/50`}
+                            role="listitem"
                         >
                             {/* Background Gradient */}
                             {card.background}
@@ -75,7 +76,7 @@ const AnalogAdvantage = ({ onOpenChat }: { onOpenChat?: () => void }) => {
                                 {/* Icon & Title */}
                                 <div className="mb-4">
                                     <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110 ${'isAction' in card && card.isAction ? "bg-primary/10 text-primary" : "bg-stone-100 text-stone-700"}`}>
-                                        <card.icon className="w-5 h-5" />
+                                        <card.icon className="w-5 h-5" aria-hidden="true" />
                                     </div>
                                     <h3 className="text-xl md:text-2xl font-serif text-foreground mb-2">
                                         {card.name}
@@ -91,12 +92,13 @@ const AnalogAdvantage = ({ onOpenChat }: { onOpenChat?: () => void }) => {
                                 <div
                                     className={`mt-auto pt-6 flex items-center gap-2 text-sm font-medium text-primary transition-all duration-300 ${'isAction' in card && card.isAction ? "opacity-100" : "opacity-0 group-hover:opacity-100"
                                         } translate-y-2 group-hover:translate-y-0`}
+                                    aria-hidden="true"
                                 >
                                     <span>{'isAction' in card && card.isAction ? "See the Proof" : "Explore Strategy"}</span>
                                     <span className="text-xs">→</span>
                                 </div>
                             </div>
-                        </div>
+                        </article>
                     ))}
                 </div>
             </div>

@@ -1,0 +1,32 @@
+# Analog AI | by Pedro Bandeira
+> Analog Wisdom. Digital Scale.
+
+## Core Value Proposition
+Pedro Bandeira is a Senior AI Operations Architect who bridges the gap between twenty years of "Old World" business experience and "New World" agentic AI. He specializes in **Sovereign AI Systems** that are owned, not rented, and run on **Local-First Architectures** to ensure data privacy and regulatory compliance.
+
+## Target Audience
+- **Regulated Industries**: Pharma, Healthcare, Finance, Logicstics.
+- **Executive Leaders**: COOs, VPs of Ops, Founders who need business logic automated without compromising governance.
+
+## Key Services
+1.  **High-Stakes Governance**: Deterministic guardrails for environments where "hallucination" is a liability.
+2.  **Operational Velocity**: Turning static data (SharePoint, Excel, SQL) into active intelligence (e.g., automated morning briefings).
+3.  **Human-in-the-Loop Design**: AI agents handle the noise; humans handle the decision. Scaling judgment, not replacing it.
+4.  **Rapid Reality Testing (Vibe Coding)**: 
+    - **Offer**: 48-hour Sprints to build production-grade Proofs of Concept.
+    - **Philosophy**: "Don't Guess. Validate." bypass the slide deck and build the actual system logic to prove architecture.
+
+## Technical Stack & Philosophy
+- **Stack**: Lovable, Supabase, Vercel, Local LLMs (Llama 3, Mistral).
+- **Philosophy**: "No Black Boxes. Just Engineering."
+- **Privacy**: Local-first architecture ensures sensitive data never leaves the client's infrastructure unless explicitly designed to.
+
+## Contact & Pricing
+- **Fit Check**: Free initial AI suitability assessment via the chat interface.
+- **Sprints**: Fixed-price engagements starting at $5k for validatable MVPs.
+- **Contact**: pedrobandeira@me.com
+
+## Navigation
+- **Home**: https://pedrobandeira.com/
+- **Architecture**: https://pedrobandeira.com/#architecture
+- **Fit Assessment**: https://pedrobandeira.com/#fit-assessment
