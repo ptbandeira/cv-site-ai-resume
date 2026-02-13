@@ -30,7 +30,7 @@ const AnalogAdvantage = ({ onOpenChat }: { onOpenChat?: () => void }) => {
         {
             icon: Zap, // Using Zap/FastForward equivalent
             name: "Rapid Reality Testing",
-            description: "From Deck to Deployed in 48h. Stop debating requirements. I use advanced Vibe Coding to build fully functional MVPs in a weekend.",
+            description: "Strategy without execution is hallucination. I use Vibe Coding to build production-grade Proofs of Concept in 48h. Validate the architecture before you hire the team.",
             className: "md:col-span-1 cursor-pointer ring-1 ring-primary/20", // Highlight
             background: <div className="absolute right-0 top-0 h-full w-full bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-50" />,
             onClick: () => setShowVibeModal(true),
@@ -116,20 +116,20 @@ const AnalogAdvantage = ({ onOpenChat }: { onOpenChat?: () => void }) => {
                             <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-4">
                                 <Zap className="w-6 h-6" />
                             </div>
-                            <h3 className="text-2xl font-serif text-foreground mb-2">From Deck to Deployed in 48h</h3>
+                            <h3 className="text-2xl font-serif text-foreground mb-2">Don't Guess. Validate.</h3>
                             <p className="text-muted-foreground leading-relaxed">
-                                You are looking at the proof. I used advanced Vibe Coding (Lovable/Antigravity) to build this fully functional site in a single weekend.
+                                Most strategic initiatives die in "Does this actually work?". I bypass the slide deck and build the actual system logic in a weekend. You get a working Sovereign AI architecture you can touch, test, and validate.
                             </p>
                         </div>
 
                         <div className="p-4 bg-secondary/50 rounded-xl mb-6">
                             <p className="text-sm font-mono text-stone-600 mb-2">
-                                <span className="font-semibold text-foreground">Capabilities:</span>
+                                <span className="font-semibold text-foreground">Operational Proof of Concepts:</span>
                             </p>
                             <ul className="space-y-2 text-sm text-muted-foreground">
                                 <li className="flex items-center gap-2">
                                     <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                                    Rapid MVP Development
+                                    Sovereign Logic Validation
                                 </li>
                                 <li className="flex items-center gap-2">
                                     <span className="w-1.5 h-1.5 rounded-full bg-primary" />
@@ -137,7 +137,7 @@ const AnalogAdvantage = ({ onOpenChat }: { onOpenChat?: () => void }) => {
                                 </li>
                                 <li className="flex items-center gap-2">
                                     <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                                    High-Fidelity Landing Pages
+                                    Executive-Ready PowerApps
                                 </li>
                             </ul>
                         </div>
