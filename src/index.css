@@ -10,89 +10,65 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Studio Light Palette - Clean, White-Paper Efficiency */
+    /* Analog AI — OLED Dark Palette (#050505 base) */
 
-    /* Background: Off-white/Gray-50 -> Slate 50 (#F8FAFC) as per Hard-Wire Req */
-    --background: 210 40% 98%;
-    /* Text: Deep Slate/Gray-900 */
-    --foreground: 222 47% 11%;
+    /* Background: OLED Black */
+    --background: 0 0% 2%;
+    /* Foreground: near-white */
+    --foreground: 0 0% 95%;
 
-    /* Cards: White with subtle border */
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    /* Cards: Elevated surface */
+    --card: 0 0% 6%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 95%;
 
-    /* Primary: Navy/Slate-900 */
-    --primary: 222 47% 11%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary: Teal-400 for CTAs */
+    --primary: 168 70% 50%;
+    --primary-foreground: 0 0% 2%;
 
-    /* Secondary: Light Gray/Slate-100 */
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222 47% 11%;
+    /* Secondary: Dark surface */
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 85%;
 
-    /* Muted: Gray-200 / Gray-500 */
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215 16% 47%;
+    /* Muted: WCAG AA compliant (≥4.5:1 vs #050505) → ~60% lightness */
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
 
-    /* Accent: Slate-200 (for hovers) */
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222 47% 11%;
+    /* Accent: Subtle lift */
+    --accent: 0 0% 12%;
+    --accent-foreground: 0 0% 90%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 95%;
 
-    /* Borders: Slate-200 */
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 222 47% 11%;
+    /* Borders: subtle */
+    --border: 0 0% 15%;
+    --input: 0 0% 12%;
+    --ring: 168 70% 50%;
 
     --radius: 0.5rem;
 
     /* Custom tokens */
-    --surface-elevated: 0 0% 100%;
-    --text-subtle: 215 16% 47%;
-    --text-highlight: 222 47% 11%;
+    --surface-elevated: 0 0% 8%;
+    --text-subtle: 0 0% 55%;
+    --text-highlight: 0 0% 95%;
 
     /* Semantic Colors */
     --success: 142 76% 36%;
-    --success-muted: 142 70% 95%;
+    --success-muted: 142 40% 15%;
     --warning: 38 92% 50%;
-    --warning-muted: 38 92% 95%;
+    --warning-muted: 38 50% 15%;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    /* Keeping dark mode as fallback or alternate if needed manually, 
-       but root is now Light by default */
-    --background: 240 10% 4%;
-    --foreground: 60 9% 98%;
-    --card: 240 8% 8%;
-    --card-foreground: 60 9% 98%;
-    --popover: 240 8% 8%;
-    --popover-foreground: 60 9% 98%;
-    --primary: 45 30% 70%;
-    --primary-foreground: 240 10% 4%;
-    --secondary: 240 6% 12%;
-    --secondary-foreground: 60 9% 90%;
-    --muted: 240 6% 15%;
-    --muted-foreground: 240 5% 55%;
-    --accent: 240 6% 12%;
-    --accent-foreground: 60 9% 90%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 60 9% 98%;
-    --border: 240 6% 18%;
-    --input: 240 6% 15%;
-    --ring: 45 30% 70%;
+    --sidebar-background: 0 0% 4%;
+    --sidebar-foreground: 0 0% 70%;
+    --sidebar-primary: 168 70% 50%;
+    --sidebar-primary-foreground: 0 0% 2%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 85%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 168 70% 50%;
   }
 }
 
@@ -213,10 +189,10 @@ All colors MUST be HSL.
   animation-delay: 0.4s;
 }
 
-/* Gradient text utility - adjusted for light mode visibility */
+/* Gradient text utility — teal-to-emerald for "Digital" elements */
 .text-gradient {
   @apply bg-clip-text text-transparent;
-  background-image: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(215 25% 40%) 100%);
+  background-image: linear-gradient(135deg, hsl(168 70% 50%) 0%, hsl(142 76% 36%) 100%);
 }
 
 .card-slab {
@@ -228,13 +204,13 @@ All colors MUST be HSL.
   box-shadow: 2px 2px 0px 0px #0F172A;
 }
 
-/* Glassmorphism card */
+/* Glassmorphism card — dark mode */
 .glass-card {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 /* Animated gradient for AI elements */

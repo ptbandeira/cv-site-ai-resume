@@ -6,8 +6,8 @@ const Footer = () => {
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
-            <p className="text-2xl font-serif text-foreground mb-2">Pedro Bandeira</p>
-            <p className="text-muted-foreground">Strategic AI Operations</p>
+            <p className="text-2xl font-serif text-foreground mb-1">Analog AI</p>
+            <p className="text-sm font-mono text-muted-foreground">by Pedro Bandeira</p>
           </div>
 
           <div className="flex items-center gap-4">
@@ -38,7 +38,7 @@ const Footer = () => {
 
         <div className="mt-12 pt-8 border-t border-border text-center">
           <p className="text-sm text-muted-foreground">
-            © 2026 Pedro Bandeira. Built with Sovereign Architecture.
+            © 2026 Analog AI. Built with Sovereign Architecture.
           </p>
         </div>
       </div>

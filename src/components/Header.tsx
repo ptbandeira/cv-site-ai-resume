@@ -48,10 +48,10 @@ const Header = ({ onOpenChat }: HeaderProps) => {
             className="text-left group"
           >
             <h1 className="font-serif text-xl font-medium tracking-tight text-foreground group-hover:text-primary transition-colors">
-              Pedro Bandeira
+              Analog AI
             </h1>
-            <span className="text-xs font-sans text-muted-foreground tracking-wide uppercase mt-0.5">
-              Strategic AI Operations
+            <span className="text-[10px] font-mono text-muted-foreground tracking-wide mt-0.5">
+              by Pedro Bandeira
             </span>
           </button>
         </div>

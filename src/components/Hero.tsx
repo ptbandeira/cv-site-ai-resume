@@ -8,26 +8,28 @@ const Hero = ({ onOpenChat }: HeroProps) => {
   return (
     <section
       id="hero"
-      className="min-h-screen flex flex-col justify-center px-6 pt-20 bg-background"
+      className="min-h-screen flex flex-col justify-center px-6 pt-20"
+      style={{ background: "#050505" }}
     >
       <div className="max-w-5xl mx-auto w-full space-y-8">
 
-        {/* Anti-Hype Badge */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 border border-primary/20 rounded-full animate-fade-in">
+        {/* Tag Pill */}
+        <div className="inline-flex items-center gap-2 px-3 py-1 border border-white/10 rounded-full animate-fade-in">
           <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-          <span className="text-xs font-medium text-foreground uppercase tracking-widest">
-            AI Strategy & Architecture
+          <span className="text-xs font-mono text-white/60 uppercase tracking-widest">
+            AI Strategy &amp; Architecture
           </span>
         </div>
 
-        {/* Main heading */}
-        <h1 className="text-5xl md:text-7xl font-serif font-medium text-foreground tracking-tight leading-[1.1] animate-slide-up">
-          <em className="not-italic" style={{ fontStyle: 'italic' }}>Dismantling</em> AI Magic. <br />
-          <span className="text-muted-foreground"><em className="not-italic" style={{ fontStyle: 'italic' }}>Building</em> Business Utility.</span>
+        {/* Main heading — Serif + Mono dual-font */}
+        <h1 className="text-5xl md:text-7xl tracking-tight leading-[1.1] animate-slide-up">
+          <span className="font-serif font-medium text-white">Analog Wisdom.</span>
+          <br />
+          <span className="font-mono text-gradient">Digital Scale.</span>
         </h1>
 
-        {/* Subtitle */}
-        <p className="text-base md:text-lg font-mono text-foreground/70 max-w-2xl leading-relaxed animate-slide-up stagger-1 tracking-tight">
+        {/* Subtitle — Mono, neutral-400 */}
+        <p className="text-base md:text-lg font-mono text-neutral-400 max-w-2xl leading-relaxed animate-slide-up stagger-1">
           No Magic. Just Engineering. I bridge the AI Implementation Gap for
           regulated industries by replacing &ldquo;SaaS Taxes&rdquo; with owned assets
           and Human-in-the-Loop governance.
@@ -45,29 +47,29 @@ const Hero = ({ onOpenChat }: HeroProps) => {
 
           <button
             onClick={() => document.getElementById('resource-audit')?.scrollIntoView({ behavior: 'smooth' })}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-secondary text-secondary-foreground rounded-full font-medium transition-colors hover:bg-secondary/80"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-white/5 border border-white/10 text-white/80 rounded-full font-medium transition-colors hover:bg-white/10"
           >
             Optimize Your Stack
           </button>
         </div>
 
-        {/* Social Proof / Capability Badges */}
-        <div className="pt-12 border-t border-border mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 opacity-0 animate-fade-in" style={{ animationDelay: "1s", animationFillMode: "forwards" }}>
+        {/* Capability Badges */}
+        <div className="pt-12 border-t border-white/10 mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 opacity-0 animate-fade-in" style={{ animationDelay: "1s", animationFillMode: "forwards" }}>
           <div>
-            <h4 className="font-serif text-lg text-foreground">AgenticOS</h4>
-            <p className="text-sm text-muted-foreground">Autonomous Workflows</p>
+            <h4 className="font-serif text-lg text-white/90">AgenticOS</h4>
+            <p className="text-sm font-mono text-white/40">Autonomous Workflows</p>
           </div>
           <div>
-            <h4 className="font-serif text-lg text-foreground">RAG pipelines</h4>
-            <p className="text-sm text-muted-foreground">Enterprise Context</p>
+            <h4 className="font-serif text-lg text-white/90">RAG pipelines</h4>
+            <p className="text-sm font-mono text-white/40">Enterprise Context</p>
           </div>
           <div>
-            <h4 className="font-serif text-lg text-foreground">Bridge Architecture</h4>
-            <p className="text-sm text-muted-foreground">Human-in-the-loop</p>
+            <h4 className="font-serif text-lg text-white/90">Bridge Architecture</h4>
+            <p className="text-sm font-mono text-white/40">Human-in-the-loop</p>
           </div>
           <div>
-            <h4 className="font-serif text-lg text-foreground">Guardrails</h4>
-            <p className="text-sm text-muted-foreground">Deterministic Output</p>
+            <h4 className="font-serif text-lg text-white/90">Guardrails</h4>
+            <p className="text-sm font-mono text-white/40">Deterministic Output</p>
           </div>
         </div>
       </div>
