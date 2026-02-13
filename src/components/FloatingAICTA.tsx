@@ -37,12 +37,9 @@ const FloatingAICTA = ({ onOpenChat }: FloatingAICTAProps) => {
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ type: "spring", stiffness: 300, damping: 25, delay: 1.5 }}
-            className={`fixed bottom-6 right-6 z-40 flex items-center gap-2 glass-card rounded-full shadow-2xl transition-all duration-300 border border-primary/20 hover:border-primary/50 hover:shadow-primary/20 hover:shadow-2xl cursor-pointer group ${collapsed ? "px-3.5 py-3.5" : "px-5 py-3"
+            className={`fixed bottom-6 right-6 z-40 flex items-center gap-2 bg-white border border-stone-200 rounded-full shadow-xl shadow-stone-200/50 transition-all duration-300 hover:border-primary/50 hover:shadow-2xl cursor-pointer group ${collapsed ? "px-3.5 py-3.5" : "px-5 py-3"
                 }`}
         >
-            {/* Animated gradient ring */}
-            <div className="absolute inset-0 rounded-full gradient-ai opacity-20 group-hover:opacity-40 transition-opacity" />
-
             <div className="relative">
                 <Sparkles
                     className={`w-5 h-5 text-primary transition-transform group-hover:scale-110 ${pulse ? "scale-125" : ""

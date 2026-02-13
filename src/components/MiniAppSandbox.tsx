@@ -11,7 +11,7 @@ import { toast } from "sonner";
 
 const MiniAppSandbox = () => {
     return (
-        <section className="py-20 bg-background/50 backdrop-blur-sm">
+        <section className="py-20 bg-background">
             <div className="max-w-6xl mx-auto px-6">
                 <div className="mb-16 md:text-center max-w-3xl mx-auto">
                     <h2 className="text-3xl font-serif text-foreground mb-6">
@@ -69,7 +69,7 @@ const SharePointBrain = () => {
     ];
 
     return (
-        <div className="glass-card rounded-2xl p-6 relative overflow-hidden h-[440px] flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl group">
+        <div className="bg-white border border-stone-200 shadow-xl shadow-stone-200/50 rounded-2xl p-6 relative overflow-hidden h-[440px] flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl group">
             <div className="absolute top-0 left-0 w-full h-1.5 gradient-ai" />
             <div className="mb-4">
                 <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mb-3 text-blue-700 group-hover:scale-110 transition-transform">
@@ -145,7 +145,7 @@ const SharePointBrain = () => {
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                            className="w-full bg-red-50/80 dark:bg-red-950/40 rounded-xl p-4 border border-red-200 dark:border-red-800"
+                            className="w-full bg-red-50 rounded-xl p-4 border border-red-200"
                         >
                             <div className="flex items-center gap-2 mb-3">
                                 <motion.div
@@ -155,14 +155,14 @@ const SharePointBrain = () => {
                                 >
                                     <AlertTriangle className="w-5 h-5 text-red-600" />
                                 </motion.div>
-                                <span className="text-sm font-bold text-red-800 dark:text-red-300">Conflict of Interest Detected</span>
+                                <span className="text-sm font-bold text-red-800">Conflict of Interest Detected</span>
                             </div>
-                            <div className="space-y-2 text-xs text-red-700 dark:text-red-400">
-                                <p className="font-mono bg-red-100/50 dark:bg-red-900/30 p-2 rounded">
+                            <div className="space-y-2 text-xs text-red-700">
+                                <p className="font-mono bg-red-100/50 p-2 rounded">
                                     <strong>Client_Nexus_Inc/</strong> board member <strong>J. Harrington</strong>
                                     {" "}is also listed as an advisor to <strong>Client_Acme_Corp/</strong>
                                 </p>
-                                <p className="text-red-600/80 dark:text-red-400/80">
+                                <p className="text-red-600/80">
                                     ⚠️ Active matter overlap detected in M&A advisory docs.
                                     Requires ethical wall review.
                                 </p>
@@ -218,10 +218,10 @@ const LeadGenCTA = () => {
 
     return (
         <>
-            <div className="glass-card rounded-2xl p-6 relative overflow-hidden h-[440px] flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl group">
-                <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-emerald-500 to-teal-500" />
+            <div className="bg-white border border-stone-200 shadow-xl shadow-stone-200/50 rounded-2xl p-6 relative overflow-hidden h-[440px] flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl group">
+                <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-primary to-orange-400" />
                 <div className="mb-4">
-                    <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center mb-3 text-emerald-700 group-hover:scale-110 transition-transform">
+                    <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center mb-3 text-orange-700 group-hover:scale-110 transition-transform">
                         <Database className="w-5 h-5" />
                     </div>
                     <h3 className="text-lg font-medium text-foreground">Start Free Optimization</h3>
@@ -234,7 +234,7 @@ const LeadGenCTA = () => {
                     </p>
                     <button
                         onClick={() => setIsOpen(true)}
-                        className="px-6 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-full text-sm font-medium transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                        className="px-6 py-2.5 bg-[#1A1A1A] hover:bg-[#333] text-white rounded-sm text-sm font-medium transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
                     >
                         Start Free Audit <ArrowRight className="w-4 h-4" />
                     </button>
@@ -273,7 +273,7 @@ const LeadGenCTA = () => {
                             />
                         </div>
                         <DialogFooter>
-                            <Button type="submit" disabled={isSubmitting} className="w-full bg-[#0F172A]">
+                            <Button type="submit" disabled={isSubmitting} className="w-full bg-[#1A1A1A]">
                                 {isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Send className="mr-2 h-4 w-4" />}
                                 {isSubmitting ? "Deploying..." : "Generate Report"}
                             </Button>
@@ -301,7 +301,7 @@ const ComplianceGuardrail = () => {
     };
 
     return (
-        <div className="glass-card rounded-2xl p-6 relative overflow-hidden h-[440px] flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl group">
+        <div className="bg-white border border-stone-200 shadow-xl shadow-stone-200/50 rounded-2xl p-6 relative overflow-hidden h-[440px] flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl group">
             <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-purple-500 to-pink-500" />
             <div className="mb-4">
                 <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mb-3 text-purple-700 group-hover:scale-110 transition-transform">
@@ -373,8 +373,8 @@ const ComplianceGuardrail = () => {
                                     delay: i * 0.12,
                                 }}
                                 className={`text-xs p-2.5 rounded-lg border ${p.compliant
-                                    ? "bg-green-50/50 border-green-200 text-green-800 dark:bg-green-950/30 dark:border-green-800 dark:text-green-300"
-                                    : "bg-red-50/50 border-red-200 text-red-800 dark:bg-red-950/30 dark:border-red-800 dark:text-red-300"
+                                    ? "bg-green-50 border-green-200 text-green-800"
+                                    : "bg-red-50 border-red-200 text-red-800"
                                     }`}
                             >
                                 <div className="flex items-center gap-1.5 mb-0.5">

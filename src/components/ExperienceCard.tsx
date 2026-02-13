@@ -33,7 +33,7 @@ const ExperienceCard = ({
   return (
     <div
       className={cn(
-        "group relative p-6 md:p-8 frosted-card rounded-2xl transition-all duration-300",
+        "group relative p-6 md:p-8 bg-white border border-stone-200 shadow-xl shadow-stone-200/50 rounded-2xl transition-all duration-300 hover:shadow-2xl hover:border-stone-300",
         "animate-slide-up opacity-0"
       )}
       style={{ animationDelay: `${index * 0.1 + 0.2}s`, animationFillMode: "forwards" }}
@@ -51,7 +51,7 @@ const ExperienceCard = ({
       <ul className="space-y-3 mb-6">
         {highlights.map((highlight, i) => (
           <li key={i} className="flex items-start gap-3 text-muted-foreground">
-            <span className="text-accent mt-1.5">→</span>
+            <span className="text-primary mt-1.5">→</span>
             <span>{highlight}</span>
           </li>
         ))}
@@ -69,7 +69,7 @@ const ExperienceCard = ({
       {/* AI Context Toggle */}
       <button
         onClick={() => setExpanded(!expanded)}
-        className="flex items-center gap-2 text-sm text-accent hover:text-accent/80 transition-colors"
+        className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
       >
         <Sparkles className="w-4 h-4" />
         <span>{expanded ? "Hide" : "View"} AI Context</span>

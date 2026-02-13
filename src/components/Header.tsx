@@ -37,8 +37,8 @@ const Header = ({ onOpenChat }: HeaderProps) => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
         scrolled
-          ? "bg-background/95 backdrop-blur-md border-border/40 py-3"
-          : "bg-background border-transparent py-5"
+          ? "bg-[#F9F9F7]/95 backdrop-blur-md border-stone-200 py-3"
+          : "bg-[#F9F9F7] border-transparent py-5"
       )}
     >
       <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between">
@@ -57,12 +57,12 @@ const Header = ({ onOpenChat }: HeaderProps) => {
         </div>
 
         {/* System Status Badge — desktop only */}
-        <div className="hidden lg:flex items-center gap-3 px-4 py-2 glass-card rounded-full">
+        <div className="hidden lg:flex items-center gap-3 px-4 py-2 bg-white border border-stone-200 rounded-full shadow-sm">
           <div className="flex items-center gap-1.5">
             <Cpu className="w-3 h-3 text-indigo-500" />
             <span className="text-[10px] font-mono text-muted-foreground">Local Models: <span className="text-foreground font-semibold">Active</span></span>
           </div>
-          <div className="w-px h-3 bg-border" />
+          <div className="w-px h-3 bg-stone-200" />
           <div className="flex items-center gap-1.5">
             <Shield className="w-3 h-3 text-emerald-500" />
             <span className="text-[10px] font-mono text-muted-foreground">Data Privacy: <span className="text-emerald-600 font-semibold">Enforced</span></span>
@@ -92,7 +92,7 @@ const Header = ({ onOpenChat }: HeaderProps) => {
           </button>
           <button
             onClick={handleAskAI}
-            className="text-sm font-medium px-5 py-2.5 bg-primary text-primary-foreground rounded-full hover:shadow-lg transition-all duration-300"
+            className="text-sm font-medium px-5 py-2.5 bg-[#1A1A1A] text-white rounded-sm hover:shadow-lg transition-all duration-300"
           >
             Consult The Architect
           </button>
@@ -109,7 +109,7 @@ const Header = ({ onOpenChat }: HeaderProps) => {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-background border-b border-border animate-slide-down absolute w-full">
+        <div className="md:hidden bg-[#F9F9F7] border-b border-stone-200 animate-slide-down absolute w-full">
           <div className="px-6 py-6 space-y-6">
             <button
               onClick={() => scrollToSection("analog-advantage")}

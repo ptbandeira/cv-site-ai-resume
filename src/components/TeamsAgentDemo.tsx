@@ -35,9 +35,9 @@ const TeamsAgentDemo = () => {
                 </div>
 
                 {/* Teams-style container */}
-                <div className="glass-card rounded-2xl overflow-hidden max-w-2xl mx-auto">
+                <div className="bg-white border border-stone-200 shadow-xl shadow-stone-200/50 rounded-2xl overflow-hidden max-w-2xl mx-auto">
                     {/* Teams header bar */}
-                    <div className="flex items-center gap-3 px-6 py-4 border-b border-white/20 bg-gradient-to-r from-indigo-600/10 to-purple-600/10">
+                    <div className="flex items-center gap-3 px-6 py-4 border-b border-stone-200 bg-gradient-to-r from-indigo-600/5 to-purple-600/5">
                         <div className="w-8 h-8 rounded-lg gradient-ai flex items-center justify-center">
                             <Sparkles className="w-4 h-4 text-white" />
                         </div>
@@ -71,7 +71,7 @@ const TeamsAgentDemo = () => {
                                     </div>
                                     <button
                                         onClick={runBriefing}
-                                        className="px-8 py-3 gradient-ai text-white rounded-full font-medium text-sm transition-all hover:shadow-lg hover:shadow-indigo-500/25 hover:-translate-y-0.5"
+                                        className="px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium text-sm transition-all hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5"
                                     >
                                         Run Morning Briefing
                                     </button>
@@ -133,7 +133,7 @@ const TeamsAgentDemo = () => {
                                     className="flex-1 flex flex-col gap-4"
                                 >
                                     {/* Opportunity Card */}
-                                    <div className="bg-white/80 rounded-xl border border-indigo-100 p-5 shadow-sm">
+                                    <div className="bg-white rounded-xl border border-indigo-100 p-5 shadow-sm">
                                         <div className="flex items-start gap-3 mb-4">
                                             <div className="w-8 h-8 rounded-lg gradient-ai flex items-center justify-center flex-shrink-0">
                                                 <Sparkles className="w-4 h-4 text-white" />

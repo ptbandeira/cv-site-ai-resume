@@ -61,7 +61,7 @@ const FitAssessment = () => {
   return (
     <div id="fit-assessment" className="w-full max-w-4xl mx-auto p-6 space-y-8 animate-fade-in">
       {!showResults ? (
-        <Card className="p-8 border-accent/20 bg-card/50 backdrop-blur">
+        <Card className="p-8 border-stone-200 bg-white shadow-xl shadow-stone-200/50">
           <h2 className="text-3xl font-serif text-foreground mb-4">Fit Assessment Protocol</h2>
           <p className="text-muted-foreground mb-6">
             Paste your Job Description below. I will run a semantic analysis against Pedro's neural context ("The Cortex") to identify
@@ -79,7 +79,7 @@ const FitAssessment = () => {
           <Button
             onClick={handleAnalyze}
             disabled={!jd.trim()}
-            className="w-full btn-neumorphic text-white py-6 text-lg group border-0"
+            className="w-full bg-[#1A1A1A] text-white py-6 text-lg group border-0 rounded-sm hover:bg-[#333]"
           >
             Run Fit Analysis <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Button>

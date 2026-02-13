@@ -107,16 +107,16 @@ const SavingsCalculator = () => {
                         <button
                             key={p.id}
                             onClick={() => setActivePreset(p.id)}
-                            className={`glass-card rounded-xl p-4 text-left transition-all duration-300 border-2 ${activePreset === p.id
-                                    ? "border-primary shadow-lg shadow-primary/10 scale-[1.02]"
-                                    : "border-transparent hover:border-border hover:shadow-md"
+                            className={`bg-white border border-stone-200 shadow-xl shadow-stone-200/50 rounded-xl p-4 text-left transition-all duration-300 border-2 ${activePreset === p.id
+                                ? "border-primary shadow-lg shadow-primary/10 scale-[1.02]"
+                                : "border-stone-200 hover:border-stone-300 hover:shadow-md"
                                 }`}
                         >
                             <div className="flex items-center gap-2 mb-2">
                                 <div
                                     className={`w-8 h-8 rounded-full flex items-center justify-center ${activePreset === p.id
-                                            ? "bg-primary text-primary-foreground"
-                                            : "bg-secondary text-muted-foreground"
+                                        ? "bg-primary text-primary-foreground"
+                                        : "bg-secondary text-muted-foreground"
                                         }`}
                                 >
                                     {p.icon}
@@ -143,7 +143,7 @@ const SavingsCalculator = () => {
                 {/* Calculator Grid */}
                 <div className="grid md:grid-cols-2 gap-6">
                     {/* Inputs */}
-                    <div className="glass-card rounded-2xl p-6 space-y-8">
+                    <div className="bg-white border border-stone-200 shadow-xl shadow-stone-200/50 rounded-2xl p-6 space-y-8">
                         <div>
                             <div className="flex items-center justify-between mb-3">
                                 <div className="flex items-center gap-2 text-sm font-medium text-foreground">
@@ -208,7 +208,7 @@ const SavingsCalculator = () => {
                     {/* Results */}
                     <div className="space-y-4">
                         {/* Main counter */}
-                        <div className="glass-card rounded-2xl p-8 text-center">
+                        <div className="bg-white border border-stone-200 shadow-xl shadow-stone-200/50 rounded-2xl p-8 text-center">
                             <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-3">
                                 Money Saved Annually
                             </p>
@@ -223,7 +223,7 @@ const SavingsCalculator = () => {
 
                         {/* Sub-cards */}
                         <div className="grid grid-cols-2 gap-4">
-                            <div className="glass-card rounded-xl p-5 text-center">
+                            <div className="bg-white border border-stone-200 shadow-xl shadow-stone-200/50 rounded-xl p-5 text-center">
                                 <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-2">
                                     One-Time Build
                                 </p>
@@ -231,7 +231,7 @@ const SavingsCalculator = () => {
                                     €{preset.buildCost.toLocaleString()}
                                 </p>
                             </div>
-                            <div className="glass-card rounded-xl p-5 text-center">
+                            <div className="bg-white border border-stone-200 shadow-xl shadow-stone-200/50 rounded-xl p-5 text-center">
                                 <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-2">
                                     Year 1 ROI
                                 </p>
@@ -246,13 +246,13 @@ const SavingsCalculator = () => {
 
                         {/* Net return */}
                         <div className={`rounded-xl p-4 text-center border ${netReturn > 0
-                                ? "bg-emerald-50/50 border-emerald-200 dark:bg-emerald-950/20 dark:border-emerald-800"
-                                : "bg-red-50/50 border-red-200 dark:bg-red-950/20 dark:border-red-800"
+                            ? "bg-emerald-50 border-emerald-200"
+                            : "bg-red-50 border-red-200"
                             }`}>
                             <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-1">
                                 Net Year 1 Return
                             </p>
-                            <p className={`text-xl font-serif font-medium ${netReturn > 0 ? "text-emerald-700 dark:text-emerald-400" : "text-red-700 dark:text-red-400"
+                            <p className={`text-xl font-serif font-medium ${netReturn > 0 ? "text-emerald-700" : "text-red-700"
                                 }`}>
                                 €{netReturn.toLocaleString()}
                             </p>

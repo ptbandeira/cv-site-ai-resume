@@ -40,7 +40,7 @@ const Footer = () => {
           <p className="text-sm text-muted-foreground">
             © 2026 Analog AI. Built with Sovereign Architecture.
           </p>
-          <p className="text-xs font-mono text-white/25 leading-relaxed max-w-xl mx-auto">
+          <p className="text-xs font-mono text-[#555555] leading-relaxed max-w-xl mx-auto">
             Pedro Bandeira: Senior AI Operations Architect. Specializing in Human-in-the-Loop
             Workflows, Local LLMs, and Sovereign Data.
           </p>

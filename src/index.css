@@ -10,65 +10,65 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Analog AI — OLED Dark Palette (#050505 base) */
+    /* Swiss Style — Warm Paper Editorial Palette */
 
-    /* Background: OLED Black */
-    --background: 0 0% 2%;
-    /* Foreground: near-white */
-    --foreground: 0 0% 95%;
+    /* Background: Warm Paper #F9F9F7 */
+    --background: 40 20% 97%;
+    /* Foreground: Deep Ink #1A1A1A */
+    --foreground: 0 0% 10%;
 
-    /* Cards: Elevated surface */
-    --card: 0 0% 6%;
-    --card-foreground: 0 0% 95%;
+    /* Cards: Pure white */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
 
-    --popover: 0 0% 6%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
 
-    /* Primary: Teal-400 for CTAs */
-    --primary: 168 70% 50%;
-    --primary-foreground: 0 0% 2%;
+    /* Primary: International Orange #F25D27 for CTAs & accents */
+    --primary: 14 89% 55%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Secondary: Dark surface */
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 85%;
+    /* Secondary: Light warm grey */
+    --secondary: 40 10% 94%;
+    --secondary-foreground: 0 0% 20%;
 
-    /* Muted: WCAG AA compliant (≥4.5:1 vs #050505) → ~60% lightness */
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 60%;
+    /* Muted: Graphite #555555 compliant */
+    --muted: 40 10% 94%;
+    --muted-foreground: 0 0% 33%;
 
-    /* Accent: Subtle lift */
-    --accent: 0 0% 12%;
-    --accent-foreground: 0 0% 90%;
+    /* Accent: International Orange (matches primary) */
+    --accent: 14 89% 55%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 95%;
+    --destructive-foreground: 0 0% 100%;
 
-    /* Borders: subtle */
-    --border: 0 0% 15%;
-    --input: 0 0% 12%;
-    --ring: 168 70% 50%;
+    /* Borders: stone-200 */
+    --border: 30 10% 85%;
+    --input: 30 10% 90%;
+    --ring: 14 89% 55%;
 
     --radius: 0.5rem;
 
     /* Custom tokens */
-    --surface-elevated: 0 0% 8%;
-    --text-subtle: 0 0% 55%;
-    --text-highlight: 0 0% 95%;
+    --surface-elevated: 0 0% 100%;
+    --text-subtle: 0 0% 33%;
+    --text-highlight: 0 0% 10%;
 
     /* Semantic Colors */
     --success: 142 76% 36%;
-    --success-muted: 142 40% 15%;
+    --success-muted: 142 40% 92%;
     --warning: 38 92% 50%;
-    --warning-muted: 38 50% 15%;
+    --warning-muted: 38 50% 92%;
 
-    --sidebar-background: 0 0% 4%;
-    --sidebar-foreground: 0 0% 70%;
-    --sidebar-primary: 168 70% 50%;
-    --sidebar-primary-foreground: 0 0% 2%;
-    --sidebar-accent: 0 0% 10%;
-    --sidebar-accent-foreground: 0 0% 85%;
-    --sidebar-border: 0 0% 15%;
-    --sidebar-ring: 168 70% 50%;
+    --sidebar-background: 40 20% 97%;
+    --sidebar-foreground: 0 0% 33%;
+    --sidebar-primary: 14 89% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 40 10% 94%;
+    --sidebar-accent-foreground: 0 0% 20%;
+    --sidebar-border: 30 10% 85%;
+    --sidebar-ring: 14 89% 55%;
   }
 }
 
@@ -189,33 +189,31 @@ All colors MUST be HSL.
   animation-delay: 0.4s;
 }
 
-/* Gradient text utility — teal-to-emerald for "Digital" elements */
+/* Gradient text utility — International Orange for accents */
 .text-gradient {
   @apply bg-clip-text text-transparent;
-  background-image: linear-gradient(135deg, hsl(168 70% 50%) 0%, hsl(142 76% 36%) 100%);
+  background-image: linear-gradient(135deg, hsl(14 89% 55%) 0%, hsl(24 95% 48%) 100%);
 }
 
 .card-slab {
-  @apply border border-slate-200 transition-all active:translate-y-[2px] active:translate-x-[2px];
-  box-shadow: 6px 6px 0px 0px #0F172A;
+  @apply border border-stone-200 transition-all active:translate-y-[2px] active:translate-x-[2px];
+  box-shadow: 6px 6px 0px 0px #1A1A1A;
 }
 
 .card-slab:active {
-  box-shadow: 2px 2px 0px 0px #0F172A;
+  box-shadow: 2px 2px 0px 0px #1A1A1A;
 }
 
-/* Glassmorphism card — dark mode */
+/* Swiss Editorial Card — white with subtle border and deep soft shadow */
 .glass-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  background: #ffffff;
+  border: 1px solid hsl(30 10% 85%);
+  box-shadow: 0 20px 25px -5px rgba(120, 113, 108, 0.08), 0 8px 10px -6px rgba(120, 113, 108, 0.04);
 }
 
-/* Animated gradient for AI elements */
+/* Accent gradient for AI elements — orange spectrum */
 .gradient-ai {
-  background: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7, #6366f1);
+  background: linear-gradient(135deg, #F25D27, #E8451A, #D63A12, #F25D27);
   background-size: 300% 300%;
   animation: gradient-shift 6s ease infinite;
 }
@@ -250,18 +248,17 @@ All colors MUST be HSL.
   letter-spacing: -0.01em;
 }
 
-/* Frosted Touch card — subtle glassmorphism with hover glow */
+/* Swiss Editorial Card — white with subtle border and deep soft shadow */
 .frosted-card {
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #ffffff;
+  border: 1px solid hsl(30 10% 85%);
+  box-shadow: 0 20px 25px -5px rgba(120, 113, 108, 0.08), 0 8px 10px -6px rgba(120, 113, 108, 0.04);
   transition: all 0.3s ease;
 }
 
 .frosted-card:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.03), 0 8px 40px rgba(0, 0, 0, 0.2);
+  border-color: hsl(30 10% 75%);
+  box-shadow: 0 25px 50px -12px rgba(120, 113, 108, 0.15);
 }
 
 /* Breathing animation — slow pulse for "alive" indicators */
@@ -283,30 +280,27 @@ All colors MUST be HSL.
   animation: breathe 3s ease-in-out infinite;
 }
 
-/* Neumorphic CTA — teal gradient with depth */
+/* Swiss CTA — Solid black, sharp corners, decisive */
 .btn-neumorphic {
-  background: linear-gradient(135deg, hsl(168 70% 50%) 0%, hsl(142 76% 36%) 100%);
+  background: #1A1A1A;
   box-shadow:
-    0 4px 15px rgba(45, 200, 150, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    0 4px 15px rgba(26, 26, 26, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
 }
 
 .btn-neumorphic:hover {
   box-shadow:
-    0 6px 25px rgba(45, 200, 150, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.25),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    0 6px 25px rgba(26, 26, 26, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
   transform: translateY(-1px);
 }
 
 .btn-neumorphic:active {
   transform: translateY(0);
   box-shadow:
-    0 2px 8px rgba(45, 200, 150, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    0 2px 8px rgba(26, 26, 26, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 /* Scanning line effect */

@@ -75,14 +75,14 @@ const Experience = () => {
 
         {/* Skills Grid */}
         <div className="mt-16 grid md:grid-cols-3 gap-6">
-          <div className="p-6 bg-green-500/10 border border-green-500/20 rounded-2xl">
-            <h4 className="text-sm font-mono uppercase tracking-wider text-green-500 mb-4">
+          <div className="p-6 bg-emerald-50 border border-emerald-200 rounded-2xl">
+            <h4 className="text-sm font-mono uppercase tracking-wider text-emerald-700 mb-4">
               Strong
             </h4>
             <ul className="space-y-2">
               {skills.strong.map((skill) => (
                 <li key={skill} className="text-foreground flex items-center gap-2">
-                  <span className="text-green-500">✓</span>
+                  <span className="text-emerald-600">✓</span>
                   {skill}
                 </li>
               ))}
@@ -103,14 +103,14 @@ const Experience = () => {
             </ul>
           </div>
 
-          <div className="p-6 bg-yellow-500/10 border border-yellow-500/20 rounded-2xl">
-            <h4 className="text-sm font-mono uppercase tracking-wider text-yellow-500 mb-4">
+          <div className="p-6 bg-amber-50 border border-amber-200 rounded-2xl">
+            <h4 className="text-sm font-mono uppercase tracking-wider text-amber-700 mb-4">
               Gaps (Outsourced)
             </h4>
             <ul className="space-y-2">
               {skills.gaps.map((skill) => (
                 <li key={skill} className="text-foreground flex items-center gap-2">
-                  <span className="text-yellow-500">✗</span>
+                  <span className="text-amber-600">✗</span>
                   {skill}
                 </li>
               ))}

@@ -14,8 +14,8 @@ const insights = [
     {
         id: "openclaw-sovereignty",
         icon: <Globe className="w-5 h-5" />,
-        color: "from-emerald-500 to-teal-500",
-        iconBg: "bg-emerald-100 text-emerald-700",
+        color: "from-primary to-orange-400",
+        iconBg: "bg-orange-100 text-orange-700",
         noise: "Meta releases Llama 4, OpenClaw launches open-source agent framework.",
         translation: "Self-hosted models are now good enough for production workloads. You can stop sending client data to US servers.",
         action: "I can redeploy your document processing pipeline to run on-premise using Llama 4 + OpenClaw — same accuracy, full data sovereignty, zero API costs.",
@@ -40,7 +40,7 @@ const InsightPulse = () => {
                     {insights.map((insight) => (
                         <div
                             key={insight.id}
-                            className="glass-card rounded-2xl overflow-hidden flex flex-col"
+                            className="bg-white border border-stone-200 shadow-xl shadow-stone-200/50 rounded-2xl overflow-hidden flex flex-col"
                         >
                             {/* Color bar */}
                             <div className={`h-1.5 bg-gradient-to-r ${insight.color}`} />
@@ -77,7 +77,7 @@ const InsightPulse = () => {
                                 </div>
 
                                 {/* The Action */}
-                                <div className="mt-auto p-3 bg-emerald-50/50 rounded-lg border border-emerald-200">
+                                <div className="mt-auto p-3 bg-emerald-50 rounded-lg border border-emerald-200">
                                     <p className="text-[10px] font-mono uppercase tracking-wider text-emerald-700 font-bold mb-1.5">
                                         The Action
                                     </p>

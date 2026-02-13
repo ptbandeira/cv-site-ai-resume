@@ -96,7 +96,7 @@ const DataTransformation = () => {
                     </p>
                 </div>
 
-                <div className="glass-card rounded-2xl overflow-hidden">
+                <div className="bg-white border border-stone-200 shadow-xl shadow-stone-200/50 rounded-2xl overflow-hidden">
                     <AnimatePresence mode="wait">
                         {/* ─── JSON Phase ─── */}
                         {phase === "json" && (
@@ -193,10 +193,10 @@ const DataTransformation = () => {
                                                 <tr
                                                     key={rowIdx}
                                                     className={`border-b border-border transition-colors ${row.alert && showAlert
-                                                            ? "bg-red-50 dark:bg-red-950/30"
-                                                            : rowIdx % 2 === 0
-                                                                ? "bg-card"
-                                                                : "bg-secondary/30"
+                                                        ? "bg-red-50"
+                                                        : rowIdx % 2 === 0
+                                                            ? "bg-card"
+                                                            : "bg-secondary/30"
                                                         }`}
                                                 >
                                                     {headers.map((_, colIdx) => (
@@ -239,14 +239,14 @@ const DataTransformation = () => {
                                             initial={{ opacity: 0, y: 12, scale: 0.95 }}
                                             animate={{ opacity: 1, y: 0, scale: 1 }}
                                             transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                                            className="mt-5 p-4 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 rounded-xl flex items-start gap-3"
+                                            className="mt-5 p-4 bg-red-50 border border-red-200 rounded-xl flex items-start gap-3"
                                         >
                                             <AlertTriangle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
                                             <div>
-                                                <p className="text-sm font-semibold text-red-800 dark:text-red-300">
+                                                <p className="text-sm font-semibold text-red-800">
                                                     ⚠️ Stock Alert: Ibuprofen critically low
                                                 </p>
-                                                <p className="agent-text text-red-700/80 dark:text-red-400/80 mt-1">
+                                                <p className="agent-text text-red-700/80 mt-1">
                                                     Warsaw Central Hub — 12 units remaining.
                                                     Auto-reorder threshold is 50 units. Triggering procurement workflow.
                                                 </p>
