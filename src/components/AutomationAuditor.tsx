@@ -151,7 +151,7 @@ const AutomationAuditor = () => {
                 <div className="text-center mb-10">
                     <h2 className="text-3xl font-serif text-foreground mb-4">The &ldquo;Safe Automation&rdquo; Auditor</h2>
                     <p className="text-muted-foreground text-lg">
-                        Before you build, verify (A-V-C Framework).
+                        Measure the Autonomy Risk of any business process.
                     </p>
                 </div>
 
