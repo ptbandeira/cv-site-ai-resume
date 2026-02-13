@@ -74,7 +74,7 @@ const AnalogAdvantage = ({ onOpenChat }: { onOpenChat?: () => void }) => {
                             <div className="relative z-10 h-full flex flex-col">
                                 {/* Icon & Title */}
                                 <div className="mb-4">
-                                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110 ${card.isAction ? "bg-primary/10 text-primary" : "bg-stone-100 text-stone-700"}`}>
+                                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110 ${'isAction' in card && card.isAction ? "bg-primary/10 text-primary" : "bg-stone-100 text-stone-700"}`}>
                                         <card.icon className="w-5 h-5" />
                                     </div>
                                     <h3 className="text-xl md:text-2xl font-serif text-foreground mb-2">
@@ -89,10 +89,10 @@ const AnalogAdvantage = ({ onOpenChat }: { onOpenChat?: () => void }) => {
 
                                 {/* Arrow hint on hover - Special text for Action card */}
                                 <div
-                                    className={`mt-auto pt-6 flex items-center gap-2 text-sm font-medium text-primary transition-all duration-300 ${card.isAction ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                                    className={`mt-auto pt-6 flex items-center gap-2 text-sm font-medium text-primary transition-all duration-300 ${'isAction' in card && card.isAction ? "opacity-100" : "opacity-0 group-hover:opacity-100"
                                         } translate-y-2 group-hover:translate-y-0`}
                                 >
-                                    <span>{card.isAction ? "See the Proof" : "Explore Strategy"}</span>
+                                    <span>{'isAction' in card && card.isAction ? "See the Proof" : "Explore Strategy"}</span>
                                     <span className="text-xs">→</span>
                                 </div>
                             </div>
