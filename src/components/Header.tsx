@@ -67,7 +67,7 @@ const Header = ({ onOpenChat }: HeaderProps) => {
             <Shield className="w-3 h-3 text-emerald-500" />
             <span className="text-[10px] font-mono text-muted-foreground">Data Privacy: <span className="text-emerald-600 font-semibold">Enforced</span></span>
           </div>
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-breathe" />
         </div>
 
         {/* Desktop nav */}

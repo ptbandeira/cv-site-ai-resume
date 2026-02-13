@@ -79,9 +79,9 @@ const FitAssessment = () => {
           <Button
             onClick={handleAnalyze}
             disabled={!jd.trim()}
-            className="w-full bg-accent hover:bg-accent/90 text-accent-foreground py-6 text-lg"
+            className="w-full btn-neumorphic text-white py-6 text-lg group border-0"
           >
-            Run Fit Analysis <ArrowRight className="ml-2 w-5 h-5" />
+            Run Fit Analysis <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Button>
         </Card>
       ) : (

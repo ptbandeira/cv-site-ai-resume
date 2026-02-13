@@ -33,7 +33,7 @@ const ExperienceCard = ({
   return (
     <div
       className={cn(
-        "group relative p-6 md:p-8 bg-card border border-border rounded-2xl transition-all duration-300 hover:border-accent/50",
+        "group relative p-6 md:p-8 frosted-card rounded-2xl transition-all duration-300",
         "animate-slide-up opacity-0"
       )}
       style={{ animationDelay: `${index * 0.1 + 0.2}s`, animationFillMode: "forwards" }}
