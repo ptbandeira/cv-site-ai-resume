@@ -11,6 +11,7 @@ import InsightPulse from "@/components/InsightPulse";
 import TeamsAgentDemo from "@/components/TeamsAgentDemo";
 import DataTransformation from "@/components/DataTransformation";
 import SavingsCalculator from "@/components/SavingsCalculator";
+import StrategicFAQ from "@/components/StrategicFAQ";
 import AIChat from "@/components/AIChat";
 import FloatingAICTA from "@/components/FloatingAICTA";
 import Footer from "@/components/Footer";
@@ -40,6 +41,7 @@ const Index = () => {
         </div>
         <Experience />
         <InsightPulse />
+        <StrategicFAQ />
         <FitAssessment />
       </main>
       <Footer />
