@@ -60,11 +60,11 @@ const AnalogAdvantage = ({ onOpenChat }: { onOpenChat?: () => void }) => {
                     {cards.map((card) => (
                         <div
                             key={card.name}
-                            onClick={card.onClick}
+                            onClick={'onClick' in card ? card.onClick : undefined}
                             className={`${card.className} relative group rounded-2xl p-6 md:p-8
               bg-white border border-stone-200 overflow-hidden
               transition-all duration-300 ease-out 
-              ${card.onClick ? "hover:scale-[1.02] hover:shadow-primary/10 cursor-pointer" : "hover:scale-[1.01] cursor-default"}
+              ${'onClick' in card && card.onClick ? "hover:scale-[1.02] hover:shadow-primary/10 cursor-pointer" : "hover:scale-[1.01] cursor-default"}
               hover:border-stone-300
               shadow-xl shadow-stone-200/50 hover:shadow-2xl hover:shadow-stone-300/50`}
                         >
