@@ -14,7 +14,9 @@ const MiniAppSandbox = () => {
         <section id="sandbox" className="py-20 bg-background/50 backdrop-blur-sm">
             <div className="max-w-6xl mx-auto px-6">
                 <div className="mb-16 md:text-center max-w-3xl mx-auto">
-                    <h2 className="text-3xl font-serif text-foreground mb-6">Workflow Previews</h2>
+                    <h2 className="text-3xl font-serif text-foreground mb-6">
+                        <span className="text-gradient">Workflow Previews</span>
+                    </h2>
                     <p className="text-muted-foreground text-lg leading-relaxed">
                         These are previews of deterministic workflows I deploy for clients.
                         Click to see real logic — not mockups.
@@ -34,11 +36,29 @@ const MiniAppSandbox = () => {
 /* ── 1. The SharePoint Brain ─────────────────────────────────── */
 const SharePointBrain = () => {
     const [step, setStep] = useState<"idle" | "scanning" | "conflict" | "done">("idle");
+    const [scanLines, setScanLines] = useState<string[]>([]);
+
+    const scanOutput = [
+        "> Indexing 4 client folders...",
+        "> Parsing 847 documents...",
+        "> Building entity graph...",
+        "> Cross-referencing board members...",
+        "> ⚠ CONFLICT DETECTED",
+    ];
 
     const runSim = () => {
         setStep("scanning");
-        setTimeout(() => setStep("conflict"), 2000);
-        setTimeout(() => setStep("done"), 3500);
+        setScanLines([]);
+
+        // Terminal typing effect — reveal lines sequentially
+        scanOutput.forEach((line, i) => {
+            setTimeout(() => {
+                setScanLines((prev) => [...prev, line]);
+            }, 400 * (i + 1));
+        });
+
+        setTimeout(() => setStep("conflict"), 400 * scanOutput.length + 300);
+        setTimeout(() => setStep("done"), 400 * scanOutput.length + 600);
     };
 
     const folders = [
@@ -49,10 +69,10 @@ const SharePointBrain = () => {
     ];
 
     return (
-        <Card className="p-6 bg-card hover:bg-card/60 transition-colors relative overflow-hidden h-[440px] flex flex-col shadow-sm card-slab">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-indigo-600" />
+        <div className="glass-card rounded-2xl p-6 relative overflow-hidden h-[440px] flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl group">
+            <div className="absolute top-0 left-0 w-full h-1.5 gradient-ai" />
             <div className="mb-4">
-                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mb-3 text-blue-700">
+                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mb-3 text-blue-700 group-hover:scale-110 transition-transform">
                     <FolderOpen className="w-5 h-5" />
                 </div>
                 <h3 className="text-lg font-medium text-foreground">The SharePoint Brain</h3>
@@ -68,7 +88,6 @@ const SharePointBrain = () => {
                             exit={{ opacity: 0, y: -10 }}
                             className="w-full space-y-4"
                         >
-                            {/* Folder list */}
                             <div className="space-y-1.5">
                                 {folders.map((f) => (
                                     <div key={f.name} className="flex items-center gap-2 text-xs font-mono text-muted-foreground px-2 py-1.5 bg-secondary/50 rounded">
@@ -78,7 +97,7 @@ const SharePointBrain = () => {
                             </div>
                             <button
                                 onClick={runSim}
-                                className="w-full px-6 py-2 bg-[#0F172A] hover:bg-[#1e293b] text-white rounded-full text-sm font-medium transition-colors flex items-center justify-center gap-2"
+                                className="w-full px-6 py-2.5 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full text-sm font-medium transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg hover:-translate-y-0.5"
                             >
                                 <Search className="w-4 h-4" /> Scan for Conflicts
                             </button>
@@ -87,52 +106,69 @@ const SharePointBrain = () => {
 
                     {step === "scanning" && (
                         <motion.div
+                            key="scanning"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             className="w-full space-y-3"
                         >
-                            <div className="flex items-center gap-2 text-sm text-blue-600">
-                                <Loader2 className="w-4 h-4 animate-spin" />
-                                <span>Cross-referencing entity relationships...</span>
+                            <div className="bg-slate-900 rounded-lg p-3 min-h-[120px]">
+                                {scanLines.map((line, i) => (
+                                    <motion.p
+                                        key={i}
+                                        initial={{ opacity: 0, x: -8 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        className={`text-[11px] font-mono leading-relaxed ${line.includes("⚠") ? "text-red-400 font-bold" : "text-emerald-400"
+                                            }`}
+                                    >
+                                        {line}
+                                        {i === scanLines.length - 1 && (
+                                            <span className="inline-block w-1.5 h-3.5 bg-emerald-400 ml-0.5 animate-pulse" />
+                                        )}
+                                    </motion.p>
+                                ))}
                             </div>
                             <div className="h-1.5 w-full bg-secondary rounded-full overflow-hidden">
                                 <motion.div
-                                    className="h-full bg-blue-600"
+                                    className="h-full gradient-ai"
                                     initial={{ width: "0%" }}
                                     animate={{ width: "100%" }}
-                                    transition={{ duration: 2, ease: "linear" }}
+                                    transition={{ duration: scanOutput.length * 0.4, ease: "linear" }}
                                 />
                             </div>
-                            <p className="text-xs text-muted-foreground font-mono">
-                                &gt; Parsing 847 documents across 4 client folders<br />
-                                &gt; Building entity graph...
-                            </p>
                         </motion.div>
                     )}
 
                     {(step === "conflict" || step === "done") && (
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
+                            key="result"
+                            initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            className="w-full bg-red-50/80 rounded-lg p-4 border border-red-200"
+                            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                            className="w-full bg-red-50/80 dark:bg-red-950/40 rounded-xl p-4 border border-red-200 dark:border-red-800"
                         >
                             <div className="flex items-center gap-2 mb-3">
-                                <AlertTriangle className="w-5 h-5 text-red-600" />
-                                <span className="text-sm font-bold text-red-800">Conflict of Interest Detected</span>
+                                <motion.div
+                                    initial={{ rotate: -20, scale: 0 }}
+                                    animate={{ rotate: 0, scale: 1 }}
+                                    transition={{ type: "spring", stiffness: 500, damping: 15, delay: 0.1 }}
+                                >
+                                    <AlertTriangle className="w-5 h-5 text-red-600" />
+                                </motion.div>
+                                <span className="text-sm font-bold text-red-800 dark:text-red-300">Conflict of Interest Detected</span>
                             </div>
-                            <div className="space-y-2 text-xs text-red-700">
-                                <p className="font-mono bg-red-100/50 p-2 rounded">
+                            <div className="space-y-2 text-xs text-red-700 dark:text-red-400">
+                                <p className="font-mono bg-red-100/50 dark:bg-red-900/30 p-2 rounded">
                                     <strong>Client_Nexus_Inc/</strong> board member <strong>J. Harrington</strong>
-                                    is also listed as an advisor to <strong>Client_Acme_Corp/</strong>
+                                    {" "}is also listed as an advisor to <strong>Client_Acme_Corp/</strong>
                                 </p>
-                                <p className="text-red-600/80">
+                                <p className="text-red-600/80 dark:text-red-400/80">
                                     ⚠️ Active matter overlap detected in M&A advisory docs.
                                     Requires ethical wall review.
                                 </p>
                             </div>
                             <button
-                                onClick={() => setStep("idle")}
+                                onClick={() => { setStep("idle"); setScanLines([]); }}
                                 className="text-[10px] text-red-600 mt-3 hover:underline w-full text-center"
                             >
                                 Reset Preview
@@ -141,11 +177,11 @@ const SharePointBrain = () => {
                     )}
                 </AnimatePresence>
             </div>
-        </Card>
+        </div>
     );
 };
 
-/* ── 2. Lead Gen CTA (unchanged functionality) ──────────────── */
+/* ── 2. Lead Gen CTA ──────────────────────────────────────────── */
 const LeadGenCTA = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [email, setEmail] = useState("");
@@ -182,10 +218,10 @@ const LeadGenCTA = () => {
 
     return (
         <>
-            <Card className="p-6 bg-card hover:bg-card/60 transition-colors relative overflow-hidden h-[440px] flex flex-col shadow-sm card-slab">
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-600 to-green-600" />
+            <div className="glass-card rounded-2xl p-6 relative overflow-hidden h-[440px] flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl group">
+                <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-emerald-500 to-teal-500" />
                 <div className="mb-4">
-                    <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center mb-3 text-emerald-700">
+                    <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center mb-3 text-emerald-700 group-hover:scale-110 transition-transform">
                         <Database className="w-5 h-5" />
                     </div>
                     <h3 className="text-lg font-medium text-foreground">Start Free Optimization</h3>
@@ -198,13 +234,13 @@ const LeadGenCTA = () => {
                     </p>
                     <button
                         onClick={() => setIsOpen(true)}
-                        className="px-6 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-full text-sm font-medium transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                        className="px-6 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-full text-sm font-medium transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
                     >
                         Start Free Audit <ArrowRight className="w-4 h-4" />
                     </button>
                     <p className="text-[10px] text-muted-foreground">No credit card required.</p>
                 </div>
-            </Card>
+            </div>
 
             <Dialog open={isOpen} onOpenChange={setIsOpen}>
                 <DialogContent>
@@ -261,14 +297,14 @@ const ComplianceGuardrail = () => {
 
     const handleScan = () => {
         setStatus("scanning");
-        setTimeout(() => setStatus("flagged"), 500); // 0.5s as per spec
+        setTimeout(() => setStatus("flagged"), 500);
     };
 
     return (
-        <Card className="p-6 bg-card hover:bg-card/60 transition-colors relative overflow-hidden h-[440px] flex flex-col shadow-sm card-slab">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-600 to-pink-600" />
+        <div className="glass-card rounded-2xl p-6 relative overflow-hidden h-[440px] flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl group">
+            <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-purple-500 to-pink-500" />
             <div className="mb-4">
-                <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mb-3 text-purple-700">
+                <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mb-3 text-purple-700 group-hover:scale-110 transition-transform">
                     <FileCheck className="w-5 h-5" />
                 </div>
                 <h3 className="text-lg font-medium text-foreground">The Compliance Guardrail</h3>
@@ -291,7 +327,7 @@ const ComplianceGuardrail = () => {
                         </div>
                         <button
                             onClick={handleScan}
-                            className="w-full px-6 py-2 bg-[#0F172A] hover:bg-[#1e293b] text-white rounded-full text-sm font-medium transition-colors"
+                            className="w-full px-6 py-2.5 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full text-sm font-medium transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
                         >
                             Run Compliance Scan
                         </button>
@@ -310,7 +346,7 @@ const ComplianceGuardrail = () => {
                         </div>
                         <div className="h-1.5 w-full bg-secondary rounded-full overflow-hidden">
                             <motion.div
-                                className="h-full bg-purple-600"
+                                className="h-full bg-gradient-to-r from-purple-500 to-pink-500"
                                 initial={{ width: "0%" }}
                                 animate={{ width: "100%" }}
                                 transition={{ duration: 0.5, ease: "linear" }}
@@ -326,25 +362,45 @@ const ComplianceGuardrail = () => {
                         className="w-full space-y-2"
                     >
                         {samplePhrases.map((p, i) => (
-                            <div
+                            <motion.div
                                 key={i}
-                                className={`text-xs p-2 rounded border ${p.compliant
-                                        ? "bg-green-50/50 border-green-200 text-green-800"
-                                        : "bg-red-50/50 border-red-200 text-red-800"
+                                initial={{ opacity: 0, x: -12, scale: 0.95 }}
+                                animate={{ opacity: 1, x: 0, scale: 1 }}
+                                transition={{
+                                    type: "spring",
+                                    stiffness: 400,
+                                    damping: 20,
+                                    delay: i * 0.12,
+                                }}
+                                className={`text-xs p-2.5 rounded-lg border ${p.compliant
+                                    ? "bg-green-50/50 border-green-200 text-green-800 dark:bg-green-950/30 dark:border-green-800 dark:text-green-300"
+                                    : "bg-red-50/50 border-red-200 text-red-800 dark:bg-red-950/30 dark:border-red-800 dark:text-red-300"
                                     }`}
                             >
                                 <div className="flex items-center gap-1.5 mb-0.5">
                                     {p.compliant ? (
-                                        <CheckCircle2 className="w-3 h-3 text-green-600 flex-shrink-0" />
+                                        <motion.div
+                                            initial={{ scale: 0 }}
+                                            animate={{ scale: 1 }}
+                                            transition={{ type: "spring", stiffness: 600, damping: 12, delay: i * 0.12 + 0.15 }}
+                                        >
+                                            <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0" />
+                                        </motion.div>
                                     ) : (
-                                        <AlertTriangle className="w-3 h-3 text-red-600 flex-shrink-0" />
+                                        <motion.div
+                                            initial={{ scale: 0, rotate: -45 }}
+                                            animate={{ scale: 1, rotate: 0 }}
+                                            transition={{ type: "spring", stiffness: 600, damping: 12, delay: i * 0.12 + 0.15 }}
+                                        >
+                                            <AlertTriangle className="w-3.5 h-3.5 text-red-600 flex-shrink-0" />
+                                        </motion.div>
                                     )}
                                     <span className="font-medium truncate">"{p.text}"</span>
                                 </div>
                                 {p.rule && (
                                     <p className="font-mono text-[10px] text-red-600/80 ml-5">{p.rule}</p>
                                 )}
-                            </div>
+                            </motion.div>
                         ))}
                         <div className="text-center pt-2">
                             <span className="text-[10px] font-mono text-muted-foreground">Scanned in 0.5s • 2 violations found</span>
@@ -358,7 +414,7 @@ const ComplianceGuardrail = () => {
                     </motion.div>
                 )}
             </div>
-        </Card>
+        </div>
     );
 };
 

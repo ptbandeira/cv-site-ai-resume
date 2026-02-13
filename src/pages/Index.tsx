@@ -12,6 +12,7 @@ import TeamsAgentDemo from "@/components/TeamsAgentDemo";
 import DataTransformation from "@/components/DataTransformation";
 import SavingsCalculator from "@/components/SavingsCalculator";
 import AIChat from "@/components/AIChat";
+import FloatingAICTA from "@/components/FloatingAICTA";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -42,6 +43,7 @@ const Index = () => {
         <FitAssessment />
       </main>
       <Footer />
+      <FloatingAICTA onOpenChat={openChat} />
       <AIChat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
     </div>
   );
