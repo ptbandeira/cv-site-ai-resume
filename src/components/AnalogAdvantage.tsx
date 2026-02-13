@@ -1,34 +1,27 @@
-import { Shield, Users, ArrowRightLeft } from "lucide-react";
+import { ShieldCheck, Zap, Users } from "lucide-react";
 import { useState } from "react";
 
 const cards = [
     {
-        id: "compliance",
-        analog: "Compliance Governance",
-        digital: "Guardrailed LLMs",
-        insight:
-            "Regulatory rigor translates directly to prompt engineering for safety.",
-        focus: "Safety",
-        icon: Shield,
-        span: "md:col-span-2",
+        icon: ShieldCheck,
+        name: "High-Stakes Governance",
+        description: "For environments where 'hallucination' is a liability. I build deterministic guardrails that keep your data safe and your output accurate.",
+        className: "md:col-span-1",
+        background: <div className="absolute right-0 top-0 h-full w-full bg-gradient-to-br from-indigo-500/5 via-transparent to-transparent opacity-50" />,
     },
     {
-        id: "sales",
-        analog: "Deal Psychology",
-        digital: "Empathetic Sales Agents",
-        insight: "Understanding human motivation is the blueprint for persuasive AI.",
-        focus: "Empathy",
+        icon: Zap,
+        name: "Operational Velocity",
+        description: "Turning static data (SharePoint, Excel, SQL) into active intelligence. From automated morning briefings to instant inventory analysis.",
+        className: "md:col-span-2",
+        background: <div className="absolute right-0 top-0 h-full w-full bg-gradient-to-bl from-emerald-500/5 via-transparent to-transparent opacity-50" />,
+    },
+    {
         icon: Users,
-        span: "md:col-span-1",
-    },
-    {
-        id: "ops",
-        analog: "P&L Discipline",
-        digital: "ROI-Focused Automation",
-        insight: "Every automation must justify its cost — just like every hire.",
-        focus: "ROI",
-        icon: ArrowRightLeft,
-        span: "md:col-span-1",
+        name: "The Human-in-the-Loop",
+        description: "AI shouldn't replace your judgment; it should scale it. I design workflows where agents handle the noise, and you handle the decision.",
+        className: "md:col-span-3",
+        background: <div className="absolute right-0 top-0 h-full w-full bg-gradient-to-t from-orange-500/5 via-transparent to-transparent opacity-50" />,
     },
 ];
 
@@ -42,41 +35,41 @@ const BentoCard = ({
 
     return (
         <div
-            className={`${card.span} relative group rounded-2xl p-6 md:p-8
-        bg-white border border-stone-200
+            className={`${card.className} relative group rounded-2xl p-6 md:p-8
+        bg-white border border-stone-200 overflow-hidden
         transition-all duration-300 ease-out cursor-default
-        hover:scale-[1.02] hover:border-stone-300
+        hover:scale-[1.01] hover:border-stone-300
         shadow-xl shadow-stone-200/50 hover:shadow-2xl hover:shadow-stone-300/50`}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
         >
-            {/* Focus label */}
-            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-4 block">
-                {card.focus}
-            </span>
+            {/* Background Gradient */}
+            {card.background}
 
-            {/* Analog → Digital mapping */}
-            <div className="mb-4">
-                <h3 className="text-lg md:text-xl font-serif text-foreground mb-1">
-                    {card.analog}
-                </h3>
-                <div className="flex items-center gap-2 text-sm font-mono text-primary">
-                    <span>→</span>
-                    <span>{card.digital}</span>
+            <div className="relative z-10 h-full flex flex-col">
+                {/* Icon & Title */}
+                <div className="mb-4">
+                    <div className="w-10 h-10 rounded-lg bg-stone-100 flex items-center justify-center mb-4 text-stone-700 group-hover:scale-110 transition-transform duration-300">
+                        <Icon className="w-5 h-5" />
+                    </div>
+                    <h3 className="text-xl md:text-2xl font-serif text-foreground mb-2">
+                        {card.name}
+                    </h3>
                 </div>
-            </div>
 
-            {/* Insight */}
-            <p className="text-sm font-mono text-muted-foreground leading-relaxed">
-                "{card.insight}"
-            </p>
+                {/* Description */}
+                <p className="text-sm md:text-base font-sans text-muted-foreground leading-relaxed md:max-w-md">
+                    {card.description}
+                </p>
 
-            {/* Shield icon — reveals on hover */}
-            <div
-                className={`absolute top-6 right-6 transition-all duration-300 ${hovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
-                    }`}
-            >
-                <Icon className="w-5 h-5 text-primary/60" />
+                {/* Arrow hint on hover */}
+                <div
+                    className={`mt-auto pt-6 flex items-center gap-2 text-sm font-medium text-primary transition-all duration-300 ${hovered ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"
+                        }`}
+                >
+                    <span>Explore Strategy</span>
+                    <span className="text-xs">→</span>
+                </div>
             </div>
         </div>
     );
@@ -93,17 +86,17 @@ const AnalogAdvantage = () => {
                     <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-5">
                         The Analog / Digital Bridge
                     </h2>
-                    <p className="text-sm md:text-base font-mono text-muted-foreground leading-relaxed">
+                    <p className="text-lg font-sans text-stone-600 leading-relaxed">
                         AI isn't magic — it's the next layer of abstraction. Decades of
                         "Old&nbsp;World" experience provide the structural blueprints for
                         robust "New&nbsp;World" reliability.
                     </p>
                 </div>
 
-                {/* Bento grid: 2-col on md+ */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Bento grid: 3-col on md+ (since we have col-span-1, 2, 3) */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {cards.map((card) => (
-                        <BentoCard key={card.id} card={card} />
+                        <BentoCard key={card.name} card={card} />
                     ))}
                 </div>
             </div>

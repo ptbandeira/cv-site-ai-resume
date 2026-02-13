@@ -5,9 +5,9 @@ import { Play, Users, Mail, CalendarCheck, Loader2, Sparkles, CheckCircle2, File
 type Step = "idle" | "step1" | "step2" | "step3" | "done";
 
 const thinkingSteps = [
-    { id: "step1" as Step, icon: <Newspaper className="w-3.5 h-3.5" />, label: "Reading Legal News...", detail: "Parsing 47 regulatory feeds" },
-    { id: "step2" as Step, icon: <FileSearch className="w-3.5 h-3.5" />, label: "Scanning SharePoint...", detail: "Cross-referencing 2,341 docs" },
-    { id: "step3" as Step, icon: <Link2 className="w-3.5 h-3.5" />, label: "Linking Entities...", detail: "Building relationship graph" },
+    { id: "step1" as Step, icon: <Newspaper className="w-3.5 h-3.5" />, label: "Reading Market News...", detail: "Ingesting Bloomberg & Reuters feeds" },
+    { id: "step2" as Step, icon: <FileSearch className="w-3.5 h-3.5" />, label: "Analyzing Internal Ops...", detail: "Parsing Shipping Manifests (Excel)" },
+    { id: "step3" as Step, icon: <Link2 className="w-3.5 h-3.5" />, label: "Synthesizing Strategy...", detail: "Drafting Decision Memo" },
 ];
 
 const TeamsAgentDemo = () => {
@@ -42,8 +42,8 @@ const TeamsAgentDemo = () => {
                             <Sparkles className="w-4 h-4 text-white" />
                         </div>
                         <div>
-                            <p className="text-sm font-semibold text-foreground">AgenticOS Daily Briefing</p>
-                            <p className="text-[10px] text-muted-foreground font-mono">General Channel • Automated</p>
+                            <p className="text-sm font-semibold text-foreground">Executive Intelligence Briefing</p>
+                            <p className="text-[10px] text-muted-foreground font-mono">Strategy Channel • Automated</p>
                         </div>
                         <div className="ml-auto flex items-center gap-1.5">
                             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -66,8 +66,8 @@ const TeamsAgentDemo = () => {
                                         <Play className="w-7 h-7 text-indigo-600" />
                                     </div>
                                     <div>
-                                        <p className="text-foreground font-medium mb-1">Morning Briefing Ready</p>
-                                        <p className="text-sm text-muted-foreground">Agent will scan feeds, cross-reference data, and surface opportunities.</p>
+                                        <p className="text-foreground font-medium mb-1">Morning Strategy Briefing</p>
+                                        <p className="text-sm text-muted-foreground">Agent will scan market news, internal logistics data, and legal contracts.</p>
                                     </div>
                                     <button
                                         onClick={runBriefing}
@@ -146,18 +146,22 @@ const TeamsAgentDemo = () => {
 
                                         <div className="p-4 bg-indigo-50/50 rounded-lg border border-indigo-100 mb-4">
                                             <p className="agent-text text-foreground leading-relaxed">
-                                                <strong>EU AI Act Amendment (Art. 6)</strong> published today creates new compliance obligations for <strong>Client_Nexus_Inc</strong>.
-                                                Their current M&A advisory engagement overlaps with incoming 2026 audit requirements.
-                                                Cross-practice opportunity between <strong>Tech Law</strong> and <strong>M&A</strong> teams.
+                                                <strong>Decision Memo: Supply Chain Risk Detected</strong>
+                                                <br /><br />
+                                                <strong>Context:</strong> New tariff legislation (Reuters) conflicts with Q3 Shipping Manifests regarding semiconductor imports.
+                                                <br />
+                                                <strong>Impact:</strong> Potential 15% margin erosion on SKU_7829 if not rerouted by Friday.
+                                                <br />
+                                                <strong>Recommendation:</strong> Switch to Supplier B (Vietnam) immediately to lock in current rates.
                                             </p>
                                         </div>
 
                                         <div className="flex gap-3">
                                             <button className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 bg-[#0F172A] text-white rounded-lg text-sm font-medium hover:bg-[#1e293b] transition-colors">
-                                                <Mail className="w-4 h-4" /> Draft Client Email
+                                                <CheckCircle2 className="w-4 h-4" /> Approve Supplier Switch
                                             </button>
                                             <button className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 border border-border bg-white text-foreground rounded-lg text-sm font-medium hover:bg-secondary transition-colors">
-                                                <CalendarCheck className="w-4 h-4" /> Schedule Meeting
+                                                <CalendarCheck className="w-4 h-4" /> Review with Ops
                                             </button>
                                         </div>
                                     </div>

@@ -32,28 +32,27 @@ const Hero = ({ onOpenChat }: HeroProps) => {
 
         {/* Subtitle — Mono, graphite */}
         <p className="font-sans text-lg leading-relaxed text-stone-800 max-w-2xl animate-slide-up stagger-1">
-          The AI revolution isn't about code; it's about context. I apply 20
-          years of &ldquo;Analog&rdquo; management experience to steer
-          &ldquo;Digital&rdquo; agent swarms, ensuring safety, ROI, and
-          operational sanity.
+          The bottleneck isn't technology; it's trust. I architect{" "}
+          <strong className="font-semibold text-foreground">Sovereign AI Systems</strong> that
+          integrate with your existing operations—whether that's complex
+          logistics, regulated healthcare, or high-volume sales. No black boxes.
+          Just business logic, automated.
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-wrap gap-4 pt-4 animate-slide-up stagger-2">
-          <button
-            onClick={onOpenChat}
-            className="group inline-flex items-center gap-2 px-8 py-4 bg-[#1A1A1A] text-white rounded-sm font-medium shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
+        <div className="flex flex-col sm:flex-row items-center gap-4 pt-4 animate-slide-up stagger-2">
+          <a
+            href="#fit-assessment"
+            className="px-8 py-4 bg-primary text-primary-foreground rounded-sm font-medium text-lg transition-all hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5 min-w-[200px] text-center"
           >
-            <span>Consult The Architect</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </button>
-
-          <button
-            onClick={() => document.getElementById('resource-audit')?.scrollIntoView({ behavior: 'smooth' })}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-white border border-stone-300 text-foreground rounded-sm font-medium transition-colors hover:bg-stone-50"
+            Initialize Fit Check
+          </a>
+          <a
+            href="#architecture"
+            className="px-8 py-4 bg-white text-foreground border border-stone-200 rounded-sm font-medium text-lg transition-all hover:bg-secondary hover:border-stone-300 min-w-[200px] text-center"
           >
-            Optimize Your Stack
-          </button>
+            View Architecture
+          </a>
         </div>
 
         {/* Capability Badges */}
