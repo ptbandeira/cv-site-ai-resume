@@ -1,6 +1,6 @@
 import { Github, Linkedin, Mail } from "lucide-react";
 
-const Footer = () => {
+const Footer = ({ onOpenChat }: { onOpenChat?: () => void }) => {
   return (
     <footer className="py-16 px-6 border-t border-border">
       <div className="max-w-4xl mx-auto">
@@ -36,14 +36,34 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-border text-center space-y-2">
-          <p className="text-sm text-muted-foreground">
-            © 2026 Analog AI. Built with Sovereign Architecture.
-          </p>
-          <p className="text-xs font-mono text-[#555555] leading-relaxed max-w-xl mx-auto">
-            Pedro Bandeira: Senior AI Operations Architect. Specializing in Human-in-the-Loop
-            Workflows, Local LLMs, and Sovereign Data.
-          </p>
+        <div className="mt-12 pt-8 border-t border-border text-center space-y-6">
+          <div className="flex justify-center">
+            <button
+              onClick={onOpenChat}
+              className="group flex flex-col items-center gap-2 p-4 rounded-2xl bg-secondary/30 hover:bg-secondary transition-all border border-transparent hover:border-stone-200"
+            >
+              <div className="flex items-center gap-2 text-xs font-mono text-stone-500 uppercase tracking-wider">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                System Status: online
+              </div>
+              <p className="text-sm text-foreground font-medium">
+                Architected by Pedro. Vibe Coded with Antigravity & Lovable.
+              </p>
+              <div className="flex items-center gap-1.5 text-xs text-primary font-medium opacity-60 group-hover:opacity-100 transition-opacity">
+                Want a site like this? <span className="underline">Run Fit Check</span>
+              </div>
+            </button>
+          </div>
+
+          <div className="space-y-2">
+            <p className="text-sm text-muted-foreground">
+              © 2026 Analog AI. Built with Sovereign Architecture.
+            </p>
+            <p className="text-xs font-mono text-[#555555] leading-relaxed max-w-xl mx-auto">
+              Pedro Bandeira: Senior AI Operations Architect. Specializing in Human-in-the-Loop
+              Workflows, Local LLMs, and Sovereign Data.
+            </p>
+          </div>
         </div>
       </div>
     </footer>

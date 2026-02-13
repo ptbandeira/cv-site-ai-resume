@@ -1,81 +1,43 @@
 import { ShieldCheck, Zap, Users } from "lucide-react";
 import { useState } from "react";
 
-const cards = [
-    {
-        icon: ShieldCheck,
-        name: "High-Stakes Governance",
-        description: "For environments where 'hallucination' is a liability. I build deterministic guardrails that keep your data safe and your output accurate.",
-        className: "md:col-span-1",
-        background: <div className="absolute right-0 top-0 h-full w-full bg-gradient-to-br from-indigo-500/5 via-transparent to-transparent opacity-50" />,
-    },
-    {
-        icon: Zap,
-        name: "Operational Velocity",
-        description: "Turning static data (SharePoint, Excel, SQL) into active intelligence. From automated morning briefings to instant inventory analysis.",
-        className: "md:col-span-2",
-        background: <div className="absolute right-0 top-0 h-full w-full bg-gradient-to-bl from-emerald-500/5 via-transparent to-transparent opacity-50" />,
-    },
-    {
-        icon: Users,
-        name: "The Human-in-the-Loop",
-        description: "AI shouldn't replace your judgment; it should scale it. I design workflows where agents handle the noise, and you handle the decision.",
-        className: "md:col-span-3",
-        background: <div className="absolute right-0 top-0 h-full w-full bg-gradient-to-t from-orange-500/5 via-transparent to-transparent opacity-50" />,
-    },
-];
+const AnalogAdvantage = ({ onOpenChat }: { onOpenChat?: () => void }) => {
+    const [showVibeModal, setShowVibeModal] = useState(false);
 
-const BentoCard = ({
-    card,
-}: {
-    card: (typeof cards)[number];
-}) => {
-    const [hovered, setHovered] = useState(false);
-    const Icon = card.icon;
+    // 4 Cards for 2x2 grid
+    const cards = [
+        {
+            icon: ShieldCheck,
+            name: "High-Stakes Governance",
+            description: "For environments where 'hallucination' is a liability. I build deterministic guardrails that keep your data safe and your output accurate.",
+            className: "md:col-span-1",
+            background: <div className="absolute right-0 top-0 h-full w-full bg-gradient-to-br from-indigo-500/5 via-transparent to-transparent opacity-50" />,
+        },
+        {
+            icon: Zap,
+            name: "Operational Velocity",
+            description: "Turning static data (SharePoint, Excel, SQL) into active intelligence. From automated morning briefings to instant inventory analysis.",
+            className: "md:col-span-1",
+            background: <div className="absolute right-0 top-0 h-full w-full bg-gradient-to-bl from-emerald-500/5 via-transparent to-transparent opacity-50" />,
+        },
+        {
+            icon: Users,
+            name: "The Human-in-the-Loop",
+            description: "AI shouldn't replace your judgment; it should scale it. I design workflows where agents handle the noise, and you handle the decision.",
+            className: "md:col-span-1",
+            background: <div className="absolute right-0 top-0 h-full w-full bg-gradient-to-t from-orange-500/5 via-transparent to-transparent opacity-50" />,
+        },
+        {
+            icon: Zap, // Using Zap/FastForward equivalent
+            name: "Rapid Reality Testing",
+            description: "From Deck to Deployed in 48h. Stop debating requirements. I use advanced Vibe Coding to build fully functional MVPs in a weekend.",
+            className: "md:col-span-1 cursor-pointer ring-1 ring-primary/20", // Highlight
+            background: <div className="absolute right-0 top-0 h-full w-full bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-50" />,
+            onClick: () => setShowVibeModal(true),
+            isAction: true,
+        },
+    ];
 
-    return (
-        <div
-            className={`${card.className} relative group rounded-2xl p-6 md:p-8
-        bg-white border border-stone-200 overflow-hidden
-        transition-all duration-300 ease-out cursor-default
-        hover:scale-[1.01] hover:border-stone-300
-        shadow-xl shadow-stone-200/50 hover:shadow-2xl hover:shadow-stone-300/50`}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-        >
-            {/* Background Gradient */}
-            {card.background}
-
-            <div className="relative z-10 h-full flex flex-col">
-                {/* Icon & Title */}
-                <div className="mb-4">
-                    <div className="w-10 h-10 rounded-lg bg-stone-100 flex items-center justify-center mb-4 text-stone-700 group-hover:scale-110 transition-transform duration-300">
-                        <Icon className="w-5 h-5" />
-                    </div>
-                    <h3 className="text-xl md:text-2xl font-serif text-foreground mb-2">
-                        {card.name}
-                    </h3>
-                </div>
-
-                {/* Description */}
-                <p className="text-sm md:text-base font-sans text-muted-foreground leading-relaxed md:max-w-md">
-                    {card.description}
-                </p>
-
-                {/* Arrow hint on hover */}
-                <div
-                    className={`mt-auto pt-6 flex items-center gap-2 text-sm font-medium text-primary transition-all duration-300 ${hovered ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"
-                        }`}
-                >
-                    <span>Explore Strategy</span>
-                    <span className="text-xs">→</span>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-const AnalogAdvantage = () => {
     return (
         <section
             id="analog-advantage"
@@ -93,13 +55,107 @@ const AnalogAdvantage = () => {
                     </p>
                 </div>
 
-                {/* Bento grid: 3-col on md+ (since we have col-span-1, 2, 3) */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* Bento grid: 2x2 Layout */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {cards.map((card) => (
-                        <BentoCard key={card.name} card={card} />
+                        <div
+                            key={card.name}
+                            onClick={card.onClick}
+                            className={`${card.className} relative group rounded-2xl p-6 md:p-8
+              bg-white border border-stone-200 overflow-hidden
+              transition-all duration-300 ease-out 
+              ${card.onClick ? "hover:scale-[1.02] hover:shadow-primary/10 cursor-pointer" : "hover:scale-[1.01] cursor-default"}
+              hover:border-stone-300
+              shadow-xl shadow-stone-200/50 hover:shadow-2xl hover:shadow-stone-300/50`}
+                        >
+                            {/* Background Gradient */}
+                            {card.background}
+
+                            <div className="relative z-10 h-full flex flex-col">
+                                {/* Icon & Title */}
+                                <div className="mb-4">
+                                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110 ${card.isAction ? "bg-primary/10 text-primary" : "bg-stone-100 text-stone-700"}`}>
+                                        <card.icon className="w-5 h-5" />
+                                    </div>
+                                    <h3 className="text-xl md:text-2xl font-serif text-foreground mb-2">
+                                        {card.name}
+                                    </h3>
+                                </div>
+
+                                {/* Description */}
+                                <p className="text-sm md:text-base font-sans text-muted-foreground leading-relaxed md:max-w-md">
+                                    {card.description}
+                                </p>
+
+                                {/* Arrow hint on hover - Special text for Action card */}
+                                <div
+                                    className={`mt-auto pt-6 flex items-center gap-2 text-sm font-medium text-primary transition-all duration-300 ${card.isAction ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                                        } translate-y-2 group-hover:translate-y-0`}
+                                >
+                                    <span>{card.isAction ? "See the Proof" : "Explore Strategy"}</span>
+                                    <span className="text-xs">→</span>
+                                </div>
+                            </div>
+                        </div>
                     ))}
                 </div>
             </div>
+
+            {/* Vibe Coding Modal */}
+            {showVibeModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm animate-fade-in">
+                    <div className="w-full max-w-lg bg-card border border-border rounded-2xl p-8 shadow-2xl relative animate-slide-up">
+                        <button
+                            onClick={() => setShowVibeModal(false)}
+                            className="absolute top-4 right-4 p-2 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-colors"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+                        </button>
+
+                        <div className="mb-6">
+                            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-4">
+                                <Zap className="w-6 h-6" />
+                            </div>
+                            <h3 className="text-2xl font-serif text-foreground mb-2">From Deck to Deployed in 48h</h3>
+                            <p className="text-muted-foreground leading-relaxed">
+                                You are looking at the proof. I used advanced Vibe Coding (Lovable/Antigravity) to build this fully functional site in a single weekend.
+                            </p>
+                        </div>
+
+                        <div className="p-4 bg-secondary/50 rounded-xl mb-6">
+                            <p className="text-sm font-mono text-stone-600 mb-2">
+                                <span className="font-semibold text-foreground">Capabilities:</span>
+                            </p>
+                            <ul className="space-y-2 text-sm text-muted-foreground">
+                                <li className="flex items-center gap-2">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                                    Rapid MVP Development
+                                </li>
+                                <li className="flex items-center gap-2">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                                    Internal Tooling & Dashboards
+                                </li>
+                                <li className="flex items-center gap-2">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                                    High-Fidelity Landing Pages
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div className="flex flex-col gap-3">
+                            <a
+                                href="mailto:pedrobandeira@me.com?subject=Book a Sprint: Reactive MVP"
+                                className="w-full py-4 bg-[#1A1A1A] text-white rounded-sm font-medium text-center hover:bg-[#333] transition-colors flex items-center justify-center gap-2"
+                            >
+                                Book a Sprint <span className="text-stone-400">→</span>
+                            </a>
+                            <p className="text-xs text-center text-muted-foreground">
+                                Limited availability. Sprints start at $5k.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            )}
         </section>
     );
 };

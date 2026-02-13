@@ -26,7 +26,7 @@ const Index = () => {
       <Header onOpenChat={openChat} />
       <main>
         <Hero onOpenChat={openChat} />
-        <AnalogAdvantage />
+        <AnalogAdvantage onOpenChat={openChat} />
         <TeamsAgentDemo />
         <DataTransformation />
         <div id="resource-audit">
@@ -44,7 +44,7 @@ const Index = () => {
         <StrategicFAQ />
         <FitAssessment />
       </main>
-      <Footer />
+      <Footer onOpenChat={openChat} />
       <FloatingAICTA onOpenChat={openChat} />
       <AIChat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
     </div>
