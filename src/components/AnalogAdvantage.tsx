@@ -1,60 +1,110 @@
-import { Card } from "@/components/ui/card";
+import { Shield, Users, ArrowRightLeft } from "lucide-react";
+import { useState } from "react";
 
-const AnalogAdvantage = () => {
-    const mappings = [
-        {
-            analog: "Pharma Compliance / Regulated Ops",
-            digital: "Private LLM Security & Guardrails",
-            insight: "Regulatory rigor translates directly to prompt engineering for safety."
-        },
-        {
-            analog: "Legacy Mainframe Migration",
-            digital: "RAG (Retrieval Augmented Generation)",
-            insight: "Connecting old data to new interfaces is the same core problem."
-        },
-        {
-            analog: "Human Team Management",
-            digital: "Multi-Agent Orchestration",
-            insight: "Agents need clear roles, KPIs, and handoffs—just like humans."
-        },
-        {
-            analog: "Executive Briefings",
-            digital: "Context Compression",
-            insight: "Summarizing 100 pages into 1 page is now an algorithmic art."
-        }
-    ];
+const cards = [
+    {
+        id: "pharma",
+        analog: "Pharma Compliance / Regulated Ops",
+        digital: "Private LLM Security & Guardrails",
+        insight:
+            "Regulatory rigor translates directly to prompt engineering for safety.",
+        focus: "Safety",
+        icon: Shield,
+        span: "md:col-span-2", // large card
+    },
+    {
+        id: "team",
+        analog: "Human Team Management",
+        digital: "Multi-Agent Orchestration",
+        insight: "Agents need clear roles, KPIs, and handoffs—just like humans.",
+        focus: "Orchestration",
+        icon: Users,
+        span: "md:col-span-1",
+    },
+    {
+        id: "legacy",
+        analog: "Legacy Mainframe Migration",
+        digital: "RAG (Retrieval Augmented Generation)",
+        insight: "Connecting old data to new interfaces is the same core problem.",
+        focus: "ROI",
+        icon: ArrowRightLeft,
+        span: "md:col-span-1",
+    },
+];
+
+const BentoCard = ({
+    card,
+}: {
+    card: (typeof cards)[number];
+}) => {
+    const [hovered, setHovered] = useState(false);
+    const Icon = card.icon;
 
     return (
-        <section id="analog-advantage" className="py-20 bg-background">
+        <div
+            className={`${card.span} relative group rounded-2xl p-6 md:p-8
+        backdrop-blur-md bg-white/[0.04] border border-white/[0.08]
+        transition-all duration-300 ease-out cursor-default
+        hover:scale-[1.02] hover:bg-white/[0.07] hover:border-white/[0.15]
+        hover:shadow-[0_8px_40px_rgba(255,255,255,0.04)]`}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+        >
+            {/* Focus label */}
+            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/40 mb-4 block">
+                {card.focus}
+            </span>
+
+            {/* Analog → Digital mapping */}
+            <div className="mb-4">
+                <h3 className="text-lg md:text-xl font-serif text-white/90 mb-1">
+                    {card.analog}
+                </h3>
+                <div className="flex items-center gap-2 text-sm font-mono text-emerald-400/70">
+                    <span>→</span>
+                    <span>{card.digital}</span>
+                </div>
+            </div>
+
+            {/* Insight */}
+            <p className="text-sm font-mono text-white/40 leading-relaxed">
+                "{card.insight}"
+            </p>
+
+            {/* Shield icon — reveals on hover */}
+            <div
+                className={`absolute top-6 right-6 transition-all duration-300 ${hovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
+                    }`}
+            >
+                <Icon className="w-5 h-5 text-emerald-400/60" />
+            </div>
+        </div>
+    );
+};
+
+const AnalogAdvantage = () => {
+    return (
+        <section
+            id="analog-advantage"
+            className="py-20 md:py-28"
+            style={{ background: "#050505" }}
+        >
             <div className="max-w-6xl mx-auto px-6">
-                <div className="mb-16 md:text-center max-w-3xl mx-auto">
-                    <h2 className="text-3xl font-serif text-foreground mb-6">The Analog Advantage</h2>
-                    <p className="text-muted-foreground text-lg leading-relaxed">
-                        AI isn't magic; it's just the next layer of abstraction. My decades of "Old World" experience
-                        provide the structural blueprints for robust "New World" reliability.
+                <div className="mb-14 md:text-center max-w-3xl mx-auto">
+                    <h2 className="text-3xl md:text-4xl font-serif text-white/90 mb-5">
+                        The Analog Advantage
+                    </h2>
+                    <p className="text-sm md:text-base font-mono text-white/40 leading-relaxed">
+                        AI isn't magic — it's the next layer of abstraction. Decades of
+                        "Old&nbsp;World" experience provide the structural blueprints for
+                        robust "New&nbsp;World" reliability.
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                    {mappings.map((item, index) => (
-                        <Card key={index} className="p-6 border-l-4 border-l-primary/40 hover:border-l-primary transition-all duration-300">
-                            <div className="flex flex-col gap-4">
-                                <div className="flex items-center justify-between border-b border-border pb-4">
-                                    <span className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Analog Skill</span>
-                                    <span className="text-sm font-bold text-primary uppercase tracking-wider text-right">AI Translation</span>
-                                </div>
-
-                                <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
-                                    <h3 className="text-lg font-serif font-medium text-foreground">{item.analog}</h3>
-                                    <span className="hidden md:block text-muted-foreground">→</span>
-                                    <h3 className="text-lg font-sans font-medium text-foreground text-right">{item.digital}</h3>
-                                </div>
-
-                                <p className="text-sm text-muted-foreground italic border-t border-border pt-4">
-                                    "{item.insight}"
-                                </p>
-                            </div>
-                        </Card>
+                {/* Bento grid: 2-col on md+ */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {cards.map((card) => (
+                        <BentoCard key={card.id} card={card} />
                     ))}
                 </div>
             </div>

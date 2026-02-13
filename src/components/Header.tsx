@@ -60,12 +60,12 @@ const Header = ({ onOpenChat }: HeaderProps) => {
         <div className="hidden lg:flex items-center gap-3 px-4 py-2 glass-card rounded-full">
           <div className="flex items-center gap-1.5">
             <Cpu className="w-3 h-3 text-indigo-500" />
-            <span className="text-[10px] font-mono text-muted-foreground">AI Stack: <span className="text-foreground font-semibold">Hybrid</span></span>
+            <span className="text-[10px] font-mono text-muted-foreground">Local Models: <span className="text-foreground font-semibold">Active</span></span>
           </div>
           <div className="w-px h-3 bg-border" />
           <div className="flex items-center gap-1.5">
             <Shield className="w-3 h-3 text-emerald-500" />
-            <span className="text-[10px] font-mono text-muted-foreground">Privacy: <span className="text-emerald-600 font-semibold">High</span></span>
+            <span className="text-[10px] font-mono text-muted-foreground">Data Privacy: <span className="text-emerald-600 font-semibold">Enforced</span></span>
           </div>
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
         </div>

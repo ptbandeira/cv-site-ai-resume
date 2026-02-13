@@ -22,12 +22,12 @@ const Hero = ({ onOpenChat }: HeroProps) => {
 
         {/* Main heading */}
         <h1 className="text-5xl md:text-7xl font-serif font-medium text-foreground tracking-tight leading-[1.1] animate-slide-up">
-          Dismantling AI Magic. <br />
-          <span className="text-muted-foreground">Building Business Utility.</span>
+          <em className="not-italic" style={{ fontStyle: 'italic' }}>Dismantling</em> AI Magic. <br />
+          <span className="text-muted-foreground"><em className="not-italic" style={{ fontStyle: 'italic' }}>Building</em> Business Utility.</span>
         </h1>
 
         {/* Subtitle */}
-        <p className="text-xl md:text-2xl text-foreground/80 max-w-2xl font-light leading-relaxed animate-slide-up stagger-1">
+        <p className="text-base md:text-lg font-mono text-foreground/70 max-w-2xl leading-relaxed animate-slide-up stagger-1 tracking-tight">
           No Magic. Just Engineering. I bridge the AI Implementation Gap for
           regulated industries by replacing &ldquo;SaaS Taxes&rdquo; with owned assets
           and Human-in-the-Loop governance.
