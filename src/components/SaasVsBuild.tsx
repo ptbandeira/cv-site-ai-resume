@@ -68,6 +68,7 @@ const SaasVsBuild = () => {
     const [selectedStack, setSelectedStack] = useState(stacks[0]);
     const [seats, setSeats] = useState(25);
     const [isStackOpen, setIsStackOpen] = useState(false);
+    const [reclaimablePct, setReclaimablePct] = useState(60); // Default 60% reclaimable
 
     // The core platform cost they already pay
     const existingPlatformAnnual = selectedStack.monthlyPerSeat * seats * 12;
@@ -82,10 +83,13 @@ const SaasVsBuild = () => {
     const agenticOSBuild = overlappingAnnual * 0.25;
     const maintenanceCost = agenticOSBuild * 0.10;
 
-    // Year 1: Save overlapping minus build+maintenance
-    const year1Savings = overlappingAnnual - (agenticOSBuild + maintenanceCost);
-    // Year 2+: Save overlapping minus maintenance only
-    const year2Savings = overlappingAnnual - maintenanceCost;
+    // Reclaimable Amount
+    const redundantSpend = overlappingAnnual * (reclaimablePct / 100);
+
+    // Year 1: Save reclaimable minus build+maintenance
+    const year1Savings = redundantSpend - (agenticOSBuild + maintenanceCost);
+    // Year 2+: Save reclaimable minus maintenance only
+    const year2Savings = redundantSpend - maintenanceCost;
 
     return (
         <section className="py-20 bg-secondary/30">
@@ -141,6 +145,25 @@ const SaasVsBuild = () => {
                                 </div>
                             </div>
 
+                            {/* Reclaimable Spend Slider */}
+                            <div className="space-y-2 pt-2">
+                                <div className="flex justify-between">
+                                    <Label>Reclaimable %</Label>
+                                    <span className="text-sm font-mono text-primary font-bold">{reclaimablePct}%</span>
+                                </div>
+                                <input
+                                    type="range"
+                                    min="10"
+                                    max="100"
+                                    value={reclaimablePct}
+                                    onChange={(e) => setReclaimablePct(Number(e.target.value))}
+                                    className="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-primary"
+                                />
+                                <p className="text-[10px] text-muted-foreground">
+                                    Conservative estimate of how much overlapping SaaS you can actually cancel.
+                                </p>
+                            </div>
+
                             {/* Overlapping Tools */}
                             <div className="pt-4 border-t border-border">
                                 <p className="text-xs font-mono uppercase tracking-wider text-stone-500 mb-3">Redundant SaaS You&apos;re Paying For</p>
@@ -189,12 +212,21 @@ const SaasVsBuild = () => {
                                 </div>
 
                                 <div className="p-4 bg-blue-50/50 border border-blue-100 rounded-lg">
-                                    <p className="text-sm text-blue-800 font-medium mb-1">Year 2+ Ownership Profit</p>
+                                    <p className="text-sm text-blue-800 font-medium mb-1">Ongoing Annual Net Benefit</p>
                                     <div className="text-3xl font-serif text-blue-700">
                                         $<CountUp end={year2Savings} />
                                     </div>
-                                    <p className="text-xs text-blue-600/80 mt-1">Per year, forever. You own the code.</p>
+                                    <p className="text-xs text-blue-600/80 mt-1">Assuming maintenance.</p>
                                 </div>
+                            </div>
+
+                            <div className="text-[10px] font-mono text-stone-400 bg-stone-50 p-3 rounded-lg border border-stone-100">
+                                <strong>How this is calculated:</strong><br />
+                                1. Redundant Spend = Monthly SaaS × 12<br />
+                                2. Reclaimable Amount = Redundant Spend × {reclaimablePct}%<br />
+                                3. Build Fee (One-time) = 25% of Redundant Spend<br />
+                                4. Annual Maintenance = 10% of Build Price<br />
+                                5. Net Benefit = Reclaimable - Maintenance
                             </div>
                         </div>
 
