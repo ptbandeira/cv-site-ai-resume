@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import FilterSection from "@/components/FilterSection";
 import OfferMenu from "@/components/OfferMenu";
 import AdultInTheRoom from "@/components/AdultInTheRoom";
+import WhenAIGoesWrong from "@/components/WhenAIGoesWrong";
 import MiniAppSandbox from "@/components/MiniAppSandbox";
 import Experience from "@/components/Experience";
 import FitAssessment from "@/components/FitAssessment";
@@ -32,6 +33,7 @@ const Index = () => {
         <FilterSection />
         <OfferMenu />
         <AdultInTheRoom />
+        <WhenAIGoesWrong />
         {/* <AnalogAdvantage onOpenChat={openChat} /> */}
         <TeamsAgentDemo />
         <DataTransformation />
