@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Shield, Cpu } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface HeaderProps {
   onOpenChat?: () => void;
@@ -57,17 +63,26 @@ const Header = ({ onOpenChat }: HeaderProps) => {
         </div>
 
         {/* System Status Badge — desktop only */}
-        <div className="hidden lg:flex items-center gap-3 px-4 py-2 bg-white border border-stone-200 rounded-full shadow-sm">
-          <div className="flex items-center gap-1.5">
-            <Cpu className="w-3 h-3 text-indigo-500" />
-            <span className="text-[10px] font-mono text-muted-foreground">Local Models: <span className="text-foreground font-semibold">Active</span></span>
-          </div>
-          <div className="w-px h-3 bg-stone-200" />
-          <div className="flex items-center gap-1.5">
-            <Shield className="w-3 h-3 text-emerald-500" />
-            <span className="text-[10px] font-mono text-muted-foreground">Data Privacy: <span className="text-emerald-600 font-semibold">Enforced</span></span>
-          </div>
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-breathe" />
+        <div className="hidden lg:flex items-center">
+          <Tooltip delayDuration={0}>
+            <TooltipTrigger asChild>
+              <div className="relative z-50 flex items-center gap-3 px-4 py-2 bg-white border border-stone-200 rounded-full shadow-sm cursor-help transition-colors hover:border-stone-300">
+                <div className="flex items-center gap-1.5">
+                  <Cpu className="w-3 h-3 text-indigo-500" />
+                  <span className="text-[10px] font-mono text-muted-foreground">Local Models: <span className="text-foreground font-semibold">Available (when required)</span></span>
+                </div>
+                <div className="w-px h-3 bg-stone-200" />
+                <div className="flex items-center gap-1.5">
+                  <Shield className="w-3 h-3 text-emerald-500" />
+                  <span className="text-[10px] font-mono text-muted-foreground">Data Privacy: <span className="text-emerald-600 font-semibold">Perimeter-first</span></span>
+                </div>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-breathe" />
+              </div>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" className="font-mono text-xs">
+              <p>Architecture mode, not a claim about this website.</p>
+            </TooltipContent>
+          </Tooltip>
         </div>
 
         {/* Desktop nav */}
