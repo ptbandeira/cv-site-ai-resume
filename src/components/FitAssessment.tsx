@@ -73,8 +73,14 @@ const FitAssessment = () => {
             value={jd}
             onChange={(e) => setJd(e.target.value)}
             placeholder="Paste Job Description here..."
-            className="min-h-[200px] mb-6 bg-secondary/50 border-border/50 focus:border-accent"
+            className="min-h-[200px] mb-2 bg-secondary/50 border-border/50 focus:border-accent"
           />
+          <p className="text-xs text-muted-foreground mb-6 flex flex-col gap-0.5">
+            <span className="font-medium text-stone-600">Privacy First:</span>
+            <span>• Don’t paste confidential client data.</span>
+            <span>• Text is used only to generate your response.</span>
+            <span>• If storage is enabled, it’s opt-in and stated explicitly.</span>
+          </p>
 
           <Button
             onClick={handleAnalyze}

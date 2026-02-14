@@ -243,11 +243,17 @@ const TriageContent = ({ isOpen, onClose }: AIChatProps) => {
         </div>
 
         {/* Disclaimer */}
-        <div className="p-4 bg-stone-50 border-t border-border text-center">
+        <div className="p-4 bg-stone-50 border-t border-border text-center space-y-2">
           <p className="text-[10px] text-muted-foreground flex items-center justify-center gap-1.5">
             <AlertTriangle className="w-3 h-3 opacity-50" />
             No legal advice. No medical advice. This is triage for scoping work.
           </p>
+          <div className="text-[10px] text-muted-foreground opacity-80 flex flex-col gap-0.5">
+            <span className="font-medium text-stone-600">Privacy:</span>
+            <span>• Don’t paste confidential client data.</span>
+            <span>• Text is used only to generate your response.</span>
+            <span>• If storage is enabled, it’s opt-in and stated explicitly.</span>
+          </div>
         </div>
 
       </div>
