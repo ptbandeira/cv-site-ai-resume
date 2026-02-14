@@ -9,7 +9,7 @@ const Hero = ({ onOpenChat }: HeroProps) => {
   return (
     <header
       id="hero"
-      className="min-h-screen flex flex-col justify-center px-6 pt-20 bg-background"
+      className="min-h-screen flex flex-col justify-center px-6 pt-32 bg-background"
       aria-labelledby="hero-heading"
     >
       <div className="max-w-5xl mx-auto w-full space-y-8">
