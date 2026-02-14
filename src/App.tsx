@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import FitAssessment from "./components/FitAssessment";
+import PulseIndex from "./pages/PulseIndex";
+import PulseDetail from "./pages/PulseDetail";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +36,8 @@ const App = () => (
               <FitAssessment />
             </div>
           } />
+          <Route path="/pulse" element={<PulseIndex />} />
+          <Route path="/pulse/:slug" element={<PulseDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

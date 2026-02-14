@@ -1,46 +1,38 @@
-import { Zap, Globe, ArrowRight } from "lucide-react";
-
-const insights = [
-    {
-        id: "anthropic-enterprise",
-        icon: <Zap className="w-5 h-5" />,
-        color: "from-amber-500 to-orange-500",
-        iconBg: "bg-amber-100 text-amber-700",
-        noise: "OpenAI releases o3, Anthropic releases Claude 4.6.",
-        translation: "Models are getting cheaper, not just smarter. Enterprise reasoning is now reliable enough for a Managing Partner's desk.",
-        action: "We can move your document review from GPT-4 to Claude Haiku, saving 90% on API costs without losing accuracy. I can implement this switch in 1–3 days if the pipeline is clean.",
-        date: "Feb 2026",
-    },
-    {
-        id: "openclaw-sovereignty",
-        icon: <Globe className="w-5 h-5" />,
-        color: "from-primary to-orange-400",
-        iconBg: "bg-orange-100 text-orange-700",
-        noise: "Meta releases Llama 4, OpenClaw launches open-source agent framework.",
-        translation: "Self-hosted models are now good enough for production workloads. You can stop sending client data to US servers.",
-        action: "I can redeploy your document processing pipeline to run on-premise using Llama 4 + OpenClaw — comparable quality on the right tasks, full data sovereignty, zero API costs.",
-        date: "Feb 2026",
-    },
-];
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { pulseItems } from "@/data/pulseItems";
 
 const InsightPulse = () => {
+    // Take only the latest 2 items
+    const latestInsights = pulseItems.slice(0, 2);
+
     return (
         <section id="insight-pulse" className="py-24 px-6 bg-secondary/30">
             <div className="max-w-4xl mx-auto">
-                <div className="mb-12">
-                    <h2 className="text-4xl md:text-5xl font-serif text-foreground mb-4">
-                        The 60-Day Pulse
-                    </h2>
-                    <p className="text-muted-foreground text-lg max-w-2xl">
-                        Not a blog. A translation layer — cutting through AI noise to show what actually matters for your business.
-                    </p>
+                <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div>
+                        <h2 className="text-4xl md:text-5xl font-serif text-foreground mb-4">
+                            The 60-Day Pulse
+                        </h2>
+                        <p className="text-muted-foreground text-lg max-w-2xl">
+                            Not a blog. A translation layer — cutting through AI noise to show what actually matters for your business.
+                        </p>
+                    </div>
+                    <Link
+                        to="/pulse"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-stone-200 hover:border-primary/50 text-stone-600 hover:text-primary rounded-lg transition-all font-medium text-sm shadow-sm hover:shadow-md whitespace-nowrap"
+                    >
+                        View all Pulse notes
+                        <ArrowRight className="w-4 h-4" />
+                    </Link>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-8">
-                    {insights.map((insight) => (
-                        <div
+                    {latestInsights.map((insight) => (
+                        <Link
+                            to={`/pulse/${insight.slug}`}
                             key={insight.id}
-                            className="bg-white border border-stone-200 shadow-xl shadow-stone-200/50 rounded-2xl overflow-hidden flex flex-col"
+                            className="bg-white border border-stone-200 shadow-xl shadow-stone-200/50 rounded-2xl overflow-hidden flex flex-col hover:scale-[1.02] transition-transform duration-300"
                         >
                             {/* Color bar */}
                             <div className={`h-1.5 bg-gradient-to-r ${insight.color}`} />
@@ -86,7 +78,7 @@ const InsightPulse = () => {
                                     </p>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>
