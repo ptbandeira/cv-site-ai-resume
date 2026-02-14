@@ -27,6 +27,6 @@ Pedro Bandeira is a Senior AI Operations Architect who bridges the gap between t
 - **Contact**: pedrobandeira@me.com
 
 ## Navigation
-- **Home**: https://pedrobandeira.com/
-- **Architecture**: https://pedrobandeira.com/#architecture
-- **Fit Assessment**: https://pedrobandeira.com/#fit-assessment
+- **Home**: https://analog-ai.vercel.app/
+- **Architecture**: https://analog-ai.vercel.app/#architecture
+- **Fit Assessment**: https://analog-ai.vercel.app/#fit-assessment

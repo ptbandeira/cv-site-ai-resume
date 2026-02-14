@@ -11,4 +11,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://pedrobandeira.com/sitemap.xml
+Sitemap: https://analog-ai.vercel.app/sitemap.xml
