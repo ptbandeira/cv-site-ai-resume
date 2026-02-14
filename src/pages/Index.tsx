@@ -12,6 +12,7 @@ import SaasVsBuild from "@/components/SaasVsBuild";
 import AutomationAuditor from "@/components/AutomationAuditor";
 // import AnalogAdvantage from "@/components/AnalogAdvantage";
 import InsightPulse from "@/components/InsightPulse";
+import FieldNoteLawFirm from "@/components/FieldNoteLawFirm";
 import TeamsAgentDemo from "@/components/TeamsAgentDemo";
 import DataTransformation from "@/components/DataTransformation";
 import SavingsCalculator from "@/components/SavingsCalculator";
@@ -37,6 +38,7 @@ const Index = () => {
         {/* <AnalogAdvantage onOpenChat={openChat} /> */}
         <TeamsAgentDemo />
         <DataTransformation />
+        <FieldNoteLawFirm />
         <div id="resource-audit">
           <SavingsCalculator />
           <SaasVsBuild />
