@@ -11,7 +11,7 @@ const AdultInTheRoom = () => {
     ];
 
     return (
-        <section className="py-24 bg-white border-y border-stone-200">
+        <section id="architecture" className="py-24 bg-white border-y border-stone-200">
             <div className="container mx-auto px-6 max-w-4xl">
                 <h2 className="text-3xl md:text-4xl font-serif text-stone-900 mb-12 text-center">
                     Why I’m the Adult in the AI Room
