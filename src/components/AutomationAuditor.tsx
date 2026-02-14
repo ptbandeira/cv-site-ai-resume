@@ -84,7 +84,7 @@ const AutomationAuditor = () => {
             return {
                 status: "danger",
                 title: "STOP: Human-in-the-Loop Required",
-                message: "This workflow cannot be verified in under 10 seconds. Autonomous execution without verification is how regulated companies get fined.",
+                message: "This workflow cannot be verified rapidly (e.g. &lt;1 min). Autonomous execution without verification is how regulated companies get fined.",
                 subMessage: "Pedro built Human-in-the-Loop governance for pharmaceutical compliance at Grupa Moja Farmacja — the same pattern your workflow needs. Compliance sign-off stays with your team; the system produces audit trails and recommendations.",
                 riskScore: 95,
                 icon: <ShieldAlert className="w-12 h-12 text-red-600" />,
@@ -227,7 +227,7 @@ const AutomationAuditor = () => {
                             <div className="space-y-6 animate-fade-in">
                                 <div className="space-y-2">
                                     <h3 className="text-2xl font-serif">Step 3: Verifiability</h3>
-                                    <p className="text-muted-foreground">Can a human verify the output accuracy in less than 10 seconds?</p>
+                                    <p className="text-muted-foreground">Can a human verify the output accuracy rapidly (e.g. &lt;1 min)?</p>
                                 </div>
 
                                 <RadioGroup onValueChange={setVerifiability} className="grid grid-cols-2 gap-4">
@@ -235,7 +235,7 @@ const AutomationAuditor = () => {
                                         <RadioGroupItem value="yes" id="ver-yes" className="peer sr-only" />
                                         <Label htmlFor="ver-yes" className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer h-full">
                                             <span className="text-xl mb-2">Yes</span>
-                                            <span className="text-xs text-center text-muted-foreground">Quick check (&lt;10s)</span>
+                                            <span className="text-xs text-center text-muted-foreground">Rapid check (&lt;1 min)</span>
                                         </Label>
                                     </div>
                                     <div>

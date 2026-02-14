@@ -19,7 +19,7 @@ const MiniAppSandbox = () => {
                     </h2>
                     <p className="text-muted-foreground text-lg leading-relaxed">
                         These are previews of deterministic workflows I deploy for clients.
-                        Click to see real logic — not mockups.
+                        Click to see deterministic logic patterns — not just UI mockups.
                     </p>
                 </div>
 
@@ -308,7 +308,7 @@ const ComplianceGuardrail = () => {
                     <FileCheck className="w-5 h-5" />
                 </div>
                 <h3 className="text-lg font-medium text-foreground">The Compliance Guardrail</h3>
-                <p className="text-sm text-muted-foreground mt-1">AI flags non-compliant marketing phrases in 0.5 seconds.</p>
+                <p className="text-sm text-muted-foreground mt-1">AI flags non-compliant marketing phrases in seconds.</p>
             </div>
 
             <div className="flex-1 flex flex-col justify-center items-center">
@@ -403,7 +403,7 @@ const ComplianceGuardrail = () => {
                             </motion.div>
                         ))}
                         <div className="text-center pt-2">
-                            <span className="text-[10px] font-mono text-muted-foreground">Scanned in 0.5s • 2 violations found</span>
+                            <span className="text-[10px] font-mono text-muted-foreground">Scan complete • 2 violations found</span>
                         </div>
                         <button
                             onClick={() => setStatus("idle")}

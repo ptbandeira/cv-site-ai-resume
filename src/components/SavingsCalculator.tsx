@@ -29,7 +29,7 @@ const presets: Preset[] = [
         costPerHour: 90,
         automationPct: 65,
         buildCost: 20000,
-        description: "Compliance workflows are highly repeatable. Compliance sign-off stays with your team; the system produces audit trails and recommendations.",
+        description: "Compliance workflows are often highly repeatable. Compliance sign-off stays with your team; the system produces audit trails and recommendations.",
     },
     {
         id: "backoffice",
@@ -38,7 +38,7 @@ const presets: Preset[] = [
         costPerHour: 45,
         automationPct: 80,
         buildCost: 12000,
-        description: "Excel/Outlook tasks are highly automatable",
+        description: "Structured Excel/Outlook tasks are highly automatable",
     },
 ];
 

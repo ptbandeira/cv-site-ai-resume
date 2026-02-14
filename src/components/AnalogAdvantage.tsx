@@ -9,7 +9,7 @@ const AnalogAdvantage = ({ onOpenChat }: { onOpenChat?: () => void }) => {
         {
             icon: ShieldCheck,
             name: "High-Stakes Governance",
-            description: "For environments where 'hallucination' is a liability. I build deterministic guardrails that keep your data safe and your output accurate.",
+            description: "For environments where 'hallucination' is a liability. I build deterministic guardrails designed to keep data within your perimeter and output grounded.",
             className: "md:col-span-1",
             background: <div className="absolute right-0 top-0 h-full w-full bg-gradient-to-br from-indigo-500/5 via-transparent to-transparent opacity-50" />,
         },
@@ -30,7 +30,7 @@ const AnalogAdvantage = ({ onOpenChat }: { onOpenChat?: () => void }) => {
         {
             icon: Zap, // Using Zap/FastForward equivalent
             name: "Rapid Reality Testing",
-            description: "Strategy without execution is hallucination. I use Vibe Coding to build production-grade Proofs of Concept in 48h. Validate the architecture before you hire the team.",
+            description: "Strategy without execution is hallucination. I use Vibe Coding to build functional Proofs of Concept in days, not weeks. Validate the architecture before you hire the team.",
             className: "md:col-span-1 cursor-pointer ring-1 ring-primary/20", // Highlight
             background: <div className="absolute right-0 top-0 h-full w-full bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-50" />,
             onClick: () => setShowVibeModal(true),
