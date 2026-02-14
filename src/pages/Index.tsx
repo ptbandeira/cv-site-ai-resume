@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import FilterSection from "@/components/FilterSection";
 import MiniAppSandbox from "@/components/MiniAppSandbox";
 import Experience from "@/components/Experience";
 import FitAssessment from "@/components/FitAssessment";
@@ -26,6 +27,7 @@ const Index = () => {
       <Header onOpenChat={openChat} />
       <main>
         <Hero onOpenChat={openChat} />
+        <FilterSection />
         <AnalogAdvantage onOpenChat={openChat} />
         <TeamsAgentDemo />
         <DataTransformation />
