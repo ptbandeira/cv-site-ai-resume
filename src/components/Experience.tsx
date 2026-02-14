@@ -3,38 +3,72 @@ import ExperienceCard from "./ExperienceCard";
 const Experience = () => {
   const milestones = [
     {
-      challenge: "Enterprise Data Gridlock: 10 Years Bridging Engineering & C-Suite",
-      role: "Solutions Architect & Consultant — Microsoft / Accenture",
-      period: "2010 - 2020",
+      challenge: "The AI Hype Cycle vs. Operational Reality",
+      role: "Independent Consultant / Contractor",
+      period: "2023 - Present",
       highlights: [
-        "Translated C-suite strategic goals into technical architecture across Fortune 500 engagements.",
-        "Architected scalable Azure cloud solutions for complex, siloed data environments.",
-        "Delivered multi-year digital transformation programs — the 'boring' infrastructure that keeps enterprises alive."
+        "Helping businesses operationalize AI beyond chat interfaces.",
+        "Building sovereign AI architectures for data privacy and auditability.",
+        "Bridging the gap between technical possibility and business ROI."
       ],
       aiContext: {
-        situation: "Large-scale organizational silos preventing data agility across multinational enterprises.",
-        approach: "Implemented unified cloud data strategies using Azure, bridging legacy systems to modern architectures.",
-        technicalWork: "Azure Synapse, Cosmos DB, Microservices Architecture, Enterprise Integration Patterns.",
-        lessonsLearned: "Technology is easy; organizational change is hard. The bottleneck is always human adoption, not infrastructure."
+        situation: "Companies drowning in 'pilot purgatory' with no production value.",
+        approach: "Implementing 'Human-in-the-loop' workflows that scale judgment.",
+        technicalWork: "AgenticOS, OpenWebUI, Local LLMs, n8n/Make automation.",
+        lessonsLearned: "Automation without governance is just high-speed chaos."
       },
-      perspective2026: "How I'd solve this today: Human-in-the-Loop agents that automate the 40% of administrative waste I handled manually between 2010-2020. Enterprise data reconciliation that took weeks now takes hours with deterministic RAG pipelines — but still requires a human to sign off."
+      perspective2026: "The 'Chief AI Operator' is the new COO. We don't need more SaaS; we need governed, owned intelligence."
+    },
+    {
+      challenge: "Enterprise Digital Transformation at Scale",
+      role: "Business Development — Microsoft Dynamics 365, Accenture",
+      period: "Aug 2021 - Jul 2023",
+      highlights: [
+        "Driving adoption of complex ERP/CRM ecosystems for large enterprises.",
+        "Aligning technical capabilities with business outcomes (P&L focus).",
+        "Navigating complex stakeholder environments to deliver operational change."
+      ],
+      aiContext: {
+        situation: "Massive data silos preventing agile decision-making.",
+        approach: "Unified Data/CRM strategies (Dynamics 365) to break down walls.",
+        technicalWork: "ERP/CRM Architecture, Enterprise Sales, Solution Mapping.",
+        lessonsLearned: "Technology is easy; organizational change is hard."
+      },
+      perspective2026: "What used to be a 2-year ERP rollout can now be a 2-month agentic workflow deployment—if you have the right architecture."
+    },
+    {
+      challenge: "International Efficiency & Execution",
+      role: "Global Sales Director — Glownet",
+      period: "2017 - 2018",
+      highlights: [
+        "Led global sales strategy for RFID/Cashless event solutions.",
+        "Managed cross-border partnerships and high-stakes deployments.",
+        "Optimized revenue operations across multiple markets."
+      ],
+      aiContext: {
+        situation: "High-volume transaction data and real-time operational pressure.",
+        approach: "Data-driven sales operations and forecasting.",
+        technicalWork: "RFID Tech, Sales Ops, International Logistics.",
+        lessonsLearned: "Real-time data prevents operational disaster."
+      },
+      perspective2026: "Predictive sales agents now handle the forecasting I used to do in Excel until 2 AM."
     },
     {
       challenge: "Scaling Regulated Retail: From 1 to 10 Units",
-      role: "CIO / Strategic Leader — Grupa Moja Farmacja",
-      period: "2020 - 2024",
+      role: "General Manager — Grupa Moja Farmacja",
+      period: "2011 - 2014",
       highlights: [
-        "Built the digital backbone for a pharmaceutical retail network scaling from single-site to multi-unit operations.",
-        "Implemented compliance-first e-commerce and logistics systems for regulated healthcare products.",
-        "Managed data security and regulatory frameworks (GDP, GMP) for sensitive patient and prescription data."
+        "Managed P&L and operational growth for a pharmacy chain.",
+        "Oversaw logistics, supply chain, and regulatory compliance.",
+        "Led teams through rapid expansion from 1 to 10+ units."
       ],
       aiContext: {
-        situation: "Rapid operational scaling required robust digital infrastructure with zero tolerance for compliance failure.",
-        approach: "Full digital transformation of logistics, sales channels, and supply chain — with pharmaceutical regulations as the design constraint, not an afterthought.",
-        technicalWork: "Custom ERP integrations, Secure Health Data Pipelines, Multi-site POS systems, Regulatory Reporting Automation.",
-        lessonsLearned: "In regulated industries, the cost of a compliance failure dwarfs any technology investment. Build for the auditor first."
+        situation: "High-stakes inventory and compliance management.",
+        approach: "Strict standard operating procedures (analog guardrails).",
+        technicalWork: "Supply Chain Optimization, Regulatory Compliance, Team Leadership.",
+        lessonsLearned: "In regulated industries, process adherence is survival."
       },
-      perspective2026: "How I'd solve this today: The Compliance Guardrail agent I now build can flag non-compliant marketing copy in 0.5 seconds — work that required manual review by me and two pharmacists in 2022. The A-V-C Framework I use for clients was born from this experience."
+      perspective2026: "The 'Compliance Guardrail' agent I now build does the work of 3 auditors I used to hire."
     }
   ];
 
