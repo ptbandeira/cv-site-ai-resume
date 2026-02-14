@@ -224,30 +224,31 @@ const LeadGenCTA = () => {
                     <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center mb-3 text-orange-700 group-hover:scale-110 transition-transform">
                         <Database className="w-5 h-5" />
                     </div>
-                    <h3 className="text-lg font-medium text-foreground">Start Free Optimization</h3>
-                    <p className="text-sm text-muted-foreground mt-1">Get a custom analysis of your existing stack's untapped potential.</p>
+                    <h3 className="text-lg font-medium text-foreground">Run a 5-minute Self-check</h3>
+                    <p className="text-sm text-muted-foreground mt-1">Get an automated estimate + a checklist. Custom work starts with a paid Reality Test.</p>
                 </div>
 
                 <div className="flex-1 flex flex-col justify-center items-center gap-4 text-center">
                     <p className="text-sm text-muted-foreground">
-                        I'll analyze your current platform and show how AgenticOS turns it into a revenue engine — at $0 incremental licensing.
+                        Serious work starts with a paid engagement. If you need a junior dev, this isn’t it.
+                        <br /><span className="opacity-70">But this automated audit will show you where the money is hiding.</span>
                     </p>
                     <button
                         onClick={() => setIsOpen(true)}
                         className="px-6 py-2.5 bg-[#1A1A1A] hover:bg-[#333] text-white rounded-sm text-sm font-medium transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
                     >
-                        Start Free Audit <ArrowRight className="w-4 h-4" />
+                        Run Self-Check <ArrowRight className="w-4 h-4" />
                     </button>
-                    <p className="text-[10px] text-muted-foreground">No credit card required.</p>
+                    <p className="text-[10px] text-muted-foreground">Automated estimate. No credit card required.</p>
                 </div>
             </div>
 
             <Dialog open={isOpen} onOpenChange={setIsOpen}>
                 <DialogContent>
                     <DialogHeader>
-                        <DialogTitle>Get Your Optimization Report</DialogTitle>
+                        <DialogTitle>Get Your Automated Report</DialogTitle>
                         <DialogDescription>
-                            Enter your details and I'll analyze how your existing stack can replace redundant SaaS.
+                            Enter your details for an automated ROI estimate.
                         </DialogDescription>
                     </DialogHeader>
                     <form onSubmit={handleSubmit} className="space-y-4 pt-4">
