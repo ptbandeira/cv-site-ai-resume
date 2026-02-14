@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { X, ArrowRight, CheckCircle2, AlertTriangle, ChevronRight, RefreshCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -38,21 +38,35 @@ const TriageContent = ({ isOpen, onClose }: AIChatProps) => {
     setState({ industry: "", sensitivity: "", goal: "" });
   };
 
-  const scrollToContact = () => {
-    onClose();
-    const contactSection = document.getElementById("contact");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
+  const generateEmailLink = (title: string) => {
+    const subject = getSubject(title);
+    const body = getBody(title);
+    return `mailto:pedrobandeira@me.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
+  const getSubject = (title: string) => {
+    switch (title) {
+      case "48-Hour Reality Test":
+        return `Request: 48-Hour Reality Test (${state.industry})`;
+      case "Sovereign AI Architecture":
+        return `Inquiry: Sovereign AI Architecture (${state.industry})`;
+      default:
+        return `Booking: Executive Strategy Triage (${state.industry})`;
     }
   };
 
-  const scrollToRealityTest = () => {
-    onClose();
-    const fitSection = document.getElementById("fit-assessment");
-    if (fitSection) {
-      fitSection.scrollIntoView({ behavior: "smooth" });
+  const getBody = (title: string) => {
+    const context = `Context:\n- Industry: ${state.industry}\n- Sensitivity: ${state.sensitivity}\n- Goal: ${state.goal}`;
+
+    switch (title) {
+      case "48-Hour Reality Test":
+        return `Hi Pedro,\n\nI used your AI Triage tool and it recommended a 48-Hour Reality Test.\n\n${context}\n\nI'd like to schedule a brief chat to see if this fits.\n\nBest,\n[Name]`;
+      case "Sovereign AI Architecture":
+        return `Hi Pedro,\n\nI need to keep my data inside my perimeter. Your AI tool recommended the Sovereign Architecture approach.\n\n${context}\n\nWhen can we discuss this?\n\nBest,\n[Name]`;
+      default:
+        return `Hi Pedro,\n\nI'm looking for high-level governance and strategy. Your AI recommended the Executive Triage.\n\n${context}\n\nPlease let me know your availability.\n\nBest,\n[Name]`;
     }
-  }
+  };
 
   const getRecommendation = () => {
     // LOGIC:
@@ -66,8 +80,9 @@ const TriageContent = ({ isOpen, onClose }: AIChatProps) => {
       state.industry === "Other" ||
       state.sensitivity === "Public"
     ) {
+      const title = "48-Hour Reality Test";
       return {
-        title: "48-Hour Reality Test",
+        title,
         description: "You need validation before scale. Don't build a cathedral when a tent will do.",
         bullets: [
           "Validate your use-case with a working MVP in 2 days",
@@ -75,15 +90,16 @@ const TriageContent = ({ isOpen, onClose }: AIChatProps) => {
           "Get a clear Build/Buy/Kill decision memo"
         ],
         cta: "Request Reality Test",
-        action: scrollToRealityTest,
+        action: () => window.location.href = generateEmailLink(title),
         isUrgent: false
       };
     }
 
     // Check for Sovereign Architecture Trigger
     if (state.goal === "Keep data inside perimeter") {
+      const title = "Sovereign AI Architecture";
       return {
-        title: "Sovereign AI Architecture",
+        title,
         description: "Your IP is the asset. Don't leak it to public models.",
         bullets: [
           "Local-first models (Llama 4 / DeepSeek) on your metal",
@@ -91,14 +107,15 @@ const TriageContent = ({ isOpen, onClose }: AIChatProps) => {
           "Audit trails for every agentic decision"
         ],
         cta: "Book Executive Triage",
-        action: scrollToContact,
+        action: () => window.location.href = generateEmailLink(title),
         isUrgent: true
       };
     }
 
     // Default to Executive Triage (Strategy/Governance)
+    const title = "Executive Strategy Triage";
     return {
-      title: "Executive Strategy Triage",
+      title,
       description: "You're dealing with high stakes. You need governance, not just code.",
       bullets: [
         "Boardroom-ready AI strategy & reporting",
@@ -106,7 +123,7 @@ const TriageContent = ({ isOpen, onClose }: AIChatProps) => {
         "Pilot-to-production execution playbook"
       ],
       cta: "Book Executive Triage",
-      action: scrollToContact,
+      action: () => window.location.href = generateEmailLink(title),
       isUrgent: true
     };
   };
