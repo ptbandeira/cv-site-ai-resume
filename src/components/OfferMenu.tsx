@@ -14,7 +14,7 @@ const OfferMenu = () => {
             cta: "Request a Reality Test",
             href: "mailto:pedrobandeira@me.com?subject=Request a Reality Test",
             highlight: true,
-            price: "Starting at $5k"
+            price: "Starting at €5k ex VAT"
         },
         {
             title: "Sovereign AI Architecture",
@@ -28,7 +28,7 @@ const OfferMenu = () => {
             cta: "Discuss Architecture",
             href: "mailto:pedrobandeira@me.com?subject=Discuss Architecture",
             highlight: false,
-            price: "Starting at $15k"
+            price: "Starting at €15k ex VAT"
         },
         {
             title: "Fractional Chief AI Operator",
@@ -42,7 +42,7 @@ const OfferMenu = () => {
             cta: "Explore a Fractional Role",
             href: "mailto:pedrobandeira@me.com?subject=Explore Fractional Role",
             highlight: false,
-            price: "Retainers from $8k/mo"
+            price: "Retainers from €8k/mo ex VAT"
         }
     ];
 
