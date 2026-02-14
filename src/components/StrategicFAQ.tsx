@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 const faqs = [
     {
         q: "How do you ensure AI safety in Pharma?",
-        a: "I use a 'Local-First' architecture where patient data never leaves your on-premise server, utilizing Llama 3 models instead of public APIs. This means zero data leakage, full audit trails, and compliance with GxP and GDPR from day one — not as an afterthought.",
+        a: "I use a 'Local-First' architecture where patient data never leaves your on-premise server, utilizing Llama 3 models instead of public APIs. This means zero data leakage, full audit trails, and compliance with GxP and GDPR from day one — not as an afterthought. Compliance sign-off stays with your team; the system produces audit trails and recommendations.",
     },
     {
         q: "Can AI replace my sales team?",

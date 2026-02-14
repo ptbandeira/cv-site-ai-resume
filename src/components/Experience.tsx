@@ -66,7 +66,7 @@ const Experience = () => {
         situation: "High-stakes inventory and compliance management.",
         approach: "Strict standard operating procedures (analog guardrails).",
         technicalWork: "Supply Chain Optimization, Regulatory Compliance, Team Leadership.",
-        lessonsLearned: "In regulated industries, process adherence is survival."
+        lessonsLearned: "In regulated industries, process adherence is survival. Compliance sign-off stays with your team; the system produces audit trails and recommendations."
       },
       perspective2026: "The 'Compliance Guardrail' agent I now build does the work of 3 auditors I used to hire."
     }

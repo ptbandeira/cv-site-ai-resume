@@ -85,7 +85,7 @@ const AutomationAuditor = () => {
                 status: "danger",
                 title: "STOP: Human-in-the-Loop Required",
                 message: "This workflow cannot be verified in under 10 seconds. Autonomous execution without verification is how regulated companies get fined.",
-                subMessage: "Pedro built Human-in-the-Loop governance for pharmaceutical compliance at Grupa Moja Farmacja — the same pattern your workflow needs.",
+                subMessage: "Pedro built Human-in-the-Loop governance for pharmaceutical compliance at Grupa Moja Farmacja — the same pattern your workflow needs. Compliance sign-off stays with your team; the system produces audit trails and recommendations.",
                 riskScore: 95,
                 icon: <ShieldAlert className="w-12 h-12 text-red-600" />,
                 bg: "bg-red-50 border-red-200",
