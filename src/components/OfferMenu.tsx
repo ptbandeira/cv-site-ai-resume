@@ -12,7 +12,7 @@ const OfferMenu = () => {
                 "Decision memo: Build / Buy / Kill"
             ],
             cta: "Request a Reality Test",
-            href: "mailto:pedrobandeira@me.com?subject=Request a Reality Test",
+            href: "mailto:pedrobandeira@me.com?subject=Request a Reality Test&body=Hi Pedro,%0D%0A%0D%0AI'm interested in a 48-Hour Reality Test.%0D%0A%0D%0AChallenge: [Describe your specific problem]%0D%0AGoal: [Validation vs. MVP vs. Workflow]%0D%0A%0D%0ABest,",
             highlight: true,
             price: "Starting at €5k ex VAT",
             scope: "Scope: one workflow, one team, one decision memo."
@@ -27,7 +27,7 @@ const OfferMenu = () => {
                 "Implementation roadmap + vendor neutral decisions"
             ],
             cta: "Discuss Architecture",
-            href: "mailto:pedrobandeira@me.com?subject=Discuss Architecture",
+            href: "mailto:pedrobandeira@me.com?subject=Discuss Architecture&body=Hi Pedro,%0D%0A%0D%0AI'd like to discuss Sovereign AI Architecture.%0D%0A%0D%0AIndustry: [e.g., Pharma, Law, Finance]%0D%0AData Sensitivity: [Internal / Confidential / PII]%0D%0A%0D%0ABest,",
             highlight: false,
             price: "Starting at €15k ex VAT",
             scope: "Scope: one domain + reference architecture + governance design."
@@ -42,7 +42,7 @@ const OfferMenu = () => {
                 "Training + operating cadence"
             ],
             cta: "Explore a Fractional Role",
-            href: "mailto:pedrobandeira@me.com?subject=Explore Fractional Role",
+            href: "mailto:pedrobandeira@me.com?subject=Explore Fractional Role&body=Hi Pedro,%0D%0A%0D%0AI'm interested in exploring a Fractional Role.%0D%0A%0D%0ACurrent Stage:%0D%0AKey Pain Points:%0D%0A%0D%0ABest,",
             highlight: false,
             price: "€8k/mo (1 day/wk) · €15k/mo (2 days/wk) ex VAT",
             scope: "Includes: weekly exec cadence + delivery management + risk reporting."
@@ -86,7 +86,7 @@ const OfferMenu = () => {
                                 €950 ex VAT (fixed)
                             </p>
                             <a
-                                href="mailto:pedrobandeira@me.com?subject=Book Executive Triage"
+                                href="mailto:pedrobandeira@me.com?subject=Book Executive Triage&body=Hi Pedro,%0D%0A%0D%0AI'd like to book an Executive Triage session (90 mins).%0D%0A%0D%0AMy main goal is: [Stop pilot sprawl / Board reporting / Strategy reset]%0D%0A%0D%0ABest,"
                                 className="flex items-center justify-center gap-2 py-4 px-6 rounded-lg font-medium transition-all bg-[#F25D27] text-white hover:bg-[#d14d1e] shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40"
                             >
                                 Book Executive Triage

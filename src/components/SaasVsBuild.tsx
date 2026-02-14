@@ -231,9 +231,14 @@ const SaasVsBuild = () => {
                         </div>
 
                         <div className="flex gap-4 pt-2">
-                            <button className="flex-1 py-3 px-4 bg-[#0F172A] text-white font-medium rounded-lg hover:bg-[#1e293b] transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+                            <a
+                                href={`mailto:pedrobandeira@me.com?subject=Proprietary Optimization Audit: ${selectedStack.name}&body=${encodeURIComponent(
+                                    `Hi Pedro,\n\nI ran the optimization audit on your site.\n\nMy Stack: ${selectedStack.name}\nSeats: ${seats}\nEstimated Reclaimable: ${reclaimablePct}%\n\nI'd like to verify these numbers.\n\nBest,`
+                                )}`}
+                                className="flex-1 py-3 px-4 bg-[#0F172A] text-white font-medium rounded-lg hover:bg-[#1e293b] transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
+                            >
                                 Start Your Optimization <ArrowRight className="w-4 h-4" />
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>

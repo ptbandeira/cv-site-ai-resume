@@ -102,7 +102,7 @@ const PressKit = () => {
                         <h2 className="text-xl font-serif font-bold text-stone-900 mb-6">Get in Touch</h2>
                         <div className="flex gap-4">
                             <a
-                                href="mailto:pedrobandeira@me.com"
+                                href="mailto:pedrobandeira@me.com?subject=Press / Booking Inquiry&body=Hi Pedro,%0D%0A%0D%0AI'm reaching out regarding...%0D%0A%0D%0ABest,"
                                 className="flex items-center gap-2 px-6 py-3 bg-stone-900 text-white rounded-lg font-medium hover:bg-stone-800 transition-colors shadow-lg shadow-stone-900/10"
                             >
                                 <Mail className="w-4 h-4" />

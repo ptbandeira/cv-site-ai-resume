@@ -149,7 +149,7 @@ const AnalogAdvantage = ({ onOpenChat }: { onOpenChat?: () => void }) => {
 
                         <div className="flex flex-col gap-3">
                             <a
-                                href="mailto:pedrobandeira@me.com?subject=Book a Sprint: Reactive MVP"
+                                href="mailto:pedrobandeira@me.com?subject=Book a Sprint: Reactive MVP&body=Hi Pedro,%0D%0A%0D%0AI want to validate a workflow with a Reactive MVP Sprint.%0D%0A%0D%0AThe Workflow: [Briefly describe the process]%0D%0ASuccess Criteria: [What does 'working' look like?]%0D%0A%0D%0ABest,"
                                 className="w-full py-4 bg-[#1A1A1A] text-white rounded-sm font-medium text-center hover:bg-[#333] transition-colors flex items-center justify-center gap-2"
                             >
                                 Book a Sprint <span className="text-stone-400">→</span>

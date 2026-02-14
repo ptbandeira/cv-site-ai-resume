@@ -23,7 +23,7 @@ const Footer = ({ onOpenChat }: { onOpenChat?: () => void }) => {
           <div className="flex flex-col items-start gap-4">
             <div className="flex flex-wrap gap-4 w-full sm:w-auto">
               <a
-                href="mailto:pedrobandeira@me.com"
+                href="mailto:pedrobandeira@me.com?subject=General Inquiry&body=Hi Pedro,%0D%0A%0D%0AI'm reaching out regarding...%0D%0A%0D%0ABest,"
                 className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-[#1A1A1A] text-white rounded-xl font-medium hover:bg-stone-800 transition-all hover:scale-[1.02] shadow-sm"
               >
                 <Mail className="w-4 h-4" />
