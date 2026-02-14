@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import FilterSection from "@/components/FilterSection";
 import OfferMenu from "@/components/OfferMenu";
+import AdultInTheRoom from "@/components/AdultInTheRoom";
 import MiniAppSandbox from "@/components/MiniAppSandbox";
 import Experience from "@/components/Experience";
 import FitAssessment from "@/components/FitAssessment";
@@ -30,6 +31,7 @@ const Index = () => {
         <Hero onOpenChat={openChat} />
         <FilterSection />
         <OfferMenu />
+        <AdultInTheRoom />
         {/* <AnalogAdvantage onOpenChat={openChat} /> */}
         <TeamsAgentDemo />
         <DataTransformation />
