@@ -38,7 +38,7 @@ const stacks = [
             { name: "Slack", perSeat: 12.50 },
             { name: "Dropbox Business", perSeat: 15 },
         ],
-        optimizationAngle: "SharePoint already includes document management, team sites, and workflow automation via Power Automate. AgenticOS turns your existing SharePoint into a Revenue Engine — RAG pipelines over your own data, zero additional licensing.",
+        optimizationAngle: "SharePoint already includes document management, team sites, and workflow automation via Power Automate. We turn your existing SharePoint into a Revenue Engine — RAG pipelines over your own data, often without new SaaS subscriptions.",
     },
     {
         id: "google",
@@ -49,7 +49,7 @@ const stacks = [
             { name: "Trello", perSeat: 10 },
             { name: "Zoom", perSeat: 13.33 },
         ],
-        optimizationAngle: "Google Workspace includes Meet, Chat, and Shared Drives. AgenticOS leverages the Google API ecosystem to build agentic workflows on infrastructure you already pay for — document processing, calendar ops, and lead routing at $0 incremental.",
+        optimizationAngle: "Google Workspace includes Meet, Chat, and Shared Drives. We leverage the Google API ecosystem to build agentic workflows on infrastructure you already pay for — document processing, calendar ops, and lead routing at €0 incremental.",
     },
     {
         id: "salesforce",
@@ -60,7 +60,7 @@ const stacks = [
             { name: "Outreach.io", perSeat: 100 },
             { name: "ZoomInfo", perSeat: 83 },
         ],
-        optimizationAngle: "You're paying for two CRMs and three prospecting tools that overlap. AgenticOS consolidates your pipeline into one deterministic engine — scoring, routing, and outreach orchestration built on your existing Salesforce instance.",
+        optimizationAngle: "You're paying for two CRMs and three prospecting tools that overlap. We consolidate your pipeline into one deterministic engine — scoring, routing, and outreach orchestration built on your existing Salesforce instance.",
     },
 ];
 
@@ -97,7 +97,7 @@ const SaasVsBuild = () => {
                 <div className="mb-12">
                     <h2 className="text-3xl font-serif text-foreground mb-4">Resource Optimization Audit</h2>
                     <p className="text-muted-foreground max-w-2xl text-lg">
-                        You already own the platform. I show you how to turn it into a Revenue Engine — for $0 in additional monthly licensing.
+                        You already own the platform. I show you how to turn it into a Revenue Engine — often for €0 in additional monthly licensing.
                     </p>
                 </div>
 
@@ -174,7 +174,7 @@ const SaasVsBuild = () => {
                                                 <span className="text-red-500">✗</span> {tool.name}
                                             </span>
                                             <span className="font-mono text-muted-foreground">
-                                                ${tool.perSeat}/seat/mo
+                                                €{tool.perSeat}/seat/mo
                                             </span>
                                         </div>
                                     ))}
@@ -182,7 +182,7 @@ const SaasVsBuild = () => {
                                 <div className="flex justify-between items-center text-sm mt-3 pt-3 border-t border-border">
                                     <span className="text-foreground font-medium">Annual Redundant Spend:</span>
                                     <span className="font-mono font-bold text-red-600 text-lg">
-                                        $<CountUp end={overlappingAnnual} />
+                                        €<CountUp end={overlappingAnnual} />
                                     </span>
                                 </div>
                             </div>
@@ -192,7 +192,7 @@ const SaasVsBuild = () => {
                     <div className="space-y-8">
                         {/* Optimization angle */}
                         <div className="p-4 bg-primary/5 border-l-4 border-primary rounded-r-lg">
-                            <p className="text-xs font-mono uppercase tracking-wider text-primary font-bold mb-2">The $0 Play</p>
+                            <p className="text-xs font-mono uppercase tracking-wider text-primary font-bold mb-2">The €0 Play</p>
                             <p className="text-sm text-foreground/80 leading-relaxed">
                                 {selectedStack.optimizationAngle}
                             </p>
@@ -206,15 +206,15 @@ const SaasVsBuild = () => {
                                 <div className="p-4 bg-emerald-50/50 border border-emerald-100 rounded-lg">
                                     <p className="text-sm text-emerald-800 font-medium mb-1">Year 1 Net Savings</p>
                                     <div className="text-3xl font-serif text-emerald-700">
-                                        $<CountUp end={year1Savings} />
+                                        €<CountUp end={year1Savings} />
                                     </div>
-                                    <p className="text-xs text-emerald-600/80 mt-1">After one-time AgenticOS build fee.</p>
+                                    <p className="text-xs text-emerald-600/80 mt-1">After one-time System build fee.</p>
                                 </div>
 
                                 <div className="p-4 bg-blue-50/50 border border-blue-100 rounded-lg">
                                     <p className="text-sm text-blue-800 font-medium mb-1">Ongoing Annual Net Benefit</p>
                                     <div className="text-3xl font-serif text-blue-700">
-                                        $<CountUp end={year2Savings} />
+                                        €<CountUp end={year2Savings} />
                                     </div>
                                     <p className="text-xs text-blue-600/80 mt-1">Assuming maintenance.</p>
                                 </div>

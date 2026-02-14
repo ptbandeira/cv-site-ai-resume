@@ -22,7 +22,7 @@ const WhenAIGoesWrong = () => {
         },
         {
             title: "Pilot Graveyard",
-            consequence: "Ten experiments, zero production.",
+            consequence: "Ten experiments, stalled production.",
             fix: "Reality tests + integration-first design.",
             icon: ZapOff
         },

@@ -5,11 +5,11 @@ import { cn } from "@/lib/utils";
 const faqs = [
     {
         q: "How do you ensure AI safety in Pharma?",
-        a: "I use a 'Local-First' architecture where patient data never leaves your on-premise server, utilizing Llama 3 models instead of public APIs. This means zero data leakage, full audit trails, and compliance with GxP and GDPR from day one — not as an afterthought. Compliance sign-off stays with your team; the system produces audit trails and recommendations.",
+        a: "I use a 'Local-First' architecture where patient data never leaves your on-premise server, utilizing Llama 3 models instead of public APIs. This means zero data leakage, full audit trails, and compliance with GxP and GDPR constraints. Compliance sign-off stays with your team; the system produces audit trails and recommendations.",
     },
     {
         q: "Can AI replace my sales team?",
-        a: "No. I build 'Hybrid Intelligence' systems where AI handles data entry, CRM updates, and report generation — while humans handle negotiation, relationship-building, and strategic decisions. The goal is to reclaim 15+ hours per rep per week, not to eliminate roles.",
+        a: "No. I build 'Hybrid Intelligence' systems where AI handles data entry, CRM updates, and report generation — while humans handle negotiation, relationship-building, and strategic decisions. The goal is to reclaim 15+ hours per rep per week.",
     },
     {
         q: "What is the difference between your approach and hiring a SaaS vendor?",
@@ -17,7 +17,7 @@ const faqs = [
     },
     {
         q: "How long does implementation typically take?",
-        a: "A production-grade PoC takes 4–6 weeks. Full enterprise rollout with guardrails, training, and governance typically runs 3–4 months. I scope aggressively because regulated environments demand precision over speed.",
+        a: "A functional PoC takes 1–3 weeks. Full enterprise rollout with guardrails, training, and governance typically runs 3–4 months. I scope aggressively because regulated environments demand precision over speed.",
     },
 ];
 

@@ -54,7 +54,7 @@ const TeamsAgentDemo = () => {
                         Agentic Workflow Simulator
                     </h3>
                     <p className="text-muted-foreground text-lg max-w-2xl">
-                        See how AgenticOS runs a morning briefing — live. No mock data. Real agent reasoning.
+                        See how the system runs a morning briefing — live. No mock data. Real agent reasoning.
                     </p>
                 </div>
 

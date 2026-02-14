@@ -30,7 +30,7 @@ const AnalogAdvantage = ({ onOpenChat }: { onOpenChat?: () => void }) => {
         {
             icon: Zap, // Using Zap/FastForward equivalent
             name: "Rapid Reality Testing",
-            description: "Strategy without execution is hallucination. I use Vibe Coding to build functional Proofs of Concept in days, not weeks. Validate the architecture before you hire the team.",
+            description: "Strategy without execution is hallucination. I use Vibe Coding to build functional Proofs of Concept in 1–3 days. Validate the architecture before you hire the team.",
             className: "md:col-span-1 cursor-pointer ring-1 ring-primary/20", // Highlight
             background: <div className="absolute right-0 top-0 h-full w-full bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-50" />,
             onClick: () => setShowVibeModal(true),
@@ -45,8 +45,11 @@ const AnalogAdvantage = ({ onOpenChat }: { onOpenChat?: () => void }) => {
         >
             <div className="max-w-6xl mx-auto px-6">
                 <div className="mb-14 md:text-center max-w-3xl mx-auto">
+                    <p className="text-xs font-mono uppercase tracking-wider text-primary font-bold mb-3">
+                        Analog/Digital Bridge
+                    </p>
                     <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-5">
-                        The Analog / Digital Bridge
+                        How I Work
                     </h2>
                     <p className="text-lg font-sans text-stone-600 leading-relaxed">
                         AI isn't magic — it's the next layer of abstraction. Decades of
@@ -152,7 +155,7 @@ const AnalogAdvantage = ({ onOpenChat }: { onOpenChat?: () => void }) => {
                                 Book a Sprint <span className="text-stone-400">→</span>
                             </a>
                             <p className="text-xs text-center text-muted-foreground">
-                                Limited availability. Sprints start at $5k.
+                                limited availability. Sprints start at €5k.
                             </p>
                         </div>
                     </div>

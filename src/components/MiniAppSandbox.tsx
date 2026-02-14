@@ -19,7 +19,7 @@ const MiniAppSandbox = () => {
                     </h2>
                     <p className="text-muted-foreground text-lg leading-relaxed">
                         These are previews of deterministic workflows I deploy for clients.
-                        Click to see deterministic logic patterns — not just UI mockups.
+                        Click to see logic patterns — using a demo dataset.
                     </p>
                 </div>
 
