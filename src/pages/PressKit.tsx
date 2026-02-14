@@ -47,9 +47,7 @@ const PressKit = () => {
                     <h1 className="text-4xl md:text-5xl font-serif text-stone-900 mb-6">
                         Pedro Bandeira
                     </h1>
-                    <p className="text-stone-600 text-lg max-w-2xl leading-relaxed">
-                        Senior AI Operations Architect • Sovereign AI Specialist • "The Adult in the Room"
-                    </p>
+                    Senior AI Operations Architect • Sovereign AI Specialist • "The Adult in the AI Room"
                 </div>
 
                 <div className="space-y-12">

@@ -3,7 +3,7 @@ import freelanceContext from '../../freelance.md?raw';
 
 // "Ground Truth" Manifesto Injection
 const cvContext = `
-Pedro is a Strategic AI Orchestrator bridging the divide between Fortune 500 discipline and the new AI economy. He creates 'Hybrid Intelligence' systems, combining 20 years of leadership (Microsoft/Accenture, Grupa Moja Farmacja) with 'Vibe Coding' speed. He is the 'Adult in the Room' who translates GenAI into Operational Efficiency.
+Pedro is a Strategic AI Orchestrator bridging the divide between Fortune 500 discipline and the new AI economy. He creates 'Hybrid Intelligence' systems, combining 20 years of leadership (Microsoft/Accenture, Grupa Moja Farmacja) with 'Vibe Coding' speed. He is the 'Adult in the AI Room' who translates GenAI into Operational Efficiency.
 `;
 
 const agenticOSManifesto = `
