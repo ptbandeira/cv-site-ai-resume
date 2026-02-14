@@ -13,7 +13,8 @@ const OfferMenu = () => {
             ],
             cta: "Request a Reality Test",
             href: "mailto:pedrobandeira@me.com?subject=Request a Reality Test",
-            highlight: true
+            highlight: true,
+            price: "Starting at $5k"
         },
         {
             title: "Sovereign AI Architecture",
@@ -26,7 +27,8 @@ const OfferMenu = () => {
             ],
             cta: "Discuss Architecture",
             href: "mailto:pedrobandeira@me.com?subject=Discuss Architecture",
-            highlight: false
+            highlight: false,
+            price: "Starting at $15k"
         },
         {
             title: "Fractional Chief AI Operator",
@@ -39,7 +41,8 @@ const OfferMenu = () => {
             ],
             cta: "Explore a Fractional Role",
             href: "mailto:pedrobandeira@me.com?subject=Explore Fractional Role",
-            highlight: false
+            highlight: false,
+            price: "Retainers from $8k/mo"
         }
     ];
 
@@ -51,8 +54,8 @@ const OfferMenu = () => {
                         <div
                             key={index}
                             className={`flex flex-col p-8 rounded-xl border transition-all duration-300 ${offer.highlight
-                                    ? "bg-white border-primary/20 shadow-xl shadow-primary/5 scale-[1.02] md:-translate-y-2"
-                                    : "bg-white border-stone-200 shadow-sm hover:shadow-md hover:border-stone-300"
+                                ? "bg-white border-primary/20 shadow-xl shadow-primary/5 scale-[1.02] md:-translate-y-2"
+                                : "bg-white border-stone-200 shadow-sm hover:shadow-md hover:border-stone-300"
                                 }`}
                         >
                             <h3 className="font-serif text-2xl text-stone-900 mb-4">{offer.title}</h3>
@@ -67,16 +70,21 @@ const OfferMenu = () => {
                                 ))}
                             </ul>
 
-                            <a
-                                href={offer.href}
-                                className={`flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-medium transition-colors ${offer.highlight
+                            <div className="mt-auto">
+                                <p className="text-xs text-stone-500 font-mono mb-3 text-center opacity-80">
+                                    {offer.price}
+                                </p>
+                                <a
+                                    href={offer.href}
+                                    className={`flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-medium transition-colors ${offer.highlight
                                         ? "bg-[#1A1A1A] text-white hover:bg-[#333]"
                                         : "bg-white border border-stone-300 text-stone-900 hover:bg-stone-50"
-                                    }`}
-                            >
-                                {offer.cta}
-                                <ArrowRight className="w-4 h-4" />
-                            </a>
+                                        }`}
+                                >
+                                    {offer.cta}
+                                    <ArrowRight className="w-4 h-4" />
+                                </a>
+                            </div>
                         </div>
                     ))}
                 </div>
