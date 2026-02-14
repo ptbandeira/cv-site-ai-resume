@@ -87,8 +87,27 @@ const DataTransformation = () => {
         <section className="py-24 px-6">
             <div className="max-w-5xl mx-auto">
                 <div className="mb-12">
-                    <h2 className="text-4xl md:text-5xl font-serif text-foreground mb-4">
-                        Excel to Insight
+                    {/* Context Block */}
+                    <div className="p-4 bg-stone-100/50 rounded-lg border border-stone-200 mb-8 max-w-3xl">
+                        <div className="flex flex-col md:flex-row md:items-center gap-4 text-sm">
+                            <div className="flex-1">
+                                <span className="font-mono text-xs uppercase text-stone-500 font-bold block mb-1">Why this exists</span>
+                                <p className="text-stone-700 font-medium leading-relaxed">
+                                    “The valuable part isn’t code. It’s the operating logic and controls around it.”
+                                </p>
+                            </div>
+                            <div className="md:border-l md:border-stone-300 md:pl-4 min-w-[200px]">
+                                <span className="font-mono text-xs uppercase text-stone-500 font-bold block mb-1">Mapped Offer</span>
+                                <div className="flex items-center gap-2 text-primary font-semibold">
+                                    <FileSpreadsheet className="w-3.5 h-3.5" />
+                                    <span>Sovereign AI Architecture</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-4">
+                        Road to Insight: Code & Logic
                     </h2>
                     <p className="text-muted-foreground text-lg max-w-2xl">
                         Raw data becomes structured intelligence. Watch JSON transform into

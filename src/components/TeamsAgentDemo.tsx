@@ -25,10 +25,34 @@ const TeamsAgentDemo = () => {
     return (
         <section className="py-20 px-6">
             <div className="max-w-4xl mx-auto">
+// ─── PROOF SECTION START ───
                 <div className="mb-12">
-                    <h2 className="text-4xl md:text-5xl font-serif text-foreground mb-4">
-                        Agentic Workflow Simulator
+                    <h2 className="text-3xl md:text-5xl font-serif text-stone-900 mb-6">
+                        Proof: Reality Testing in Public
                     </h2>
+
+                    {/* Context Block */}
+                    <div className="p-4 bg-stone-100/50 rounded-lg border border-stone-200 mb-8 max-w-3xl">
+                        <div className="flex flex-col md:flex-row md:items-center gap-4 text-sm">
+                            <div className="flex-1">
+                                <span className="font-mono text-xs uppercase text-stone-500 font-bold block mb-1">Why this exists</span>
+                                <p className="text-stone-700 font-medium leading-relaxed">
+                                    “Executives don’t need more demos. They need to see where AI breaks before it hits customers.”
+                                </p>
+                            </div>
+                            <div className="md:border-l md:border-stone-300 md:pl-4 min-w-[200px]">
+                                <span className="font-mono text-xs uppercase text-stone-500 font-bold block mb-1">Mapped Offer</span>
+                                <div className="flex items-center gap-2 text-primary font-semibold">
+                                    <Sparkles className="w-3.5 h-3.5" />
+                                    <span>48‑Hour Reality Test</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 className="text-2xl font-serif text-stone-800 mb-2">
+                        Agentic Workflow Simulator
+                    </h3>
                     <p className="text-muted-foreground text-lg max-w-2xl">
                         See how AgenticOS runs a morning briefing — live. No mock data. Real agent reasoning.
                     </p>
