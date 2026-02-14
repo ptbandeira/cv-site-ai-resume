@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import FitAssessment from "./components/FitAssessment";
 import PulseIndex from "./pages/PulseIndex";
 import PulseDetail from "./pages/PulseDetail";
+import PressKit from "./pages/PressKit";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,7 @@ const App = () => (
           } />
           <Route path="/pulse" element={<PulseIndex />} />
           <Route path="/pulse/:slug" element={<PulseDetail />} />
+          <Route path="/press" element={<PressKit />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

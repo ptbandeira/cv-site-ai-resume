@@ -1,4 +1,5 @@
 import { Github, Linkedin, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = ({ onOpenChat }: { onOpenChat?: () => void }) => {
   return (
@@ -65,7 +66,7 @@ const Footer = ({ onOpenChat }: { onOpenChat?: () => void }) => {
 
           <div className="space-y-2">
             <p className="text-sm text-muted-foreground">
-              © 2026 Analog AI. Built with Sovereign Architecture.
+              © 2026 Analog AI. Built with Sovereign Architecture. • <Link to="/press" className="hover:text-primary transition-colors">Press Kit</Link>
             </p>
             <p className="text-xs font-mono text-[#555555] leading-relaxed max-w-xl mx-auto">
               Pedro Bandeira: Senior AI Operations Architect. Specializing in Human-in-the-Loop
