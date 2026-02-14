@@ -2,12 +2,13 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import FilterSection from "@/components/FilterSection";
+import OfferMenu from "@/components/OfferMenu";
 import MiniAppSandbox from "@/components/MiniAppSandbox";
 import Experience from "@/components/Experience";
 import FitAssessment from "@/components/FitAssessment";
 import SaasVsBuild from "@/components/SaasVsBuild";
 import AutomationAuditor from "@/components/AutomationAuditor";
-import AnalogAdvantage from "@/components/AnalogAdvantage";
+// import AnalogAdvantage from "@/components/AnalogAdvantage";
 import InsightPulse from "@/components/InsightPulse";
 import TeamsAgentDemo from "@/components/TeamsAgentDemo";
 import DataTransformation from "@/components/DataTransformation";
@@ -28,7 +29,8 @@ const Index = () => {
       <main>
         <Hero onOpenChat={openChat} />
         <FilterSection />
-        <AnalogAdvantage onOpenChat={openChat} />
+        <OfferMenu />
+        {/* <AnalogAdvantage onOpenChat={openChat} /> */}
         <TeamsAgentDemo />
         <DataTransformation />
         <div id="resource-audit">
