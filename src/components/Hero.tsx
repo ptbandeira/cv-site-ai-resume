@@ -32,27 +32,45 @@ const Hero = ({ onOpenChat }: HeroProps) => {
         </h1>
 
         {/* Subtitle — Mono, graphite */}
-        <p className="font-sans text-lg leading-relaxed text-stone-800 max-w-2xl animate-slide-up stagger-1">
-          The bottleneck isn't technology; it's trust. I architect{" "}
-          <strong className="font-semibold text-foreground">Sovereign AI Systems</strong> that
-          integrate with your existing operations—whether that's complex
-          logistics, regulated healthcare, or high-volume sales. No black boxes.
-          Just business logic, automated.
+        <p className="font-mono text-lg md:text-xl text-stone-600 max-w-2xl animate-slide-up stagger-1 mt-6">
+          Adult supervision for AI in regulated, high-stakes businesses.
         </p>
 
+        <div className="space-y-6 animate-slide-up stagger-2">
+          <p className="font-sans text-lg leading-relaxed text-stone-800 max-w-2xl">
+            I help senior leaders turn AI hype into governed, private, auditable workflows.
+            Tools change weekly. Architecture, risk, and accountability don’t.
+          </p>
+
+          <ul className="space-y-3 font-sans text-base text-stone-700">
+            <li className="flex items-center gap-3">
+              <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-primary" />
+              <span>Stop the SaaS tax and pilot sprawl</span>
+            </li>
+            <li className="flex items-center gap-3">
+              <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-primary" />
+              <span>Ship deterministic workflows with human-in-the-loop control</span>
+            </li>
+            <li className="flex items-center gap-3">
+              <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-primary" />
+              <span>Keep sensitive data inside your perimeter (when required)</span>
+            </li>
+          </ul>
+        </div>
+
         {/* CTA Buttons */}
-        <nav className="flex flex-col sm:flex-row items-center gap-4 pt-4 animate-slide-up stagger-2" aria-label="Hero Actions">
+        <nav className="flex flex-col sm:flex-row items-center gap-4 pt-4 animate-slide-up stagger-3" aria-label="Hero Actions">
           <a
             href="#fit-assessment"
             className="px-8 py-4 bg-primary text-primary-foreground rounded-sm font-medium text-lg transition-all hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5 min-w-[200px] text-center"
           >
-            Initialize Fit Check
+            Start with a Reality Test
           </a>
           <a
             href="#architecture"
             className="px-8 py-4 bg-white text-foreground border border-stone-200 rounded-sm font-medium text-lg transition-all hover:bg-secondary hover:border-stone-300 min-w-[200px] text-center"
           >
-            View Architecture
+            See how I work
           </a>
         </nav>
 
