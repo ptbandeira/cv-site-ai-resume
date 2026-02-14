@@ -4,35 +4,43 @@ const Footer = ({ onOpenChat }: { onOpenChat?: () => void }) => {
   return (
     <footer id="contact" className="py-16 px-6 border-t border-border">
       <div className="max-w-4xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="grid md:grid-cols-2 gap-12 mb-16">
+          {/* Left Column */}
           <div>
-            <p className="text-2xl font-serif text-foreground mb-1">Analog AI</p>
-            <p className="text-sm font-mono text-muted-foreground">by Pedro Bandeira</p>
+            <h2 className="text-3xl font-serif text-foreground mb-6">Contact</h2>
+            <div className="space-y-4">
+              <p className="text-lg text-stone-600 leading-relaxed">
+                Based in Warsaw. Remote across Europe (EU/UK time zones).
+              </p>
+              <p className="text-sm font-mono text-muted-foreground uppercase tracking-wide">
+                Languages: EN / PT / ES / FR
+              </p>
+            </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            <a
-              href="https://github.com/ptbandeira"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 bg-secondary rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-            >
-              <Github className="w-5 h-5" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/ptbandeira/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 bg-secondary rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-            >
-              <Linkedin className="w-5 h-5" />
-            </a>
-            <a
-              href="mailto:contact@pedrobandeira.ai"
-              className="p-3 bg-secondary rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-            >
-              <Mail className="w-5 h-5" />
-            </a>
+          {/* Right Column */}
+          <div className="flex flex-col items-start gap-4">
+            <div className="flex flex-wrap gap-4 w-full sm:w-auto">
+              <a
+                href="mailto:pedrobandeira@me.com"
+                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-[#1A1A1A] text-white rounded-xl font-medium hover:bg-stone-800 transition-all hover:scale-[1.02] shadow-sm"
+              >
+                <Mail className="w-4 h-4" />
+                Email Me
+              </a>
+              <a
+                href="https://www.linkedin.com/in/pedro-bandeira-6315346/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-white border border-stone-200 text-stone-700 rounded-xl font-medium hover:bg-stone-50 hover:border-stone-300 transition-all"
+              >
+                <Linkedin className="w-4 h-4" />
+                LinkedIn
+              </a>
+            </div>
+            <p className="text-sm text-muted-foreground mt-2">
+              If you’re serious, start with a Reality Test.
+            </p>
           </div>
         </div>
 
