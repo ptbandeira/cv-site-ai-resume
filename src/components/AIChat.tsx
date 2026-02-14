@@ -7,12 +7,12 @@ interface AIChatProps {
   onClose: () => void;
 }
 
-type Step = "industry" | "sensitivity" | "need" | "result";
+type Step = "industry" | "sensitivity" | "goal" | "result";
 
 interface TriageState {
   industry: string;
   sensitivity: string;
-  need: string;
+  goal: string;
 }
 
 const AIChat = ({ isOpen, onClose }: AIChatProps) => {
@@ -25,7 +25,7 @@ const TriageContent = ({ isOpen, onClose }: AIChatProps) => {
   const [state, setState] = useState<TriageState>({
     industry: "",
     sensitivity: "",
-    need: "",
+    goal: "",
   });
 
   const handleSelect = (key: keyof TriageState, value: string, nextStep: Step) => {
@@ -35,7 +35,7 @@ const TriageContent = ({ isOpen, onClose }: AIChatProps) => {
 
   const reset = () => {
     setStep("industry");
-    setState({ industry: "", sensitivity: "", need: "" });
+    setState({ industry: "", sensitivity: "", goal: "" });
   };
 
   const scrollToContact = () => {
@@ -46,50 +46,69 @@ const TriageContent = ({ isOpen, onClose }: AIChatProps) => {
     }
   };
 
-  const getRecommendation = () => {
-    switch (state.need) {
-      case "Clarity fast":
-        return {
-          title: "48-Hour Reality Test",
-          description: "Executives don't need more demos. They need to see where AI breaks before it hits customers.",
-          bullets: [
-            "Validate your idea with a working MVP in 2 days",
-            "Identify hallucinations and risks early",
-            "Get a clear Build/Buy/Kill decision memo"
-          ]
-        };
-      case "Safe architecture":
-        return {
-          title: "Sovereign AI Architecture",
-          description: "The valuable part isn't code. It's the operating logic and controls around it.",
-          bullets: [
-            "Local-first models for full data privacy",
-            "Audit trails for every AI decision",
-            "Vendor-neutral design (no lock-in)"
-          ]
-        };
-      case "Leadership":
-        return {
-          title: "Fractional Chief AI Operator",
-          description: "AI only matters if it changes cost, cycle time, or risk exposure.",
-          bullets: [
-            "Boardroom-ready strategy & reporting",
-            "Pilot-to-production execution playbook",
-            "Training & governance for your team"
-          ]
-        };
-      default:
-        // Fallback
-        return {
-          title: "48-Hour Reality Test",
-          description: "Start with a rapid validation sprint.",
-          bullets: [
-            "Validate your idea with a working MVP",
-            "Identify risks early",
-            "Get a clear decision memo"
-          ]
-        };
+  const scrollToRealityTest = () => {
+    onClose();
+    const fitSection = document.getElementById("fit-assessment");
+    if (fitSection) {
+      fitSection.scrollIntoView({ behavior: "smooth" });
     }
+  }
+
+  const getRecommendation = () => {
+    // LOGIC:
+    // 1. Reality Test: "Stop pilot sprawl" OR Industry="Other" OR Sensitivity="Public"
+    // 2. Sovereign Architecture: "Keep data inside perimeter"
+    // 3. Executive Triage: Everything else (Exec reporting, Regulated/Pharma/Law/Finance)
+
+    // Check for Reality Test Triggers
+    if (
+      state.goal === "Stop pilot sprawl" ||
+      state.industry === "Other" ||
+      state.sensitivity === "Public"
+    ) {
+      return {
+        title: "48-Hour Reality Test",
+        description: "You need validation before scale. Don't build a cathedral when a tent will do.",
+        bullets: [
+          "Validate your use-case with a working MVP in 2 days",
+          "Fail fast and cheap if the idea doesn't work",
+          "Get a clear Build/Buy/Kill decision memo"
+        ],
+        cta: "Request Reality Test",
+        action: scrollToRealityTest,
+        isUrgent: false
+      };
+    }
+
+    // Check for Sovereign Architecture Trigger
+    if (state.goal === "Keep data inside perimeter") {
+      return {
+        title: "Sovereign AI Architecture",
+        description: "Your IP is the asset. Don't leak it to public models.",
+        bullets: [
+          "Local-first models (Llama 4 / DeepSeek) on your metal",
+          "Full data sovereignty - no API calls leaving your VPC",
+          "Audit trails for every agentic decision"
+        ],
+        cta: "Book Executive Triage",
+        action: scrollToContact,
+        isUrgent: true
+      };
+    }
+
+    // Default to Executive Triage (Strategy/Governance)
+    return {
+      title: "Executive Strategy Triage",
+      description: "You're dealing with high stakes. You need governance, not just code.",
+      bullets: [
+        "Boardroom-ready AI strategy & reporting",
+        "Human-in-the-Loop governance frameworks",
+        "Pilot-to-production execution playbook"
+      ],
+      cta: "Book Executive Triage",
+      action: scrollToContact,
+      isUrgent: true
+    };
   };
 
   const recommendation = getRecommendation();
@@ -150,17 +169,17 @@ const TriageContent = ({ isOpen, onClose }: AIChatProps) => {
             <div className="animate-fade-in space-y-6 flex-1">
               <div>
                 <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Step 2 of 3</span>
-                <h3 className="text-2xl font-serif text-foreground mt-1">How sensitive is your data?</h3>
+                <h3 className="text-2xl font-serif text-foreground mt-1">Data sensitivity?</h3>
               </div>
               <div className="grid gap-3">
                 {[
-                  { label: "Public", sub: "Websites, Marketing, SEO" },
-                  { label: "Internal", sub: "Operations, Slack, Knowledge Base" },
-                  { label: "Regulated", sub: "Patient Data, Contracts, Financials" }
+                  { label: "Public", sub: "Marketing, SEO, Website" },
+                  { label: "Internal", sub: "Knowledge Base, Slack, Ops" },
+                  { label: "Regulated", sub: "Patient Data, Contracts, PII" }
                 ].map((opt) => (
                   <button
                     key={opt.label}
-                    onClick={() => handleSelect("sensitivity", opt.label, "need")}
+                    onClick={() => handleSelect("sensitivity", opt.label, "goal")}
                     className="flex items-center justify-between p-4 rounded-xl border border-stone-200 bg-white hover:border-primary/50 hover:bg-stone-50 transition-all group text-left"
                   >
                     <div>
@@ -174,22 +193,22 @@ const TriageContent = ({ isOpen, onClose }: AIChatProps) => {
             </div>
           )}
 
-          {/* STEP 3: NEED */}
-          {step === "need" && (
+          {/* STEP 3: GOAL */}
+          {step === "goal" && (
             <div className="animate-fade-in space-y-6 flex-1">
               <div>
                 <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Step 3 of 3</span>
-                <h3 className="text-2xl font-serif text-foreground mt-1">What do you need right now?</h3>
+                <h3 className="text-2xl font-serif text-foreground mt-1">What's the main goal?</h3>
               </div>
               <div className="grid gap-3">
                 {[
-                  { label: "Clarity fast", sub: "Stop wasting time" },
-                  { label: "Safe architecture", sub: "Data privacy + auditability" },
-                  { label: "Leadership", sub: "Program management + execution" }
+                  { label: "Stop pilot sprawl", sub: "Too many toys, no value" },
+                  { label: "Keep data inside perimeter", sub: "Security & Sovereignty" },
+                  { label: "Exec reporting + governance", sub: "Strategy & Board Buy-in" }
                 ].map((opt) => (
                   <button
                     key={opt.label}
-                    onClick={() => handleSelect("need", opt.label, "result")}
+                    onClick={() => handleSelect("goal", opt.label, "result")}
                     className="flex items-center justify-between p-4 rounded-xl border border-stone-200 bg-white hover:border-primary/50 hover:bg-stone-50 transition-all group text-left"
                   >
                     <div>
@@ -225,10 +244,13 @@ const TriageContent = ({ isOpen, onClose }: AIChatProps) => {
 
               <div className="mt-auto space-y-3">
                 <button
-                  onClick={scrollToContact}
-                  className="w-full flex items-center justify-center gap-2 py-4 bg-[#1A1A1A] text-white rounded-xl font-medium hover:bg-stone-800 transition-all hover:scale-[1.02] shadow-xl shadow-stone-200"
+                  onClick={recommendation.action}
+                  className={cn(
+                    "w-full flex items-center justify-center gap-2 py-4 text-white rounded-xl font-medium transition-all hover:scale-[1.02] shadow-xl shadow-stone-200",
+                    recommendation.isUrgent ? "bg-[#1A1A1A] hover:bg-stone-800" : "bg-primary hover:bg-primary/90"
+                  )}
                 >
-                  Send this to Pedro <ArrowRight className="w-4 h-4" />
+                  {recommendation.cta} <ArrowRight className="w-4 h-4" />
                 </button>
 
                 <button
@@ -246,14 +268,8 @@ const TriageContent = ({ isOpen, onClose }: AIChatProps) => {
         <div className="p-4 bg-stone-50 border-t border-border text-center space-y-2">
           <p className="text-[10px] text-muted-foreground flex items-center justify-center gap-1.5">
             <AlertTriangle className="w-3 h-3 opacity-50" />
-            No legal advice. No medical advice. This is triage for scoping work.
+            This tool does not provide legal advice. Don’t paste client confidential data.
           </p>
-          <div className="text-[10px] text-muted-foreground opacity-80 flex flex-col gap-0.5">
-            <span className="font-medium text-stone-600">Privacy:</span>
-            <span>• Don’t paste confidential client data.</span>
-            <span>• Text is used only to generate your response.</span>
-            <span>• If storage is enabled, it’s opt-in and stated explicitly.</span>
-          </div>
         </div>
 
       </div>
