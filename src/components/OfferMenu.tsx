@@ -14,7 +14,8 @@ const OfferMenu = () => {
             cta: "Request a Reality Test",
             href: "mailto:pedrobandeira@me.com?subject=Request a Reality Test",
             highlight: true,
-            price: "Starting at €5k ex VAT"
+            price: "Starting at €5k ex VAT",
+            scope: "Scope: one workflow, one team, one decision memo."
         },
         {
             title: "Sovereign AI Architecture",
@@ -28,7 +29,8 @@ const OfferMenu = () => {
             cta: "Discuss Architecture",
             href: "mailto:pedrobandeira@me.com?subject=Discuss Architecture",
             highlight: false,
-            price: "Starting at €15k ex VAT"
+            price: "Starting at €15k ex VAT",
+            scope: "Scope: one domain + reference architecture + governance design."
         },
         {
             title: "Fractional Chief AI Operator",
@@ -42,7 +44,8 @@ const OfferMenu = () => {
             cta: "Explore a Fractional Role",
             href: "mailto:pedrobandeira@me.com?subject=Explore Fractional Role",
             highlight: false,
-            price: "€8k/mo (1 day/wk) · €15k/mo (2 days/wk) ex VAT"
+            price: "€8k/mo (1 day/wk) · €15k/mo (2 days/wk) ex VAT",
+            scope: "Includes: weekly exec cadence + delivery management + risk reporting."
         }
     ];
 
@@ -115,8 +118,11 @@ const OfferMenu = () => {
                             </ul>
 
                             <div className="mt-auto">
-                                <p className="text-xs text-stone-500 font-mono mb-3 text-center opacity-80">
+                                <p className="text-xs text-stone-500 font-mono mb-1 text-center opacity-80">
                                     {offer.price}
+                                </p>
+                                <p className="text-[10px] text-stone-400 font-sans mb-4 text-center max-w-[90%] mx-auto leading-tight">
+                                    {offer.scope}
                                 </p>
                                 <a
                                     href={offer.href}
