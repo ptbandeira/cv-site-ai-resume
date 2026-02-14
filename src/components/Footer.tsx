@@ -2,7 +2,7 @@ import { Github, Linkedin, Mail } from "lucide-react";
 
 const Footer = ({ onOpenChat }: { onOpenChat?: () => void }) => {
   return (
-    <footer className="py-16 px-6 border-t border-border">
+    <footer id="contact" className="py-16 px-6 border-t border-border">
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           <div>

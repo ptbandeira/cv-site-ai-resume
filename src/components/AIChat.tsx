@@ -1,99 +1,114 @@
-import { useState, useEffect, useRef } from "react";
-import { X, Send, Sparkles } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { X, ArrowRight, CheckCircle2, AlertTriangle, ChevronRight, RefreshCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useChat } from "@ai-sdk/react";
-import { DefaultChatTransport } from "ai";
-import { BRIDGE_ARCHITECT_PERSONA } from "@/lib/persona";
 
 interface AIChatProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const suggestedQuestions = [
-  "What is the Bridge Interface?",
-  "Tell me about AgenticOS.",
-  "Do you have experience with Law Firms?",
-  "What freelance services do you offer?",
-];
+type Step = "industry" | "sensitivity" | "need" | "result";
 
-/** Extract plain text from a UIMessage's parts array */
-function getMessageText(msg: { parts?: Array<{ type: string; text?: string }> }): string {
-  if (!msg.parts) return "";
-  return msg.parts
-    .filter((p) => p.type === "text" && p.text)
-    .map((p) => p.text)
-    .join("");
+interface TriageState {
+  industry: string;
+  sensitivity: string;
+  need: string;
 }
 
 const AIChat = ({ isOpen, onClose }: AIChatProps) => {
   if (!isOpen) return null;
-  return <AIChatContent isOpen={isOpen} onClose={onClose} />;
+  return <TriageContent isOpen={isOpen} onClose={onClose} />;
 };
 
-const AIChatContent = ({ isOpen, onClose }: AIChatProps) => {
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const [input, setInput] = useState("");
-
-  const chatApiUrl = import.meta.env.VITE_CHAT_API_URL || "/api/chat";
-
-  const { messages, sendMessage, status, setMessages } = useChat({
-    transport: new DefaultChatTransport({
-      api: chatApiUrl,
-      headers: import.meta.env.VITE_SUPABASE_ANON_KEY
-        ? { Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}` }
-        : undefined,
-    }),
-    messages: [
-      {
-        id: "system-1",
-        role: "system" as const,
-        parts: [{ type: "text" as const, text: BRIDGE_ARCHITECT_PERSONA }],
-      },
-    ],
+const TriageContent = ({ isOpen, onClose }: AIChatProps) => {
+  const [step, setStep] = useState<Step>("industry");
+  const [state, setState] = useState<TriageState>({
+    industry: "",
+    sensitivity: "",
+    need: "",
   });
 
-  const isLoading = status === "streaming" || status === "submitted";
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-
-  const handleSubmit = (e?: React.FormEvent) => {
-    e?.preventDefault();
-    if (!input.trim() || isLoading) return;
-    sendMessage({ text: input });
-    setInput(0 as unknown as string); // force re-render
-    setInput("");
+  const handleSelect = (key: keyof TriageState, value: string, nextStep: Step) => {
+    setState((prev) => ({ ...prev, [key]: value }));
+    setTimeout(() => setStep(nextStep), 250); // Small delay for "click feel"
   };
 
-  const onSuggestedClick = (text: string) => {
-    sendMessage({ text });
+  const reset = () => {
+    setStep("industry");
+    setState({ industry: "", sensitivity: "", need: "" });
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
+  const scrollToContact = () => {
+    onClose();
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
-  if (!isOpen) return null;
+  const getRecommendation = () => {
+    switch (state.need) {
+      case "Clarity fast":
+        return {
+          title: "48-Hour Reality Test",
+          description: "Executives don't need more demos. They need to see where AI breaks before it hits customers.",
+          bullets: [
+            "Validate your idea with a working MVP in 2 days",
+            "Identify hallucinations and risks early",
+            "Get a clear Build/Buy/Kill decision memo"
+          ]
+        };
+      case "Safe architecture":
+        return {
+          title: "Sovereign AI Architecture",
+          description: "The valuable part isn't code. It's the operating logic and controls around it.",
+          bullets: [
+            "Local-first models for full data privacy",
+            "Audit trails for every AI decision",
+            "Vendor-neutral design (no lock-in)"
+          ]
+        };
+      case "Leadership":
+        return {
+          title: "Fractional Chief AI Operator",
+          description: "AI only matters if it changes cost, cycle time, or risk exposure.",
+          bullets: [
+            "Boardroom-ready strategy & reporting",
+            "Pilot-to-production execution playbook",
+            "Training & governance for your team"
+          ]
+        };
+      default:
+        // Fallback
+        return {
+          title: "48-Hour Reality Test",
+          description: "Start with a rapid validation sprint.",
+          bullets: [
+            "Validate your idea with a working MVP",
+            "Identify risks early",
+            "Get a clear decision memo"
+          ]
+        };
+    }
+  };
+
+  const recommendation = getRecommendation();
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm animate-fade-in">
-      <div className="w-full max-w-2xl h-[80vh] bg-card border border-border rounded-2xl flex flex-col overflow-hidden shadow-2xl animate-slide-up">
+      <div className="w-full max-w-lg bg-card border border-border rounded-2xl flex flex-col shadow-2xl animate-slide-up overflow-hidden">
+
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-border">
+        <div className="flex items-center justify-between p-5 border-b border-border bg-secondary/30">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-primary flex items-center justify-center text-accent-foreground font-serif font-bold">
-              M
+            <div className="w-10 h-10 rounded-full bg-stone-900 flex items-center justify-center text-white font-serif font-bold border border-stone-700">
+              P
             </div>
             <div>
-              <p className="text-foreground font-medium">Bridge Architect</p>
+              <p className="text-foreground font-medium">Talk to ‘AI Pedro’</p>
               <p className="text-xs text-muted-foreground flex items-center gap-1">
-                <span
-                  className={`w-2 h-2 rounded-full ${isLoading ? "bg-amber-400 animate-pulse" : "bg-success"
-                    }`}
-                />
-                {isLoading ? "Thinking..." : "Connected"}
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                Guided Triage
               </p>
             </div>
           </div>
@@ -105,96 +120,136 @@ const AIChatContent = ({ isOpen, onClose }: AIChatProps) => {
           </button>
         </div>
 
-        {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
-          {messages.length <= 1 && (
-            <div className="h-full flex flex-col items-center justify-center text-center px-6">
-              <Sparkles className="w-12 h-12 text-accent mb-4" />
-              <h3 className="text-xl font-serif text-foreground mb-2">
-                System Interface Active
-              </h3>
-              <p className="text-muted-foreground text-sm mb-6 max-w-md">
-                I am the Bridge Architect. Accessing Pedro's neural context. How
-                can I assist you?
-              </p>
-              <div className="w-full max-w-md space-y-2">
-                {suggestedQuestions.map((q, i) => (
+        {/* Content Area */}
+        <div className="p-6 min-h-[400px] flex flex-col">
+
+          {/* STEP 1: INDUSTRY */}
+          {step === "industry" && (
+            <div className="animate-fade-in space-y-6 flex-1">
+              <div>
+                <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Step 1 of 3</span>
+                <h3 className="text-2xl font-serif text-foreground mt-1">What’s your industry?</h3>
+              </div>
+              <div className="grid gap-3">
+                {["Pharma", "Law", "Logistics", "Finance", "Other"].map((opt) => (
                   <button
-                    key={i}
-                    onClick={() => onSuggestedClick(q)}
-                    className="w-full text-left p-3 bg-secondary rounded-xl text-sm text-foreground hover:bg-muted transition-colors border border-transparent hover:border-accent/30"
+                    key={opt}
+                    onClick={() => handleSelect("industry", opt, "sensitivity")}
+                    className="flex items-center justify-between p-4 rounded-xl border border-stone-200 bg-white hover:border-primary/50 hover:bg-stone-50 transition-all group text-left"
                   >
-                    "{q}"
+                    <span className="font-medium text-stone-700">{opt}</span>
+                    <ChevronRight className="w-4 h-4 text-stone-400 group-hover:text-primary" />
                   </button>
                 ))}
               </div>
             </div>
           )}
 
-          {messages
-            .filter((m) => m.role !== "system")
-            .map((msg, i) => {
-              const text = getMessageText(msg);
-              if (!text) return null;
-              return (
-                <div
-                  key={i}
-                  className={cn(
-                    "flex",
-                    msg.role === "user" ? "justify-end" : "justify-start"
-                  )}
-                >
-                  <div
-                    className={cn(
-                      "max-w-[85%] rounded-2xl px-4 py-3",
-                      msg.role === "user"
-                        ? "bg-accent text-accent-foreground rounded-br-md"
-                        : "bg-secondary text-foreground rounded-bl-md"
-                    )}
-                  >
-                    <p className="text-sm whitespace-pre-wrap leading-relaxed">
-                      {text}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-
-          {/* Loading Indicator */}
-          {isLoading &&
-            messages[messages.length - 1]?.role === "user" && (
-              <div className="flex justify-start">
-                <div className="max-w-[85%] bg-secondary text-foreground rounded-2xl rounded-bl-md px-4 py-3">
-                  <p className="text-sm whitespace-pre-wrap leading-relaxed">
-                    <span className="inline-block w-2 h-4 bg-accent ml-1 animate-typing-cursor" />
-                  </p>
-                </div>
+          {/* STEP 2: SENSITIVITY */}
+          {step === "sensitivity" && (
+            <div className="animate-fade-in space-y-6 flex-1">
+              <div>
+                <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Step 2 of 3</span>
+                <h3 className="text-2xl font-serif text-foreground mt-1">How sensitive is your data?</h3>
               </div>
-            )}
+              <div className="grid gap-3">
+                {[
+                  { label: "Public", sub: "Websites, Marketing, SEO" },
+                  { label: "Internal", sub: "Operations, Slack, Knowledge Base" },
+                  { label: "Regulated", sub: "Patient Data, Contracts, Financials" }
+                ].map((opt) => (
+                  <button
+                    key={opt.label}
+                    onClick={() => handleSelect("sensitivity", opt.label, "need")}
+                    className="flex items-center justify-between p-4 rounded-xl border border-stone-200 bg-white hover:border-primary/50 hover:bg-stone-50 transition-all group text-left"
+                  >
+                    <div>
+                      <span className="font-medium text-stone-700 block">{opt.label}</span>
+                      <span className="text-xs text-muted-foreground">{opt.sub}</span>
+                    </div>
+                    <ChevronRight className="w-4 h-4 text-stone-400 group-hover:text-primary" />
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
-          <div ref={messagesEndRef} />
+          {/* STEP 3: NEED */}
+          {step === "need" && (
+            <div className="animate-fade-in space-y-6 flex-1">
+              <div>
+                <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Step 3 of 3</span>
+                <h3 className="text-2xl font-serif text-foreground mt-1">What do you need right now?</h3>
+              </div>
+              <div className="grid gap-3">
+                {[
+                  { label: "Clarity fast", sub: "Stop wasting time" },
+                  { label: "Safe architecture", sub: "Data privacy + auditability" },
+                  { label: "Leadership", sub: "Program management + execution" }
+                ].map((opt) => (
+                  <button
+                    key={opt.label}
+                    onClick={() => handleSelect("need", opt.label, "result")}
+                    className="flex items-center justify-between p-4 rounded-xl border border-stone-200 bg-white hover:border-primary/50 hover:bg-stone-50 transition-all group text-left"
+                  >
+                    <div>
+                      <span className="font-medium text-stone-700 block">{opt.label}</span>
+                      <span className="text-xs text-muted-foreground">{opt.sub}</span>
+                    </div>
+                    <ChevronRight className="w-4 h-4 text-stone-400 group-hover:text-primary" />
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* STEP 4: RESULT */}
+          {step === "result" && (
+            <div className="animate-fade-in flex flex-col flex-1 h-full">
+              <div className="mb-6">
+                <span className="text-xs font-mono text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md uppercase tracking-wider font-medium">Recommendation</span>
+                <h3 className="text-3xl font-serif text-foreground mt-3 mb-2">{recommendation.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{recommendation.description}</p>
+              </div>
+
+              <div className="bg-stone-50 border border-stone-100 rounded-xl p-5 mb-8">
+                <ul className="space-y-3">
+                  {recommendation.bullets.map((bullet, i) => (
+                    <li key={i} className="flex items-start gap-2.5">
+                      <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                      <span className="text-stone-700 font-medium text-sm">{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mt-auto space-y-3">
+                <button
+                  onClick={scrollToContact}
+                  className="w-full flex items-center justify-center gap-2 py-4 bg-[#1A1A1A] text-white rounded-xl font-medium hover:bg-stone-800 transition-all hover:scale-[1.02] shadow-xl shadow-stone-200"
+                >
+                  Send this to Pedro <ArrowRight className="w-4 h-4" />
+                </button>
+
+                <button
+                  onClick={reset}
+                  className="w-full flex items-center justify-center gap-2 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <RefreshCcw className="w-3.5 h-3.5" /> Start Over
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
-        {/* Input */}
-        <div className="p-4 border-t border-border">
-          <form onSubmit={handleSubmit} className="flex gap-3">
-            <input
-              type="text"
-              value={input}
-              onChange={handleInputChange}
-              placeholder="Query the architecture..."
-              disabled={isLoading}
-              className="flex-1 bg-secondary rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground border border-border focus:border-accent focus:outline-none transition-colors disabled:opacity-50"
-            />
-            <button
-              type="submit"
-              disabled={!input.trim() || isLoading}
-              className="px-4 py-3 bg-accent text-accent-foreground rounded-xl font-medium disabled:opacity-50 hover:opacity-90 transition-opacity"
-            >
-              <Send className="w-5 h-5" />
-            </button>
-          </form>
+        {/* Disclaimer */}
+        <div className="p-4 bg-stone-50 border-t border-border text-center">
+          <p className="text-[10px] text-muted-foreground flex items-center justify-center gap-1.5">
+            <AlertTriangle className="w-3 h-3 opacity-50" />
+            No legal advice. No medical advice. This is triage for scoping work.
+          </p>
         </div>
+
       </div>
     </div>
   );
