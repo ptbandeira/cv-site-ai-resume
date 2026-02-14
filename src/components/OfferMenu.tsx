@@ -49,6 +49,50 @@ const OfferMenu = () => {
     return (
         <section id="offer-menu" className="py-24 bg-stone-50">
             <div className="container mx-auto px-6 max-w-7xl">
+                <div className="max-w-3xl mx-auto mb-16">
+                    <div className="flex flex-col md:flex-row p-8 rounded-xl border border-primary/20 bg-white shadow-xl shadow-primary/5 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <CheckCircle2 className="w-32 h-32 text-primary" />
+                        </div>
+
+                        <div className="flex-1 pr-6 relative z-10">
+                            <div className="inline-block px-3 py-1 mb-4 text-xs font-mono font-bold tracking-wider text-primary uppercase bg-primary/10 rounded-full">
+                                New • First Step
+                            </div>
+                            <h3 className="font-serif text-3xl text-stone-900 mb-4">Executive Triage <span className="text-lg text-stone-500 font-sans font-normal">(90 minutes)</span></h3>
+                            <p className="text-stone-600 mb-6 text-lg">Fast clarity for leaders who are stuck in pilot sprawl.</p>
+
+                            <ul className="space-y-3 mb-8">
+                                <li className="flex items-start gap-3 text-stone-700">
+                                    <CheckCircle2 className="w-5 h-5 text-primary/80 flex-shrink-0 mt-0.5" />
+                                    <span><strong>1-page decision memo:</strong> Stop / Start / Scale</span>
+                                </li>
+                                <li className="flex items-start gap-3 text-stone-700">
+                                    <CheckCircle2 className="w-5 h-5 text-primary/80 flex-shrink-0 mt-0.5" />
+                                    <span><strong>Risk map:</strong> data, auditability, ownership, hallucinations</span>
+                                </li>
+                                <li className="flex items-start gap-3 text-stone-700">
+                                    <CheckCircle2 className="w-5 h-5 text-primary/80 flex-shrink-0 mt-0.5" />
+                                    <span><strong>Next step:</strong> Reality Test or Architecture plan</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div className="flex flex-col justify-end min-w-[240px] border-l border-stone-100 pl-8 md:pl-8 relative z-10 mt-6 md:mt-0 pt-6 md:pt-0 border-t md:border-t-0">
+                            <p className="text-sm text-stone-500 font-mono mb-4 text-center">
+                                €950 ex VAT (fixed)
+                            </p>
+                            <a
+                                href="mailto:pedrobandeira@me.com?subject=Book Executive Triage"
+                                className="flex items-center justify-center gap-2 py-4 px-6 rounded-lg font-medium transition-all bg-[#F25D27] text-white hover:bg-[#d14d1e] shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40"
+                            >
+                                Book Executive Triage
+                                <ArrowRight className="w-4 h-4" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {offers.map((offer, index) => (
                         <div
