@@ -54,13 +54,13 @@ const Experience = () => {
       perspective2026: "Predictive sales agents now handle the forecasting I used to do in Excel until 2 AM."
     },
     {
-      challenge: "Scaling Regulated Retail: From 1 to 10 Units",
+      challenge: "Scaling Regulated Retail: From 1 to 18 Units",
       role: "General Manager — Grupa Moja Farmacja",
       period: "2011 - 2014",
       highlights: [
         "Managed P&L and operational growth for a pharmacy chain.",
         "Oversaw logistics, supply chain, and regulatory compliance.",
-        "Led teams through rapid expansion from 1 to 10+ units."
+        "Led teams through rapid expansion from 1 to 18 units, scaling headcount from 5 to 120."
       ],
       aiContext: {
         situation: "High-stakes inventory and compliance management.",
