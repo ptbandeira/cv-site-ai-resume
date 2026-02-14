@@ -42,7 +42,7 @@ const OfferMenu = () => {
             cta: "Explore a Fractional Role",
             href: "mailto:pedrobandeira@me.com?subject=Explore Fractional Role",
             highlight: false,
-            price: "Retainers from €8k/mo ex VAT"
+            price: "€8k/mo (1 day/wk) · €15k/mo (2 days/wk) ex VAT"
         }
     ];
 
