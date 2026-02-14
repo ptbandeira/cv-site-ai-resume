@@ -56,6 +56,10 @@ const Hero = ({ onOpenChat }: HeroProps) => {
               <span>Keep sensitive data inside your perimeter (when required)</span>
             </li>
           </ul>
+
+          <p className="text-sm font-mono text-stone-500 pt-2">
+            Relevant roles: Head of AI Operations, AI Program Director, AI Governance Lead, Fractional CAIO / AI COO, AI Transformation Lead.
+          </p>
         </div>
 
         {/* CTA Buttons */}
