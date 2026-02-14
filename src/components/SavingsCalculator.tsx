@@ -50,23 +50,31 @@ const SavingsCalculator = () => {
     const [activePreset, setActivePreset] = useState<string>("legal");
     const [employees, setEmployees] = useState(15);
     const [hoursPerWeek, setHoursPerWeek] = useState(10);
+    const [captureRate, setCaptureRate] = useState(35); // Default 35% BS reduction
 
     const preset = presets.find((p) => p.id === activePreset)!;
-    const weeklyCost = employees * hoursPerWeek * preset.costPerHour;
-    const annualManualCost = weeklyCost * 52;
-    const annualSavings = Math.round(annualManualCost * (preset.automationPct / 100));
-    const automatedHours = Math.round(employees * hoursPerWeek * (preset.automationPct / 100));
-    const year1ROI = Math.round(((annualSavings - preset.buildCost) / preset.buildCost) * 100);
-    const netReturn = annualSavings - preset.buildCost;
 
-    // Animated counter
-    const [displayValue, setDisplayValue] = useState(annualSavings);
+    // Calculates
+    const weeklyCost = employees * hoursPerWeek * preset.costPerHour;
+    const annualCapacityValue = weeklyCost * 52; // Gross capacity value
+    const automatedHoursWeekly = Math.round(employees * hoursPerWeek * (preset.automationPct / 100));
+    const automatedHoursAnnual = automatedHoursWeekly * 52;
+
+    // Realized Value (The "Non-BS" number)
+    const valueCaptured = Math.round(annualCapacityValue * (preset.automationPct / 100) * (captureRate / 100));
+
+    // ROI based on Captured Value
+    const year1ROI = Math.round(((valueCaptured - preset.buildCost) / preset.buildCost) * 100);
+    const netReturn = valueCaptured - preset.buildCost;
+
+    // Animated counter for Value Captured
+    const [displayValue, setDisplayValue] = useState(valueCaptured);
     const animRef = useRef<number>();
-    const prevTarget = useRef(annualSavings);
+    const prevTarget = useRef(valueCaptured);
 
     useEffect(() => {
         const start = prevTarget.current;
-        const end = annualSavings;
+        const end = valueCaptured;
         prevTarget.current = end;
         const duration = 600;
         const startTime = performance.now();
@@ -86,7 +94,7 @@ const SavingsCalculator = () => {
         return () => {
             if (animRef.current) cancelAnimationFrame(animRef.current);
         };
-    }, [annualSavings]);
+    }, [valueCaptured]);
 
     return (
         <section className="py-24 px-6">
@@ -211,6 +219,33 @@ const SavingsCalculator = () => {
                             </div>
                         </div>
 
+                        <div>
+                            <div className="flex items-center justify-between mb-3">
+                                <div className="flex items-center gap-2 text-sm font-medium text-foreground">
+                                    <TrendingUp className="w-4 h-4 text-muted-foreground" />
+                                    Value Capture Rate
+                                </div>
+                                <span className="font-mono text-lg font-bold text-primary">
+                                    {captureRate}%
+                                </span>
+                            </div>
+                            <Slider
+                                value={[captureRate]}
+                                onValueChange={([v]) => setCaptureRate(v)}
+                                min={10}
+                                max={80}
+                                step={5}
+                                className="w-full"
+                            />
+                            <div className="flex justify-between mt-1 text-[10px] font-mono text-muted-foreground">
+                                <span>10% (Conservative)</span>
+                                <span>80% (Aggressive)</span>
+                            </div>
+                            <p className="text-[10px] text-stone-500 mt-2 leading-relaxed">
+                                Most calculators assume 100% efficiency. We assume you won't fire people, but reuse time with friction. 35% is realistic.
+                            </p>
+                        </div>
+
                         {/* Assumptions */}
                         <div className="pt-4 border-t border-border space-y-1">
                             <p className="text-[10px] font-mono uppercase tracking-wider text-stone-500 font-bold">
@@ -227,16 +262,17 @@ const SavingsCalculator = () => {
                     {/* Results */}
                     <div className="space-y-4">
                         {/* Main counter */}
-                        <div className="bg-white border border-stone-200 shadow-xl shadow-stone-200/50 rounded-2xl p-8 text-center">
+                        <div className="bg-white border border-stone-200 shadow-xl shadow-stone-200/50 rounded-2xl p-8 text-center relative overflow-hidden">
+                            <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-emerald-500 to-primary/50" />
                             <p className="text-[10px] font-mono uppercase tracking-widest text-stone-500 mb-3">
-                                Money Saved Annually
+                                Annual Value Captured (Realized)
                             </p>
                             <p className="text-5xl md:text-6xl font-serif text-emerald-600 font-medium tracking-tight">
                                 <span className="text-3xl mr-1">€</span>
                                 {displayValue.toLocaleString()}
                             </p>
-                            <p className="text-sm text-muted-foreground mt-2">
-                                by automating {automatedHours} hours/week
+                            <p className="text-sm text-stone-500 mt-3 font-medium">
+                                based on {captureRate}% capture of recovered capacity
                             </p>
                         </div>
 
@@ -244,22 +280,25 @@ const SavingsCalculator = () => {
                         <div className="grid grid-cols-2 gap-4">
                             <div className="bg-white border border-stone-200 shadow-xl shadow-stone-200/50 rounded-xl p-5 text-center">
                                 <p className="text-[10px] font-mono uppercase tracking-widest text-stone-500 mb-2">
-                                    One-Time Build
+                                    Capacity Recovered
                                 </p>
-                                <p className="text-2xl font-serif text-foreground">
-                                    €{preset.buildCost.toLocaleString()}
+                                <p className="text-xl font-serif text-foreground">
+                                    {automatedHoursAnnual.toLocaleString()} hrs/yr
+                                </p>
+                                <p className="text-[10px] text-stone-400 mt-1">
+                                    ({automatedHoursWeekly} hrs/week)
                                 </p>
                             </div>
                             <div className="bg-white border border-stone-200 shadow-xl shadow-stone-200/50 rounded-xl p-5 text-center">
                                 <p className="text-[10px] font-mono uppercase tracking-widest text-stone-500 mb-2">
-                                    Year 1 ROI
+                                    Capacity Value (Gross)
                                 </p>
-                                <div className="flex items-center justify-center gap-1">
-                                    <TrendingUp className={`w-5 h-5 ${year1ROI > 0 ? "text-emerald-600" : "text-red-500"}`} />
-                                    <p className={`text-2xl font-serif ${year1ROI > 0 ? "text-emerald-600" : "text-red-500"}`}>
-                                        {year1ROI > 0 ? "+" : ""}{year1ROI}%
-                                    </p>
-                                </div>
+                                <p className="text-xl font-serif text-stone-400 line-through decoration-stone-300">
+                                    €{Math.round(annualCapacityValue * (preset.automationPct / 100)).toLocaleString()}
+                                </p>
+                                <p className="text-[10px] text-stone-400 mt-1">
+                                    Theoretical Max
+                                </p>
                             </div>
                         </div>
 
@@ -268,18 +307,30 @@ const SavingsCalculator = () => {
                             ? "bg-emerald-50 border-emerald-200"
                             : "bg-red-50 border-red-200"
                             }`}>
-                            <p className="text-[10px] font-mono uppercase tracking-widest text-stone-500 mb-1">
-                                Net Year 1 Return
-                            </p>
-                            <p className={`text-xl font-serif font-medium ${netReturn > 0 ? "text-emerald-700" : "text-red-700"
-                                }`}>
-                                €{netReturn.toLocaleString()}
-                            </p>
+                            <div className="grid grid-cols-2 gap-4 divide-x divide-stone-200/50">
+                                <div>
+                                    <p className="text-[10px] font-mono uppercase tracking-widest text-stone-500 mb-1">
+                                        Year 1 ROI
+                                    </p>
+                                    <p className={`text-xl font-serif font-medium ${year1ROI > 0 ? "text-emerald-700" : "text-red-700"}`}>
+                                        {year1ROI > 0 ? "+" : ""}{year1ROI}%
+                                    </p>
+                                </div>
+                                <div>
+                                    <p className="text-[10px] font-mono uppercase tracking-widest text-stone-500 mb-1">
+                                        Net Return
+                                    </p>
+                                    <p className={`text-xl font-serif font-medium ${netReturn > 0 ? "text-emerald-700" : "text-red-700"}`}>
+                                        €{netReturn.toLocaleString()}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
 
-                        <p className="text-[10px] font-mono text-stone-400 text-center mt-4">
-                            Assumptions are editable. Output is a planning estimate, not a promise.
-                        </p>
+                        <div className="text-[10px] font-mono text-stone-400 text-center mt-4 bg-stone-50 p-3 rounded-lg border border-stone-100">
+                            <strong>Formula:</strong> Value Captured = (Capacity Value) × (Capture Rate).<br />
+                            We discount theoretical savings because real-world friction exists.
+                        </div>
                     </div>
                 </div>
             </div>
