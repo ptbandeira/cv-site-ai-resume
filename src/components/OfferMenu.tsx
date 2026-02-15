@@ -1,7 +1,11 @@
-import { Check, ArrowRight, Copy } from "lucide-react";
+import { Zap, ArrowRight, Check, Copy } from "lucide-react";
 import { toast } from "sonner";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const OfferMenu = () => {
+    const [clickedOffers, setClickedOffers] = useState<Set<string>>(new Set());
+
     const offers = [
         {
             title: "48-Hour Reality Test",
@@ -19,110 +23,132 @@ const OfferMenu = () => {
             scope: "Scope: one workflow, one team, one decision memo."
         },
         {
-            title: "Sovereign AI Architecture",
-            description: "Your data. Your metal. Your rules.",
+            title: "The Executive Triage",
+            description: "For leaders drowning in AI noise.",
             features: [
-                "Local-first LLM deployment (Llama 3, DeepSeek)",
-                "Air-gapped RAG pipelines",
-                "Implementation roadmap + vendor neutral decisions"
+                "Map your entire organization's AI opportunities",
+                "Identify high-risk 'Shadow AI' usage",
+                "Stack-rank pilot candidates by ROI"
             ],
-            cta: "Discuss Architecture",
-            subject: "Discuss Architecture",
-            body: "Hi Pedro,\n\nI'd like to discuss Sovereign AI Architecture.\n\nIndustry: [e.g., Pharma, Law, Finance]\nData Sensitivity: [Internal / Confidential / PII]\n\nBest,",
+            cta: "Book Triage Session",
+            subject: "Request an Executive Triage",
+            body: "Hi Pedro,\n\nI need to cut through the noise. Interested in an Executive Triage session.\n\nOrganization Size:\nCurrent AI state: [Chaos / Curated / Blocked]\n\nBest,",
             highlight: false,
-            price: "Starting at €15k ex VAT",
-            scope: "Scope: one domain + reference architecture + governance design."
+            price: "Flat fee €2.5k",
+            scope: "Scope: full-day workshop + strategic roadmap."
         },
         {
-            title: "Fractional AI Officer",
-            description: "Adult supervision for your AI roadmap.",
+            title: "Sovereign Systems",
+            description: "End-to-end proprietary architecture.",
             features: [
-                "Risk governance & vendor audit",
-                "Hiring & team structure strategy",
-                "Training + operating cadence"
+                "Custom LLM pipelines on your infrastructure",
+                "Full data residency & compliance control",
+                "Zero-dependency on external SaaS wrappers"
             ],
-            cta: "Explore a Fractional Role",
-            subject: "Explore Fractional Role",
-            body: "Hi Pedro,\n\nI'm interested in exploring a Fractional Role.\n\nCurrent Stage:\nKey Pain Points:\n\nBest,",
+            cta: "Discuss Architecture",
+            subject: "Discuss Sovereign Architecture",
+            body: "Hi Pedro,\n\nWe need to build something proprietary.\n\nUse Case: [Internal Knowledge / Customer Facing]\nCompliance Needs: [GDPR / HIPAA / proprietary data]\n\nBest,",
             highlight: false,
-            price: "€8k/mo (1 day/wk) · €15k/mo (2 days/wk) ex VAT",
-            scope: "Includes: weekly exec cadence + delivery management + risk reporting."
+            price: "Custom Engagement",
+            scope: "Scope: design, build, and handoff of full system."
         }
     ];
 
-    const generateMailto = (subject: string, body: string) => {
-        return `mailto:pedrobandeira@me.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const handleRequest = (offer: typeof offers[0]) => {
+        setClickedOffers(prev => new Set(prev).add(offer.title));
+        window.location.href = `mailto:pedrobandeira@me.com?subject=${encodeURIComponent(offer.subject)}&body=${encodeURIComponent(offer.body)}`;
     };
 
-    const handleCopy = (subject: string, body: string) => {
-        const text = `Subject: ${subject}\n\n${body}`;
+    const handleCopy = (offer: typeof offers[0]) => {
+        const text = `Subject: ${offer.subject}\n\n${offer.body}`;
         navigator.clipboard.writeText(text);
-        // Assuming 'toast' is available globally or imported elsewhere
-        // toast.success("Request copied to clipboard");
+        toast.success("Request copied to clipboard");
     };
 
     return (
-        <section id="offers" className="py-24 bg-[#F9F9F7] relative overflow-hidden">
-            {/* Background elements */}
-            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-stone-300 to-transparent" />
-            <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-stone-300 to-transparent" />
-
-            <div className="container mx-auto px-6 relative z-10">
-                <div className="max-w-3xl mx-auto text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl font-serif text-stone-900 mb-4">
+        <section id="offers" className="py-24 bg-stone-50">
+            <div className="max-w-7xl mx-auto px-6">
+                <div className="mb-16 md:text-center max-w-3xl mx-auto">
+                    <p className="text-xs font-mono uppercase tracking-wider text-primary font-bold mb-3">
                         Choose Your Engagement
+                    </p>
+                    <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-6">
+                        Stop buying software. Start building assets.
                     </h2>
-                    <p className="text-stone-600 font-mono text-sm md:text-base">
-                        No hourly billing. No ambiguous retainers. Fixed-scope outcomes.
+                    <p className="text-lg text-stone-600 leading-relaxed">
+                        Most agencies sell you a subscription to their time. I sell you a
+                        working system that belongs to you. No retainers, no "maintenance
+                        fees", just sovereign code.
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    {offers.map((offer, index) => (
+                <div className="grid md:grid-cols-3 gap-8">
+                    {offers.map((offer) => (
                         <div
-                            key={index}
-                            className={`p-8 rounded-xl border flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${offer.highlight
-                                ? "bg-white border-stone-300 shadow-lg ring-1 ring-stone-200"
-                                : "bg-[#F9F9F7] border-stone-200 hover:bg-white"
+                            key={offer.title}
+                            className={`relative p-8 rounded-xl border transition-all duration-300 flex flex-col ${offer.highlight
+                                ? "bg-white border-primary/20 shadow-xl shadow-primary/5 scale-105 z-10"
+                                : "bg-stone-100 border-stone-200 hover:border-primary/20 hover:shadow-lg"
                                 }`}
                         >
-                            <div className="mb-6">
-                                <h3 className="text-xl font-bold font-serif text-stone-900 mb-2">{offer.title}</h3>
-                                <p className="text-stone-600 text-sm h-10">{offer.description}</p>
+                            {offer.highlight && (
+                                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider rounded-full shadow-lg">
+                                    Most Popular
+                                </div>
+                            )}
+
+                            <div className="mb-2">
+                                <h3 className="text-xl font-serif font-bold text-foreground">
+                                    {offer.title}
+                                </h3>
+                                <p className="text-sm font-mono text-stone-500 mt-1">{offer.price}</p>
                             </div>
 
+                            <p className="text-stone-600 mb-6 min-h-[48px]">
+                                {offer.description}
+                            </p>
+
                             <ul className="space-y-3 mb-8 flex-1">
-                                {offer.features.map((feature, i) => (
-                                    <li key={i} className="flex items-start gap-2 text-sm text-stone-700">
-                                        <Check className="w-4 h-4 text-stone-400 mt-0.5 flex-shrink-0" />
+                                {offer.features.map((feature) => (
+                                    <li key={feature} className="flex items-start gap-3 text-sm text-stone-600">
+                                        <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${offer.highlight ? "text-primary" : "text-stone-400"
+                                            }`} />
                                         <span>{feature}</span>
                                     </li>
                                 ))}
                             </ul>
 
-                            <div className="mt-auto space-y-3">
-                                <div className="text-xs font-mono text-stone-500 py-3 border-t border-stone-100 min-h-[60px]">
+                            <div className="mt-auto space-y-3 pt-6 border-t border-stone-100">
+                                <p className="text-xs font-mono text-stone-400 italic px-1">
                                     {offer.scope}
-                                </div>
-                                <p className="text-sm font-medium text-stone-900 pb-2">
-                                    {offer.price}
                                 </p>
-                                <a
-                                    href={generateMailto(offer.subject, offer.body)}
-                                    className={`flex items-center justify-center gap-2 w-full py-3 px-4 rounded-lg font-medium transition-colors ${offer.highlight
-                                        ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                                        : "bg-white border border-stone-200 text-stone-900 hover:bg-stone-50"
-                                        }`}
-                                >
-                                    {offer.cta}
-                                </a>
-                                <button
-                                    onClick={() => handleCopy(offer.subject, offer.body)}
-                                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg font-medium text-sm text-stone-500 hover:text-stone-900 hover:bg-stone-100 transition-colors"
-                                >
-                                    <Copy className="w-3.5 h-3.5" />
-                                    Copy Request
-                                </button>
+                                <div className="flex gap-2">
+                                    <button
+                                        onClick={() => handleRequest(offer)}
+                                        className={`flex-1 py-3 px-4 rounded-lg font-medium text-sm transition-all flex items-center justify-center gap-2 ${offer.highlight
+                                            ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg"
+                                            : "bg-white border border-stone-200 text-stone-700 hover:border-primary/50 hover:text-primary"
+                                            }`}
+                                    >
+                                        {offer.cta} <ArrowRight className="w-4 h-4" />
+                                    </button>
+
+                                    <AnimatePresence>
+                                        {clickedOffers.has(offer.title) && (
+                                            <motion.button
+                                                initial={{ opacity: 0, width: 0, paddingLeft: 0, paddingRight: 0 }}
+                                                animate={{ opacity: 1, width: "auto", paddingLeft: "12px", paddingRight: "12px" }}
+                                                exit={{ opacity: 0, width: 0, paddingLeft: 0, paddingRight: 0 }}
+                                                transition={{ duration: 0.2 }}
+                                                onClick={() => handleCopy(offer)}
+                                                className="py-3 rounded-lg border border-stone-200 text-stone-500 hover:text-stone-900 hover:bg-stone-50 transition-colors flex items-center justify-center gap-2 overflow-hidden whitespace-nowrap"
+                                                title="Copy Request"
+                                            >
+                                                <Copy className="w-4 h-4 flex-shrink-0" />
+                                            </motion.button>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
                             </div>
                         </div>
                     ))}

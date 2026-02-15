@@ -2,6 +2,7 @@ import { useState } from "react";
 import { X, ArrowRight, CheckCircle2, AlertTriangle, ChevronRight, RefreshCcw, Copy } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface AIChatProps {
   isOpen: boolean;
@@ -23,6 +24,7 @@ const AIChat = ({ isOpen, onClose }: AIChatProps) => {
 
 const TriageContent = ({ isOpen, onClose }: AIChatProps) => {
   const [step, setStep] = useState<Step>("industry");
+  const [hasClicked, setHasClicked] = useState(false);
   const [state, setState] = useState<TriageState>({
     industry: "",
     sensitivity: "",
@@ -268,7 +270,10 @@ const TriageContent = ({ isOpen, onClose }: AIChatProps) => {
 
               <div className="mt-auto space-y-3">
                 <button
-                  onClick={recommendation.action}
+                  onClick={() => {
+                    setHasClicked(true);
+                    recommendation.action();
+                  }}
                   className={cn(
                     "w-full flex items-center justify-center gap-2 py-4 text-white rounded-xl font-medium transition-all hover:scale-[1.02] shadow-xl shadow-stone-200",
                     recommendation.isUrgent ? "bg-[#1A1A1A] hover:bg-stone-800" : "bg-primary hover:bg-primary/90"
@@ -277,17 +282,25 @@ const TriageContent = ({ isOpen, onClose }: AIChatProps) => {
                   {recommendation.cta} <ArrowRight className="w-4 h-4" />
                 </button>
 
-                <button
-                  onClick={() => {
-                    const text = `Subject: ${recommendation.subject}\n\n${recommendation.body}`;
-                    navigator.clipboard.writeText(text);
-                    toast.success("Request copied to clipboard");
-                  }}
-                  className="w-full flex items-center justify-center gap-2 py-4 bg-white border border-stone-200 text-stone-700 rounded-xl font-medium transition-all hover:bg-stone-50 hover:border-stone-300"
-                >
-                  <Copy className="w-4 h-4" />
-                  Copy Request
-                </button>
+                <AnimatePresence>
+                  {hasClicked && (
+                    <motion.button
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      onClick={() => {
+                        const text = `Subject: ${recommendation.subject}\n\n${recommendation.body}`;
+                        navigator.clipboard.writeText(text);
+                        toast.success("Request copied to clipboard");
+                      }}
+                      className="w-full flex items-center justify-center gap-2 py-4 bg-white border border-stone-200 text-stone-700 rounded-xl font-medium transition-all hover:bg-stone-50 hover:border-stone-300 overflow-hidden"
+                    >
+                      <Copy className="w-4 h-4" />
+                      Copy Request
+                    </motion.button>
+                  )}
+                </AnimatePresence>
 
                 <button
                   onClick={reset}

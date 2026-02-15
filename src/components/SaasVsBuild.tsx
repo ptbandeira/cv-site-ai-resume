@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ArrowRight, Calculator as CalcIcon, RefreshCw, Copy, Check, DollarSign, Users, ChevronDown } from "lucide-react";
 import { toast } from "sonner";
+import { motion, AnimatePresence } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -70,6 +71,7 @@ const SaasVsBuild = () => {
     const [seats, setSeats] = useState(25);
     const [isStackOpen, setIsStackOpen] = useState(false);
     const [reclaimablePct, setReclaimablePct] = useState(60); // Default 60% reclaimable
+    const [hasClicked, setHasClicked] = useState(false);
 
     // The core platform cost they already pay
     const existingPlatformAnnual = selectedStack.monthlyPerSeat * seats * 12;
@@ -95,6 +97,11 @@ const SaasVsBuild = () => {
     const subject = "Request a SaaS vs Build Audit";
     const body = `Hi Pedro,\n\nI'm interested in an Optimization Audit.\n\nStack to Audit: [e.g., Vercel, Datadog, AWS]\nCurrent Monthly Spend: [Approximate]\nGoal: [Reduce cost / Improve performance / Compliance]\n\nBest,`;
     const mailtoLink = `mailto:pedrobandeira@me.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    const handleRequest = () => {
+        setHasClicked(true);
+        window.location.href = mailtoLink;
+    };
 
     const handleCopy = () => {
         const text = `Subject: ${subject}\n\n${body}`;
@@ -242,18 +249,26 @@ const SaasVsBuild = () => {
                         </div>
 
                         <div className="flex gap-4 pt-2">
-                            <a
-                                href={mailtoLink}
+                            <button
+                                onClick={handleRequest}
                                 className="flex-1 py-3 px-4 bg-[#0F172A] text-white font-medium rounded-lg hover:bg-[#1e293b] transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
                             >
                                 Start Your Optimization <ArrowRight className="w-4 h-4" />
-                            </a>
-                            <button
-                                onClick={handleCopy}
-                                className="px-6 py-3 rounded-lg border border-white/10 text-slate-300 font-medium hover:bg-white/5 hover:text-white transition-all flex items-center justify-center gap-2"
-                            >
-                                <Copy className="w-4 h-4" /> Copy Request
                             </button>
+                            <AnimatePresence>
+                                {hasClicked && (
+                                    <motion.button
+                                        initial={{ opacity: 0, width: 0, paddingLeft: 0, paddingRight: 0 }}
+                                        animate={{ opacity: 1, width: "auto", paddingLeft: "24px", paddingRight: "24px" }}
+                                        exit={{ opacity: 0, width: 0, paddingLeft: 0, paddingRight: 0 }}
+                                        transition={{ duration: 0.2 }}
+                                        onClick={handleCopy}
+                                        className="py-3 rounded-lg border border-white/10 text-slate-300 font-medium hover:bg-white/5 hover:text-white transition-all flex items-center justify-center gap-2 overflow-hidden whitespace-nowrap"
+                                    >
+                                        <Copy className="w-4 h-4" /> Copy Request
+                                    </motion.button>
+                                )}
+                            </AnimatePresence>
                         </div>
                     </div>
                 </div>

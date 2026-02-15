@@ -1,9 +1,28 @@
-import { ShieldCheck, Zap, Users, Copy } from "lucide-react";
+import { ShieldCheck, Zap, Users, Copy, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const AnalogAdvantage = ({ onOpenChat }: { onOpenChat?: () => void }) => {
     const [showVibeModal, setShowVibeModal] = useState(false);
+    const [hasClicked, setHasClicked] = useState(false);
+
+    // ... (cards array remains same)
+
+    // (inside modal)
+    const handleRequest = () => {
+        setHasClicked(true);
+        window.location.href = `mailto:pedrobandeira@me.com?subject=${encodeURIComponent("Book a Sprint: Reactive MVP")}&body=${encodeURIComponent("Hi Pedro,\n\nI want to validate a workflow with a Reactive MVP Sprint.\n\nThe Workflow: [Briefly describe the process]\nSuccess Criteria: [What does 'working' look like?]\n\nBest,")}`;
+    };
+
+    const handleCopy = () => {
+        const text = `Subject: Book a Sprint: Reactive MVP\n\nHi Pedro,\n\nI want to validate a workflow with a Reactive MVP Sprint.\n\nThe Workflow: [Briefly describe the process]\nSuccess Criteria: [What does 'working' look like?]\n\nBest,`;
+        navigator.clipboard.writeText(text);
+        toast.success("Request copied to clipboard");
+    };
+
+    // ... (return statement until modal content)
+
 
     // 4 Cards for 2x2 grid
     const cards = [
@@ -149,24 +168,37 @@ const AnalogAdvantage = ({ onOpenChat }: { onOpenChat?: () => void }) => {
                         </div>
 
                         <div className="flex flex-col gap-3">
-                            <a
-                                href={`mailto:pedrobandeira@me.com?subject=${encodeURIComponent("Book a Sprint: Reactive MVP")}&body=${encodeURIComponent("Hi Pedro,\n\nI want to validate a workflow with a Reactive MVP Sprint.\n\nThe Workflow: [Briefly describe the process]\nSuccess Criteria: [What does 'working' look like?]\n\nBest,")}`}
+                            <button
+                                onClick={() => {
+                                    setHasClicked(true);
+                                    window.location.href = `mailto:pedrobandeira@me.com?subject=${encodeURIComponent("Book a Sprint: Reactive MVP")}&body=${encodeURIComponent("Hi Pedro,\n\nI want to validate a workflow with a Reactive MVP Sprint.\n\nThe Workflow: [Briefly describe the process]\nSuccess Criteria: [What does 'working' look like?]\n\nBest,")}`;
+                                }}
                                 className="w-full py-4 bg-[#1A1A1A] text-white rounded-sm font-medium text-center hover:bg-[#333] transition-colors flex items-center justify-center gap-2"
                             >
                                 Book a Sprint <span className="text-stone-400">→</span>
-                            </a>
-                            <button
-                                onClick={() => {
-                                    const text = `Subject: Book a Sprint: Reactive MVP\n\nHi Pedro,\n\nI want to validate a workflow with a Reactive MVP Sprint.\n\nThe Workflow: [Briefly describe the process]\nSuccess Criteria: [What does 'working' look like?]\n\nBest,`;
-                                    navigator.clipboard.writeText(text);
-                                    toast.success("Request copied to clipboard");
-                                }}
-                                className="w-full py-2.5 rounded-lg font-medium text-sm text-stone-500 hover:text-stone-900 hover:bg-stone-100 transition-colors flex items-center justify-center gap-2"
-                            >
-                                <Copy className="w-3.5 h-3.5" />
-                                Copy Request
                             </button>
-                            <p className="text-xs text-center text-muted-foreground">
+
+                            <AnimatePresence>
+                                {hasClicked && (
+                                    <motion.button
+                                        initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                                        animate={{ opacity: 1, height: "auto", marginTop: "8px" }}
+                                        exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                                        transition={{ duration: 0.3 }}
+                                        onClick={() => {
+                                            const text = `Subject: Book a Sprint: Reactive MVP\n\nHi Pedro,\n\nI want to validate a workflow with a Reactive MVP Sprint.\n\nThe Workflow: [Briefly describe the process]\nSuccess Criteria: [What does 'working' look like?]\n\nBest,`;
+                                            navigator.clipboard.writeText(text);
+                                            toast.success("Request copied to clipboard");
+                                        }}
+                                        className="w-full py-2.5 rounded-lg font-medium text-sm text-stone-500 hover:text-stone-900 hover:bg-stone-100 transition-colors flex items-center justify-center gap-2 overflow-hidden"
+                                    >
+                                        <Copy className="w-3.5 h-3.5" />
+                                        Copy Request
+                                    </motion.button>
+                                )}
+                            </AnimatePresence>
+
+                            <p className="text-xs text-center text-muted-foreground mt-2">
                                 limited availability. Sprints start at €5k.
                             </p>
                         </div>
