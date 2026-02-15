@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { X, ArrowRight, CheckCircle2, AlertTriangle, ChevronRight, RefreshCcw } from "lucide-react";
+import { X, ArrowRight, CheckCircle2, AlertTriangle, ChevronRight, RefreshCcw, Copy } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 
 interface AIChatProps {
   isOpen: boolean;
@@ -91,6 +92,8 @@ const TriageContent = ({ isOpen, onClose }: AIChatProps) => {
         ],
         cta: "Request Reality Test",
         action: () => window.location.href = generateEmailLink(title),
+        subject: getSubject(title),
+        body: getBody(title),
         isUrgent: false
       };
     }
@@ -108,6 +111,8 @@ const TriageContent = ({ isOpen, onClose }: AIChatProps) => {
         ],
         cta: "Book Executive Triage",
         action: () => window.location.href = generateEmailLink(title),
+        subject: getSubject(title),
+        body: getBody(title),
         isUrgent: true
       };
     }
@@ -124,6 +129,8 @@ const TriageContent = ({ isOpen, onClose }: AIChatProps) => {
       ],
       cta: "Book Executive Triage",
       action: () => window.location.href = generateEmailLink(title),
+      subject: getSubject(title),
+      body: getBody(title),
       isUrgent: true
     };
   };
@@ -268,6 +275,18 @@ const TriageContent = ({ isOpen, onClose }: AIChatProps) => {
                   )}
                 >
                   {recommendation.cta} <ArrowRight className="w-4 h-4" />
+                </button>
+
+                <button
+                  onClick={() => {
+                    const text = `Subject: ${recommendation.subject}\n\n${recommendation.body}`;
+                    navigator.clipboard.writeText(text);
+                    toast.success("Request copied to clipboard");
+                  }}
+                  className="w-full flex items-center justify-center gap-2 py-4 bg-white border border-stone-200 text-stone-700 rounded-xl font-medium transition-all hover:bg-stone-50 hover:border-stone-300"
+                >
+                  <Copy className="w-4 h-4" />
+                  Copy Request
                 </button>
 
                 <button

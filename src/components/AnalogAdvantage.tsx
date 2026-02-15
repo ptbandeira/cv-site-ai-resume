@@ -1,4 +1,5 @@
-import { ShieldCheck, Zap, Users } from "lucide-react";
+import { ShieldCheck, Zap, Users, Copy } from "lucide-react";
+import { toast } from "sonner";
 import { useState } from "react";
 
 const AnalogAdvantage = ({ onOpenChat }: { onOpenChat?: () => void }) => {
@@ -149,11 +150,22 @@ const AnalogAdvantage = ({ onOpenChat }: { onOpenChat?: () => void }) => {
 
                         <div className="flex flex-col gap-3">
                             <a
-                                href="mailto:pedrobandeira@me.com?subject=Book a Sprint: Reactive MVP&body=Hi Pedro,%0D%0A%0D%0AI want to validate a workflow with a Reactive MVP Sprint.%0D%0A%0D%0AThe Workflow: [Briefly describe the process]%0D%0ASuccess Criteria: [What does 'working' look like?]%0D%0A%0D%0ABest,"
+                                href={`mailto:pedrobandeira@me.com?subject=${encodeURIComponent("Book a Sprint: Reactive MVP")}&body=${encodeURIComponent("Hi Pedro,\n\nI want to validate a workflow with a Reactive MVP Sprint.\n\nThe Workflow: [Briefly describe the process]\nSuccess Criteria: [What does 'working' look like?]\n\nBest,")}`}
                                 className="w-full py-4 bg-[#1A1A1A] text-white rounded-sm font-medium text-center hover:bg-[#333] transition-colors flex items-center justify-center gap-2"
                             >
                                 Book a Sprint <span className="text-stone-400">→</span>
                             </a>
+                            <button
+                                onClick={() => {
+                                    const text = `Subject: Book a Sprint: Reactive MVP\n\nHi Pedro,\n\nI want to validate a workflow with a Reactive MVP Sprint.\n\nThe Workflow: [Briefly describe the process]\nSuccess Criteria: [What does 'working' look like?]\n\nBest,`;
+                                    navigator.clipboard.writeText(text);
+                                    toast.success("Request copied to clipboard");
+                                }}
+                                className="w-full py-2.5 rounded-lg font-medium text-sm text-stone-500 hover:text-stone-900 hover:bg-stone-100 transition-colors flex items-center justify-center gap-2"
+                            >
+                                <Copy className="w-3.5 h-3.5" />
+                                Copy Request
+                            </button>
                             <p className="text-xs text-center text-muted-foreground">
                                 limited availability. Sprints start at €5k.
                             </p>
