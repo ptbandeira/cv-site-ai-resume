@@ -11,11 +11,16 @@ const AdultInTheRoom = () => {
     ];
 
     return (
-        <section id="architecture" className="py-24 bg-white border-y border-stone-200">
+        <section id="how-i-work" className="py-24 bg-white border-y border-stone-200">
             <div className="container mx-auto px-6 max-w-4xl">
-                <h2 className="text-3xl md:text-4xl font-serif text-stone-900 mb-12 text-center">
-                    Why I’m the Adult in the AI Room
-                </h2>
+                <div className="text-center mb-12">
+                    <span className="font-mono text-sm tracking-wider text-muted-foreground uppercase mb-2 block">
+                        Why I’m the Adult in the AI Room
+                    </span>
+                    <h2 className="text-3xl md:text-4xl font-serif text-stone-900">
+                        How I Work
+                    </h2>
+                </div>
 
                 <div className="grid gap-6">
                     {qualifications.map((item, index) => (
