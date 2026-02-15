@@ -109,7 +109,7 @@ const Header = ({ onOpenChat }: HeaderProps) => {
             onClick={handleAskAI}
             className="text-sm font-medium px-5 py-2.5 bg-[#1A1A1A] text-white rounded-sm hover:shadow-lg transition-all duration-300"
           >
-            Consult The Architect
+            Request a Call
           </button>
         </div>
 
@@ -148,7 +148,7 @@ const Header = ({ onOpenChat }: HeaderProps) => {
               onClick={handleAskAI}
               className="block w-full text-left font-medium text-primary"
             >
-              Consult The Architect
+              Request a Call
             </button>
           </div>
         </div>

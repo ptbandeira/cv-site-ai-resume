@@ -68,7 +68,7 @@ const Hero = ({ onOpenChat }: HeroProps) => {
             href="#fit-assessment"
             className="px-8 py-4 bg-primary text-primary-foreground rounded-sm font-medium text-lg transition-all hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5 min-w-[200px] text-center"
           >
-            Start with a Reality Test
+            Run Fit Check
           </a>
           <a
             href="#architecture"
