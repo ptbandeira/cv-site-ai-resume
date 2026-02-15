@@ -71,12 +71,12 @@ const Header = ({ onOpenChat }: HeaderProps) => {
               <TooltipTrigger asChild>
                 <div className="flex items-center gap-1.5 cursor-help group">
                   <Cpu className="w-3 h-3 text-indigo-500" />
-                  <span className="text-[10px] font-mono text-muted-foreground">Deployment: <span className="text-foreground font-semibold">Cloud or On-Prem</span></span>
+                  <span className="text-[10px] font-mono text-muted-foreground">Deployment: <span className="text-foreground font-semibold">Cloud or On-Prem (as required)</span></span>
                   <Info className="w-3 h-3 text-stone-400 group-hover:text-stone-600" />
                 </div>
               </TooltipTrigger>
               <TooltipContent side="bottom" className="font-mono text-xs max-w-[200px]">
-                <p>We deploy agents directly on your infrastructure or private cloud.</p>
+                <p>Cloud by default; on-prem or private VPC when policy or data sensitivity requires it.</p>
               </TooltipContent>
             </Tooltip>
 
@@ -86,12 +86,12 @@ const Header = ({ onOpenChat }: HeaderProps) => {
               <TooltipTrigger asChild>
                 <div className="flex items-center gap-1.5 cursor-help group">
                   <Shield className="w-3 h-3 text-emerald-500" />
-                  <span className="text-[10px] font-mono text-muted-foreground">Data: <span className="text-emerald-600 font-semibold">stays inside your perimeter</span></span>
+                  <span className="text-[10px] font-mono text-muted-foreground">Data: <span className="text-emerald-600 font-semibold">stays inside your perimeter (as required)</span></span>
                   <Info className="w-3 h-3 text-stone-400 group-hover:text-stone-600" />
                 </div>
               </TooltipTrigger>
               <TooltipContent side="bottom" className="font-mono text-xs max-w-[200px]">
-                <p>Your data is processed locally and never trains public models.</p>
+                <p>Sensitive data can be processed locally; nothing is stored unless you explicitly opt in.</p>
               </TooltipContent>
             </Tooltip>
 
