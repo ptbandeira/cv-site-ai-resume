@@ -1,65 +1,74 @@
 {
-  "topics": [
+  "newsTopics": [
     {
-      "id": "ai-governance-pharma",
-      "title": "AI Governance in Pharmaceutical Companies",
-      "keywords": ["AI governance", "pharma compliance", "FDA AI regulation", "drug development AI"],
-      "targetAudience": "Chief Digital Officers, VP Compliance, Pharma executives",
-      "angle": "How to implement AI governance frameworks that satisfy FDA requirements"
+      "id": "ai-governance-updates",
+      "category": "AI Governance",
+      "keywords": ["AI regulation", "EU AI Act", "FDA AI guidance", "AI compliance", "responsible AI"],
+      "targetAudience": "Chief Compliance Officers, Legal Counsel, Regulatory Affairs",
+      "sources": ["TechCrunch AI", "VentureBeat AI", "The Verge AI", "AI regulation news"]
     },
     {
-      "id": "digital-transformation-banking",
-      "title": "Digital Transformation in Banking Under GDPR",
-      "keywords": ["banking digital transformation", "GDPR compliance", "financial AI", "regulatory technology"],
-      "targetAudience": "Banking CIOs, Chief Risk Officers, FinTech leaders",
-      "angle": "Navigating AI adoption while maintaining GDPR and financial regulations"
+      "id": "enterprise-ai-releases",
+      "category": "Enterprise AI",
+      "keywords": ["enterprise AI", "OpenAI", "Anthropic", "Google AI", "Microsoft AI", "LLM releases"],
+      "targetAudience": "CIOs, CTOs, Technology Leaders",
+      "sources": ["OpenAI blog", "Anthropic releases", "Google AI blog", "Microsoft AI"]
     },
     {
-      "id": "ai-legal-operations",
-      "title": "AI Operations in Law Firms: Ethics and Practice",
-      "keywords": ["legal AI", "law firm technology", "AI ethics legal", "legal operations"],
+      "id": "pharma-ai-innovation",
+      "category": "Pharma & Healthcare AI",
+      "keywords": ["drug discovery AI", "clinical AI", "pharma technology", "FDA digital health"],
+      "targetAudience": "Pharma executives, Healthcare CIOs",
+      "sources": ["PharmaPhorum", "FierceBiotech", "Healthcare IT News"]
+    },
+    {
+      "id": "fintech-compliance",
+      "category": "Finance & Compliance",
+      "keywords": ["fintech AI", "banking regulation", "financial compliance", "RegTech"],
+      "targetAudience": "Banking CIOs, Chief Risk Officers, Compliance Directors",
+      "sources": ["The Banker", "Finextra", "American Banker"]
+    },
+    {
+      "id": "legal-tech-updates",
+      "category": "Legal Technology",
+      "keywords": ["legal AI", "law firm technology", "contract automation", "legal operations"],
       "targetAudience": "Managing Partners, Legal Tech Directors, General Counsel",
-      "angle": "Implementing AI in legal practice while maintaining ethical standards"
-    },
-    {
-      "id": "healthcare-ai-compliance",
-      "title": "Healthcare AI Implementation Under HIPAA",
-      "keywords": ["healthcare AI", "HIPAA compliance", "medical AI governance", "health data security"],
-      "targetAudience": "Hospital CIOs, Healthcare IT Directors, CMIOs",
-      "angle": "Deploying AI in healthcare while ensuring patient privacy and HIPAA compliance"
-    },
-    {
-      "id": "analog-ai-advantage",
-      "title": "The Analog-AI Advantage: Why Experience Matters",
-      "keywords": ["AI consulting", "digital transformation experience", "enterprise AI", "technology leadership"],
-      "targetAudience": "C-suite executives, Board members, Transformation leaders",
-      "angle": "Why executives who understand pre-digital business are better positioned to guide AI transformation"
+      "sources": ["Legal Week", "Above the Law", "LegalTech News"]
     }
   ],
-  "contentFormats": [
-    {
-      "type": "case-study",
-      "length": 1200,
-      "structure": ["Challenge", "Approach", "Solution", "Results", "Key Takeaways"]
+  "pulseFormat": {
+    "structure": {
+      "noise": {
+        "description": "The raw tech news headline - jargon and all",
+        "maxLength": 150,
+        "tone": "Straight from the press release"
+      },
+      "translation": {
+        "description": "What it actually means for business leaders - plain English",
+        "maxLength": 200,
+        "tone": "Bridge between tech and business impact"
+      },
+      "action": {
+        "description": "Concrete next step from the Analog-AI operator perspective",
+        "maxLength": 250,
+        "tone": "Experienced operator who's seen this before, knows what works"
+      }
     },
-    {
-      "type": "thought-leadership",
-      "length": 1000,
-      "structure": ["Problem Statement", "Industry Context", "Framework", "Implementation Steps", "Call to Action"]
-    },
-    {
-      "type": "how-to-guide",
-      "length": 1500,
-      "structure": ["Introduction", "Prerequisites", "Step-by-Step Process", "Common Pitfalls", "Next Steps"]
+    "analogPerspective": {
+      "description": "The unique Xennial advantage - bridge analog business experience + AI execution",
+      "themes": [
+        "Having seen pre-digital business gives pattern recognition AI-natives lack",
+        "Understanding org politics and change management from pre-tech era",
+        "Knowing which 'revolutionary' tech is actually repackaged 90s concepts",
+        "Translating between C-suite language and engineer language",
+        "Spotting vendor hype vs actual enterprise readiness"
+      ]
     }
-  ],
-  "seoOptimization": {
-    "targetSearchEngines": ["ChatGPT", "Claude", "Perplexity", "Google"],
-    "focusKeywords": [
-      "AI operations consultant regulated industries",
-      "AI governance implementation",
-      "digital transformation compliance",
-      "enterprise AI strategy pharma finance legal"
-    ]
+  },
+  "outputFormat": {
+    "color": "from-amber-500 to-orange-500",
+    "iconBg": "bg-amber-100 text-amber-700",
+    "icon": "Zap",
+    "date": "auto-generated from current date"
   }
 }

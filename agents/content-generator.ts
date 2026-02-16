@@ -1,5 +1,5 @@
-// Content Generator Agent — FREE VERSION
-// Uses Gemini Flash 2.0 (1500 requests/day FREE)
+// Content Generator Agent — Pulse Format (News Analysis)
+// Uses Gemini 2.5 Flash (FREE tier)
 
 import fs from 'fs/promises';
 import path from 'path';
@@ -9,45 +9,47 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-interface ContentConfig {
-  topics: Array<{
+interface NewsConfig {
+  newsTopics: Array<{
     id: string;
-    title: string;
+    category: string;
     keywords: string[];
     targetAudience: string;
-    angle: string;
+    sources: string[];
   }>;
-  contentFormats: Array<{
-    type: string;
-    length: number;
-    structure: string[];
-  }>;
-  seoOptimization: {
-    targetSearchEngines: string[];
-    focusKeywords: string[];
+  pulseFormat: {
+    structure: {
+      noise: { description: string; maxLength: number; tone: string };
+      translation: { description: string; maxLength: number; tone: string };
+      action: { description: string; maxLength: number; tone: string };
+    };
+    analogPerspective: {
+      description: string;
+      themes: string[];
+    };
   };
 }
 
-interface GeneratedContent {
-  topic: string;
-  title: string;
-  content: string;
-  metadata: {
-    keywords: string[];
-    targetAudience: string;
-    generatedAt: string;
-    wordCount: number;
-  };
+interface PulseItem {
+  id: string;
+  slug: string;
+  category: string;
+  noise: string;
+  translation: string;
+  action: string;
+  date: string;
+  keywords: string[];
+  sources?: Array<{ label: string; url: string }>;
 }
 
 /**
- * Call Gemini Flash API (FREE tier - 1500 requests/day)
+ * Call Gemini 2.5 Flash API
  */
-async function callGeminiFlash(prompt: string): Promise<string> {
+async function callGemini(prompt: string): Promise<string> {
   const apiKey = process.env.GEMINI_API_KEY;
   
   if (!apiKey) {
-    throw new Error('GEMINI_API_KEY not set in environment variables');
+    throw new Error('GEMINI_API_KEY not set');
   }
 
   const response = await fetch(
@@ -60,10 +62,10 @@ async function callGeminiFlash(prompt: string): Promise<string> {
           parts: [{ text: prompt }]
         }],
         generationConfig: {
-          temperature: 0.7,
+          temperature: 0.8,
           topK: 40,
           topP: 0.95,
-          maxOutputTokens: 2048
+          maxOutputTokens: 1024
         }
       })
     }
@@ -79,121 +81,129 @@ async function callGeminiFlash(prompt: string): Promise<string> {
 }
 
 /**
- * Generate SEO-optimized content for a topic
+ * Generate Pulse-format news analysis
  */
-export async function generateContent(
-  topic: ContentConfig['topics'][0],
-  format: ContentConfig['contentFormats'][0],
-  seoKeywords: string[]
-): Promise<GeneratedContent> {
+export async function generatePulseItem(
+  topic: NewsConfig['newsTopics'][0],
+  pulseFormat: NewsConfig['pulseFormat']
+): Promise<PulseItem> {
   
-  console.log(`📝 Generating ${format.type} for: ${topic.title}`);
+  console.log(`📝 Generating Pulse item for: ${topic.category}`);
 
-  const prompt = `You are an expert content writer specializing in AI operations and digital transformation for regulated industries.
+  const prompt = `You are Pedro Bandeira — a 50-year-old Portuguese entrepreneur with 25+ years bridging analog business + AI execution. You're the "Xennial advantage" — you started working before mobile phones existed, understand pre-digital org politics, and now execute AI operations for regulated industries.
 
-Write a ${format.type} article (${format.length} words) on the following topic:
+**Your job:** Write a Pulse news analysis entry.
 
-**Title**: ${topic.title}
-**Target Audience**: ${topic.targetAudience}
-**Angle**: ${topic.angle}
-**Keywords to include naturally**: ${topic.keywords.join(', ')}
+**Category:** ${topic.category}
+**Target Audience:** ${topic.targetAudience}
+**Keywords to monitor:** ${topic.keywords.join(', ')}
 
-**Structure**:
-${format.structure.map((section, i) => `${i + 1}. ${section}`).join('\n')}
+**ANALOG-AI PERSPECTIVE (your unique edge):**
+${pulseFormat.analogPerspective.themes.join('\n- ')}
 
-**SEO Requirements**:
-- Must rank well in ChatGPT, Claude, Perplexity, and Google searches
-- Target these phrases: ${seoKeywords.slice(0, 3).join(', ')}
-- Use semantic SEO (related terms, concepts, context)
-- Write for C-suite executives making AI transformation decisions
+**OUTPUT FORMAT (3 sections, exact structure):**
 
-**Tone**:
-- Professional but accessible
-- Data-driven with specific examples
-- Action-oriented (clear next steps)
-- Thought leadership voice
+1. **THE NOISE** (${pulseFormat.structure.noise.maxLength} chars max)
+   ${pulseFormat.structure.noise.description}
+   ${pulseFormat.structure.noise.tone}
+   
+   Example: "Meta releases Llama 4, OpenClaw launches open-source agent framework."
+   
+2. **THE TRANSLATION** (${pulseFormat.structure.translation.maxLength} chars max)
+   ${pulseFormat.structure.translation.description}
+   ${pulseFormat.structure.translation.tone}
+   
+   Example: "Self-hosted models are now good enough for production workloads. You can stop sending client data to US servers."
+   
+3. **THE ACTION** (${pulseFormat.structure.action.maxLength} chars max)
+   ${pulseFormat.structure.action.description}
+   ${pulseFormat.structure.action.tone}
+   
+   Example: "I can redeploy your document processing pipeline to run on-premise using Llama 4 + OpenClaw — comparable quality on the right tasks, full data sovereignty, zero API costs."
 
-**CRITICAL**:
-- NO fluff or generic advice
-- MUST include specific frameworks, methodologies, or action plans
-- Show deep expertise in regulated industries (pharma, finance, legal, healthcare)
-- Emphasize the "analog advantage" - experience from pre-digital business world
+**CRITICAL REQUIREMENTS:**
+- Pick a RECENT, REAL news story from this category (Feb 2026)
+- Show your 50yo operator experience (pattern recognition AI-natives lack)
+- Be specific and actionable, not generic
+- Use first-person ("I can implement this in 1-3 days")
+- No fluff or buzzwords
 
-Write the complete article now. Output ONLY the article content (no meta-commentary).`;
+**OUTPUT (plain text, exact format):**
+NOISE: [your noise text here]
+TRANSLATION: [your translation text here]
+ACTION: [your action text here]
+SOURCE_URL: [actual URL to the news source]`;
 
-  const content = await callGeminiFlash(prompt);
+  const response = await callGemini(prompt);
+
+  // Parse response
+  const noiseMatch = response.match(/NOISE:\s*(.+?)(?=TRANSLATION:|$)/s);
+  const translationMatch = response.match(/TRANSLATION:\s*(.+?)(?=ACTION:|$)/s);
+  const actionMatch = response.match(/ACTION:\s*(.+?)(?=SOURCE_URL:|$)/s);
+  const sourceMatch = response.match(/SOURCE_URL:\s*(.+?)$/s);
+
+  const noise = noiseMatch?.[1]?.trim() || 'No noise extracted';
+  const translation = translationMatch?.[1]?.trim() || 'No translation extracted';
+  const action = actionMatch?.[1]?.trim() || 'No action extracted';
+  const sourceUrl = sourceMatch?.[1]?.trim() || '';
+
+  const slug = topic.id + '-' + Date.now();
+  const date = new Date().toLocaleDateString('en-US', { 
+    year: 'numeric', 
+    month: 'short' 
+  });
 
   return {
-    topic: topic.id,
-    title: topic.title,
-    content,
-    metadata: {
-      keywords: topic.keywords,
-      targetAudience: topic.targetAudience,
-      generatedAt: new Date().toISOString(),
-      wordCount: content.split(/\s+/).length
-    }
+    id: slug,
+    slug,
+    category: topic.category,
+    noise,
+    translation,
+    action,
+    date,
+    keywords: topic.keywords,
+    sources: sourceUrl ? [{ label: topic.category, url: sourceUrl }] : undefined
   };
 }
 
 /**
- * Main content generation orchestrator
+ * Main orchestrator
  */
-export async function runContentGenerator(): Promise<GeneratedContent[]> {
-  console.log('🚀 Starting Content Generation (Gemini Flash FREE)');
+export async function runPulseGenerator(): Promise<PulseItem[]> {
+  console.log('🚀 Starting Pulse Generator (News Analysis Format)');
 
   // Load config
   const configPath = path.join(__dirname, 'content-config.json');
   const configData = await fs.readFile(configPath, 'utf-8');
-  const config: ContentConfig = JSON.parse(configData);
+  const config: NewsConfig = JSON.parse(configData);
 
-  const results: GeneratedContent[] = [];
+  // Generate one Pulse item per run (pick random topic)
+  const randomTopic = config.newsTopics[Math.floor(Math.random() * config.newsTopics.length)];
 
-  // Generate one article per week (pick random topic)
-  const randomTopic = config.topics[Math.floor(Math.random() * config.topics.length)];
-  const randomFormat = config.contentFormats[Math.floor(Math.random() * config.contentFormats.length)];
+  console.log(`📌 Topic: ${randomTopic.category}`);
 
-  console.log(`📌 Selected: ${randomTopic.title} (${randomFormat.type})`);
+  const pulseItem = await generatePulseItem(randomTopic, config.pulseFormat);
 
-  const article = await generateContent(
-    randomTopic,
-    randomFormat,
-    config.seoOptimization.focusKeywords
-  );
-
-  results.push(article);
-
-  // Save to output file
+  // Save to output
   const outputDir = path.join(__dirname, '../generated-content');
   await fs.mkdir(outputDir, { recursive: true });
 
-  const filename = `${randomTopic.id}-${Date.now()}.md`;
+  const filename = `${pulseItem.slug}.json`;
   const filePath = path.join(outputDir, filename);
 
-  const markdown = `---
-title: ${article.title}
-keywords: ${article.metadata.keywords.join(', ')}
-audience: ${article.metadata.targetAudience}
-generated: ${article.metadata.generatedAt}
-wordCount: ${article.metadata.wordCount}
----
-
-${article.content}
-`;
-
-  await fs.writeFile(filePath, markdown, 'utf-8');
+  await fs.writeFile(filePath, JSON.stringify(pulseItem, null, 2), 'utf-8');
 
   console.log(`✅ Generated: ${filename}`);
-  console.log(`   Words: ${article.metadata.wordCount}`);
-  console.log(`   Saved to: ${filePath}`);
+  console.log(`   Category: ${pulseItem.category}`);
+  console.log(`   Noise: ${pulseItem.noise.substring(0, 60)}...`);
 
-  return results;
+  return [pulseItem];
 }
 
 // Run if executed directly
-runContentGenerator()
+runPulseGenerator()
   .then(results => {
-    console.log(`\n✨ Done! Generated ${results.length} articles`);
+    console.log(`\n✨ Done! Generated ${results.length} Pulse items`);
     process.exit(0);
   })
   .catch(error => {
