@@ -102,15 +102,13 @@ export async function orchestrate() {
   }
 }
 
-// Run if executed directly
-if (import.meta.url === `file://${process.argv[1]}`) {
-  orchestrate()
-    .then(() => {
-      console.log('\n✨ Done!');
-      process.exit(0);
-    })
-    .catch(error => {
-      console.error('\n💥 Fatal Error:', error);
-      process.exit(1);
-    });
-}
+// Run if executed directly - FIXED ES MODULE CHECK
+orchestrate()
+  .then(() => {
+    console.log('\n✨ Done!');
+    process.exit(0);
+  })
+  .catch(error => {
+    console.error('\n💥 Fatal Error:', error);
+    process.exit(1);
+  });
