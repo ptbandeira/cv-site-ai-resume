@@ -103,7 +103,7 @@ export async function orchestrate() {
 }
 
 // Run if executed directly
-if (require.main === module) {
+if (import.meta.url === `file://${process.argv[1]}`) {
   orchestrate()
     .then(() => {
       console.log('\n✨ Done!');
