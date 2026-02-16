@@ -1,0 +1,49 @@
+name: Weekly Content Generation
+
+on:
+  schedule:
+    # Runs every Monday at 9:00 AM UTC (10:00 AM Warsaw time)
+    - cron: '0 9 * * 1'
+  workflow_dispatch: # Allow manual runs
+
+jobs:
+  generate-content:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate content with Gemini Flash
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          npx tsx agents/content-generator.ts
+
+      - name: Publish content to website
+        run: |
+          npx tsx agents/content-publisher.ts
+
+      - name: Commit and push new content
+        run: |
+          git config --global user.name 'Content Bot'
+          git config --global user.email 'bot@analog-ai.vercel.app'
+          git add public/blog/ generated-content/
+          git diff --staged --quiet || git commit -m "🤖 Auto-generated weekly content [skip ci]"
+          git push
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-content
+          path: generated-content/
+          retention-days: 30

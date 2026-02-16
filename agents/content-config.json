@@ -1,0 +1,65 @@
+{
+  "topics": [
+    {
+      "id": "ai-governance-pharma",
+      "title": "AI Governance in Pharmaceutical Companies",
+      "keywords": ["AI governance", "pharma compliance", "FDA AI regulation", "drug development AI"],
+      "targetAudience": "Chief Digital Officers, VP Compliance, Pharma executives",
+      "angle": "How to implement AI governance frameworks that satisfy FDA requirements"
+    },
+    {
+      "id": "digital-transformation-banking",
+      "title": "Digital Transformation in Banking Under GDPR",
+      "keywords": ["banking digital transformation", "GDPR compliance", "financial AI", "regulatory technology"],
+      "targetAudience": "Banking CIOs, Chief Risk Officers, FinTech leaders",
+      "angle": "Navigating AI adoption while maintaining GDPR and financial regulations"
+    },
+    {
+      "id": "ai-legal-operations",
+      "title": "AI Operations in Law Firms: Ethics and Practice",
+      "keywords": ["legal AI", "law firm technology", "AI ethics legal", "legal operations"],
+      "targetAudience": "Managing Partners, Legal Tech Directors, General Counsel",
+      "angle": "Implementing AI in legal practice while maintaining ethical standards"
+    },
+    {
+      "id": "healthcare-ai-compliance",
+      "title": "Healthcare AI Implementation Under HIPAA",
+      "keywords": ["healthcare AI", "HIPAA compliance", "medical AI governance", "health data security"],
+      "targetAudience": "Hospital CIOs, Healthcare IT Directors, CMIOs",
+      "angle": "Deploying AI in healthcare while ensuring patient privacy and HIPAA compliance"
+    },
+    {
+      "id": "analog-ai-advantage",
+      "title": "The Analog-AI Advantage: Why Experience Matters",
+      "keywords": ["AI consulting", "digital transformation experience", "enterprise AI", "technology leadership"],
+      "targetAudience": "C-suite executives, Board members, Transformation leaders",
+      "angle": "Why executives who understand pre-digital business are better positioned to guide AI transformation"
+    }
+  ],
+  "contentFormats": [
+    {
+      "type": "case-study",
+      "length": 1200,
+      "structure": ["Challenge", "Approach", "Solution", "Results", "Key Takeaways"]
+    },
+    {
+      "type": "thought-leadership",
+      "length": 1000,
+      "structure": ["Problem Statement", "Industry Context", "Framework", "Implementation Steps", "Call to Action"]
+    },
+    {
+      "type": "how-to-guide",
+      "length": 1500,
+      "structure": ["Introduction", "Prerequisites", "Step-by-Step Process", "Common Pitfalls", "Next Steps"]
+    }
+  ],
+  "seoOptimization": {
+    "targetSearchEngines": ["ChatGPT", "Claude", "Perplexity", "Google"],
+    "focusKeywords": [
+      "AI operations consultant regulated industries",
+      "AI governance implementation",
+      "digital transformation compliance",
+      "enterprise AI strategy pharma finance legal"
+    ]
+  }
+}
