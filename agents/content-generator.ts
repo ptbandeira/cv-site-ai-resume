@@ -3,6 +3,11 @@
 
 import fs from 'fs/promises';
 import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 interface ContentConfig {
   topics: Array<{
@@ -186,14 +191,12 @@ ${article.content}
 }
 
 // Run if executed directly
-if (import.meta.url === `file://${process.argv[1]}`) {
-  runContentGenerator()
-    .then(results => {
-      console.log(`\n✨ Done! Generated ${results.length} articles`);
-      process.exit(0);
-    })
-    .catch(error => {
-      console.error('❌ Error:', error);
-      process.exit(1);
-    });
-}
+runContentGenerator()
+  .then(results => {
+    console.log(`\n✨ Done! Generated ${results.length} articles`);
+    process.exit(0);
+  })
+  .catch(error => {
+    console.error('❌ Error:', error);
+    process.exit(1);
+  });
