@@ -2,7 +2,7 @@ name: Generate Weekly Pulse Content
 
 on:
   schedule:
-    # Run every Monday at 9am UTC (adjust timezone as needed)
+    # Run every Monday at 9am UTC
     - cron: '0 9 * * 1'
   workflow_dispatch: # Allow manual trigger
   push:
@@ -44,7 +44,3 @@ jobs:
           git add public/blog/*.json public/manifest.json
           git diff --staged --quiet || git commit -m "🤖 Auto-generate Pulse content [skip ci]"
           git push
-
-      - name: Deploy notification
-        if: success()
-        run: echo "✅ New Pulse content generated and deployed!"
