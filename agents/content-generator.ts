@@ -65,7 +65,7 @@ async function callGemini(prompt: string): Promise<string> {
           temperature: 0.8,
           topK: 40,
           topP: 0.95,
-          maxOutputTokens: 1024
+          maxOutputTokens: 2048
         }
       })
     }
@@ -136,6 +136,8 @@ SOURCE_URL: [actual URL to the news source]`;
 
   const response = await callGemini(prompt);
 
+
+
   // Parse response
   const noiseMatch = response.match(/NOISE:\s*(.+?)(?=TRANSLATION:|$)/s);
   const translationMatch = response.match(/TRANSLATION:\s*(.+?)(?=ACTION:|$)/s);
@@ -185,7 +187,7 @@ export async function runPulseGenerator(): Promise<PulseItem[]> {
   const pulseItem = await generatePulseItem(randomTopic, config.pulseFormat);
 
   // Save to output
-  const outputDir = path.join(__dirname, '../generated-content');
+  const outputDir = path.join(__dirname, '../public/blog');
   await fs.mkdir(outputDir, { recursive: true });
 
   const filename = `${pulseItem.slug}.json`;
