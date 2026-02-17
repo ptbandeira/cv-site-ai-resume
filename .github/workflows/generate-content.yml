@@ -1,0 +1,50 @@
+name: Generate Weekly Pulse Content
+
+on:
+  schedule:
+    # Run every Monday at 9am UTC (adjust timezone as needed)
+    - cron: '0 9 * * 1'
+  workflow_dispatch: # Allow manual trigger
+  push:
+    branches:
+      - main
+    paths:
+      - 'agents/content-config.json'
+      - 'agents/content-generator.ts'
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Pulse content
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: npm run generate
+
+      - name: Publish manifest
+        run: npm run publish
+
+      - name: Commit generated content
+        run: |
+          git config user.name "Pulse Bot"
+          git config user.email "bot@analog-ai.com"
+          git add public/blog/*.json public/manifest.json
+          git diff --staged --quiet || git commit -m "🤖 Auto-generate Pulse content [skip ci]"
+          git push
+
+      - name: Deploy notification
+        if: success()
+        run: echo "✅ New Pulse content generated and deployed!"
