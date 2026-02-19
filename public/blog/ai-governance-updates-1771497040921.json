@@ -1,0 +1,22 @@
+{
+  "id": "ai-governance-updates-1771497040921",
+  "slug": "ai-governance-updates-1771497040921",
+  "category": "AI Governance",
+  "noise": "EC finalizes EU AI Act high-risk list & conformity standards. 6-month compliance window opens for regulated sectors.",
+  "translation": "The grace period is over. Know if your AI is 'high-risk' and start your conformity assessment. This isn't just a legal check; it's a technical audit requiring deep dive into your AI systems.",
+  "action": "I can lead your cross-functional team (legal, tech, operations) to map your AI systems against the new high-risk criteria, assess conformity, and implement the required technical documentation & governance. This isn't rocket science; it's structured process work, like ISO 9001 in the 90s, but for AI. Expect 4-6 weeks for initial assessment.",
+  "date": "Feb 2026",
+  "keywords": [
+    "AI regulation",
+    "EU AI Act",
+    "FDA AI guidance",
+    "AI compliance",
+    "responsible AI"
+  ],
+  "sources": [
+    {
+      "label": "AI Governance",
+      "url": "https://ec.europa.eu/info/ai-act-high-risk-standards-feb2026"
+    }
+  ]
+}
