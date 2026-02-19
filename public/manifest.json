@@ -1,26 +1,25 @@
 {
-  "generated": "2026-02-19T10:30:41.612Z",
+  "generated": "2026-02-17T09:56:56.172Z",
   "totalItems": 1,
   "items": [
     {
-      "id": "ai-governance-updates-1771497040921",
-      "slug": "ai-governance-updates-1771497040921",
-      "category": "AI Governance",
-      "noise": "EC finalizes EU AI Act high-risk list & conformity standards. 6-month compliance window opens for regulated sectors.",
-      "translation": "The grace period is over. Know if your AI is 'high-risk' and start your conformity assessment. This isn't just a legal check; it's a technical audit requiring deep dive into your AI systems.",
-      "action": "I can lead your cross-functional team (legal, tech, operations) to map your AI systems against the new high-risk criteria, assess conformity, and implement the required technical documentation & governance. This isn't rocket science; it's structured process work, like ISO 9001 in the 90s, but for AI. Expect 4-6 weeks for initial assessment.",
+      "id": "legal-tech-updates-1771322203597",
+      "slug": "legal-tech-updates-1771322203597",
+      "category": "Legal Technology",
+      "noise": "LexisNexis AI launches 'Drafting Assistant Pro,' integrates GenAI for brief synthesis & argument generation.",
+      "translation": "Your associates can now produce near-final legal briefs in minutes, not hours, by leveraging AI. This means faster client delivery and lower research costs, not just incremental gains.",
+      "action": "I've seen 'automation' tools promise this since the 90s. This isn't just word processing. I can design a pilot program to integrate this into your litigation workflow, including critical human oversight and training, ready in 3-5 days.",
       "date": "Feb 2026",
       "keywords": [
-        "AI regulation",
-        "EU AI Act",
-        "FDA AI guidance",
-        "AI compliance",
-        "responsible AI"
+        "legal AI",
+        "law firm technology",
+        "contract automation",
+        "legal operations"
       ],
       "sources": [
         {
-          "label": "AI Governance",
-          "url": "https://ec.europa.eu/info/ai-act-high-risk-standards-feb2026"
+          "label": "Legal Technology",
+          "url": "https://www.lexisnexis.com/en-us/about-us/media/press-release/2023/lexisnexis-lexis-ai-now-generally-available-in-the-us.page"
         }
       ]
     }
