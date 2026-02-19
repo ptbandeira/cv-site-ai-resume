@@ -61,17 +61,21 @@ export async function orchestrate() {
 
     console.log(`✅ Saved ${savedLeads?.length || 0} leads to database`);
 
-    // 🔄 STEP 3: Sync to HubSpot
-    console.log('\n🔄 Syncing to HubSpot CRM...');
-    const syncResult = await syncLeadBatch(leads);
-
-    console.log(`✅ HubSpot Sync Complete:`);
-    console.log(`   Success: ${syncResult.success}`);
-    console.log(`   Failed: ${syncResult.failed}`);
-
-    if (syncResult.errors.length > 0) {
-      console.log(`   Errors:`);
-      syncResult.errors.forEach(err => console.log(`     - ${err}`));
+    // 🔄 STEP 3: Sync to HubSpot (optional — skipped if no API key or on failure)
+    if (process.env.HUBSPOT_API_KEY) {
+      try {
+        console.log('\n🔄 Syncing to HubSpot CRM...');
+        const syncResult = await syncLeadBatch(leads);
+        console.log(`✅ HubSpot Sync: ${syncResult.success}/${leads.length} pushed`);
+        if (syncResult.errors.length > 0) {
+          console.log(`⚠️  Sync errors (non-fatal):`);
+          syncResult.errors.slice(0, 5).forEach(err => console.log(`     - ${err}`));
+        }
+      } catch (syncErr: any) {
+        console.log(`⚠️  HubSpot sync skipped: ${syncErr.message} (leads saved to Supabase)`);
+      }
+    } else {
+      console.log('\n⏭️  HubSpot sync skipped (no API key — leads saved to Supabase for manual review)');
     }
 
     // Update job as completed

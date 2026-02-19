@@ -1,232 +1,243 @@
-// Lead Finder Agent — FREE VERSION (No API costs)
-// Uses Playwright + Cheerio for scraping instead of Firecrawl
+// Lead Finder Agent — ANALOG AI VERSION
+// ICP: Gen X executives and SMB owners in regulated industries who need
+//      a business-side AI implementation partner (not a technical hire)
+// Signal: Companies/execs publicly starting, struggling with, or asking about AI adoption
+// Sources: Google News RSS, TechCrunch RSS, Hacker News API
+// No Playwright needed — pure HTTP fetch
 
-import { chromium } from 'playwright';
+import { load } from 'cheerio';
 import type { Lead } from './types';
 
-// Job search queries (same as before)
-const JOB_SEARCH_QUERIES = [
-  'Chief AI Officer pharma',
-  'VP Digital Transformation finance',
-  'Head of Compliance Technology',
-  'AI Governance Director',
-  'Chief Data Officer healthcare',
-  'Digital Transformation Leader legal'
+// ─── ICP-tuned search queries ────────────────────────────────────────────────
+const GOOGLE_NEWS_QUERIES = [
+  '"AI implementation" ("law firm" OR "legal" OR "pharma" OR "healthcare" OR "financial services")',
+  '"artificial intelligence" "we don\'t know where to start" OR "struggling to implement" OR "failed pilot"',
+  '"AI strategy" ("SMB" OR "small business" OR "mid-size" OR "family business")',
+  '"AI governance" ("compliance" OR "regulated" OR "risk") -"job" -"hiring"',
+  '"digital transformation" ("overwhelmed" OR "behind" OR "don\'t know how") AI',
+  '"Chief AI Officer" OR "fractional AI" ("need" OR "looking for" OR "hire")',
 ];
 
-const REGULATED_INDUSTRIES = [
-  'pharmaceutical', 'pharma', 'biotech',
-  'banking', 'finance', 'fintech', 'insurance',
-  'legal', 'law firm', 'litigation',
-  'healthcare', 'hospital', 'medical device'
+// ─── Industry classifier ─────────────────────────────────────────────────────
+const INDUSTRY_KEYWORDS: [string, Lead['industry']][] = [
+  ['pharma', 'pharma'], ['pharmaceutical', 'pharma'], ['biotech', 'pharma'], ['drug', 'pharma'],
+  ['bank', 'finance'], ['financ', 'finance'], ['insurance', 'finance'], ['wealth', 'finance'], ['hedge fund', 'finance'],
+  ['law firm', 'legal'], ['legal', 'legal'], ['attorney', 'legal'], ['counsel', 'legal'], ['barrister', 'legal'],
+  ['hospital', 'healthcare'], ['healthcare', 'healthcare'], ['health care', 'healthcare'], ['clinic', 'healthcare'], ['medical', 'healthcare'],
 ];
 
-/**
- * Scrape LinkedIn Jobs using Playwright (FREE, no API)
- */
-export async function scrapeLinkedInJobsFree(): Promise<Lead[]> {
-  const leads: Lead[] = [];
-
-  // Launch browser
-  const browser = await chromium.launch({
-    headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
-  });
-
-  const context = await browser.newContext({
-    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-  });
-
-  const page = await context.newPage();
-
-  for (const query of JOB_SEARCH_QUERIES) {
-    try {
-      // Navigate to LinkedIn Jobs (public search, no login needed)
-      const searchUrl = `https://www.linkedin.com/jobs/search/?keywords=${encodeURIComponent(query)}&location=Worldwide&f_TPR=r86400`;
-
-      await page.goto(searchUrl, { waitUntil: 'networkidle' });
-      await page.waitForTimeout(2000); // Let page load
-
-      // Extract job listings
-      const jobs = await page.evaluate(() => {
-        const jobCards = Array.from(document.querySelectorAll('.base-card'));
-
-        return jobCards.map(card => {
-          const titleEl = card.querySelector('.base-search-card__title');
-          const companyEl = card.querySelector('.base-search-card__subtitle');
-          const locationEl = card.querySelector('.job-search-card__location');
-          const linkEl = card.querySelector('a');
-
-          return {
-            title: titleEl?.textContent?.trim() || '',
-            company: companyEl?.textContent?.trim() || '',
-            location: locationEl?.textContent?.trim() || '',
-            url: linkEl?.href || ''
-          };
-        }).filter(job => job.title && job.company);
-      });
-
-      // Filter for regulated industries
-      const filteredJobs = jobs.filter(job => {
-        const text = `${job.title} ${job.company}`.toLowerCase();
-        return REGULATED_INDUSTRIES.some(industry => text.includes(industry));
-      });
-
-      // Convert to Lead format
-      for (const job of filteredJobs) {
-        leads.push({
-          id: `job-${Date.now()}-${Math.random()}`,
-          source: 'job_board',
-          company_name: job.company,
-          industry: inferIndustry(job.company, job.title),
-          signal: `Posted ${job.title} role`,
-          signal_url: job.url,
-          priority: assessPriority(job.title),
-          scraped_at: new Date().toISOString(),
-          synced_to_hubspot: false
-        });
-      }
-
-      console.log(`✓ Found ${filteredJobs.length} leads for "${query}"`);
-
-      // Rate limiting: 3 seconds between queries
-      await page.waitForTimeout(3000);
-
-    } catch (error) {
-      console.error(`Error scraping "${query}":`, error);
-    }
+function detectIndustry(text: string): Lead['industry'] {
+  const lower = text.toLowerCase();
+  for (const [kw, industry] of INDUSTRY_KEYWORDS) {
+    if (lower.includes(kw)) return industry;
   }
-
-  await browser.close();
-  return leads;
-}
-
-/**
- * Scrape TechCrunch for AI funding news (FREE, no API)
- */
-export async function scrapeTechCrunchNews(): Promise<Lead[]> {
-  const leads: Lead[] = [];
-
-  const browser = await chromium.launch({ headless: true });
-  const page = await browser.newPage();
-
-  try {
-    // TechCrunch AI tag
-    await page.goto('https://techcrunch.com/tag/artificial-intelligence/', {
-      waitUntil: 'networkidle'
-    });
-
-    // Extract articles
-    const articles = await page.evaluate(() => {
-      const items = Array.from(document.querySelectorAll('article'));
-
-      return items.slice(0, 20).map(article => {
-        const titleEl = article.querySelector('h2 a');
-        const excerptEl = article.querySelector('.article-content');
-
-        return {
-          title: titleEl?.textContent?.trim() || '',
-          url: titleEl?.getAttribute('href') || '',
-          excerpt: excerptEl?.textContent?.trim() || ''
-        };
-      }).filter(a => a.title);
-    });
-
-    // Look for funding announcements in regulated industries
-    for (const article of articles) {
-      const text = `${article.title} ${article.excerpt}`.toLowerCase();
-
-      // Check if it's about regulated industries
-      const hasIndustry = REGULATED_INDUSTRIES.some(ind => text.includes(ind));
-
-      // Check if it's about funding or AI initiatives
-      const hasFunding = text.match(/raises|funding|series [abc]|million|capital/);
-      const hasAI = text.match(/artificial intelligence|machine learning|ai platform/);
-
-      if (hasIndustry && (hasFunding || hasAI)) {
-        // Extract company name (basic heuristic)
-        const companyMatch = article.title.match(/^([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)/);
-        const companyName = companyMatch ? companyMatch[1] : 'Unknown Company';
-
-        leads.push({
-          id: `news-${Date.now()}-${Math.random()}`,
-          source: 'news',
-          company_name: companyName,
-          industry: inferIndustry(companyName, article.excerpt),
-          signal: article.title,
-          signal_url: article.url,
-          priority: 'warm',
-          scraped_at: new Date().toISOString(),
-          synced_to_hubspot: false
-        });
-      }
-    }
-
-  } catch (error) {
-    console.error('Error scraping TechCrunch:', error);
-  }
-
-  await browser.close();
-  return leads;
-}
-
-/**
- * Infer industry from company name and text
- */
-function inferIndustry(companyName: string, text: string): Lead['industry'] {
-  const combined = `${companyName} ${text}`.toLowerCase();
-
-  if (combined.match(/pharma|biotech|drug|clinical/)) return 'pharma';
-  if (combined.match(/bank|financ|insurance|trading/)) return 'finance';
-  if (combined.match(/law|legal|attorney|litigation/)) return 'legal';
-  if (combined.match(/hospital|healthcare|medical/)) return 'healthcare';
-
   return 'other';
 }
 
-/**
- * Assess priority based on job title
- */
-function assessPriority(title: string): Lead['priority'] {
-  const lower = title.toLowerCase();
+// ─── Priority scorer ─────────────────────────────────────────────────────────
+// Hot = explicit pain / active search for help
+// Warm = announced initiative (will need help soon)
+// Cold = general AI news in target industry
+function scorePriority(text: string): Lead['priority'] {
+  const t = text.toLowerCase();
+  const hotSignals = [
+    'struggling', 'failed', 'failure', 'challenge', 'problem', 'behind',
+    'don\'t know', "don't know", 'overwhelmed', 'confused', 'worried',
+    'seeking help', 'looking for', 'need a', 'hire a', 'fractional',
+    'pilot went wrong', 'implementation issue', 'compliance risk'
+  ];
+  const warmSignals = [
+    'announced', 'launches', 'launched', 'beginning', 'starting',
+    'partnership', 'initiative', 'exploring', 'piloting', 'strategy'
+  ];
 
-  if (lower.match(/chief|ceo|cto|cio/)) return 'hot';
-  if (lower.match(/vp|vice president|director/)) return 'warm';
-
+  if (hotSignals.some(s => t.includes(s))) return 'hot';
+  if (warmSignals.some(s => t.includes(s))) return 'warm';
   return 'cold';
 }
 
-/**
- * Main orchestrator for FREE version
- */
-export async function runLeadFinderSwarmFree(): Promise<Lead[]> {
-  console.log('🔍 Starting Lead Finder Swarm (FREE VERSION)...');
-
-  const [jobLeads, newsLeads] = await Promise.all([
-    scrapeLinkedInJobsFree(),
-    scrapeTechCrunchNews()
-  ]);
-
-  const allLeads = [...jobLeads, ...newsLeads];
-
-  console.log(`✅ Found ${allLeads.length} leads`);
-  console.log(`   Hot: ${allLeads.filter(l => l.priority === 'hot').length}`);
-  console.log(`   Warm: ${allLeads.filter(l => l.priority === 'warm').length}`);
-  console.log(`   Cold: ${allLeads.filter(l => l.priority === 'cold').length}`);
-
-  return allLeads;
+// ─── Company name extractor from news headline ───────────────────────────────
+// Tries to pull the org name from a title like "Acme Corp launches AI initiative"
+function extractCompanyFromTitle(title: string, sourceName: string): string {
+  // Pattern: "OrgName verb AI..." at start of sentence
+  const match = title.match(/^([A-Z][A-Za-z0-9&\s',.-]{2,40}?)\s+(launches|announces|says|warns|faces|struggles|adopts|pilots|hires|seeks)/);
+  if (match) return match[1].trim();
+  // Fallback: "How OrgName is..."
+  const match2 = title.match(/(?:How|Why|When)\s+([A-Z][A-Za-z0-9&\s',.-]{2,40}?)\s+(?:is|are|was|has)/);
+  if (match2) return match2[1].trim();
+  // Fallback to news source name
+  return sourceName || 'Unknown';
 }
 
-// Run if executed directly
-if (import.meta.url === `file://${process.argv[1]}`) {
-  runLeadFinderSwarmFree()
-    .then(leads => {
-      console.log('\n📊 Lead Summary:');
-      console.log(JSON.stringify(leads.slice(0, 5), null, 2));
-      console.log(`\n... and ${leads.length - 5} more`);
-    })
-    .catch(error => {
-      console.error('❌ Error:', error);
-      process.exit(1);
+// ─── Google News RSS scraper ─────────────────────────────────────────────────
+async function scrapeGoogleNews(query: string): Promise<Lead[]> {
+  const leads: Lead[] = [];
+  try {
+    const url = `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=en-US&gl=US&ceid=US:en`;
+    const res = await fetch(url, {
+      headers: { 'Accept': 'application/rss+xml,application/xml,text/xml,*/*' },
+      signal: AbortSignal.timeout(15000),
     });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    const xml = await res.text();
+    const $ = load(xml, { xmlMode: true });
+
+    $('item').slice(0, 8).each((_, el) => {
+      const title       = $(el).find('title').first().text().trim();
+      const link        = $(el).find('link').first().text().trim();
+      const sourceName  = $(el).find('source').first().text().trim();
+      const description = $(el).find('description').first().text().replace(/<[^>]*>/g, '').trim();
+
+      if (!title || !link) return;
+
+      const fullText = `${title} ${description} ${sourceName}`;
+      const industry = detectIndustry(fullText);
+      if (industry === 'other') return;
+
+      const priority    = scorePriority(fullText);
+      const companyName = extractCompanyFromTitle(title, sourceName);
+
+      leads.push({
+        id: `gn-${Buffer.from(link).toString('base64').slice(0, 16)}-${Date.now()}`,
+        source: 'news',
+        company_name: companyName,
+        industry,
+        signal: title,
+        signal_url: link,
+        priority,
+        scraped_at: new Date().toISOString(),
+        synced_to_hubspot: false,
+      });
+    });
+
+    console.log(`  ✓ Google News [${query.slice(0, 50)}...]: ${leads.length} leads`);
+  } catch (err: any) {
+    console.log(`  ✗ Google News [${query.slice(0, 50)}...]: ${err.message}`);
+  }
+  return leads;
+}
+
+// ─── TechCrunch RSS ───────────────────────────────────────────────────────────
+async function scrapeTechCrunch(): Promise<Lead[]> {
+  const leads: Lead[] = [];
+  try {
+    const res = await fetch('https://techcrunch.com/feed/', {
+      headers: { 'Accept': 'application/rss+xml,*/*' },
+      signal: AbortSignal.timeout(15000),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    const xml = await res.text();
+    const $ = load(xml, { xmlMode: true });
+
+    $('item').each((_, el) => {
+      const title       = $(el).find('title').first().text().trim();
+      const link        = $(el).find('link').first().text().trim();
+      const description = $(el).find('description').first().text().replace(/<[^>]*>/g, '').trim();
+
+      const fullText = `${title} ${description}`;
+      const lower = fullText.toLowerCase();
+
+      const isAI      = lower.includes(' ai ') || lower.includes('artificial intelligence') || lower.includes('machine learning');
+      const industry  = detectIndustry(fullText);
+      const isSMB     = lower.includes('smb') || lower.includes('small business') || lower.includes('mid-market');
+
+      if (!isAI || (industry === 'other' && !isSMB)) return;
+
+      leads.push({
+        id: `tc-${Buffer.from(link).toString('base64').slice(0, 16)}-${Date.now()}`,
+        source: 'news',
+        company_name: extractCompanyFromTitle(title, 'TechCrunch'),
+        industry: industry === 'other' ? 'other' : industry,
+        signal: title,
+        signal_url: link,
+        priority: scorePriority(fullText),
+        scraped_at: new Date().toISOString(),
+        synced_to_hubspot: false,
+      });
+    });
+
+    console.log(`  ✓ TechCrunch: ${leads.length} relevant items`);
+  } catch (err: any) {
+    console.log(`  ✗ TechCrunch: ${err.message}`);
+  }
+  return leads;
+}
+
+// ─── Hacker News API (recent stories about AI + business) ───────────────────
+async function scrapeHackerNews(): Promise<Lead[]> {
+  const leads: Lead[] = [];
+  try {
+    const queries = [
+      'AI implementation business regulated',
+      'artificial intelligence SMB governance',
+      'fractional Chief AI Officer',
+    ];
+    const since = Math.floor(Date.now() / 1000) - 7 * 24 * 3600; // last 7 days
+
+    for (const q of queries) {
+      const url = `https://hn.algolia.com/api/v1/search?query=${encodeURIComponent(q)}&tags=story&hitsPerPage=10&numericFilters=created_at_i>${since}`;
+      const res = await fetch(url, { signal: AbortSignal.timeout(10000) });
+      const data: any = await res.json();
+
+      for (const hit of data.hits || []) {
+        if (!hit.title) continue;
+        const storyUrl = hit.url || `https://news.ycombinator.com/item?id=${hit.objectID}`;
+        const fullText = `${hit.title} ${hit.story_text || ''}`;
+        const industry = detectIndustry(fullText);
+
+        leads.push({
+          id: `hn-${hit.objectID}`,
+          source: 'news',
+          company_name: extractCompanyFromTitle(hit.title, 'HN Discussion'),
+          industry: industry === 'other' ? 'other' : industry,
+          signal: hit.title,
+          signal_url: storyUrl,
+          priority: hit.points > 100 ? 'hot' : hit.points > 30 ? 'warm' : 'cold',
+          scraped_at: new Date().toISOString(),
+          synced_to_hubspot: false,
+        });
+      }
+    }
+    console.log(`  ✓ Hacker News: ${leads.length} items`);
+  } catch (err: any) {
+    console.log(`  ✗ Hacker News: ${err.message}`);
+  }
+  return leads;
+}
+
+// ─── Main export ─────────────────────────────────────────────────────────────
+export async function runLeadFinderSwarmFree(): Promise<Lead[]> {
+  console.log('🎯 ICP: Regulated industry execs + SMB owners needing AI implementation help\n');
+
+  // Run all scrapers in parallel
+  console.log('📰 Scraping Google News...');
+  const googleLeads = await Promise.all(GOOGLE_NEWS_QUERIES.map(q => scrapeGoogleNews(q)));
+
+  console.log('\n🟢 Scraping TechCrunch RSS...');
+  const tcLeads = await scrapeTechCrunch();
+
+  console.log('\n🔶 Scraping Hacker News...');
+  const hnLeads = await scrapeHackerNews();
+
+  // Merge + deduplicate by signal_url
+  const all = [...googleLeads.flat(), ...tcLeads, ...hnLeads];
+  const seen = new Set<string>();
+  const unique = all.filter(lead => {
+    if (seen.has(lead.signal_url)) return false;
+    seen.add(lead.signal_url);
+    return true;
+  });
+
+  const hot  = unique.filter(l => l.priority === 'hot');
+  const warm = unique.filter(l => l.priority === 'warm');
+  const cold = unique.filter(l => l.priority === 'cold');
+
+  console.log(`\n✅ Found ${unique.length} unique leads`);
+  console.log(`   Hot:  ${hot.length}`);
+  console.log(`   Warm: ${warm.length}`);
+  console.log(`   Cold: ${cold.length}`);
+
+  return unique;
 }
