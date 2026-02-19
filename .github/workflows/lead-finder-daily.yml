@@ -21,8 +21,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install
-          npx playwright install chromium
+          npm ci
 
       - name: Run Lead Finder Swarm
         env:

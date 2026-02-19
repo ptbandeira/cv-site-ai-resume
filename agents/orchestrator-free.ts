@@ -52,7 +52,7 @@ export async function orchestrate() {
     console.log(`\n💾 Saving ${leads.length} leads to Supabase...`);
     const { data: savedLeads, error: saveError } = await supabase
       .from('leads')
-      .insert(leads)
+      .upsert(leads, { onConflict: 'id', ignoreDuplicates: true })
       .select();
 
     if (saveError) {
