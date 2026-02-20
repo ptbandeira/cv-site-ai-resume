@@ -9,13 +9,22 @@ import { load } from 'cheerio';
 import type { Lead } from './types';
 
 // ─── ICP-tuned search queries ────────────────────────────────────────────────
+// PRIMARY: EU AI Act — enforcement August 2026, biggest compliance urgency in Europe
 const GOOGLE_NEWS_QUERIES = [
+  // EU AI Act — the #1 European business AI story of 2026
+  '"EU AI Act" ("compliance" OR "deadline" OR "August 2026" OR "enforcement" OR "prepare")',
+  '"EU AI Act" ("law firm" OR "legal" OR "pharma" OR "healthcare" OR "financial" OR "bank")',
+  '"AI regulation" ("Europe" OR "EU" OR "European") ("company" OR "business" OR "enterprise")',
+  '"AI compliance" ("2026" OR "deadline" OR "audit" OR "risk" OR "penalty")',
+  // AI implementation pain — Pedro\'s direct ICP
   '"AI implementation" ("law firm" OR "legal" OR "pharma" OR "healthcare" OR "financial services")',
-  '"artificial intelligence" "we don\'t know where to start" OR "struggling to implement" OR "failed pilot"',
+  '"artificial intelligence" ("struggling" OR "failed pilot" OR "don\'t know where to start" OR "behind")',
   '"AI strategy" ("SMB" OR "small business" OR "mid-size" OR "family business")',
   '"AI governance" ("compliance" OR "regulated" OR "risk") -"job" -"hiring"',
-  '"digital transformation" ("overwhelmed" OR "behind" OR "don\'t know how") AI',
   '"Chief AI Officer" OR "fractional AI" ("need" OR "looking for" OR "hire")',
+  // Poland + Portugal markets
+  '"artificial intelligence" ("Poland" OR "Warsaw" OR "Portugal" OR "Lisbon") ("business" OR "company")',
+  '"AI regulation" ("Poland" OR "Portugal" OR "CEE" OR "Central Europe")',
 ];
 
 // ─── Industry classifier ─────────────────────────────────────────────────────
@@ -44,11 +53,17 @@ function scorePriority(text: string): Lead['priority'] {
     'struggling', 'failed', 'failure', 'challenge', 'problem', 'behind',
     'don\'t know', "don't know", 'overwhelmed', 'confused', 'worried',
     'seeking help', 'looking for', 'need a', 'hire a', 'fractional',
-    'pilot went wrong', 'implementation issue', 'compliance risk'
+    'pilot went wrong', 'implementation issue', 'compliance risk',
+    // EU AI Act urgency signals
+    'deadline', 'penalty', 'fine', 'non-compliant', 'audit', 'enforcement',
+    'august 2026', 'must comply', 'required to'
   ];
   const warmSignals = [
     'announced', 'launches', 'launched', 'beginning', 'starting',
-    'partnership', 'initiative', 'exploring', 'piloting', 'strategy'
+    'partnership', 'initiative', 'exploring', 'piloting', 'strategy',
+    // EU AI Act preparedness signals
+    'eu ai act', 'ai regulation', 'ai governance', 'compliance program',
+    'preparing for', 'getting ready', 'ai policy'
   ];
 
   if (hotSignals.some(s => t.includes(s))) return 'hot';
@@ -93,8 +108,8 @@ async function scrapeGoogleNews(query: string): Promise<Lead[]> {
 
       const fullText = `${title} ${description} ${sourceName}`;
       const industry = detectIndustry(fullText);
-      if (industry === 'other') return;
-
+      // Keep ALL results from ICP queries — don't filter on industry
+      // (EU AI Act / compliance articles affect all industries)
       const priority    = scorePriority(fullText);
       const companyName = extractCompanyFromTitle(title, sourceName);
 

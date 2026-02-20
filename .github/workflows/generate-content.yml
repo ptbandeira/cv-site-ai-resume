@@ -1,8 +1,8 @@
-name: Weekly Pulse Content
+name: Daily Pulse Content
 
 on:
   schedule:
-    - cron: '0 9 * * 1'
+    - cron: '0 8 * * *'  # Daily 8AM UTC (9AM Warsaw/Lisbon) — runs BEFORE lead finder
   workflow_dispatch:
 
 jobs:
@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: '20'
 
-      - run: npm install
+      - run: npm ci
 
       - name: Generate Pulse content
         env:

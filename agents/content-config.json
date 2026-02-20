@@ -1,16 +1,34 @@
 {
   "newsTopics": [
     {
+      "id": "eu-ai-act",
+      "category": "EU AI Act",
+      "keywords": ["EU AI Act", "EU AI regulation", "AI Act compliance", "AI Act August 2026", "AI Act enforcement", "European AI law", "high-risk AI systems", "AI regulatory deadline"],
+      "targetAudience": "Legal Counsel, Chief Compliance Officers, CEOs/MDs of European companies, HR Directors in regulated industries",
+      "sources": ["euractiv.com", "AI regulation news", "IAPP", "legal tech news", "VentureBeat AI policy"],
+      "priority": 1,
+      "note": "Enforcement begins August 2026 — 6 months away. THE dominant European business AI story."
+    },
+    {
+      "id": "ai-model-launches",
+      "category": "AI Tools",
+      "keywords": ["Gemini", "GPT", "Claude", "OpenAI", "Anthropic", "Google AI", "Microsoft Copilot", "new AI model", "AI release", "LLM update"],
+      "targetAudience": "Gen X executives who need translation from hype to business impact",
+      "sources": ["OpenAI blog", "Anthropic releases", "Google AI blog", "The Verge", "TechCrunch"],
+      "priority": 2,
+      "note": "New model every week — Pedro's 'Noise → Translation → Action' format is perfect for this."
+    },
+    {
       "id": "ai-governance-updates",
       "category": "AI Governance",
-      "keywords": ["AI regulation", "EU AI Act", "FDA AI guidance", "AI compliance", "responsible AI"],
+      "keywords": ["AI regulation", "FDA AI guidance", "AI compliance", "responsible AI", "AI governance framework"],
       "targetAudience": "Chief Compliance Officers, Legal Counsel, Regulatory Affairs",
       "sources": ["TechCrunch AI", "VentureBeat AI", "The Verge AI", "AI regulation news"]
     },
     {
       "id": "enterprise-ai-releases",
       "category": "Enterprise AI",
-      "keywords": ["enterprise AI", "OpenAI", "Anthropic", "Google AI", "Microsoft AI", "LLM releases"],
+      "keywords": ["enterprise AI", "AI implementation", "AI strategy", "AI ROI", "AI transformation"],
       "targetAudience": "CIOs, CTOs, Technology Leaders",
       "sources": ["OpenAI blog", "Anthropic releases", "Google AI blog", "Microsoft AI"]
     },
