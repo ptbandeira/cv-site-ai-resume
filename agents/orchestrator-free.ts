@@ -16,7 +16,10 @@ const supabase = createClient(
  */
 async function sendSlackDigest(leads: Lead[]): Promise<void> {
   const webhookUrl = process.env.SLACK_WEBHOOK_URL;
-  if (!webhookUrl) return;
+  if (!webhookUrl) {
+    console.log('⚠️  SLACK_WEBHOOK_URL not set — skipping digest');
+    return;
+  }
 
   const hot  = leads.filter(l => l.priority === 'hot');
   const warm = leads.filter(l => l.priority === 'warm');
@@ -29,6 +32,10 @@ async function sendSlackDigest(leads: Lead[]): Promise<void> {
       .map(l => `• <${l.signal_url}|${l.signal.slice(0, 80)}${l.signal.length > 80 ? '…' : ''}>`)
       .join('\n');
 
+  const summaryText = leads.length === 0
+    ? `*0 leads found today* — system ran OK, Google News may have been quiet or rate-limited. Check again tomorrow.`
+    : `*${leads.length} leads found today* · 🔴 ${hot.length} hot · 🟡 ${warm.length} warm · ⚪ ${cold.length} cold`;
+
   const blocks: any[] = [
     {
       type: 'header',
@@ -36,10 +43,7 @@ async function sendSlackDigest(leads: Lead[]): Promise<void> {
     },
     {
       type: 'section',
-      text: {
-        type: 'mrkdwn',
-        text: `*${leads.length} leads found today* · 🔴 ${hot.length} hot · 🟡 ${warm.length} warm · ⚪ ${cold.length} cold`
-      }
+      text: { type: 'mrkdwn', text: summaryText }
     }
   ];
 
@@ -66,14 +70,19 @@ async function sendSlackDigest(leads: Lead[]): Promise<void> {
   });
 
   try {
-    await fetch(webhookUrl, {
+    const slackRes = await fetch(webhookUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ blocks }),
     });
-    console.log('📬 Slack digest sent');
+    if (!slackRes.ok) {
+      const body = await slackRes.text();
+      console.error(`❌ Slack webhook returned ${slackRes.status}: ${body}`);
+    } else {
+      console.log('📬 Slack digest sent successfully');
+    }
   } catch (err: any) {
-    console.log(`⚠️  Slack notification failed (non-fatal): ${err.message}`);
+    console.error(`❌ Slack notification FAILED: ${err.message}`);
   }
 }
 
@@ -111,6 +120,8 @@ export async function orchestrate() {
         completed_at: new Date().toISOString(),
         leads_found: 0
       }).eq('id', jobId);
+      // Still send Slack heartbeat so you know the system ran
+      await sendSlackDigest([]);
       return;
     }
 
@@ -144,10 +155,8 @@ export async function orchestrate() {
       console.log('\n⏭️  HubSpot sync skipped (no API key — leads saved to Supabase for manual review)');
     }
 
-    // 📬 STEP 4: Send Slack digest
-    if (leads.length > 0) {
-      await sendSlackDigest(leads);
-    }
+    // 📬 STEP 4: Send Slack digest (always — confirms system health)
+    await sendSlackDigest(leads);
 
     // Update job as completed
     await supabase.from('scraping_jobs').update({

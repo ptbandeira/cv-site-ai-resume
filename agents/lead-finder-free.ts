@@ -6,7 +6,13 @@
 // No Playwright needed — pure HTTP fetch
 
 import { load } from 'cheerio';
+import { createHash } from 'crypto';
 import type { Lead } from './types';
+
+// Stable ID from URL — same article = same ID across runs (enables Supabase dedup)
+function stableId(prefix: string, url: string): string {
+  return `${prefix}-${createHash('md5').update(url).digest('hex').slice(0, 16)}`;
+}
 
 // ─── ICP-tuned search queries ────────────────────────────────────────────────
 // PRIMARY: EU AI Act — enforcement August 2026, biggest compliance urgency in Europe
@@ -114,7 +120,7 @@ async function scrapeGoogleNews(query: string): Promise<Lead[]> {
       const companyName = extractCompanyFromTitle(title, sourceName);
 
       leads.push({
-        id: `gn-${Buffer.from(link).toString('base64').slice(0, 16)}-${Date.now()}`,
+        id: stableId('gn', link),
         source: 'news',
         company_name: companyName,
         industry,
@@ -161,7 +167,7 @@ async function scrapeTechCrunch(): Promise<Lead[]> {
       if (!isAI || (industry === 'other' && !isSMB)) return;
 
       leads.push({
-        id: `tc-${Buffer.from(link).toString('base64').slice(0, 16)}-${Date.now()}`,
+        id: stableId('tc', link),
         source: 'news',
         company_name: extractCompanyFromTitle(title, 'TechCrunch'),
         industry: industry === 'other' ? 'other' : industry,
