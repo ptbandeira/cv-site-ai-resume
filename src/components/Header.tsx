@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X, Shield, Cpu, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -101,6 +102,19 @@ const Header = ({ onOpenChat }: HeaderProps) => {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
+          <Link
+            to="/pulse"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+            Pulse
+          </Link>
+          <Link
+            to="/blog/eu-ai-act-compliance.html"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            EU AI Act
+          </Link>
           <button
             onClick={() => scrollToSection("how-i-work")}
             className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
@@ -140,6 +154,20 @@ const Header = ({ onOpenChat }: HeaderProps) => {
       {mobileMenuOpen && (
         <div className="md:hidden bg-[#F9F9F7] border-b border-stone-200 animate-slide-down absolute w-full">
           <div className="px-6 py-6 space-y-6">
+            <Link
+              to="/pulse"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block w-full text-left font-medium text-muted-foreground hover:text-foreground"
+            >
+              Pulse
+            </Link>
+            <Link
+              to="/blog/eu-ai-act-compliance.html"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block w-full text-left font-medium text-muted-foreground hover:text-foreground"
+            >
+              EU AI Act Guide
+            </Link>
             <button
               onClick={() => scrollToSection("how-i-work")}
               className="block w-full text-left font-medium text-muted-foreground hover:text-foreground"

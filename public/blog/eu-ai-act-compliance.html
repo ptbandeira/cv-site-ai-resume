@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EU AI Act: A Business Translation — Analog AI</title>
+<meta name="description" content="The EU AI Act high-risk deadline moved to 2027. But two obligations are already in force. A plain-English guide for European SMBs and regulated industries.">
+<meta name="keywords" content="EU AI Act compliance, EU AI Act 2026, EU AI Act SMB, EU AI Act Portugal, AI regulation Europe, AI Act high-risk systems, EU AI Act business guide">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; background: #fafaf8; color: #1a1a1a; line-height: 1.75; }
+  .container { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  /* Header */
+  .category-tag { font-family: 'Arial', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #f59e0b; margin-bottom: 16px; }
+  h1 { font-size: 2.6rem; line-height: 1.2; font-weight: 700; margin-bottom: 20px; color: #111; }
+  .subtitle { font-size: 1.2rem; color: #555; font-style: italic; margin-bottom: 32px; border-left: 3px solid #f59e0b; padding-left: 16px; }
+  .byline { font-family: 'Arial', sans-serif; font-size: 13px; color: #888; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid #e5e5e5; }
+  .byline strong { color: #444; }
+
+  /* Status badges */
+  .status-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 32px 0; }
+  .badge { font-family: 'Arial', sans-serif; font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 4px; display: inline-flex; align-items: center; gap: 6px; }
+  .badge-live { background: #fee2e2; color: #dc2626; }
+  .badge-pending { background: #fef3c7; color: #d97706; }
+  .badge-delayed { background: #f0fdf4; color: #16a34a; }
+
+  /* Timeline table */
+  .timeline { width: 100%; border-collapse: collapse; margin: 32px 0; font-family: 'Arial', sans-serif; font-size: 14px; }
+  .timeline th { text-align: left; padding: 10px 14px; background: #f5f5f0; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #666; border-bottom: 2px solid #e5e5e5; }
+  .timeline td { padding: 12px 14px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+  .timeline tr:hover td { background: #fafaf5; }
+  .status-live { color: #dc2626; font-weight: 700; }
+  .status-delayed { color: #16a34a; font-weight: 700; }
+  .status-proposed { color: #d97706; font-weight: 700; }
+
+  /* Content */
+  h2 { font-size: 1.5rem; font-weight: 700; margin: 48px 0 16px; color: #111; }
+  h3 { font-size: 1.1rem; font-weight: 700; margin: 32px 0 12px; color: #333; }
+  p { margin-bottom: 20px; }
+
+  /* Callout boxes */
+  .callout { border-left: 4px solid #f59e0b; background: #fffbeb; padding: 20px 24px; margin: 32px 0; border-radius: 0 8px 8px 0; }
+  .callout-title { font-family: 'Arial', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #d97706; margin-bottom: 8px; }
+  .callout p { margin-bottom: 0; }
+  .callout-red { border-left-color: #dc2626; background: #fff5f5; }
+  .callout-red .callout-title { color: #dc2626; }
+  .callout-green { border-left-color: #16a34a; background: #f0fdf4; }
+  .callout-green .callout-title { color: #16a34a; }
+
+  /* Penalty table */
+  .penalties { width: 100%; border-collapse: collapse; margin: 24px 0; font-family: 'Arial', sans-serif; font-size: 14px; }
+  .penalties th { text-align: left; padding: 10px 14px; background: #f5f5f0; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #666; }
+  .penalties td { padding: 12px 14px; border-bottom: 1px solid #f0f0f0; }
+  .penalty-high { color: #dc2626; font-weight: 700; }
+  .penalty-mid { color: #d97706; font-weight: 700; }
+  .penalty-low { color: #666; font-weight: 700; }
+
+  /* Checklist */
+  .checklist { list-style: none; margin: 24px 0; }
+  .checklist li { padding: 10px 0 10px 32px; position: relative; border-bottom: 1px solid #f0f0f0; font-family: 'Arial', sans-serif; font-size: 14px; }
+  .checklist li:before { content: "□"; position: absolute; left: 4px; color: #d97706; font-size: 16px; font-weight: 700; }
+  .checklist li strong { display: block; color: #222; margin-bottom: 2px; }
+
+  /* Industry cards */
+  .industry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+  .industry-card { background: white; border: 1px solid #e5e5e5; border-radius: 8px; padding: 20px; }
+  .industry-card h4 { font-family: 'Arial', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #f59e0b; margin-bottom: 8px; }
+  .industry-card ul { font-family: 'Arial', sans-serif; font-size: 13px; color: #444; padding-left: 16px; }
+  .industry-card ul li { margin-bottom: 4px; }
+
+  /* CTA */
+  .cta-block { background: #1a1a1a; color: white; padding: 40px; border-radius: 12px; margin-top: 64px; text-align: center; }
+  .cta-block h3 { font-size: 1.4rem; margin-bottom: 12px; color: white; }
+  .cta-block p { color: #aaa; margin-bottom: 24px; font-size: 0.95rem; }
+  .cta-button { display: inline-block; background: #f59e0b; color: #1a1a1a; font-family: 'Arial', sans-serif; font-weight: 700; font-size: 14px; padding: 14px 32px; border-radius: 6px; text-decoration: none; letter-spacing: 0.5px; }
+
+  /* Footer */
+  .article-footer { margin-top: 48px; padding-top: 32px; border-top: 1px solid #e5e5e5; font-family: 'Arial', sans-serif; font-size: 12px; color: #999; }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 1.8rem; }
+    .industry-grid { grid-template-columns: 1fr; }
+    .status-row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<nav style="position:sticky;top:0;z-index:100;background:#fafaf8;border-bottom:1px solid #e5e5e5;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;">
+  <a href="/" style="font-family:Georgia,serif;font-size:15px;font-weight:700;color:#1a1a1a;text-decoration:none;">Analog AI</a>
+  <div style="display:flex;gap:20px;font-family:Arial,sans-serif;font-size:13px;">
+    <a href="/pulse" style="color:#666;text-decoration:none;">Pulse</a>
+    <a href="/" style="color:#f59e0b;font-weight:700;text-decoration:none;">← Back to site</a>
+  </div>
+</nav>
+<div class="container">
+
+  <div class="category-tag">EU AI Act · Compliance Guide</div>
+
+  <h1>EU AI Act: A Business Owner's Translation</h1>
+
+  <p class="subtitle">The high-risk deadline just moved to 2027. But two obligations are already in force — and most European companies are ignoring both.</p>
+
+  <div class="byline">
+    By <strong>Pedro Bandeira</strong> · Analog AI · Updated February 2026 · 12 min read
+  </div>
+
+  <p>I've spent the last twenty years watching companies panic about compliance deadlines they ignored for two years, then scramble six months before enforcement began. The EU AI Act is following exactly that pattern — with one twist that changes everything.</p>
+
+  <p>In December 2025, the European Commission proposed pushing the main high-risk AI compliance deadline from August 2026 to December 2027. That sounds like good news. But while everyone was focused on the moved deadline, two earlier waves of the AI Act quietly went into force — and most businesses still haven't acted on either of them.</p>
+
+  <p>This is a business translation, not a legal brief. I'm not a lawyer. What I am is someone who's implemented AI systems inside regulated companies and watched what happens when executives leave this to the legal team without anyone who actually understands how AI works. Let's fix that.</p>
+
+  <div class="callout callout-red">
+    <div class="callout-title">⚠ Already In Force</div>
+    <p>Two waves of the EU AI Act are already active. If your company uses any AI — including off-the-shelf tools like ChatGPT, Copilot, or any AI-assisted HR, finance, or legal software — you likely have obligations right now.</p>
+  </div>
+
+  <h2>The Timeline You Actually Need</h2>
+
+  <table class="timeline">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>What Happened / What's Coming</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Feb 2, 2025</strong></td>
+        <td>Prohibited AI practices banned. AI literacy training required for all staff using AI.</td>
+        <td class="status-live">● IN FORCE</td>
+      </tr>
+      <tr>
+        <td><strong>Aug 2, 2025</strong></td>
+        <td>General-purpose AI (GPT, Gemini, Claude) obligations active. Penalty regime begins. AI Office operational.</td>
+        <td class="status-live">● IN FORCE</td>
+      </tr>
+      <tr>
+        <td><strong>Aug 2, 2026</strong></td>
+        <td>Original high-risk systems deadline. Now proposed to move.</td>
+        <td class="status-proposed">⏳ BEING REVISED</td>
+      </tr>
+      <tr>
+        <td><strong>Dec 2, 2027</strong></td>
+        <td>New proposed deadline: Annex III high-risk systems (employment, credit, healthcare, education AI).</td>
+        <td class="status-proposed">⏳ PROPOSED (not final)</td>
+      </tr>
+      <tr>
+        <td><strong>Aug 2, 2028</strong></td>
+        <td>New proposed deadline: Annex I systems (critical infrastructure, biometrics, law enforcement AI).</td>
+        <td class="status-delayed">✓ DELAYED (proposed)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-green">
+    <div class="callout-title">📌 The Omnibus Context</div>
+    <p>The delay is part of the EU's "Digital Omnibus" package proposed December 2025. The new deadlines are tied to the completion of technical harmonised standards (CEN-CENELEC work expected late 2026). The delay proposal still needs EU Parliament and Council approval — so August 2026 is not formally cancelled yet. Plan as if both timelines are possible.</p>
+  </div>
+
+  <h2>What's Already Required — Right Now</h2>
+
+  <p>This is the part most businesses have missed entirely.</p>
+
+  <h3>1. AI Literacy Training (Since February 2025)</h3>
+
+  <p>Article 4 of the EU AI Act requires that companies ensure all personnel who <em>operate or use</em> AI systems have sufficient AI literacy. This is not a future obligation. It has been in force for over a year.</p>
+
+  <p>What does "sufficient AI literacy" mean in practice? Your staff should understand what the AI tool does, what it cannot do, how to spot errors, and the legal and ethical implications of acting on its outputs. "The AI said so" is not a valid defence in a compliance context.</p>
+
+  <p>If you're using Copilot for contract review, ChatGPT for financial analysis, or any AI tool in an HR or hiring process — this applies to you, today.</p>
+
+  <h3>2. General-Purpose AI Obligations (Since August 2025)</h3>
+
+  <p>If your company provides or deploys general-purpose AI models — meaning the large language models like GPT-4, Gemini, Claude, or any fine-tuned version of these — you have transparency and documentation obligations that have been active since August 2025.</p>
+
+  <p>If you're a user of these tools (not the provider), your main obligation is knowing you're using them and being able to account for it. If you're building products on top of them, the obligations are significantly higher.</p>
+
+  <h2>The Risk Tiers — In Plain English</h2>
+
+  <p>The AI Act categorises AI systems into four tiers. Knowing which tier your tools fall into is the first thing any compliance effort needs to establish.</p>
+
+  <p><strong>Prohibited (Banned Entirely):</strong> Social scoring, predictive policing, real-time biometric surveillance in public spaces, AI that manipulates people through subliminal techniques. If you're using any of these, stop. The fines here go up to 7% of global annual turnover.</p>
+
+  <p><strong>High-Risk (Strict Compliance Required):</strong> This is where most regulated-industry companies will find themselves. High-risk AI includes: any AI used in hiring or managing employees, AI that makes or influences credit decisions, AI used in healthcare diagnosis or treatment, AI used in education assessment, and AI used in access to essential services like insurance or housing. Full compliance requirements apply — risk assessments, documentation, human oversight, conformity assessments, EU database registration.</p>
+
+  <p><strong>Limited Risk:</strong> AI that interacts with humans (chatbots, customer service AI) must disclose that it's AI. Content generated by AI should be labelled. These are transparency requirements, not structural compliance ones.</p>
+
+  <p><strong>Minimal Risk:</strong> Most AI tools fall here. General productivity AI, spam filters, recommendation engines, inventory optimisation. Good governance applies, but no mandatory compliance obligations.</p>
+
+  <h2>The Penalties — Why This Is Not Optional</h2>
+
+  <table class="penalties">
+    <thead>
+      <tr>
+        <th>Violation</th>
+        <th>Maximum Fine</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Using a prohibited AI system</td>
+        <td class="penalty-high">€35 million or 7% of global annual turnover</td>
+      </tr>
+      <tr>
+        <td>Non-compliant high-risk system</td>
+        <td class="penalty-mid">€15 million or 3% of global annual turnover</td>
+      </tr>
+      <tr>
+        <td>False or incomplete documentation</td>
+        <td class="penalty-low">€7.5 million or 1% of global annual turnover</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>For SMBs, fines are calculated as whichever is lower — the percentage or the fixed amount. That's the proportionality carve-out for smaller companies. But "lower fine" and "no fine" are very different things.</p>
+
+  <p>Enforcement is through national market surveillance authorities. In Portugal, that will be through the relevant sectoral regulators. In Poland, the Office of Competition and Consumer Protection (UOKiK) has been designated. Member state readiness varies considerably — but that's not a long-term protection strategy.</p>
+
+  <h2>What Regulated Industries Need to Do</h2>
+
+  <div class="industry-grid">
+    <div class="industry-card">
+      <h4>⚖ Law Firms</h4>
+      <ul>
+        <li>Contract review and due diligence AI = likely high-risk</li>
+        <li>Human lawyer sign-off required on all AI recommendations</li>
+        <li>Clients must know AI was used</li>
+        <li>Document training data sources and error rates</li>
+        <li>Review vendor contracts for liability allocation</li>
+      </ul>
+    </div>
+    <div class="industry-card">
+      <h4>🏥 Healthcare</h4>
+      <ul>
+        <li>Diagnosis/treatment AI = high-risk, full compliance</li>
+        <li>Clinical validation before deployment required</li>
+        <li>Physician oversight for all AI recommendations</li>
+        <li>Integrate AI Act with existing MDR compliance</li>
+        <li>Representative training data documentation</li>
+      </ul>
+    </div>
+    <div class="industry-card">
+      <h4>🏦 Finance & Insurance</h4>
+      <ul>
+        <li>Loan, credit, insurance pricing AI = high-risk</li>
+        <li>Explainability required (why was this decision made?)</li>
+        <li>Quarterly bias testing mandatory</li>
+        <li>Appeal mechanisms for affected individuals</li>
+        <li>Register systems in EU AI database</li>
+      </ul>
+    </div>
+    <div class="industry-card">
+      <h4>💊 Pharma</h4>
+      <ul>
+        <li>Drug discovery / clinical trial AI = high-risk</li>
+        <li>Validation per ICH guidelines (familiar territory)</li>
+        <li>Audit trail and deviation management required</li>
+        <li>Integrate with existing QMS (ISO 13485)</li>
+        <li>Opportunity: AI Act aligns with FDA/MHRA frameworks</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>The 4-Step Preparation Roadmap</h2>
+
+  <p>Whether the high-risk deadline is August 2026 or December 2027, the preparation work is identical. The difference is how much time pressure you have. Start here:</p>
+
+  <ul class="checklist">
+    <li>
+      <strong>Step 1: Build your AI inventory</strong>
+      List every AI system your company uses — including off-the-shelf SaaS tools with AI features (Microsoft 365 Copilot, Salesforce Einstein, any AI-assisted recruitment tool, credit scoring systems). Include the vendor, what decisions it influences, and who uses it. Most companies are surprised by how long this list gets.
+    </li>
+    <li>
+      <strong>Step 2: Determine your role</strong>
+      For each system: are you the provider (you built it), the deployer (you use it commercially), or both? The obligations differ significantly. Most regulated industry companies are deployers, not providers — but if you've customised an AI model or built an internal tool on top of one, you may be a provider for that system.
+    </li>
+    <li>
+      <strong>Step 3: Classify each system by risk tier</strong>
+      For each system in your inventory, determine which risk tier applies. The EU AI Act's official risk classification flowchart is the reference. Anything touching employment, credit decisions, healthcare, or essential services is very likely high-risk. Flag these. Get legal input specifically on the classification — this is where specialist AI counsel earns its fee.
+    </li>
+    <li>
+      <strong>Step 4: Start the two things already required</strong>
+      Launch AI literacy training for all staff who use AI tools (required since February 2025). If you're using general-purpose AI models, document how and why. These two steps don't require waiting for harmonised standards — they're due now.
+    </li>
+  </ul>
+
+  <h2>The Strategic View</h2>
+
+  <p>Here's the thing about compliance deadlines in Europe: the ones that matter are never the ones that slip. The penalty regime started in August 2025. The AI Office is operational. The prohibited practices ban is in force. The "everything moves to 2027" narrative is only true for one specific category of high-risk systems — and it's still a proposal, not a law.</p>
+
+  <p>Companies that use the delay as an excuse to do nothing are making a mistake. Companies that use it as breathing room to build proper compliance infrastructure — an AI inventory, a governance policy, staff training, documented vendor accountability — will be in a fundamentally different position in 2027 than the ones who procrastinated.</p>
+
+  <p>The businesses that move now are also the ones that get to define what AI-responsible looks like in their industry in Europe. That's not a compliance advantage — it's a competitive one. Clients, partners, and regulators notice when a company can demonstrate it has done the work.</p>
+
+  <div class="callout">
+    <div class="callout-title">Pedro's Take</div>
+    <p>I've worked in and around businesses long enough to know that "we have until 2027" is exactly the kind of sentence that turns into a €15 million problem. The history of digital transformation is full of companies that waited for certainty before acting. The EU AI Act's certainty is already here — it's just spread across three waves. Two of them already landed. The third is two years away. Use those two years wisely.</p>
+  </div>
+
+  <h2>Frequently Asked Questions</h2>
+
+  <h3>Does this apply to my company if we're small?</h3>
+  <p>Yes, with proportionality. The AI Act applies to any company using AI that is placed on the EU market or affects EU residents — regardless of company size or country of origin. SMEs get proportional fines (lower of percentage or fixed amount) and some simplified pathways, but the obligations still apply.</p>
+
+  <h3>We use ChatGPT / Microsoft Copilot — do we need to do anything?</h3>
+  <p>Yes. Since August 2025, if your company uses general-purpose AI models commercially, you need to be able to account for that usage. OpenAI, Microsoft, and Google are the providers — but you're the deployer, and deployers have their own obligations: knowing what you're deploying, documenting how it's used, and ensuring your staff are trained on its limitations.</p>
+
+  <h3>Is the August 2026 deadline actually cancelled?</h3>
+  <p>Not yet. The Digital Omnibus proposal to delay it is still being reviewed by EU Parliament and Council. Until it's formally adopted, August 2026 remains the official deadline for high-risk systems. Plan for both scenarios.</p>
+
+  <h3>What's the fastest way to get started without hiring a full compliance team?</h3>
+  <p>The AI inventory is free. The risk classification can be done with a good lawyer and a few hours. AI literacy training can be done through existing providers. The biggest bottleneck isn't money — it's the decision to start. Most companies delay because the scope feels overwhelming. Breaking it into the four steps above makes it manageable.</p>
+
+  <div class="cta-block">
+    <h3>Need help translating this into action for your business?</h3>
+    <p>I work with SMBs and regulated industry companies across Portugal and Poland to implement AI responsibly — including EU AI Act readiness. If you're not sure where your company stands, a 30-minute conversation is usually enough to map it out.</p>
+    <a href="mailto:pedro@analog-ai.com" class="cta-button">Book a Free Diagnostic Call</a>
+  </div>
+
+  <div class="article-footer">
+    <p>Last updated February 2026. This article is for informational purposes only and does not constitute legal advice. For formal compliance guidance, engage qualified AI/technology legal counsel. Key sources: EU AI Act official text, artificialintelligenceact.eu, EU Digital Omnibus proposal (December 2025), Orrick EU AI Act guidance, DLA Piper AI Act update.</p>
+  </div>
+
+</div>
+</body>
+</html>

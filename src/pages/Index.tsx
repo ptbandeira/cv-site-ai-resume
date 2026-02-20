@@ -19,6 +19,7 @@ import SavingsCalculator from "@/components/SavingsCalculator";
 import StrategicFAQ from "@/components/StrategicFAQ";
 import AIChat from "@/components/AIChat";
 import FloatingAICTA from "@/components/FloatingAICTA";
+import FloatingPulseTeaser from "@/components/FloatingPulseTeaser";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -56,6 +57,7 @@ const Index = () => {
       </main>
       <Footer onOpenChat={openChat} />
       <FloatingAICTA onOpenChat={openChat} />
+      <FloatingPulseTeaser />
       <AIChat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
     </div>
   );
