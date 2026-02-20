@@ -15,23 +15,52 @@ function stableId(prefix: string, url: string): string {
 }
 
 // ─── ICP-tuned search queries ────────────────────────────────────────────────
-// PRIMARY: EU AI Act — enforcement August 2026, biggest compliance urgency in Europe
+// ICP: SMBs 50-500 employees. NOT Fortune 500.
+// Target: Skeptical Stabilizer, Compliance Guardian, Frustrated Visionary, Legacy Modernizer
+// AVOID: Big pharma, big tech, logistics giants, VC-backed startups
 const GOOGLE_NEWS_QUERIES = [
-  // EU AI Act — the #1 European business AI story of 2026
-  '"EU AI Act" ("compliance" OR "deadline" OR "August 2026" OR "enforcement" OR "prepare")',
-  '"EU AI Act" ("law firm" OR "legal" OR "pharma" OR "healthcare" OR "financial" OR "bank")',
-  '"AI regulation" ("Europe" OR "EU" OR "European") ("company" OR "business" OR "enterprise")',
-  '"AI compliance" ("2026" OR "deadline" OR "audit" OR "risk" OR "penalty")',
-  // AI implementation pain — Pedro\'s direct ICP
-  '"AI implementation" ("law firm" OR "legal" OR "pharma" OR "healthcare" OR "financial services")',
-  '"artificial intelligence" ("struggling" OR "failed pilot" OR "don\'t know where to start" OR "behind")',
-  '"AI strategy" ("SMB" OR "small business" OR "mid-size" OR "family business")',
-  '"AI governance" ("compliance" OR "regulated" OR "risk") -"job" -"hiring"',
-  '"Chief AI Officer" OR "fractional AI" ("need" OR "looking for" OR "hire")',
-  // Poland + Portugal markets
-  '"artificial intelligence" ("Poland" OR "Warsaw" OR "Portugal" OR "Lisbon") ("business" OR "company")',
-  '"AI regulation" ("Poland" OR "Portugal" OR "CEE" OR "Central Europe")',
+  // EU AI Act — August 2026 enforcement = Pedro's commercial trigger, SMB angle
+  '"EU AI Act" ("SME" OR "small business" OR "mid-size" OR "boutique" OR "independent")',
+  '"EU AI Act" ("law firm" OR "legal practice" OR "independent pharmacy" OR "clinic")',
+  '"EU AI Act" compliance ("prepare" OR "deadline" OR "how to" OR "consultant" OR "help")',
+  '"AI Act" ("Poland" OR "Portugal" OR "CEE" OR "Central Europe") ("company" OR "firm")',
+
+  // Law firms — Managing Partner persona, GDPR + AI risk
+  '"law firm" ("AI implementation" OR "AI adoption" OR "artificial intelligence") -"Big Law" -"Magic Circle"',
+  '"legal practice" ("AI compliance" OR "AI risk" OR "data privacy AI" OR "GDPR AI")',
+  '"managing partner" ("AI strategy" OR "AI tools" OR "automation" OR "legal tech")',
+
+  // Pharma/biotech SMBs — Pedro's vertical expertise, avoid giants
+  '"biotech" OR "CRO" OR "contract research" ("AI compliance" OR "AI implementation") -"Pfizer" -"Novartis" -"Roche"',
+  '"pharma" ("AI regulation" OR "EU AI Act") ("small" OR "mid-size" OR "independent")',
+
+  // Logistics/ops SMBs — Skeptical Stabilizer persona
+  '"logistics" ("AI automation" OR "AI operations") ("small company" OR "SMB" OR "mid-size")',
+  '"family business" OR "owner-operated" ("artificial intelligence" OR "AI tools" OR "automation")',
+
+  // Pain-signal queries — direct ICP intent
+  '"AI implementation" ("struggling" OR "failed" OR "challenge" OR "no IT team" OR "overwhelmed")',
+  '"fractional AI" OR "fractional CTO" OR "AI consultant" ("looking for" OR "need" OR "hire")',
+  '"artificial intelligence" ("can't afford" OR "no budget" OR "too expensive" OR "alternatives")',
+
+  // Poland + Portugal — geographic edge
+  '"artificial intelligence" ("Poland" OR "Warsaw") ("firma" OR "business" OR "company")',
+  '"sztuczna inteligencja" ("firma" OR "mała firma" OR "wdrożenie" OR "compliance")',
+  '"inteligência artificial" ("Portugal" OR "Lisboa" OR "empresa" OR "PME")',
 ];
+// Companies to ignore — Pedro's ICP is SMBs, not Fortune 500
+const NEGATIVE_COMPANY_FILTER = [
+  'google', 'microsoft', 'amazon', 'meta', 'apple', 'nvidia',
+  'novo nordisk', 'pfizer', 'roche', 'johnson', 'novartis', 'astrazeneca',
+  'goldman sachs', 'jpmorgan', 'blackrock',
+  'series a', 'series b', 'funding round', 'raises $', 'raises €',
+];
+
+function isNegativeLead(text: string): boolean {
+  const t = text.toLowerCase();
+  return NEGATIVE_COMPANY_FILTER.some(term => t.includes(term));
+}
+
 
 // ─── Industry classifier ─────────────────────────────────────────────────────
 const INDUSTRY_KEYWORDS: [string, Lead['industry']][] = [

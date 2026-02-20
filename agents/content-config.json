@@ -1,92 +1,98 @@
 {
   "newsTopics": [
     {
-      "id": "eu-ai-act",
+      "id": "eu-ai-act-smb",
       "category": "EU AI Act",
-      "keywords": ["EU AI Act", "EU AI regulation", "AI Act compliance", "AI Act August 2026", "AI Act enforcement", "European AI law", "high-risk AI systems", "AI regulatory deadline"],
-      "targetAudience": "Legal Counsel, Chief Compliance Officers, CEOs/MDs of European companies, HR Directors in regulated industries",
-      "sources": ["euractiv.com", "AI regulation news", "IAPP", "legal tech news", "VentureBeat AI policy"],
+      "keywords": [
+        "EU AI Act SME", "EU AI Act small business", "EU AI Act compliance deadline",
+        "AI Act August 2026", "AI Act enforcement SMB", "European AI law compliance",
+        "high-risk AI systems compliance", "EU AI Act consultant", "AI regulatory burden SMB",
+        "AI Act preparation mid-market"
+      ],
+      "targetAudience": "CEOs/MDs of European SMBs (50-500 employees), compliance leads at independent law firms, managing partners at pharma/biotech SMEs",
+      "sources": ["euractiv.com", "IAPP", "legal tech news", "SME-focused business media"],
       "priority": 1,
-      "note": "Enforcement begins August 2026 — 6 months away. THE dominant European business AI story."
+      "note": "August 2026 enforcement = Pedro's clearest commercial trigger. SMBs are underserved vs. big corps."
     },
     {
-      "id": "ai-model-launches",
-      "category": "AI Tools",
-      "keywords": ["Gemini", "GPT", "Claude", "OpenAI", "Anthropic", "Google AI", "Microsoft Copilot", "new AI model", "AI release", "LLM update"],
-      "targetAudience": "Gen X executives who need translation from hype to business impact",
-      "sources": ["OpenAI blog", "Anthropic releases", "Google AI blog", "The Verge", "TechCrunch"],
+      "id": "law-firm-ai",
+      "category": "Legal Tech",
+      "keywords": [
+        "law firm AI implementation", "legal AI adoption", "law firm automation",
+        "boutique law firm AI", "legal practice AI compliance", "GDPR AI legal",
+        "law firm data privacy AI", "independent law firm technology", "legal AI risk"
+      ],
+      "targetAudience": "Managing partners and senior associates at independent/boutique law firms (5-50 lawyers). Anna's profile.",
+      "sources": ["Law360", "Legal Cheek", "The Lawyer", "Artificial Lawyer", "LegalTech News"],
       "priority": 2,
-      "note": "New model every week — Pedro's 'Noise → Translation → Action' format is perfect for this."
+      "note": "Law firms are compliance guardians with GDPR fears. Local-first AI = perfect pitch. Anna is the proof."
     },
     {
-      "id": "ai-governance-updates",
-      "category": "AI Governance",
-      "keywords": ["AI regulation", "FDA AI guidance", "AI compliance", "responsible AI", "AI governance framework"],
-      "targetAudience": "Chief Compliance Officers, Legal Counsel, Regulatory Affairs",
-      "sources": ["TechCrunch AI", "VentureBeat AI", "The Verge AI", "AI regulation news"]
+      "id": "pharma-sme-ai",
+      "category": "Pharma AI",
+      "keywords": [
+        "pharma SME AI", "biotech startup AI compliance", "CRO artificial intelligence",
+        "small pharma AI", "clinical trial AI automation", "pharma GDPR AI",
+        "pharma data privacy AI", "life sciences SMB AI", "regulatory affairs AI pharma"
+      ],
+      "targetAudience": "CEOs/CTOs of CROs, generic pharma companies, small biotech (under 500 employees). Pedro's Grupo Moja Farmacja background is a differentiator.",
+      "sources": ["Fierce Pharma", "BioPharmaDive", "Endpoints News", "PharmaVoice"],
+      "priority": 2,
+      "note": "Pedro's pharma ops background = trust builder. AVOID: Pfizer, Roche, Novartis — they have it in-house."
     },
     {
-      "id": "enterprise-ai-releases",
+      "id": "logistics-retail-ai",
       "category": "Enterprise AI",
-      "keywords": ["enterprise AI", "AI implementation", "AI strategy", "AI ROI", "AI transformation"],
-      "targetAudience": "CIOs, CTOs, Technology Leaders",
-      "sources": ["OpenAI blog", "Anthropic releases", "Google AI blog", "Microsoft AI"]
+      "keywords": [
+        "logistics company AI automation", "retail SMB AI", "supply chain AI small business",
+        "family business AI", "mid-market AI adoption", "operations automation SMB",
+        "manufacturing AI pilot mid-size", "warehouse automation small company",
+        "AI operations management SMB", "SaaS replacement automation"
+      ],
+      "targetAudience": "COOs/Ops Directors at mid-market logistics, retail chains, manufacturing firms. The Skeptical Stabilizer persona.",
+      "sources": ["Supply Chain Dive", "Modern Retail", "Industry Week", "SMB tech media"],
+      "priority": 3,
+      "note": "Pedro's XL Energy / Glownet operations background resonates. Avoid logistics giants (DHL, Maersk)."
     },
     {
-      "id": "pharma-ai-innovation",
-      "category": "Pharma & Healthcare AI",
-      "keywords": ["drug discovery AI", "clinical AI", "pharma technology", "FDA digital health"],
-      "targetAudience": "Pharma executives, Healthcare CIOs",
-      "sources": ["PharmaPhorum", "FierceBiotech", "Healthcare IT News"]
+      "id": "poland-portugal-market",
+      "category": "AI Governance",
+      "keywords": [
+        "artificial intelligence Poland business", "AI implementation Warsaw",
+        "Portugal AI regulation SME", "AI compliance Lisbon", "CEE AI adoption",
+        "Poland EU AI Act", "Portugal digital transformation SMB",
+        "Polish company AI strategy", "Iberian AI regulation"
+      ],
+      "targetAudience": "Pedro's home markets. Polish and Portuguese SMBs are 6-12 months behind Western Europe in AI adoption = opportunity.",
+      "sources": ["Polish business press", "Portuguese tech media", "CEE tech news"],
+      "priority": 3,
+      "note": "Geographic edge: Pedro speaks both languages, understands both markets."
     },
     {
-      "id": "fintech-compliance",
-      "category": "Finance & Compliance",
-      "keywords": ["fintech AI", "banking regulation", "financial compliance", "RegTech"],
-      "targetAudience": "Banking CIOs, Chief Risk Officers, Compliance Directors",
-      "sources": ["The Banker", "Finextra", "American Banker"]
-    },
-    {
-      "id": "legal-tech-updates",
-      "category": "Legal Technology",
-      "keywords": ["legal AI", "law firm technology", "contract automation", "legal operations"],
-      "targetAudience": "Managing Partners, Legal Tech Directors, General Counsel",
-      "sources": ["Legal Week", "Above the Law", "LegalTech News"]
+      "id": "ai-model-translation",
+      "category": "AI Tools",
+      "keywords": [
+        "Gemini release", "GPT update", "Claude new model", "OpenAI announcement",
+        "Microsoft Copilot business", "AI tool for small business", "ChatGPT enterprise",
+        "AI productivity tool SMB", "LLM business use case"
+      ],
+      "targetAudience": "Gen X executives who see AI headlines and feel lost — Pedro's 'Noise → Translation → Action' format.",
+      "sources": ["OpenAI blog", "Anthropic releases", "TechCrunch", "The Verge"],
+      "priority": 4,
+      "note": "Content angle: 'Here is what this week's AI news means for your business in plain language.'"
     }
   ],
-  "pulseFormat": {
-    "structure": {
-      "noise": {
-        "description": "The raw tech news headline - jargon and all",
-        "maxLength": 150,
-        "tone": "Straight from the press release"
-      },
-      "translation": {
-        "description": "What it actually means for business leaders - plain English",
-        "maxLength": 200,
-        "tone": "Bridge between tech and business impact"
-      },
-      "action": {
-        "description": "Concrete next step from the Analog-AI operator perspective",
-        "maxLength": 250,
-        "tone": "Experienced operator who's seen this before, knows what works"
-      }
-    },
-    "analogPerspective": {
-      "description": "The unique Xennial advantage - bridge analog business experience + AI execution",
-      "themes": [
-        "Having seen pre-digital business gives pattern recognition AI-natives lack",
-        "Understanding org politics and change management from pre-tech era",
-        "Knowing which 'revolutionary' tech is actually repackaged 90s concepts",
-        "Translating between C-suite language and engineer language",
-        "Spotting vendor hype vs actual enterprise readiness"
-      ]
-    }
-  },
-  "outputFormat": {
-    "color": "from-amber-500 to-orange-500",
-    "iconBg": "bg-amber-100 text-amber-700",
-    "icon": "Zap",
-    "date": "auto-generated from current date"
+  "negativeFilters": [
+    "Google", "Microsoft", "Amazon", "Meta", "Apple", "Nvidia",
+    "Novo Nordisk", "Pfizer", "Roche", "Johnson & Johnson", "Novartis",
+    "DHL", "FedEx", "Maersk", "Amazon Logistics",
+    "Goldman Sachs", "JPMorgan", "BlackRock",
+    "job opening", "hiring", "talent acquisition", "recruiter",
+    "startup raises", "series A", "series B", "funding round", "VC"
+  ],
+  "icpSignals": {
+    "companySize": ["SMB", "SME", "small business", "mid-size", "boutique", "independent", "family business", "owner-operated", "50 employees", "100 employees", "200 employees"],
+    "painSignals": ["struggling", "behind", "can't afford", "no IT team", "overwhelmed", "manual process", "spreadsheet", "failing", "compliance risk", "penalty", "fine"],
+    "buySignals": ["looking for", "need help", "seeking", "hire a consultant", "fractional", "pilot project", "exploring options", "RFP", "proposal"]
   }
 }
