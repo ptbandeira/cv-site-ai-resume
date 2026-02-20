@@ -12,6 +12,72 @@ const supabase = createClient(
 );
 
 /**
+ * Post daily lead digest to Slack
+ */
+async function sendSlackDigest(leads: Lead[]): Promise<void> {
+  const webhookUrl = process.env.SLACK_WEBHOOK_URL;
+  if (!webhookUrl) return;
+
+  const hot  = leads.filter(l => l.priority === 'hot');
+  const warm = leads.filter(l => l.priority === 'warm');
+  const cold = leads.filter(l => l.priority === 'cold');
+
+  const date = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+
+  const formatLeads = (batch: Lead[], max = 5) =>
+    batch.slice(0, max)
+      .map(l => `• <${l.signal_url}|${l.signal.slice(0, 80)}${l.signal.length > 80 ? '…' : ''}>`)
+      .join('\n');
+
+  const blocks: any[] = [
+    {
+      type: 'header',
+      text: { type: 'plain_text', text: `🎯 Analog AI — Lead Digest ${date}` }
+    },
+    {
+      type: 'section',
+      text: {
+        type: 'mrkdwn',
+        text: `*${leads.length} leads found today* · 🔴 ${hot.length} hot · 🟡 ${warm.length} warm · ⚪ ${cold.length} cold`
+      }
+    }
+  ];
+
+  if (hot.length > 0) {
+    blocks.push({ type: 'divider' });
+    blocks.push({
+      type: 'section',
+      text: { type: 'mrkdwn', text: `*🔴 HOT LEADS* (${hot.length})\n${formatLeads(hot)}` }
+    });
+  }
+
+  if (warm.length > 0) {
+    blocks.push({ type: 'divider' });
+    blocks.push({
+      type: 'section',
+      text: { type: 'mrkdwn', text: `*🟡 WARM LEADS* (top ${Math.min(warm.length, 5)} of ${warm.length})\n${formatLeads(warm)}` }
+    });
+  }
+
+  blocks.push({ type: 'divider' });
+  blocks.push({
+    type: 'context',
+    elements: [{ type: 'mrkdwn', text: `EU AI Act · Regulated Industry · AI Implementation signals · <${process.env.SUPABASE_URL?.replace('.supabase.co', '.supabase.co/dashboard')}|View in Supabase>` }]
+  });
+
+  try {
+    await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ blocks }),
+    });
+    console.log('📬 Slack digest sent');
+  } catch (err: any) {
+    console.log(`⚠️  Slack notification failed (non-fatal): ${err.message}`);
+  }
+}
+
+/**
  * Main orchestrator function
  */
 export async function orchestrate() {
@@ -76,6 +142,11 @@ export async function orchestrate() {
       }
     } else {
       console.log('\n⏭️  HubSpot sync skipped (no API key — leads saved to Supabase for manual review)');
+    }
+
+    // 📬 STEP 4: Send Slack digest
+    if (leads.length > 0) {
+      await sendSlackDigest(leads);
     }
 
     // Update job as completed
