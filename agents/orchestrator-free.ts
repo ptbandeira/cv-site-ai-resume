@@ -106,9 +106,17 @@ async function sendSlackDigest(leads: Lead[]): Promise<void> {
     console.log('⚠️  SLACK_WEBHOOK_URL not set — skipping digest');
     return;
   }
-  await postToSlack(webhookUrl, [
-    { type: 'section', text: { type: 'mrkdwn', text: message } },
-  ]);
+  const slackRes = await fetch(webhookUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: message }),
+  });
+  if (slackRes.ok) {
+    console.log('📬 Slack digest sent');
+  } else {
+    const errBody = await slackRes.text();
+    console.error('Slack error ' + slackRes.status + ': ' + errBody);
+  }
 }
 
 async function postToSlack(webhookUrl: string, blocks: any[]): Promise<void> {
