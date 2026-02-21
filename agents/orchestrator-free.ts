@@ -15,11 +15,11 @@ const supabase = createClient(
 /**
  * Post daily lead digest to Slack
  */
-async function sendSlackDigest(
-  hotLeads: Lead[],
-  warmLeads: Lead[],
-  coldLeads: Lead[]
-): Promise<void> {
+async function sendSlackDigest(leads: Lead[]): Promise<void> {
+  const hotLeads  = leads.filter(l => (l as any).priority === 'hot'  || (l as any).tier === 'hot');
+  const warmLeads = leads.filter(l => (l as any).priority === 'warm' || (l as any).tier === 'warm');
+  const coldLeads = leads.filter(l => (l as any).priority === 'cold' || (l as any).tier === 'cold');
+
   // ── Enrich hot leads with Apollo (fully null-safe) ──────────────────────────
   let enrichedLeads: Array<{ contact: null | { name?: string; title?: string; email?: string; linkedin?: string }; draft?: string }> = [];
 
