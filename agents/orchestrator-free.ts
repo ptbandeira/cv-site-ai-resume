@@ -15,118 +15,93 @@ const supabase = createClient(
 /**
  * Post daily lead digest to Slack
  */
-async function sendSlackDigest(leads: Lead[]): Promise<void> {
-  const webhookUrl = process.env.SLACK_WEBHOOK_URL;
-  if (!webhookUrl) {
-    console.log('⚠️  SLACK_WEBHOOK_URL not set — skipping digest');
-    return;
+async function sendSlackDigest(
+  hotLeads: Lead[],
+  warmLeads: Lead[],
+  coldLeads: Lead[]
+): Promise<void> {
+  // ── Enrich hot leads with Apollo (fully null-safe) ──────────────────────────
+  let enrichedLeads: Array<{ contact: null | { name?: string; title?: string; email?: string; linkedin?: string }; draft?: string }> = [];
+
+  try {
+    enrichedLeads = await Promise.all(
+      hotLeads.map(lead =>
+        enrichLead(
+          lead.company ?? 'Unknown',
+          lead.industry ?? 'Enterprise AI',
+          lead.title ?? lead.url ?? 'AI news'
+        ).catch((err: Error) => ({
+          contact: null,
+          draft: `[Apollo error: ${err?.message ?? 'unknown'}]`,
+        }))
+      )
+    );
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.warn('⚠️  Apollo enrichment batch failed:', msg);
+    enrichedLeads = hotLeads.map(() => ({ contact: null, draft: '' }));
   }
 
-  const hot  = leads.filter(l => l.priority === 'hot');
-  const warm = leads.filter(l => l.priority === 'warm');
-  const cold = leads.filter(l => l.priority === 'cold');
+  // ── Build hot leads section ─────────────────────────────────────────────────
+  const hotSection =
+    hotLeads.length === 0
+      ? ''
+      : [`*🔥 HOT LEADS (${hotLeads.length})*`]
+          .concat(
+            hotLeads.map((lead, i) => {
+              const enriched = enrichedLeads[i] ?? { contact: null, draft: '' };
+              const contact = enriched?.contact ?? null;
+              const draft = (enriched?.draft ?? '').slice(0, 200);
+              const title = (lead.title ?? lead.url ?? 'article').slice(0, 80);
+              const company = lead.company ?? lead.url ?? 'Unknown';
+              const url = lead.url ?? '';
 
-  // Enrich hot leads with Apollo contact data
-  console.log(`🔍 Enriching ${hot.length} hot leads with Apollo...`);
-  const hotEnriched = await Promise.all(
-    hot.map(async (lead) => {
-      const enriched = await enrichLead(
-        (lead.company ?? lead.url ?? "Unknown") ?? 'Unknown',
-        (lead.industry ?? "General AI") ?? 'Enterprise AI',
-        lead.title
-      );
-      return { lead, ...enriched };
-    })
-  );
+              const lines: string[] = [
+                `*${company}* — <${url}|${title}>`,
+              ];
+              if (contact) {
+                const who = [contact.name, contact.title].filter(Boolean).join(' · ');
+                if (who) lines.push(`👤 ${who}`);
+                if (contact.email) lines.push(`📧 ${contact.email}`);
+                if (contact.linkedin) lines.push(`🔗 ${contact.linkedin}`);
+              }
+              if (draft) lines.push(`📝 _${draft}_`);
+              return lines.join('\n');
+            })
+          )
+          .join('\n---\n');
 
-  const blocks: any[] = [];
+  // ── Build warm leads section (top 5) ────────────────────────────────────────
+  const warmSection =
+    warmLeads.length === 0
+      ? ''
+      : [`*🟡 WARM LEADS (${warmLeads.length})*`]
+          .concat(
+            warmLeads.slice(0, 5).map(lead => {
+              const title = (lead.title ?? '').slice(0, 60);
+              const company = lead.company ?? 'Unknown';
+              const url = lead.url ?? '';
+              return `• *${company}* — <${url}|${title}${title.length === 60 ? '…' : ''}>`;
+            })
+          )
+          .concat(warmLeads.length > 5 ? [`_…and ${warmLeads.length - 5} more_`] : [])
+          .join('\n');
 
-  if (leads.length === 0) {
-    blocks.push({
-      type: 'section',
-      text: { type: 'mrkdwn', text: '*0 leads today* — system ran OK. Google News may have been quiet.' },
-    });
-    await postToSlack(webhookUrl, blocks);
-    return;
-  }
+  // ── Cold summary ────────────────────────────────────────────────────────────
+  const coldSection = coldLeads.length === 0 ? '' : `❄️ *${coldLeads.length} cold leads* saved to Supabase`;
 
-  // Header
-  blocks.push({
-    type: 'header',
-    text: {
-      type: 'plain_text',
-      text: `🎯 ${leads.length} leads · ${new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' })}`,
-      emoji: true,
-    },
-  });
-  blocks.push({
-    type: 'context',
-    elements: [{ type: 'mrkdwn', text: `🔴 ${hot.length} hot · 🟡 ${warm.length} warm · ⚪ ${cold.length} cold  |  Apollo enrichment on hot leads` }],
-  });
-  blocks.push({ type: 'divider' });
+  // ── Compose and send ────────────────────────────────────────────────────────
+  const date = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+  const message = [
+    `*🤖 Analog AI Lead Digest — ${date}*`,
+    hotSection,
+    warmSection,
+    coldSection,
+  ]
+    .filter(Boolean)
+    .join('\n\n');
 
-  // HOT leads with contact + draft
-  if (hotEnriched.length > 0) {
-    blocks.push({ type: 'section', text: { type: 'mrkdwn', text: '*🔴 HOT LEADS — Act today*' } });
-
-    for (const { lead, contact, draft } of hotEnriched) {
-      blocks.push({
-        type: 'section',
-        text: {
-          type: 'mrkdwn',
-          text: `*<${lead.url}|${lead.title}>*\n` +
-            (lead.company && lead.company !== 'Unknown' ? `🏢 *${lead.company}*  ` : '') +
-            (lead.industry ? `📂 ${lead.industry}  ` : '') +
-            `🗞 ${lead.source}`,
-        },
-      });
-
-      if (contact && contact.email && contact.email !== '(not found)') {
-        const icon = contact.confidence === 'verified' ? '✅' : '⚡';
-        const liLink = contact.linkedinUrl ? `  |  <${contact.linkedinUrl}|LinkedIn>` : '';
-        blocks.push({
-          type: 'context',
-          elements: [{ type: 'mrkdwn', text: `👤 *${contact.name}*, ${contact.title}  |  📧 ${contact.email} ${icon}${liLink}` }],
-        });
-      } else {
-        blocks.push({
-          type: 'context',
-          elements: [{ type: 'mrkdwn', text: `👤 Apollo: no contact found — search manually at ${lead.company ?? 'this company'}` }],
-        });
-      }
-
-      if (draft) {
-        blocks.push({
-          type: 'section',
-          text: { type: 'mrkdwn', text: `📩 *Draft pitch:*\n\`\`\`${draft}\`\`\`` },
-        });
-      }
-
-      blocks.push({ type: 'divider' });
-    }
-  }
-
-  // WARM leads — condensed list
-  if (warm.length > 0) {
-    blocks.push({ type: 'section', text: { type: 'mrkdwn', text: '*🟡 WARM LEADS — Worth a read*' } });
-    const warmLines = warm.slice(0, 5).map(l => {
-      const title = l.title.length > 72 ? l.title.slice(0, 69) + '…' : l.title;
-      const co = l.company && l.company !== 'Unknown' ? l.company : l.source;
-      return `• <${l.url}|${title}> — ${co}`;
-    }).join('\n');
-    blocks.push({ type: 'section', text: { type: 'mrkdwn', text: warmLines } });
-    if (warm.length > 5) {
-      blocks.push({ type: 'context', elements: [{ type: 'mrkdwn', text: `+${warm.length - 5} more warm leads in Supabase` }] });
-    }
-    blocks.push({ type: 'divider' });
-  }
-
-  // COLD — summary only
-  if (cold.length > 0) {
-    blocks.push({ type: 'context', elements: [{ type: 'mrkdwn', text: `⚪ *${cold.length} cold leads* stored in Supabase — low priority` }] });
-  }
-
-  await postToSlack(webhookUrl, blocks);
+  await postToSlack(message);
 }
 
 async function postToSlack(webhookUrl: string, blocks: any[]): Promise<void> {
