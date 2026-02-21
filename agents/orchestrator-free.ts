@@ -31,8 +31,8 @@ async function sendSlackDigest(leads: Lead[]): Promise<void> {
   const hotEnriched = await Promise.all(
     hot.map(async (lead) => {
       const enriched = await enrichLead(
-        lead.company ?? 'Unknown',
-        lead.industry ?? 'Enterprise AI',
+        (lead.company ?? lead.url ?? "Unknown") ?? 'Unknown',
+        (lead.industry ?? "General AI") ?? 'Enterprise AI',
         lead.title
       );
       return { lead, ...enriched };

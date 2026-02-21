@@ -26,9 +26,9 @@ const ICP_TITLES = [
 
 // ─── Apollo People Search ────────────────────────────────────────────────────
 export async function enrichLead(
-  company: string,
-  industry: string,
-  articleTitle: string
+  company: string | undefined,
+  industry: string | undefined,
+  articleTitle: string | undefined
 ): Promise<EnrichedLead> {
   const apiKey = process.env.APOLLO_API_KEY;
   const draft = generateDraft(company, industry, articleTitle, null);
@@ -155,7 +155,8 @@ function detectLanguage(company: string): 'pl' | 'pt' | 'en' {
   return 'en';
 }
 
-function extractTopic(articleTitle: string): string {
+function extractTopic(articleTitle: string | undefined | null): string {
+  if (!articleTitle) return "AI implementation";
   // Shorten the article title to a natural phrase
   const cleaned = articleTitle
     .replace(/["""]/g, '')
