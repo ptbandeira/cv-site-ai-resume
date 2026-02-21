@@ -25,6 +25,17 @@ const ICP_TITLES = [
 ];
 
 // ─── Apollo People Search ────────────────────────────────────────────────────
+
+// ── Apollo circuit-breaker ─────────────────────────────────────────────────────
+// Avoids hammering a 403-returning API on every hot lead.
+// Resets each run (in-memory only).
+let apolloDisabled = false;
+const apollo403Cache = new Set<string>(); // companies that returned 403
+
+function apolloAvailable(): boolean {
+  return !apolloDisabled && !!process.env.APOLLO_API_KEY;
+}
+
 export async function enrichLead(
   company: string | undefined,
   industry: string | undefined,
