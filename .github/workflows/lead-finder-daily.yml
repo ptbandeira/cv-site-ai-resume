@@ -29,6 +29,7 @@ jobs:
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
           HUBSPOT_API_KEY: ${{ secrets.HUBSPOT_API_KEY }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          APOLLO_API_KEY: ${{ secrets.APOLLO_API_KEY }}
         run: |
           npm run agents:run
 
