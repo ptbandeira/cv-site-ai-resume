@@ -9,6 +9,56 @@ import { load } from 'cheerio';
 import { createHash } from 'crypto';
 import type { Lead } from './types';
 
+// ── Known publishers / enterprises to exclude from leads ─────────────────────
+// These are media outlets, think tanks, large enterprises — NOT SMB prospects.
+// If company_name matches, the article is a source, not a lead.
+const KNOWN_PUBLISHERS = new Set([
+  // Legal media
+  'law360', 'legaltech news', 'above the law', 'american lawyer', 'legal week',
+  'the national law review', 'the national law journal', 'legal cheek',
+  'lawyers monthly', 'the lawyer', 'legal futures', 'attorneys at law magazine',
+  // Privacy / AI associations & think tanks
+  'iapp', 'international association of privacy professionals',
+  'future of privacy forum', 'electronic frontier foundation', 'eff',
+  'ai now institute', 'partnership on ai', 'center for ai safety',
+  'ada lovelace institute', 'alan turing institute', 'real instituto elcano',
+  // General tech & business media
+  'techcrunch', 'the verge', 'wired', 'ars technica', 'zdnet', 'cnet',
+  'venturebeat', 'the information', 'protocol', 'semafor', 'axios',
+  'business insider', 'fortune', 'forbes', 'bloomberg', 'reuters',
+  'the guardian', 'financial times', 'ft', 'wall street journal', 'wsj',
+  'new york times', 'nyt', 'washington post',
+  // AI-specific media
+  'the ai journal', 'ai business', 'ai news', 'towards data science',
+  'analytics vidhya', 'kdnuggets', 'papers with code', 'financialcontent',
+  'tmx newsfile', 'tmxnewsfile', 'newswire', 'pr newswire', 'businesswire',
+  'globe newswire', 'accesswire', 'ein presswire',
+  // Large enterprises (not SMBs)
+  'wolters kluwer', 'lexisnexis', 'thomson reuters', 'westlaw', 'relx',
+  'microsoft', 'google', 'amazon', 'meta', 'apple', 'ibm', 'oracle', 'sap',
+  'deloitte', 'pwc', 'kpmg', 'ey', 'ernst & young', 'mckinsey', 'bcg', 'bain',
+  'accenture', 'capgemini', 'infosys', 'tcs', 'wipro', 'cognizant',
+  // Universities
+  'mit', 'stanford', 'harvard', 'oxford', 'cambridge',
+  'london school of economics', 'lse', 'imperial college', 'startups',
+  // Polish media
+  'rzeczpospolita', 'gazeta prawna', 'prawo.pl', 'lex.pl', 'nowoczesna firma',
+  // Portuguese media
+  'publico', 'jornal de negocios', 'expresso', 'observador', 'eco',
+]);
+
+function isKnownPublisher(name: string | null | undefined): boolean {
+  if (!name) return false;
+  const lower = name.toLowerCase().trim();
+  if (KNOWN_PUBLISHERS.has(lower)) return true;
+  // Also catch patterns like "Startups.co.uk", "TechCrunch | AI"
+  for (const pub of KNOWN_PUBLISHERS) {
+    if (lower.startsWith(pub) || lower.includes(' | ' + pub)) return true;
+  }
+  return false;
+}
+
+
 // Stable ID from URL — same article = same ID across runs (enables Supabase dedup)
 function stableId(prefix: string, url: string): string {
   return `${prefix}-${createHash('md5').update(url).digest('hex').slice(0, 16)}`;
@@ -146,6 +196,13 @@ async function scrapeGoogleNews(query: string): Promise<Lead[]> {
       // (EU AI Act / compliance articles affect all industries)
       const priority    = scorePriority(fullText);
       const companyName = extractCompanyFromTitle(title, sourceName);
+
+      // ── Publisher filter: skip if company is a known media/enterprise source ──
+      if (isKnownPublisher(companyName)) {
+        console.log(`  ⏭  Skip publisher: ${companyName} — not an SMB prospect`);
+        return; // skip to next in .each()
+      }
+      // ── end publisher filter ─────────────────────────────────────────────────
 
       leads.push({
         id: stableId('gn', link),
