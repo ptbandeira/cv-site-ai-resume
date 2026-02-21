@@ -19,34 +19,33 @@ function stableId(prefix: string, url: string): string {
 // Target: Skeptical Stabilizer, Compliance Guardian, Frustrated Visionary, Legacy Modernizer
 // AVOID: Big pharma, big tech, logistics giants, VC-backed startups
 const GOOGLE_NEWS_QUERIES = [
-  // EU AI Act — August 2026 enforcement = Pedro's commercial trigger, SMB angle
-  '"EU AI Act" ("SME" OR "small business" OR "mid-size" OR "boutique" OR "independent")',
-  '"EU AI Act" ("law firm" OR "legal practice" OR "independent pharmacy" OR "clinic")',
-  '"EU AI Act" compliance ("prepare" OR "deadline" OR "how to" OR "consultant" OR "help")',
-  '"AI Act" ("Poland" OR "Portugal" OR "CEE" OR "Central Europe") ("company" OR "firm")',
+  // EU AI Act — SMB and compliance focus (NOT Fortune 500)
+  '"EU AI Act" ("law firm" OR "legal" OR "SMB" OR "compliance" OR "small business")',
+  '"AI Act" ("kancelaria" OR "prawna" OR "compliance" OR "RODO" OR "mala firma")',
 
-  // Law firms — Managing Partner persona, GDPR + AI risk
-  '"law firm" ("AI implementation" OR "AI adoption" OR "artificial intelligence") -"Big Law" -"Magic Circle"',
-  '"legal practice" ("AI compliance" OR "AI risk" OR "data privacy AI" OR "GDPR AI")',
-  '"managing partner" ("AI strategy" OR "AI tools" OR "automation" OR "legal tech")',
+  // Law firm AI adoption (boutique / independent firms)
+  '"law firm" ("AI" OR "artificial intelligence") ("compliance" OR "risk" OR "data privacy")',
+  '"kancelaria" ("sztuczna inteligencja" OR "AI" OR "automatyzacja" OR "dane")',
 
-  // Pharma/biotech SMBs — Pedro's vertical expertise, avoid giants
-  '"biotech" OR "CRO" OR "contract research" ("AI compliance" OR "AI implementation") -"Pfizer" -"Novartis" -"Roche"',
-  '"pharma" ("AI regulation" OR "EU AI Act") ("small" OR "mid-size" OR "independent")',
+  // Pharma SMB / CRO / Biotech (NOT Pfizer, Roche, Novartis)
+  '"pharma" ("AI" OR "artificial intelligence") ("SMB" OR "small" OR "mid-market" OR "compliance" OR "CRO")',
+  '"farmaceutyczna" ("AI" OR "sztuczna inteligencja" OR "automatyzacja" OR "zgodnosc")',
 
-  // Logistics/ops SMBs — Skeptical Stabilizer persona
-  '"logistics" ("AI automation" OR "AI operations") ("small company" OR "SMB" OR "mid-size")',
-  '"family business" OR "owner-operated" ("artificial intelligence" OR "AI tools" OR "automation")',
+  // Logistics / Retail mid-market (NOT DHL, FedEx, Maersk)
+  '"logistics" ("AI" OR "automation") ("mid-market" OR "regional" OR "independent" OR "SMB")',
+  '"retail" ("AI" OR "automation") ("independent" OR "regional" OR "chain" OR "SMB")',
 
-  // Pain-signal queries — direct ICP intent
-  '"AI implementation" ("struggling" OR "failed" OR "challenge" OR "no IT team" OR "overwhelmed")',
-  '"fractional AI" OR "fractional CTO" OR "AI consultant" ("looking for" OR "need" OR "hire")',
-  '"artificial intelligence" ("can't afford" OR "no budget" OR "too expensive" OR "alternatives")',
+  // Poland market (ASCII-safe Polish queries)
+  '"sztuczna inteligencja" ("firma" OR "mala firma" OR "wdrozenie" OR "compliance")',
+  '"automatyzacja" ("kancelaria" OR "logistyka" OR "farmacja" OR "handel")',
 
-  // Poland + Portugal — geographic edge
-  '"artificial intelligence" ("Poland" OR "Warsaw") ("firma" OR "business" OR "company")',
-  '"sztuczna inteligencja" ("firma" OR "mała firma" OR "wdrożenie" OR "compliance")',
-  '"inteligência artificial" ("Portugal" OR "Lisboa" OR "empresa" OR "PME")',
+  // Portugal market
+  '"inteligencia artificial" ("empresa" OR "PME" OR "implementacao" OR "conformidade")',
+  '"automacao" ("juridico" OR "farmaceutica" OR "logistica" OR "retalho")',
+
+  // AI governance / data sovereignty (SMB angle)
+  '"AI governance" ("SMB" OR "small business" OR "mid-market" OR "compliance")',
+  '"data sovereignty" ("AI" OR "artificial intelligence") ("SMB" OR "enterprise" OR "compliance")',
 ];
 // Companies to ignore — Pedro's ICP is SMBs, not Fortune 500
 const NEGATIVE_COMPANY_FILTER = [
