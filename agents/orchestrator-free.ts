@@ -5,6 +5,7 @@ import { createClient } from '@supabase/supabase-js';
 import { runLeadFinderSwarmFree } from './lead-finder-free';
 import { syncLeadBatch } from './hubspot-sync';
 import type { Lead, ScrapingJob } from './types';
+import { enrichLead } from './enricher';
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
@@ -25,64 +26,124 @@ async function sendSlackDigest(leads: Lead[]): Promise<void> {
   const warm = leads.filter(l => l.priority === 'warm');
   const cold = leads.filter(l => l.priority === 'cold');
 
-  const date = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  // Enrich hot leads with Apollo contact data
+  console.log(`🔍 Enriching ${hot.length} hot leads with Apollo...`);
+  const hotEnriched = await Promise.all(
+    hot.map(async (lead) => {
+      const enriched = await enrichLead(
+        lead.company ?? 'Unknown',
+        lead.industry ?? 'Enterprise AI',
+        lead.title
+      );
+      return { lead, ...enriched };
+    })
+  );
 
-  const formatLeads = (batch: Lead[], max = 5) =>
-    batch.slice(0, max)
-      .map(l => `• <${l.signal_url}|${l.signal.slice(0, 80)}${l.signal.length > 80 ? '…' : ''}>`)
-      .join('\n');
+  const blocks: any[] = [];
 
-  const summaryText = leads.length === 0
-    ? `*0 leads found today* — system ran OK, Google News may have been quiet or rate-limited. Check again tomorrow.`
-    : `*${leads.length} leads found today* · 🔴 ${hot.length} hot · 🟡 ${warm.length} warm · ⚪ ${cold.length} cold`;
+  if (leads.length === 0) {
+    blocks.push({
+      type: 'section',
+      text: { type: 'mrkdwn', text: '*0 leads today* — system ran OK. Google News may have been quiet.' },
+    });
+    await postToSlack(webhookUrl, blocks);
+    return;
+  }
 
-  const blocks: any[] = [
-    {
-      type: 'header',
-      text: { type: 'plain_text', text: `🎯 Analog AI — Lead Digest ${date}` }
+  // Header
+  blocks.push({
+    type: 'header',
+    text: {
+      type: 'plain_text',
+      text: `🎯 ${leads.length} leads · ${new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' })}`,
+      emoji: true,
     },
-    {
-      type: 'section',
-      text: { type: 'mrkdwn', text: summaryText }
-    }
-  ];
-
-  if (hot.length > 0) {
-    blocks.push({ type: 'divider' });
-    blocks.push({
-      type: 'section',
-      text: { type: 'mrkdwn', text: `*🔴 HOT LEADS* (${hot.length})\n${formatLeads(hot)}` }
-    });
-  }
-
-  if (warm.length > 0) {
-    blocks.push({ type: 'divider' });
-    blocks.push({
-      type: 'section',
-      text: { type: 'mrkdwn', text: `*🟡 WARM LEADS* (top ${Math.min(warm.length, 5)} of ${warm.length})\n${formatLeads(warm)}` }
-    });
-  }
-
-  blocks.push({ type: 'divider' });
+  });
   blocks.push({
     type: 'context',
-    elements: [{ type: 'mrkdwn', text: `EU AI Act · Regulated Industry · AI Implementation signals · <${process.env.SUPABASE_URL?.replace('.supabase.co', '.supabase.co/dashboard')}|View in Supabase>` }]
+    elements: [{ type: 'mrkdwn', text: `🔴 ${hot.length} hot · 🟡 ${warm.length} warm · ⚪ ${cold.length} cold  |  Apollo enrichment on hot leads` }],
   });
+  blocks.push({ type: 'divider' });
 
+  // HOT leads with contact + draft
+  if (hotEnriched.length > 0) {
+    blocks.push({ type: 'section', text: { type: 'mrkdwn', text: '*🔴 HOT LEADS — Act today*' } });
+
+    for (const { lead, contact, draft } of hotEnriched) {
+      blocks.push({
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `*<${lead.url}|${lead.title}>*\n` +
+            (lead.company && lead.company !== 'Unknown' ? `🏢 *${lead.company}*  ` : '') +
+            (lead.industry ? `📂 ${lead.industry}  ` : '') +
+            `🗞 ${lead.source}`,
+        },
+      });
+
+      if (contact && contact.email && contact.email !== '(not found)') {
+        const icon = contact.confidence === 'verified' ? '✅' : '⚡';
+        const liLink = contact.linkedinUrl ? `  |  <${contact.linkedinUrl}|LinkedIn>` : '';
+        blocks.push({
+          type: 'context',
+          elements: [{ type: 'mrkdwn', text: `👤 *${contact.name}*, ${contact.title}  |  📧 ${contact.email} ${icon}${liLink}` }],
+        });
+      } else {
+        blocks.push({
+          type: 'context',
+          elements: [{ type: 'mrkdwn', text: `👤 Apollo: no contact found — search manually at ${lead.company ?? 'this company'}` }],
+        });
+      }
+
+      if (draft) {
+        blocks.push({
+          type: 'section',
+          text: { type: 'mrkdwn', text: `📩 *Draft pitch:*\n\`\`\`${draft}\`\`\`` },
+        });
+      }
+
+      blocks.push({ type: 'divider' });
+    }
+  }
+
+  // WARM leads — condensed list
+  if (warm.length > 0) {
+    blocks.push({ type: 'section', text: { type: 'mrkdwn', text: '*🟡 WARM LEADS — Worth a read*' } });
+    const warmLines = warm.slice(0, 5).map(l => {
+      const title = l.title.length > 72 ? l.title.slice(0, 69) + '…' : l.title;
+      const co = l.company && l.company !== 'Unknown' ? l.company : l.source;
+      return `• <${l.url}|${title}> — ${co}`;
+    }).join('\n');
+    blocks.push({ type: 'section', text: { type: 'mrkdwn', text: warmLines } });
+    if (warm.length > 5) {
+      blocks.push({ type: 'context', elements: [{ type: 'mrkdwn', text: `+${warm.length - 5} more warm leads in Supabase` }] });
+    }
+    blocks.push({ type: 'divider' });
+  }
+
+  // COLD — summary only
+  if (cold.length > 0) {
+    blocks.push({ type: 'context', elements: [{ type: 'mrkdwn', text: `⚪ *${cold.length} cold leads* stored in Supabase — low priority` }] });
+  }
+
+  await postToSlack(webhookUrl, blocks);
+}
+
+async function postToSlack(webhookUrl: string, blocks: any[]): Promise<void> {
   try {
-    const slackRes = await fetch(webhookUrl, {
+    const res = await fetch(webhookUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ blocks }),
     });
-    if (!slackRes.ok) {
-      const body = await slackRes.text();
-      console.error(`❌ Slack webhook returned ${slackRes.status}: ${body}`);
+    if (!res.ok) {
+      const body = await res.text();
+      console.error(`❌ Slack returned ${res.status}: ${body}`);
     } else {
-      console.log('📬 Slack digest sent successfully');
+      console.log('📬 Slack digest sent');
     }
   } catch (err: any) {
-    console.error(`❌ Slack notification FAILED: ${err.message}`);
+    console.error(`❌ Slack FAILED: ${err.message}`);
   }
 }
 
