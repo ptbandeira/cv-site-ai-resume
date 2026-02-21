@@ -16,9 +16,9 @@ const supabase = createClient(
  * Post daily lead digest to Slack
  */
 async function sendSlackDigest(leads: Lead[]): Promise<void> {
-  const hotLeads  = leads.filter(l => (l as any).priority === 'hot'  || (l as any).tier === 'hot');
-  const warmLeads = leads.filter(l => (l as any).priority === 'warm' || (l as any).tier === 'warm');
-  const coldLeads = leads.filter(l => (l as any).priority === 'cold' || (l as any).tier === 'cold');
+  const hotLeads  = leads.filter(l => (l as any).priority === 'hot');
+  const warmLeads = leads.filter(l => (l as any).priority === 'warm');
+  const coldLeads = leads.filter(l => (l as any).priority === 'cold');
 
   // ── Enrich hot leads with Apollo (fully null-safe) ──────────────────────────
   let enrichedLeads: Array<{ contact: null | { name?: string; title?: string; email?: string; linkedin?: string }; draft?: string }> = [];
@@ -27,9 +27,9 @@ async function sendSlackDigest(leads: Lead[]): Promise<void> {
     enrichedLeads = await Promise.all(
       hotLeads.map(lead =>
         enrichLead(
-          lead.company ?? 'Unknown',
+          (lead as any).company_name ?? 'Unknown',
           lead.industry ?? 'Enterprise AI',
-          lead.title ?? lead.url ?? 'AI news'
+          (lead as any).signal ?? (lead as any).signal_url ?? 'AI news'
         ).catch((err: Error) => ({
           contact: null,
           draft: `[Apollo error: ${err?.message ?? 'unknown'}]`,
@@ -52,9 +52,9 @@ async function sendSlackDigest(leads: Lead[]): Promise<void> {
               const enriched = enrichedLeads[i] ?? { contact: null, draft: '' };
               const contact = enriched?.contact ?? null;
               const draft = (enriched?.draft ?? '').slice(0, 200);
-              const title = (lead.title ?? lead.url ?? 'article').slice(0, 80);
-              const company = lead.company ?? lead.url ?? 'Unknown';
-              const url = lead.url ?? '';
+              const title = ((lead as any).signal ?? "AI implementation").slice(0, 80);
+              const company = (lead as any).company_name ?? (lead as any).signal_url ?? 'Unknown';
+              const url = (lead as any).signal_url ?? '';
 
               const lines: string[] = [
                 `*${company}* — <${url}|${title}>`,
@@ -78,9 +78,9 @@ async function sendSlackDigest(leads: Lead[]): Promise<void> {
       : [`*🟡 WARM LEADS (${warmLeads.length})*`]
           .concat(
             warmLeads.slice(0, 5).map(lead => {
-              const title = (lead.title ?? '').slice(0, 60);
-              const company = lead.company ?? 'Unknown';
-              const url = lead.url ?? '';
+              const title = ((lead as any).signal ?? '').slice(0, 60);
+              const company = (lead as any).company_name ?? 'Unknown';
+              const url = (lead as any).signal_url ?? '';
               return `• *${company}* — <${url}|${title}${title.length === 60 ? '…' : ''}>`;
             })
           )
