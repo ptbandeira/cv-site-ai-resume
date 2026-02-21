@@ -101,7 +101,14 @@ async function sendSlackDigest(leads: Lead[]): Promise<void> {
     .filter(Boolean)
     .join('\n\n');
 
-  await postToSlack(message);
+  const webhookUrl = process.env.SLACK_WEBHOOK_URL;
+  if (!webhookUrl) {
+    console.log('⚠️  SLACK_WEBHOOK_URL not set — skipping digest');
+    return;
+  }
+  await postToSlack(webhookUrl, [
+    { type: 'section', text: { type: 'mrkdwn', text: message } },
+  ]);
 }
 
 async function postToSlack(webhookUrl: string, blocks: any[]): Promise<void> {
