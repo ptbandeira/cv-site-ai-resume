@@ -13,6 +13,7 @@
     "test:watch": "vitest",
     "agents:run": "tsx agents/orchestrator-free.ts",
     "feedback:sync": "tsx scripts/read-slack-feedback.ts",
+    "pulse:from-slack": "tsx scripts/slack-to-pulse.ts",
     "generate": "tsx agents/content-generator.ts",
     "publish": "tsx agents/content-publisher.ts",
     "content:full": "npm run generate && npm run publish"
