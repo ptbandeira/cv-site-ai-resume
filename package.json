@@ -12,6 +12,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "agents:run": "tsx agents/orchestrator-free.ts",
+    "feedback:sync": "tsx scripts/read-slack-feedback.ts",
     "generate": "tsx agents/content-generator.ts",
     "publish": "tsx agents/content-publisher.ts",
     "content:full": "npm run generate && npm run publish"

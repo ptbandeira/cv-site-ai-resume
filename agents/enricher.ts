@@ -125,11 +125,24 @@ function generateDraft(
   articleTitle: string,
   contact: Contact | null
 ): string {
-  const lang = detectLanguage(company);
-  const firstName = contact?.name.split(' ')[0] ?? null;
   const topic = extractTopic(articleTitle);
   const pain = getPainByIndustry(industry);
-  const valueProps = getValuePropByIndustry(industry, lang);
+  const valueProps = getValuePropByIndustry(industry, 'en');
+
+  // Sector signal — different template: we sell to the firms NOT in the article
+  if (company.startsWith('📡')) {
+    const market = company.match(/\[([^\]]+)\]/)?.[1] ?? 'this market';
+    return (
+      `Hi,\n\n` +
+      `Saw the piece about ${topic} — this kind of shift usually means 70% of firms in ${market} haven't acted yet.\n\n` +
+      `I help the smaller practices implement AI safely, without the risks of the big platforms (${pain}).\n\n` +
+      `${valueProps}\n\n` +
+      `→ Use this signal: reach out to similar firms in ${market} that are NOT in this article.`
+    );
+  }
+
+  const lang = detectLanguage(company);
+  const firstName = contact?.name.split(' ')[0] ?? null;
 
   if (lang === 'pl') {
     const greeting = firstName ? `Dzień dobry ${firstName},` : 'Dzień dobry,';
@@ -137,7 +150,7 @@ function generateDraft(
       `${greeting}\n\n` +
       `Przeczytałem o ${topic} i pomyślałem, że mogę pomóc. ` +
       `Specjalizuję się w bezpiecznym wdrożeniu AI dla firm takich jak ${company} — ${pain}. ` +
-      `${valueProps}\n\n` +
+      `${getValuePropByIndustry(industry, 'pl')}\n\n` +
       `Czy ma Pan/Pani 20 minut na rozmowę w tym tygodniu?`
     );
   }
@@ -148,7 +161,7 @@ function generateDraft(
       `${greeting}\n\n` +
       `Li sobre ${topic} e acredito que posso ajudar. ` +
       `Especializo-me em implementação segura de IA para empresas como ${company} — ${pain}. ` +
-      `${valueProps}\n\n` +
+      `${getValuePropByIndustry(industry, 'pt')}\n\n` +
       `Tem 20 minutos para uma conversa esta semana?`
     );
   }
@@ -158,7 +171,7 @@ function generateDraft(
   return (
     `${greeting}\n\n` +
     `Saw the piece about ${topic} — exactly the space I work in. ` +
-    `I help companies like ${company} implement AI safely, without the usual ${pain}. ` +
+    `I help companies like ${company} implement AI safely, avoiding ${pain}. ` +
     `${valueProps}\n\n` +
     `Worth a 20-minute call this week?`
   );
@@ -191,7 +204,7 @@ function getPainByIndustry(industry: string): string {
     'AI Governance': 'compliance complexity and the cost of getting it wrong',
     'FinTech Compliance': 'data sovereignty and audit trail requirements',
   };
-  return pains[industry] ?? 'the usual implementation gap between AI hype and actual business results';
+  return pains[industry] ?? 'the implementation gap between AI hype and actual results';
 }
 
 function getValuePropByIndustry(industry: string, lang: 'pl' | 'pt' | 'en'): string {

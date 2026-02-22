@@ -10,7 +10,43 @@
 
 import { load } from 'cheerio';
 import { createHash } from 'crypto';
+import * as fs from 'fs';
+import * as path from 'path';
 import type { Lead } from './types';
+
+// ── Feedback boosts (loaded from feedback/good-leads.txt) ────────────────────
+// Pedro adds good article URLs → system boosts leads from same sources
+interface FeedbackBoosts { domains: Set<string> }
+let FEEDBACK_BOOSTS: FeedbackBoosts = { domains: new Set() };
+
+function loadFeedbackBoosts(): void {
+  const feedbackPath = path.join(__dirname, '..', 'feedback', 'good-leads.txt');
+  if (!fs.existsSync(feedbackPath)) return;
+  const lines = fs.readFileSync(feedbackPath, 'utf-8').split('\n');
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+    try {
+      const hostname = new URL(trimmed).hostname.replace(/^www\./, '');
+      FEEDBACK_BOOSTS.domains.add(hostname);
+    } catch (_) { /* skip non-URL lines */ }
+  }
+  if (FEEDBACK_BOOSTS.domains.size > 0) {
+    console.log(`📚 Feedback: ${FEEDBACK_BOOSTS.domains.size} trusted domains loaded (${Array.from(FEEDBACK_BOOSTS.domains).join(', ')})`);
+  }
+}
+
+function applyFeedbackBoost(url: string, priority: Lead['priority']): Lead['priority'] {
+  if (FEEDBACK_BOOSTS.domains.size === 0) return priority;
+  try {
+    const hostname = new URL(url).hostname.replace(/^www\./, '');
+    if (FEEDBACK_BOOSTS.domains.has(hostname)) {
+      if (priority === 'cold') return 'warm';
+      if (priority === 'warm') return 'hot';
+    }
+  } catch (_) {}
+  return priority;
+}
 
 // ── Known publishers / enterprises to exclude from leads ─────────────────────
 // Media outlets, think tanks, large enterprises — NOT SMB prospects.
@@ -465,7 +501,7 @@ async function scrapeGoogleNews(nq: NewsQuery): Promise<Lead[]> {
       }
 
       const industry    = detectIndustry(fullText);
-      const priority    = scorePriority(fullText);
+      const priority    = applyFeedbackBoost(link, scorePriority(fullText));
       const companyName = extractCompanyFromTitle(title, sourceName, nq.market);
 
       // Publisher filter: skip if extracted company is a known media/enterprise
@@ -544,6 +580,9 @@ async function scrapeHackerNews(): Promise<Lead[]> {
 export async function runLeadFinderSwarmFree(): Promise<Lead[]> {
   console.log('🎯 ICP: 1–50 employee traditional professional services (law, accounting, insurance)');
   console.log('🎯 Mode: Sector-laggard signals — firms BEHIND competitors on AI/digital\n');
+
+  // Load feedback boosts — Pedro's good examples teach the system what to find more of
+  loadFeedbackBoosts();
 
   // Run all Google News locale queries in parallel (batched to avoid rate limits)
   console.log('📰 Scraping Google News (multilingual — en, pl, pt-PT, es, fr, de, it)...');

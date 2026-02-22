@@ -1,0 +1,14 @@
+# GOOD LEAD EXAMPLES
+# Pedro: drop URLs here when you see articles that match your ICP perfectly.
+# One URL per line. Lines starting with # are comments.
+# The system reads this file at startup and boosts similar signals.
+#
+# ALSO: Post URLs in #analog-ai-feedback on Slack — run `npm run feedback:sync`
+# to pull them from Slack into this file automatically.
+#
+# WHAT TO ADD: Articles about small/mid law firms, accountants, insurance brokers
+# that are struggling with AI, falling behind, or where their sector is moving fast.
+#
+# SEEDED from 22-Feb-2026 run (good signals):
+https://www.todaysfamilylawyer.co.uk/should-smaller-legal-practices-be-worried-about-ai
+https://itwiz.pl/cyfrowa-transformacja-msp-jak-zaczac-z-erp-i-ai-zanim-bedzie-za-pozno
