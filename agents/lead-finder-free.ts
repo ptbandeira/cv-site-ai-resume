@@ -35,6 +35,10 @@ const KNOWN_PUBLISHERS = new Set([
   'valor economico',
   'valor econômico',
   'business wire',
+  'legal technology news',
+  'artificial lawyer',
+  'lawsites',
+  'computerworld',
   'globe newswire', 'accesswire', 'ein presswire',
   // Large enterprises (not SMBs)
   'wolters kluwer', 'lexisnexis', 'thomson reuters', 'westlaw', 'relx',
