@@ -32,6 +32,9 @@ const KNOWN_PUBLISHERS = new Set([
   'the ai journal', 'ai business', 'ai news', 'towards data science',
   'analytics vidhya', 'kdnuggets', 'papers with code', 'financialcontent',
   'tmx newsfile', 'tmxnewsfile', 'newswire', 'pr newswire', 'businesswire',
+  'valor economico',
+  'valor econômico',
+  'business wire',
   'globe newswire', 'accesswire', 'ein presswire',
   // Large enterprises (not SMBs)
   'wolters kluwer', 'lexisnexis', 'thomson reuters', 'westlaw', 'relx',
