@@ -41,7 +41,55 @@ const KNOWN_PUBLISHERS = new Set([
   // Universities
   'mit', 'stanford', 'harvard', 'oxford', 'cambridge',
   'london school of economics', 'lse', 'imperial college', 'startups',
-  // Polish media
+  // Additional publishers found in run logs
+  'jd supra',
+    // Additional publishers found in run logs
+  'tech policy press',
+    // Additional publishers found in run logs
+  'digitaleurope',
+    // Additional publishers found in run logs
+  'economist impact',
+    // Additional publishers found in run logs
+  'oracle blogs',
+    // Additional publishers found in run logs
+  'microsoft source',
+    // Additional publishers found in run logs
+  'thomson reuters legal solutions',
+    // Additional publishers found in run logs
+  'orrick',
+    // Additional publishers found in run logs
+  'orrick.com',
+    // Additional publishers found in run logs
+  'crowell',
+    // Additional publishers found in run logs
+  'crowell & moring',
+    // Additional publishers found in run logs
+  'allen & overy',
+    // Additional publishers found in run logs
+  'linklaters',
+    // Additional publishers found in run logs
+  'freshfields',
+    // Additional publishers found in run logs
+  'clifford chance',
+    // Additional publishers found in run logs
+  'baker mckenzie',
+    // Additional publishers found in run logs
+  'dentons',
+    // Additional publishers found in run logs
+  'norton rose',
+    // Additional publishers found in run logs
+  'hogan lovells',
+    // Additional publishers found in run logs
+  'latham & watkins',
+    // Additional publishers found in run logs
+  'skadden',
+    // Additional publishers found in run logs
+  'sidley',
+    // Additional publishers found in run logs
+  'kirkland',
+    // Additional publishers found in run logs
+  'weil gotshal',
+    // Polish media
   'rzeczpospolita', 'gazeta prawna', 'prawo.pl', 'lex.pl', 'nowoczesna firma',
   // Portuguese media
   'publico', 'jornal de negocios', 'expresso', 'observador', 'eco',
@@ -50,10 +98,16 @@ const KNOWN_PUBLISHERS = new Set([
 function isKnownPublisher(name: string | null | undefined): boolean {
   if (!name) return false;
   const lower = name.toLowerCase().trim();
+  // Strip common leading articles so "The Guardian" matches "guardian" etc.
+  const stripped = lower.replace(/^(the|a|an) /, '');
   if (KNOWN_PUBLISHERS.has(lower)) return true;
-  // Also catch patterns like "Startups.co.uk", "TechCrunch | AI"
+  if (KNOWN_PUBLISHERS.has(stripped)) return true;
+  // Also catch patterns like "Startups.co.uk", "TechCrunch | AI", or partial name matches
   for (const pub of KNOWN_PUBLISHERS) {
-    if (lower.startsWith(pub) || lower.includes(' | ' + pub)) return true;
+    if (lower.startsWith(pub) || stripped.startsWith(pub)) return true;
+    if (lower.includes(' | ' + pub)) return true;
+    // Catch "The London School of Economics and Political Science" matching "london school of economics"
+    if (stripped.startsWith(pub) || lower.includes(pub)) return true;
   }
   return false;
 }

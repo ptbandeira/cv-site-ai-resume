@@ -44,7 +44,9 @@ export async function enrichLead(
   const apiKey = process.env.APOLLO_API_KEY;
   const draft = generateDraft(company, industry, articleTitle, null);
 
-  if (!apiKey || !company || company === 'Unknown' || company.length < 3) {
+  // Fast-fail if Apollo disabled (403 from earlier in this run)
+  if (!apiKey || apolloDisabled || !company || company === 'Unknown' || company.length < 3) {
+    if (apolloDisabled) console.log(`  ⚡ Apollo disabled (free plan 403) — skipping ${company}`);
     return { contact: null, draft };
   }
 
@@ -65,7 +67,12 @@ export async function enrichLead(
     });
 
     if (!res.ok) {
-      console.error(`Apollo API returned ${res.status} for company: ${company}`);
+      if (res.status === 403) {
+        apolloDisabled = true;
+        console.warn(`⚡ Apollo 403 for ${company} — disabling for this run (free plan limit)`);
+      } else {
+        console.error(`Apollo API returned ${res.status} for company: ${company}`);
+      }
       return { contact: null, draft };
     }
 
