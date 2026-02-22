@@ -108,7 +108,7 @@ async function callGemini(prompt: string): Promise<string> {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.7, maxOutputTokens: 1024 },
+        generationConfig: { temperature: 0.7, maxOutputTokens: 4096 },
       }),
     }
   );
@@ -122,7 +122,7 @@ async function callGemini(prompt: string): Promise<string> {
     const res2 = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`,
       { method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.7, maxOutputTokens: 1024 } }) }
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.7, maxOutputTokens: 4096 } }) }
     );
     if (!res2.ok) throw new Error(`Gemini HTTP ${res2.status} (after retry)`);
     return (await res2.json() as any).candidates?.[0]?.content?.parts?.[0]?.text ?? '';
