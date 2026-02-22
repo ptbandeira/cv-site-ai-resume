@@ -1,7 +1,29 @@
 {
-  "generated": "2026-02-22T21:51:55.792Z",
+  "generated": "2026-02-22T21:56:27.607Z",
   "totalItems": 4,
   "items": [
+    {
+      "id": "ai-agents-the-next-wave-of-business-change-1771797372659",
+      "slug": "ai-agents-the-next-wave-of-business-change-1771797372659",
+      "category": "SMB Operations",
+      "noise": "Anthropic's Boris Cherny, creator of their Claude Code AI agent, warns that AI agents will \"painfully\" reshape nearly every computer-based job, with significant changes starting as early as 2026. He emphasizes these agents can increasingly operate computers autonomously.",
+      "translation": "This isn't abstract tech talk for Silicon Valley; it directly impacts your European law firm, accountancy, or consultancy. It means AI is moving beyond simple chatbots to tools that can *act* on your computer systems—analyzing contracts, preparing reports, or managing client communications. Ignoring this shift will put you at a significant competitive disadvantage very soon.",
+      "action": "My advice is direct: start experimenting, not just observing. Pick a small, repetitive digital task within your firm – perhaps document review or data entry – and assign a small team to explore how current AI agents can automate or assist. My clients often start with low-cost platform access, focusing on understanding the *how* and *why* before committing to larger investments.",
+      "date": "Feb 2026",
+      "keywords": [
+        "AI agents",
+        "job disruption",
+        "SMB productivity",
+        "knowledge workers",
+        "automation"
+      ],
+      "sources": [
+        {
+          "label": "AI Agents The Next Wave of Business Change",
+          "url": "https://www.businessinsider.com/anthropic-boris-cherny-ai-impact-computer-jobs-painful-change-2026-2"
+        }
+      ]
+    },
     {
       "id": "ai-governance-updates-1771497040921",
       "slug": "ai-governance-updates-1771497040921",
@@ -25,38 +47,6 @@
       ]
     },
     {
-      "id": "ai-insight-1771797104055",
-      "slug": "ai-insight-1771797104055",
-      "category": "SMB Operations",
-      "noise": "Anthropic's Boris Cherny, creator of their Claude Code AI agent, recently warned that AI will \"painfully\" reshape nearly every computer-based job in America, with changes",
-      "translation": "",
-      "action": "",
-      "date": "Feb 2026",
-      "keywords": [],
-      "sources": [
-        {
-          "label": "ai-insight",
-          "url": "https://www.businessinsider.com/anthropic-boris-cherny-ai-impact-computer-jobs-painful-change-2026-2"
-        }
-      ]
-    },
-    {
-      "id": "ai-insight-1771797115788",
-      "slug": "ai-insight-1771797115788",
-      "category": "SMB Operations",
-      "noise": "A recent InvestorPlace analysis asserts that companies *using* AI are set to outperform those *building* the AI infrastructure. The article draws parallels to historical tech booms like railroads and",
-      "translation": "",
-      "action": "",
-      "date": "Feb 2026",
-      "keywords": [],
-      "sources": [
-        {
-          "label": "ai-insight",
-          "url": "https://investorplace.com/smartmoney/2026/02/companies-using-ai-beat-ones-building/"
-        }
-      ]
-    },
-    {
       "id": "legal-tech-updates-1771322203597",
       "slug": "legal-tech-updates-1771322203597",
       "category": "Legal Technology",
@@ -74,6 +64,28 @@
         {
           "label": "Legal Technology",
           "url": "https://www.lexisnexis.com/en-us/about-us/media/press-release/2023/lexisnexis-lexis-ai-now-generally-available-in-the-us.page"
+        }
+      ]
+    },
+    {
+      "id": "smbs-win-by-applying-not-building-ai-1771797387604",
+      "slug": "smbs-win-by-applying-not-building-ai-1771797387604",
+      "category": "SMB Operations",
+      "noise": "The latest market analysis highlights a significant trend: companies *using* AI are predicted to outperform and accrue more profit than those investing heavily in *building* the core AI infrastructure. This pattern echoes historical shifts seen with railroads and the internet, where appliers ultimately built greater empires.",
+      "translation": "For European SMBs like your law firm, accountancy, or consultancy, this is a critical insight. You are not meant to be an AI builder; your strategic advantage lies in becoming an expert AI *applier*. This means focusing on how to integrate readily available AI tools to enhance efficiency, client service, and ultimately, your bottom line, without the immense capital and risk associated with development.",
+      "action": "My direct recommendation is to stop chasing the \"next big thing\" in AI development and instead, immediately identify 1-2 high-impact areas within your operations where existing AI tools can be deployed. Target processes like document analysis, preliminary research, or client communication drafting, and aim for a pilot implementation within the next 45 days. I can guide you in selecting the right, cost-effective solutions and ensuring a smooth, practical integration.",
+      "date": "Feb 2026",
+      "keywords": [
+        "AI adoption",
+        "SMB strategy",
+        "operational efficiency",
+        "AI application",
+        "competitive advantage"
+      ],
+      "sources": [
+        {
+          "label": "SMBs Win By Applying, Not Building, AI",
+          "url": "https://investorplace.com/smartmoney/2026/02/companies-using-ai-beat-ones-building/"
         }
       ]
     }
