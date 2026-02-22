@@ -1,3 +1,4 @@
+import "dotenv/config";
 // scripts/slack-to-pulse.ts
 // Reads #analog-ai-feedback Slack channel → fetches articles → generates Pulse notes via Gemini →
 // writes to public/blog/ → regenerates manifest.json → commits + pushes → Vercel auto-deploys.
@@ -15,6 +16,8 @@ import * as fsAsync from 'fs/promises';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
+
+const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -97,6 +100,7 @@ async function fetchArticle(url: string): Promise<string> {
 // ─── Gemini ────────────────────────────────────────────────────────────────
 
 async function callGemini(prompt: string): Promise<string> {
+  await sleep(5000); // Rate-limit guard
   const res = await fetch(
     `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`,
     {
@@ -108,6 +112,21 @@ async function callGemini(prompt: string): Promise<string> {
       }),
     }
   );
+  if (res.status === 429) {
+    const body = await res.json().catch(() => ({})) as any;
+    const msg = body?.error?.message ?? 'rate limited';
+    const retryMatch = (body?.error?.message ?? '').match(/retry in ([\d.]+)s/i);
+    const waitSecs = retryMatch ? Math.ceil(parseFloat(retryMatch[1])) + 5 : 65;
+    console.log(`   ⏳ 429: ${msg}. Waiting ${waitSecs}s then retrying...`);
+    await sleep(waitSecs * 1000);
+    const res2 = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`,
+      { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.7, maxOutputTokens: 1024 } }) }
+    );
+    if (!res2.ok) throw new Error(`Gemini HTTP ${res2.status} (after retry)`);
+    return (await res2.json() as any).candidates?.[0]?.content?.parts?.[0]?.text ?? '';
+  }
   if (!res.ok) throw new Error(`Gemini HTTP ${res.status}`);
   const data = await res.json() as any;
   return data.candidates[0].content.parts[0].text;
@@ -217,6 +236,7 @@ async function main() {
   const published: string[] = [];
 
   for (const url of newUrls) {
+    if (url.includes("linkedin.com")) { console.log("   ⏭️  Skipped: LinkedIn"); continue; }
     console.log(`📰 ${url}`);
     try {
       const articleText = await fetchArticle(url);
