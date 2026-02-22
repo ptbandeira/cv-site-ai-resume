@@ -1,0 +1,36 @@
+name: Publish Pulse (on-demand from Slack)
+
+on:
+  repository_dispatch:
+    types: [publish-pulse]
+  workflow_dispatch: # also allow manual trigger from GitHub UI
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - run: npm ci
+
+      - name: Run pulse-from-slack
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_FEEDBACK_CHANNEL: ${{ secrets.SLACK_FEEDBACK_CHANNEL }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: npm run pulse:from-slack
+
+      - name: Commit and push
+        run: |
+          git config user.name "Pulse Bot"
+          git config user.email "bot@analog-ai.vercel.app"
+          git add public/blog/ public/manifest.json feedback/processed-pulse-urls.txt
+          git diff --staged --quiet || git commit -m "🤖 New pulse item published from Slack [skip ci]"
+          git push
