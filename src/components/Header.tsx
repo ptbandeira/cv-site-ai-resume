@@ -54,9 +54,9 @@ const Header = ({ onOpenChat }: HeaderProps) => {
             onClick={() => scrollToSection("hero")}
             className="text-left group"
           >
-            <h1 className="font-serif text-xl font-medium tracking-tight text-foreground group-hover:text-primary transition-colors">
+            <span className="font-serif text-xl font-medium tracking-tight text-foreground group-hover:text-primary transition-colors">
               Analog AI
-            </h1>
+            </span>
             <span className="text-[10px] font-mono text-muted-foreground tracking-wide mt-0.5">
               by Pedro Bandeira
             </span>
