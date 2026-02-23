@@ -1,6 +1,10 @@
-import { Check } from "lucide-react";
+import { useState } from "react";
+import { Check, ChevronDown, ChevronUp } from "lucide-react";
+import Experience from "@/components/Experience";
 
 const AdultInTheRoom = () => {
+    const [showBackground, setShowBackground] = useState(false);
+
     const qualifications = [
         "20+ years running business growth, partnerships, and commercial operations across Pharma/Healthcare, Digital Platforms, and Retail.",
         "Scaled and operated real businesses with P&L consequences (not slide decks).",
@@ -39,6 +43,32 @@ const AdultInTheRoom = () => {
                     <p className="text-xl md:text-2xl font-serif italic text-stone-900">
                         "I don’t sell hype. I sell clarity and governed execution."
                     </p>
+                </div>
+
+                {/* Background accordion */}
+                <div className="mt-12 border-t border-stone-200 pt-8">
+                    <button
+                        onClick={() => setShowBackground(v => !v)}
+                        className="flex items-center gap-2 mx-auto text-sm font-mono uppercase tracking-wider text-stone-500 hover:text-stone-800 transition-colors"
+                    >
+                        {showBackground ? (
+                            <>
+                                <ChevronUp className="w-4 h-4" />
+                                Hide full background
+                            </>
+                        ) : (
+                            <>
+                                <ChevronDown className="w-4 h-4" />
+                                View full background
+                            </>
+                        )}
+                    </button>
+
+                    {showBackground && (
+                        <div className="mt-8">
+                            <Experience />
+                        </div>
+                    )}
                 </div>
             </div>
         </section>
