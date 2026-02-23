@@ -121,6 +121,40 @@ export default function PulseIndex() {
           </p>
         </div>
 
+        {/* Featured Guide — pinned static content */}
+        <div className="mb-8">
+          <p className="text-xs font-bold uppercase tracking-widest text-stone-400 mb-4">Featured Guide</p>
+          <a
+            href="/blog/eu-ai-act-compliance.html"
+            className="block bg-amber-50 border border-amber-200 rounded-lg p-6 hover:shadow-md transition-shadow group"
+          >
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 p-3 rounded-lg bg-amber-100 text-amber-700">
+                <AlertTriangle className="h-6 w-6" />
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-xs font-bold uppercase tracking-widest text-amber-700 bg-amber-100 px-2 py-0.5 rounded">AI Governance</span>
+                  <span className="text-sm text-stone-400">Feb 2026</span>
+                  <span className="text-xs font-bold uppercase tracking-widest text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">Deep Dive</span>
+                </div>
+                <p className="text-xl font-serif font-bold text-stone-900 mb-2 group-hover:text-amber-800 transition-colors">
+                  EU AI Act: A Business Translation
+                </p>
+                <p className="text-stone-600 leading-relaxed">
+                  The high-risk deadline moved to 2027 — but two obligations are already in force. A plain-English guide for European SMBs and regulated industries.
+                </p>
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {["EU AI Act compliance", "AI literacy training", "high-risk systems", "SMB guide"].map((kw, i) => (
+                    <span key={i} className="text-xs px-2 py-1 bg-amber-100 text-amber-700 rounded">{kw}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <p className="text-xs font-bold uppercase tracking-widest text-stone-400 mb-4">Latest Analysis</p>
         <div className="space-y-6">
           {pulseItems.map((insight) => {
             const colors = categoryColors[insight.category] || {
