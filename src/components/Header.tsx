@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Shield, Cpu, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -16,6 +16,8 @@ interface HeaderProps {
 const Header = ({ onOpenChat }: HeaderProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,15 +29,19 @@ const Header = ({ onOpenChat }: HeaderProps) => {
 
   const scrollToSection = (id: string) => {
     setMobileMenuOpen(false);
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    if (isHome) {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.location.href = `/#${id}`;
+    }
   };
 
   const handleAskAI = () => {
     setMobileMenuOpen(false);
-    if (onOpenChat) {
+    if (isHome && onOpenChat) {
       onOpenChat();
     } else {
-      scrollToSection("experience");
+      window.location.href = "/#contact";
     }
   };
 
