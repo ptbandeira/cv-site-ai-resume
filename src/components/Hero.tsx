@@ -53,7 +53,7 @@ const Hero = ({ onOpenChat }: HeroProps) => {
             </li>
             <li className="flex items-center gap-3">
               <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-primary" />
-              <span>Keep sensitive data inside your perimeter (when required)</span>
+              <span>Keep sensitive data inside your perimeter — EU AI Act & GDPR ready</span>
             </li>
           </ul>
 

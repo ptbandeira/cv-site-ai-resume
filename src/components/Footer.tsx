@@ -56,7 +56,7 @@ const Footer = ({ onOpenChat }: { onOpenChat?: () => void }) => {
                 System Status: online
               </div>
               <p className="text-sm text-foreground font-medium">
-                Architected by Pedro. Vibe Coded with Antigravity & Lovable.
+                Architected by Pedro. Built with the same tools I recommend to clients.
               </p>
               <div className="flex items-center gap-1.5 text-xs text-primary font-medium opacity-60 group-hover:opacity-100 transition-opacity">
                 Want a site like this? <span className="underline">Run Fit Check</span>
@@ -69,8 +69,8 @@ const Footer = ({ onOpenChat }: { onOpenChat?: () => void }) => {
               © 2026 Analog AI. Built with Sovereign Architecture. • <Link to="/press" className="hover:text-primary transition-colors">Press Kit</Link>
             </p>
             <p className="text-xs font-mono text-[#555555] leading-relaxed max-w-xl mx-auto">
-              Pedro Bandeira: Senior AI Operations Architect. Specializing in Human-in-the-Loop
-              Workflows, Local LLMs, and Sovereign Data.
+              Pedro Bandeira: Fractional CAIO & AI Governance Advisor. Specialising in Human-in-the-Loop
+              Workflows, EU AI Act Compliance, and Private AI Architecture.
             </p>
           </div>
         </div>
