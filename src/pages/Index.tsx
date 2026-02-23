@@ -5,16 +5,16 @@ import FilterSection from "@/components/FilterSection";
 import OfferMenu from "@/components/OfferMenu";
 import AdultInTheRoom from "@/components/AdultInTheRoom";
 import WhenAIGoesWrong from "@/components/WhenAIGoesWrong";
-import MiniAppSandbox from "@/components/MiniAppSandbox";
+// import MiniAppSandbox from "@/components/MiniAppSandbox";
 import Experience from "@/components/Experience";
 import FitAssessment from "@/components/FitAssessment";
 import SaasVsBuild from "@/components/SaasVsBuild";
-import AutomationAuditor from "@/components/AutomationAuditor";
+// import AutomationAuditor from "@/components/AutomationAuditor";
 // import AnalogAdvantage from "@/components/AnalogAdvantage";
-import InsightPulse from "@/components/InsightPulse";
-import FieldNoteLawFirm from "@/components/FieldNoteLawFirm";
-import TeamsAgentDemo from "@/components/TeamsAgentDemo";
-import DataTransformation from "@/components/DataTransformation";
+// import InsightPulse from "@/components/InsightPulse";
+// import FieldNoteLawFirm from "@/components/FieldNoteLawFirm";
+// import TeamsAgentDemo from "@/components/TeamsAgentDemo";
+// import DataTransformation from "@/components/DataTransformation";
 import SavingsCalculator from "@/components/SavingsCalculator";
 import StrategicFAQ from "@/components/StrategicFAQ";
 import AIChat from "@/components/AIChat";
@@ -37,23 +37,18 @@ const Index = () => {
         <AdultInTheRoom />
         <WhenAIGoesWrong />
         {/* <AnalogAdvantage onOpenChat={openChat} /> */}
-        <TeamsAgentDemo />
-        <DataTransformation />
-        <FieldNoteLawFirm />
+        {/* TeamsAgentDemo, DataTransformation, FieldNoteLawFirm moved to Pulse/dedicated pages */}
         <div id="resource-audit">
           <SavingsCalculator />
           <SaasVsBuild />
         </div>
-        <div id="automation-auditor">
-          <AutomationAuditor />
-        </div>
-        <div id="sandbox">
-          <MiniAppSandbox />
-        </div>
+        {/* AutomationAuditor, MiniAppSandbox available at /audit and /sandbox */}
         <Experience />
-        <InsightPulse />
+        {/* InsightPulse removed — Pulse linked from nav */}
         <StrategicFAQ />
-        <FitAssessment />
+        <div id="fit-assessment">
+          <FitAssessment />
+        </div>
       </main>
       <Footer onOpenChat={openChat} />
       <FloatingAICTA onOpenChat={openChat} />
