@@ -50,17 +50,17 @@ const Header = ({ onOpenChat }: HeaderProps) => {
     >
       <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <div className="flex flex-col">
-          <button
-            onClick={() => scrollToSection("hero")}
+          <Link
+            to="/"
             className="text-left group"
           >
-            <span className="font-serif text-xl font-medium tracking-tight text-foreground group-hover:text-primary transition-colors">
+            <h1 className="font-serif text-xl font-medium tracking-tight text-foreground group-hover:text-primary transition-colors leading-none">
               Analog AI
-            </span>
-            <span className="text-[10px] font-mono text-muted-foreground tracking-wide mt-0.5">
+            </h1>
+            <span className="block text-[10px] font-mono text-muted-foreground tracking-wide mt-1 leading-none">
               by Pedro Bandeira
             </span>
-          </button>
+          </Link>
         </div>
 
         {/* System Status Badge — desktop only */}
@@ -101,19 +101,13 @@ const Header = ({ onOpenChat }: HeaderProps) => {
         </div>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6">
           <Link
             to="/pulse"
             className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
             Pulse
-          </Link>
-          <Link
-            to="/blog/eu-ai-act-compliance.html"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            EU AI Act
           </Link>
           <button
             onClick={() => scrollToSection("how-i-work")}
@@ -135,7 +129,7 @@ const Header = ({ onOpenChat }: HeaderProps) => {
           </button>
           <button
             onClick={handleAskAI}
-            className="text-sm font-medium px-5 py-2.5 bg-[#1A1A1A] text-white rounded-sm hover:shadow-lg transition-all duration-300"
+            className="text-sm font-medium px-4 py-2 bg-[#1A1A1A] text-white rounded-sm hover:shadow-lg transition-all duration-300"
           >
             Request a Call
           </button>
@@ -161,13 +155,13 @@ const Header = ({ onOpenChat }: HeaderProps) => {
             >
               Pulse
             </Link>
-            <Link
-              to="/blog/eu-ai-act-compliance.html"
+            <a
+              href="/blog/eu-ai-act-compliance.html"
               onClick={() => setMobileMenuOpen(false)}
               className="block w-full text-left font-medium text-muted-foreground hover:text-foreground"
             >
               EU AI Act Guide
-            </Link>
+            </a>
             <button
               onClick={() => scrollToSection("how-i-work")}
               className="block w-full text-left font-medium text-muted-foreground hover:text-foreground"

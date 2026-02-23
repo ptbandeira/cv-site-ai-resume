@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Activity, TrendingUp, AlertTriangle, Zap, Target, ArrowRight } from "lucide-react";
+import { ArrowRight, BookOpen } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingAICTA from "@/components/FloatingAICTA";
@@ -18,42 +18,16 @@ interface PulseItem {
   sources?: Array<{ label: string; url: string }>;
 }
 
-interface Manifest {
-  generated: string;
-  totalItems: number;
-  items: PulseItem[];
-}
-
-const categoryIcons: Record<string, React.ReactNode> = {
-  "AI Governance":    <AlertTriangle className="h-5 w-5" />,
-  "Enterprise AI":    <Zap className="h-5 w-5" />,
-  "Pharma AI":        <Activity className="h-5 w-5" />,
-  "FinTech Compliance": <TrendingUp className="h-5 w-5" />,
-  "Legal Tech":       <Target className="h-5 w-5" />,
-  "Legal Technology": <Target className="h-5 w-5" />,
-  "SMB Operations":   <TrendingUp className="h-5 w-5" />,
-};
-
-const categoryColors: Record<string, { color: string; iconBg: string; dot: string }> = {
-  "AI Governance":    { color: "text-amber-700",   iconBg: "bg-amber-100",   dot: "bg-amber-500" },
-  "Enterprise AI":    { color: "text-blue-700",    iconBg: "bg-blue-100",    dot: "bg-blue-500" },
-  "Pharma AI":        { color: "text-emerald-700", iconBg: "bg-emerald-100", dot: "bg-emerald-500" },
-  "FinTech Compliance": { color: "text-purple-700", iconBg: "bg-purple-100", dot: "bg-purple-500" },
-  "Legal Tech":       { color: "text-rose-700",    iconBg: "bg-rose-100",    dot: "bg-rose-500" },
-  "Legal Technology": { color: "text-rose-700",    iconBg: "bg-rose-100",    dot: "bg-rose-500" },
-  "SMB Operations":   { color: "text-emerald-700", iconBg: "bg-emerald-100", dot: "bg-emerald-500" },
-};
-
 export default function PulseIndex() {
   const [pulseItems, setPulseItems] = useState<PulseItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [isChatOpen, setIsChatOpen] = useState(false);
 
   useEffect(() => {
-    fetch('/manifest.json')
-      .then(r => r.json())
-      .then((manifest: Manifest) => setPulseItems(manifest.items ?? []))
-      .catch(() => setPulseItems([]))
+    fetch("/manifest.json")
+      .then((r) => r.json())
+      .then((data) => setPulseItems(data.items ?? []))
+      .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
 
@@ -61,154 +35,133 @@ export default function PulseIndex() {
     <div className="min-h-screen bg-background font-sans selection:bg-primary/20">
       <Header onOpenChat={() => setIsChatOpen(true)} />
 
-      <main className="pt-32 pb-24 px-6">
-        <div className="max-w-4xl mx-auto">
+      <main className="pt-36 pb-24 px-6">
+        <div className="max-w-3xl mx-auto">
 
-          {/* Page header — matches site editorial style */}
-          <div className="mb-16 border-b border-stone-200 pb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 border border-stone-300 rounded-full mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-              <span className="text-xs font-mono text-stone-500 uppercase tracking-widest">
-                Intelligence Feed
-              </span>
-            </div>
-            <h1 className="font-serif text-5xl md:text-6xl italic text-stone-900 tracking-tight leading-tight mb-5">
+          {/* Masthead */}
+          <div className="mb-14">
+            <span className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-5">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+              Signal intelligence
+            </span>
+            <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight text-foreground leading-tight mb-4">
               The Pulse
             </h1>
-            <p className="font-mono text-base text-stone-500 max-w-xl">
-              AI news decoded for executives. Cutting vendor hype with 25 years of operator experience from both sides of the table.
+            <p className="text-base text-muted-foreground max-w-xl leading-relaxed">
+              News analysis for executives navigating AI adoption — cutting through
+              vendor hype with experience from both sides of the table.
             </p>
           </div>
 
-          {/* Featured Guide */}
-          <div className="mb-12">
-            <p className="text-xs font-mono font-bold uppercase tracking-widest text-stone-400 mb-5">
-              Featured Guide
-            </p>
-            <a
-              href="/blog/eu-ai-act-compliance.html"
-              className="block bg-white border border-stone-200 rounded-sm p-8 hover:shadow-lg hover:border-stone-300 transition-all group"
-            >
-              <div className="flex items-start gap-6">
-                <div className="flex-shrink-0 p-3 rounded-sm bg-amber-100 text-amber-700">
-                  <AlertTriangle className="h-6 w-6" />
-                </div>
-                <div className="flex-1">
-                  <div className="flex flex-wrap items-center gap-3 mb-4">
-                    <span className="text-xs font-mono font-bold uppercase tracking-widest text-amber-700">
-                      AI Governance
-                    </span>
-                    <span className="text-xs font-mono text-stone-400">·</span>
-                    <span className="text-xs font-mono uppercase tracking-widest px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-sm font-bold">
-                      Deep Dive
-                    </span>
-                    <span className="text-xs font-mono text-stone-400">Feb 2026</span>
-                  </div>
-                  <h2 className="font-serif text-2xl md:text-3xl italic text-stone-900 mb-3 group-hover:text-amber-800 transition-colors">
-                    EU AI Act: A Business Translation
-                  </h2>
-                  <p className="text-stone-600 leading-relaxed mb-5">
-                    The high-risk deadline moved to 2027 — but two obligations are already in force. 
-                    A plain-English guide for European SMBs and regulated industries.
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-5">
-                    {["EU AI Act compliance", "AI literacy training", "high-risk systems", "SMB guide"].map((kw, i) => (
-                      <span key={i} className="text-xs px-2 py-1 bg-stone-100 text-stone-600 rounded-sm font-mono">
-                        {kw}
-                      </span>
-                    ))}
-                  </div>
-                  <span className="inline-flex items-center gap-1.5 text-sm font-medium text-stone-900 group-hover:text-amber-800 transition-colors">
-                    Read the guide <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </div>
+          {/* Featured Guide — EU AI Act */}
+          <a
+            href="/blog/eu-ai-act-compliance.html"
+            className="group block mb-12 border border-amber-200 bg-amber-50/60 hover:bg-amber-50 rounded-sm p-6 transition-all duration-200 hover:border-amber-300 hover:shadow-sm"
+          >
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex-1">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-amber-600 mb-3 block">
+                  Featured Guide
+                </span>
+                <h2 className="font-serif text-xl font-medium text-foreground mb-2 leading-snug group-hover:text-primary transition-colors">
+                  EU AI Act Compliance for SMBs
+                </h2>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  A practical operator's guide to the EU AI Act — what it means for
+                  mid-market companies, what's actually required by August 2026, and
+                  how to avoid expensive surprises.
+                </p>
               </div>
-            </a>
-          </div>
+              <div className="flex-shrink-0 w-10 h-10 rounded-sm bg-amber-100 flex items-center justify-center group-hover:bg-amber-200 transition-colors">
+                <BookOpen className="w-5 h-5 text-amber-600" />
+              </div>
+            </div>
+            <div className="mt-4 flex items-center gap-1.5 text-xs font-mono text-amber-600">
+              Read the guide
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </a>
 
           {/* Latest Analysis */}
-          <div>
-            <p className="text-xs font-mono font-bold uppercase tracking-widest text-stone-400 mb-5">
+          <div className="mb-6">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
               Latest Analysis
-            </p>
+            </span>
+          </div>
 
-            {loading ? (
-              <div className="space-y-4">
-                {[1, 2, 3].map(i => (
-                  <div key={i} className="bg-white border border-stone-200 rounded-sm p-6 animate-pulse">
-                    <div className="h-4 bg-stone-100 rounded w-1/4 mb-3" />
-                    <div className="h-6 bg-stone-100 rounded w-3/4 mb-2" />
-                    <div className="h-4 bg-stone-100 rounded w-full" />
-                  </div>
-                ))}
-              </div>
-            ) : pulseItems.length === 0 ? (
-              <div className="text-center py-16 border border-dashed border-stone-200 rounded-sm">
-                <Activity className="h-8 w-8 text-stone-300 mx-auto mb-3" />
-                <p className="font-mono text-sm text-stone-500">No analysis published yet. Check back soon.</p>
-              </div>
-            ) : (
-              <div className="space-y-4">
-                {pulseItems.map((insight) => {
-                  const colors = categoryColors[insight.category] || { color: "text-stone-600", iconBg: "bg-stone-100", dot: "bg-stone-400" };
-                  const icon = categoryIcons[insight.category] || <Activity className="h-5 w-5" />;
-
-                  return (
-                    <Link
-                      to={`/pulse/${insight.slug}`}
-                      key={insight.id}
-                      className="block bg-white border border-stone-200 rounded-sm p-6 hover:shadow-md hover:border-stone-300 transition-all group"
-                    >
-                      <div className="flex items-start gap-5">
-                        <div className={`flex-shrink-0 p-2.5 rounded-sm ${colors.iconBg} ${colors.color}`}>
-                          {icon}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex flex-wrap items-center gap-3 mb-2">
-                            <span className={`text-xs font-mono font-bold uppercase tracking-widest ${colors.color}`}>
-                              {insight.category}
-                            </span>
-                            <span className="text-xs font-mono text-stone-400">
-                              {new Date(insight.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
-                            </span>
-                          </div>
-
-                          {insight.noise && (
-                            <p className="text-xs font-mono text-stone-500 mb-2 truncate">
-                              The noise: {insight.noise}
-                            </p>
-                          )}
-
-                          <p className="font-serif text-lg italic text-stone-900 leading-snug group-hover:text-stone-700 transition-colors">
-                            {insight.translation}
-                          </p>
-
-                          {insight.keywords?.length > 0 && (
-                            <div className="flex flex-wrap gap-1.5 mt-3">
-                              {insight.keywords.slice(0, 4).map((kw, idx) => (
-                                <span key={idx} className="text-xs px-2 py-0.5 bg-stone-100 text-stone-500 rounded-sm font-mono">
-                                  {kw}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                        <ArrowRight className="flex-shrink-0 h-4 w-4 text-stone-300 group-hover:text-stone-600 group-hover:translate-x-1 transition-all mt-1" />
+          {loading ? (
+            <div className="space-y-4">
+              {[1, 2, 3].map((n) => (
+                <div key={n} className="border border-stone-100 rounded-sm p-6 animate-pulse">
+                  <div className="h-3 w-24 bg-stone-100 rounded mb-4" />
+                  <div className="h-5 w-3/4 bg-stone-100 rounded mb-3" />
+                  <div className="h-4 w-full bg-stone-100 rounded mb-2" />
+                  <div className="h-4 w-2/3 bg-stone-100 rounded" />
+                </div>
+              ))}
+            </div>
+          ) : pulseItems.length === 0 ? (
+            <div className="text-center py-20 border border-stone-100 rounded-sm">
+              <p className="font-mono text-xs text-muted-foreground uppercase tracking-widest">
+                No insights yet — check back soon
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-px">
+              {pulseItems.map((item) => (
+                <Link
+                  key={item.id}
+                  to={`/pulse/${item.slug}`}
+                  className="group block border border-stone-100 hover:border-stone-200 bg-white hover:bg-stone-50/50 rounded-sm p-6 transition-all duration-200"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-3 mb-3">
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+                          {item.category}
+                        </span>
+                        <span className="text-[10px] font-mono text-stone-300">·</span>
+                        <span className="text-[10px] font-mono text-muted-foreground">
+                          {new Date(item.date).toLocaleDateString("en-GB", {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric",
+                          })}
+                        </span>
                       </div>
-                    </Link>
-                  );
-                })}
-              </div>
-            )}
-          </div>
+                      <p className="font-serif text-lg font-medium text-foreground leading-snug mb-2 group-hover:text-primary transition-colors">
+                        {item.translation}
+                      </p>
+                      <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
+                        {item.noise}
+                      </p>
+                      {item.keywords && item.keywords.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mt-4">
+                          {item.keywords.slice(0, 4).map((kw, i) => (
+                            <span
+                              key={i}
+                              className="inline-flex items-center gap-1 text-[10px] font-mono text-muted-foreground"
+                            >
+                              <span className="w-1 h-1 rounded-full bg-stone-300" />
+                              {kw}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    <ArrowRight className="flex-shrink-0 w-4 h-4 text-stone-300 group-hover:text-primary group-hover:translate-x-1 transition-all mt-1" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
 
-          {/* Bottom tagline */}
-          <div className="mt-16 pt-8 border-t border-stone-200">
-            <p className="font-mono text-xs text-stone-400 text-center uppercase tracking-widest">
-              Analysis from 25 years of operating experience · Updated when the news warrants it
+          <div className="mt-16 pt-8 border-t border-stone-100 text-center">
+            <p className="text-[11px] font-mono text-muted-foreground tracking-wide">
+              Analysis from a 50-year-old operator — who's built analog businesses
+              and shipped AI products
             </p>
           </div>
-
         </div>
       </main>
 
