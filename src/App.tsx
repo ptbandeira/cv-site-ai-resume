@@ -9,6 +9,9 @@ import FitAssessment from "./components/FitAssessment";
 import PulseIndex from "./pages/PulseIndex";
 import PulseDetail from "./pages/PulseDetail";
 import PressKit from "./pages/PressKit";
+import HowIWork from "./pages/HowIWork";
+import Proof from "./pages/Proof";
+import Tools from "./pages/Tools";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +40,9 @@ const App = () => (
               <FitAssessment />
             </div>
           } />
+          <Route path="/how-i-work" element={<HowIWork />} />
+          <Route path="/proof" element={<Proof />} />
+          <Route path="/tools" element={<Tools />} />
           <Route path="/pulse" element={<PulseIndex />} />
           <Route path="/pulse/:slug" element={<PulseDetail />} />
           <Route path="/press" element={<PressKit />} />

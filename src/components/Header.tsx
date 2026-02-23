@@ -115,24 +115,24 @@ const Header = ({ onOpenChat }: HeaderProps) => {
             <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
             Pulse
           </Link>
-          <button
-            onClick={() => scrollToSection("how-i-work")}
+          <Link
+            to="/how-i-work"
             className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
-            How I work
-          </button>
-          <button
-            onClick={() => scrollToSection("resource-audit")}
+            How I Work
+          </Link>
+          <Link
+            to="/proof"
             className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
-            ROI Audit
-          </button>
-          <button
-            onClick={() => scrollToSection("fit-assessment")}
+            Proof
+          </Link>
+          <Link
+            to="/tools"
             className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
-            Fit Check
-          </button>
+            Tools
+          </Link>
           <button
             onClick={handleAskAI}
             className="text-sm font-medium px-4 py-2 bg-[#1A1A1A] text-white rounded-sm hover:shadow-lg transition-all duration-300"
@@ -161,6 +161,27 @@ const Header = ({ onOpenChat }: HeaderProps) => {
             >
               Pulse
             </Link>
+            <Link
+              to="/how-i-work"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block w-full text-left font-medium text-muted-foreground hover:text-foreground"
+            >
+              How I Work
+            </Link>
+            <Link
+              to="/proof"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block w-full text-left font-medium text-muted-foreground hover:text-foreground"
+            >
+              Proof
+            </Link>
+            <Link
+              to="/tools"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block w-full text-left font-medium text-muted-foreground hover:text-foreground"
+            >
+              Tools
+            </Link>
             <a
               href="/blog/eu-ai-act-compliance.html"
               onClick={() => setMobileMenuOpen(false)}
@@ -168,24 +189,6 @@ const Header = ({ onOpenChat }: HeaderProps) => {
             >
               EU AI Act Guide
             </a>
-            <button
-              onClick={() => scrollToSection("how-i-work")}
-              className="block w-full text-left font-medium text-muted-foreground hover:text-foreground"
-            >
-              How I work
-            </button>
-            <button
-              onClick={() => scrollToSection("resource-audit")}
-              className="block w-full text-left font-medium text-muted-foreground hover:text-foreground"
-            >
-              ROI Audit
-            </button>
-            <button
-              onClick={() => scrollToSection("fit-assessment")}
-              className="block w-full text-left font-medium text-muted-foreground hover:text-foreground"
-            >
-              Fit Check
-            </button>
             <button
               onClick={handleAskAI}
               className="block w-full text-left font-medium text-primary"
