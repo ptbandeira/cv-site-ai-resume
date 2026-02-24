@@ -7,10 +7,20 @@ import { syncLeadBatch } from './hubspot-sync';
 import type { Lead, ScrapingJob } from './types';
 import { enrichLead } from './enricher';
 
-const supabase = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_KEY!
-);
+// Lazy-initialize Supabase so missing secrets give a clear error at runtime
+// (not a cryptic module-level crash)
+function getSupabaseClient() {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_KEY;
+  if (!url || !key) {
+    throw new Error(
+      `Missing Supabase secrets. Set SUPABASE_URL and SUPABASE_KEY in GitHub Actions secrets.\n` +
+      `  SUPABASE_URL: ${url ? '✅ set' : '❌ MISSING'}\n` +
+      `  SUPABASE_KEY: ${key ? '✅ set' : '❌ MISSING'}`
+    );
+  }
+  return createClient(url, key);
+}
 
 /**
  * Post daily lead digest to Slack
@@ -143,6 +153,9 @@ async function postToSlack(webhookUrl: string, blocks: any[]): Promise<void> {
 export async function orchestrate() {
   console.log('🚀 Starting Agent Swarm Orchestration (FREE VERSION)');
   console.log('⏰', new Date().toISOString());
+
+  // Initialize Supabase here — throws with a clear message if secrets missing
+  const supabase = getSupabaseClient();
 
   const jobId = `job-${Date.now()}`;
   const startTime = new Date().toISOString();

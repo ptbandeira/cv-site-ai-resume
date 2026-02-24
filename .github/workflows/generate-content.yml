@@ -18,6 +18,18 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Check required secrets
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          echo "=== Secret check ==="
+          if [ -z "$GEMINI_API_KEY" ]; then
+            echo "❌ GEMINI_API_KEY is NOT set. Go to: GitHub repo → Settings → Secrets → Actions → New repository secret"
+            exit 1
+          else
+            echo "✅ GEMINI_API_KEY is set (${#GEMINI_API_KEY} chars)"
+          fi
+
       - run: npm ci
 
       - name: Generate Pulse content
