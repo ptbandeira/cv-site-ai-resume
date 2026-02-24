@@ -82,6 +82,37 @@
       "note": "Content angle: 'Here is what this week's AI news means for your business in plain language.'"
     }
   ],
+  "pulseFormat": {
+    "structure": {
+      "noise": {
+        "description": "State the raw AI headline in 1-2 sentences. What happened. Just the facts — no opinion, no spin.",
+        "maxLength": 200,
+        "tone": "Neutral, factual, journalist-style. No adjectives like 'groundbreaking' or 'revolutionary'."
+      },
+      "translation": {
+        "description": "What this actually means for a mid-market European business in plain language. Cut through the hype. What changes in practice for a 50-200 person company?",
+        "maxLength": 300,
+        "tone": "Direct, experienced, slightly wry. The 'adult in the room' who has seen ten waves of tech hype."
+      },
+      "action": {
+        "description": "One concrete thing Pedro can help with, or one thing the reader should do or consider. Specific, not generic. First-person offer.",
+        "maxLength": 200,
+        "tone": "Actionable, confident, practitioner voice. No buzzwords. Can be a direct offer ('I can help you do X in 2 weeks')."
+      }
+    },
+    "analogPerspective": {
+      "description": "Pedro's unique lens: 50yo Xennial entrepreneur with 25+ years in analog + digital operations. He bridges pre-digital institutional knowledge with AI execution. Regulated industries. EU context. No hype.",
+      "themes": [
+        "The Xennial advantage — I started working before mobile phones. I understand org politics, change resistance, and why legacy processes exist.",
+        "EU AI Act countdown — August 2026 enforcement is real. SMBs are underserved and running out of time.",
+        "Governed execution over experimentation — AI projects fail when no adult is in the room.",
+        "Microsoft 365 first — most SMBs already pay for Copilot and don't use it. Start there before buying anything new.",
+        "Data sovereignty matters in Europe — don't send client data to US servers if you're in pharma, legal, or finance.",
+        "Local-first AI for regulated industries — on-premise and private cloud deployments for GDPR compliance.",
+        "Skeptic by default — if a vendor says their tool is risk-free or works out of the box, they're selling, not advising."
+      ]
+    }
+  },
   "negativeFilters": [
     "Google", "Microsoft", "Amazon", "Meta", "Apple", "Nvidia",
     "Novo Nordisk", "Pfizer", "Roche", "Johnson & Johnson", "Novartis",
