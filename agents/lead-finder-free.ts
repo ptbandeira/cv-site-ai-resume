@@ -12,7 +12,12 @@ import { load } from 'cheerio';
 import { createHash } from 'crypto';
 import * as fs from 'fs';
 import * as path from 'path';
+import { fileURLToPath } from 'url';
 import type { Lead } from './types';
+
+// ESM-safe __dirname replacement
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // ── Feedback boosts (loaded from feedback/good-leads.txt) ────────────────────
 // Pedro adds good article URLs → system boosts leads from same sources
