@@ -124,7 +124,7 @@ async function fetchArticle(url: string): Promise<string> {
 async function callGemini(prompt: string): Promise<string> {
   await sleep(5000); // Rate-limit guard
   const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -142,7 +142,7 @@ async function callGemini(prompt: string): Promise<string> {
     console.log(`   ⏳ 429: ${msg}. Waiting ${waitSecs}s then retrying...`);
     await sleep(waitSecs * 1000);
     const res2 = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
       { method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.7, maxOutputTokens: 4096 } }) }
     );
@@ -266,7 +266,9 @@ async function main() {
   const published: string[] = [];
 
   for (const url of newUrls) {
-    if (url.includes("linkedin.com")) { console.log("   ⏭️  Skipped: LinkedIn"); continue; }
+    const skipPatterns = ["linkedin.com", "youtube.com", "youtu.be", "twitter.com", "x.com", "instagram.com", "tiktok.com"];
+    const skipMatch = skipPatterns.find(p => url.includes(p));
+    if (skipMatch) { markProcessed(url); console.log(`   ⏭️  Skipped + marked done: ${skipMatch} (not scrapeable)`); continue; }
     console.log(`📰 ${url}`);
     try {
       const articleText = await fetchArticle(url);
@@ -284,7 +286,15 @@ async function main() {
       published.push(item.slug);
       console.log(`   ✅ Saved as ${item.slug}.json\n`);
     } catch (err) {
-      console.error(`   ❌ Skipped: ${(err as Error).message}\n`);
+      const msg = (err as Error).message;
+      // Permanent failures (paywall, bot-block, not-found) → mark processed to stop retrying
+      const isPermanent = /HTTP (403|404|401|410|451)/.test(msg);
+      if (isPermanent) {
+        markProcessed(url);
+        console.error(`   ❌ Permanent failure (${msg}) — marked done to skip on future runs\n`);
+      } else {
+        console.error(`   ❌ Transient failure (${msg}) — will retry next run\n`);
+      }
     }
   }
 

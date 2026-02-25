@@ -1,10 +1,9 @@
 // scripts/generate-social-posts.ts
 // Generates a week of LinkedIn + Facebook posts from Pulse content
 // Outputs to scripts/output/social-posts-YYYY-WW.json
-// Optionally queues to Buffer if BUFFER_ACCESS_TOKEN is set
 //
 // Usage:   npm run social:generate
-// Env:     GEMINI_API_KEY, SITE_URL, BUFFER_ACCESS_TOKEN (optional)
+// Env:     GEMINI_API_KEY, SITE_URL
 
 import { config } from 'dotenv';
 config({ path: '.env.local' });
@@ -21,7 +20,6 @@ const ROOT = path.join(__dirname, '..');
 
 const GEMINI_KEY = process.env.GEMINI_API_KEY;
 const SITE_URL = process.env.SITE_URL || 'https://analog-ai.vercel.app';
-const BUFFER_TOKEN = process.env.BUFFER_ACCESS_TOKEN; // optional
 
 if (!GEMINI_KEY) {
   console.error('❌ Missing GEMINI_API_KEY');
@@ -97,7 +95,7 @@ function isoWeek(d: Date): string {
 
 async function callGemini(prompt: string, maxTokens = 600): Promise<string> {
   const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -264,43 +262,6 @@ Write ONLY the post text, ready to copy-paste. No explanations.`;
   return { linkedin, facebook };
 }
 
-// ─── Buffer integration ───────────────────────────────────────────────────────
-
-interface BufferProfile {
-  id: string;
-  service: string;
-  service_type: string;
-  formatted_username: string;
-}
-
-async function getBufferProfiles(): Promise<BufferProfile[]> {
-  const res = await fetch(
-    `https://api.bufferapp.com/1/profiles.json?access_token=${BUFFER_TOKEN}`
-  );
-  if (!res.ok) throw new Error(`Buffer profiles error: ${res.status}`);
-  return res.json();
-}
-
-async function scheduleBufferPost(profileId: string, text: string, scheduledAt: Date): Promise<void> {
-  const body = new URLSearchParams({
-    access_token: BUFFER_TOKEN!,
-    'profile_ids[]': profileId,
-    text,
-    scheduled_at: scheduledAt.toISOString(),
-  });
-
-  const res = await fetch('https://api.bufferapp.com/1/updates/create.json', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: body.toString(),
-  });
-
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`Buffer schedule error: ${res.status} ${err}`);
-  }
-}
-
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -389,52 +350,8 @@ async function main() {
     console.log('\n' + '─'.repeat(70));
   }
 
-  // 7. Push to Buffer (if token set)
-  if (BUFFER_TOKEN) {
-    console.log('\n🚀 Buffer token found — pushing to queue...\n');
-
-    let profiles: BufferProfile[] = [];
-    try {
-      profiles = await getBufferProfiles();
-      console.log(`   Connected profiles: ${profiles.map(p => `${p.service}/${p.formatted_username}`).join(', ')}`);
-    } catch (err: any) {
-      console.error(`   ❌ Could not fetch Buffer profiles: ${err.message}`);
-      console.log('   → Posts saved to file. Add them manually in Buffer.');
-      process.exit(0);
-    }
-
-    if (profiles.length === 0) {
-      console.log('   ⚠️  No Buffer profiles connected. Connect LinkedIn + Facebook in Buffer first.');
-      process.exit(0);
-    }
-
-    // Map profiles to platforms
-    const linkedinProfile = profiles.find(p => p.service === 'linkedin');
-    const facebookProfile = profiles.find(p => p.service === 'facebook');
-
-    let queued = 0;
-    for (const post of posts) {
-      const profile = post.platform === 'linkedin' ? linkedinProfile : facebookProfile;
-      if (!profile) {
-        console.log(`   ⚠️  No ${post.platform} profile found — skipping.`);
-        continue;
-      }
-      try {
-        await scheduleBufferPost(profile.id, post.text, new Date(post.scheduledAt));
-        console.log(`   ✅ Queued: ${post.platform} ${post.scheduledDay}`);
-        queued++;
-        // Small delay to avoid rate limits
-        await new Promise(r => setTimeout(r, 400));
-      } catch (err: any) {
-        console.error(`   ❌ ${post.platform} ${post.scheduledDay}: ${err.message}`);
-      }
-    }
-
-    console.log(`\n✅ Buffer: ${queued}/${posts.length} posts queued.`);
-  } else {
-    console.log('\n💡 Tip: Set BUFFER_ACCESS_TOKEN to auto-queue posts to Buffer.');
-    console.log('   Get your token at: https://buffer.com/developers/apps → your app → Access Token');
-  }
+  console.log('\n💡 To post today\'s content directly: npm run social:post -- mon|wed|fri');
+  console.log('   LinkedIn token required in .env.local — see scripts/SOCIAL-SETUP.md\n');
 
   console.log('\n🎯 Done.\n');
 }
