@@ -1,0 +1,44 @@
+name: Weekly Digest + LinkedIn Drafts
+
+on:
+  schedule:
+    - cron: '0 8 * * 5' # Every Friday at 8:00 UTC
+  workflow_dispatch: # Allow manual trigger from GitHub UI
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - run: npm ci
+
+      - name: Send weekly digest email
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          SITE_URL: https://analog-ai.vercel.app
+        run: npm run digest:send
+
+      - name: Generate LinkedIn drafts (past 7 days)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SITE_URL: https://analog-ai.vercel.app
+        run: npm run linkedin:drafts -- --days 7
+
+      - name: Commit LinkedIn drafts
+        run: |
+          git config user.name "Pulse Bot"
+          git config user.email "bot@analog-ai.vercel.app"
+          git add linkedin-drafts/
+          git diff --staged --quiet || git commit -m "🤖 LinkedIn drafts generated [skip ci]"
+          git push

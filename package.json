@@ -16,7 +16,9 @@
     "pulse:from-slack": "tsx scripts/slack-to-pulse.ts",
     "generate": "tsx agents/content-generator.ts",
     "publish": "tsx agents/content-publisher.ts",
-    "content:full": "npm run generate && npm run publish"
+    "content:full": "npm run generate && npm run publish",
+    "digest:send": "tsx scripts/weekly-digest.ts",
+    "linkedin:drafts": "tsx scripts/generate-linkedin-drafts.ts"
   },
   "dependencies": {
     "@ai-sdk/google": "^3.0.26",

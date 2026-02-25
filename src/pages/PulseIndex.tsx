@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingAICTA from "@/components/FloatingAICTA";
 import AIChat from "@/components/AIChat";
+import SubscribeForm from "@/components/SubscribeForm";
 
 interface PulseItem {
   id: string;
@@ -51,6 +52,11 @@ export default function PulseIndex() {
               News analysis for executives navigating AI adoption — cutting through
               vendor hype with experience from both sides of the table.
             </p>
+          </div>
+
+          {/* Subscribe */}
+          <div className="mb-12">
+            <SubscribeForm />
           </div>
 
           {/* Featured Guide — EU AI Act */}
