@@ -1,0 +1,23 @@
+{
+  "id": "google-opal-workflow-automation-for-smbs-1772016854488",
+  "slug": "google-opal-workflow-automation-for-smbs-1772016854488",
+  "category": "SMB Operations",
+  "noise": "Google's \"vibe-coding\" app, Opal, now features an agent that lets non-technical users build custom automated workflows using natural language prompts. This means you can describe a task, and Opal, powered by Gemini 3 Flash, will plan and execute it, even interacting with tools like Google Sheets.",
+  "translation": "Forget the \"vibe-coding\" hype; this is about democratized workflow automation for your business. For European SMBs like yours, it means the ability to create bespoke internal mini-apps to handle repetitive, rule-based tasks without needing a developer. This isn't a silver bullet for complex systems, but a powerful tool to automate those niche, time-consuming processes that often fall through the cracks of standard software.",
+  "action": "My advice is simple: don't overthink it. Identify one single, tedious, low-risk internal process – perhaps cross-referencing client data between two spreadsheets or generating a specific weekly report. Use this new Opal capability to try automating just that one task. Learn its strengths and limitations firsthand, then scale up, rather than trying to overhaul your entire operations from day one.",
+  "date": "Feb 25, 2026",
+  "isoDate": "2026-02-25T10:54:14.488Z",
+  "keywords": [
+    "Opal",
+    "Workflow automation",
+    "Google Gemini",
+    "No-code AI",
+    "Business process automation"
+  ],
+  "sources": [
+    {
+      "label": "Google Opal Workflow Automation for SMBs",
+      "url": "https://techcrunch.com/2026/02/24/google-adds-a-way-to-create-automated-workflows-to-opal/"
+    }
+  ]
+}
