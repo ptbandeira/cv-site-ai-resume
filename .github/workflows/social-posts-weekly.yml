@@ -1,18 +1,31 @@
-name: Weekly Social Posts Generator
+name: Weekly Social Posts
 
 on:
+  workflow_dispatch:
+    inputs:
+      day:
+        description: 'Force a specific day (mon/wed/fri) — leave blank for auto'
+        required: false
+        default: ''
+
   schedule:
-    # Every Monday at 06:00 UTC (07:00 Warsaw winter / 08:00 summer)
+    # Monday 07:00 Warsaw (06:00 UTC) — generate + post
     - cron: '0 6 * * 1'
-  workflow_dispatch: # Run manually from GitHub Actions tab
+    # Wednesday 09:00 Warsaw (08:00 UTC) — post from stored JSON
+    - cron: '0 8 * * 3'
+    # Friday 08:00 Warsaw (07:00 UTC) — post from stored JSON
+    - cron: '0 7 * * 5'
 
 jobs:
-  generate-social-posts:
+  social-posts:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          # Need full history to commit generated files back
+          fetch-depth: 1
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -23,27 +36,37 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Generate social posts
+      # ── Monday only: generate the week's posts ───────────────────────────────
+      - name: Generate posts (Monday)
+        if: github.event.schedule == '0 6 * * 1' || github.event.inputs.day == 'mon'
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           SITE_URL: ${{ secrets.SITE_URL }}
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          RESEND_FROM: ${{ secrets.RESEND_FROM }}
         run: npm run social:generate
 
-      - name: Email posts to Pedro
-        if: ${{ env.RESEND_API_KEY != '' }}
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          SITE_URL: ${{ secrets.SITE_URL }}
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          RESEND_FROM: ${{ secrets.RESEND_FROM }}
-        run: npm run social:email
-
-      - name: Commit generated posts
+      - name: Commit generated posts (Monday)
+        if: github.event.schedule == '0 6 * * 1' || github.event.inputs.day == 'mon'
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add scripts/output/
-          git diff --staged --quiet || git commit -m "chore: weekly social posts $(date +'%Y-W%V')"
-          git push
+          git diff --staged --quiet || git commit -m "chore: weekly social posts $(date +'%Y-W%V')" && git push
+
+      # ── Post today's content (all three days) ────────────────────────────────
+      - name: Determine day
+        id: day
+        run: |
+          if [ -n "${{ github.event.inputs.day }}" ]; then
+            echo "label=${{ github.event.inputs.day }}" >> $GITHUB_OUTPUT
+          else
+            DAY=$(date +%A | tr '[:upper:]' '[:lower:]' | cut -c1-3)
+            echo "label=$DAY" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Post to LinkedIn + Facebook
+        env:
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_AUTHOR_URN: ${{ secrets.LINKEDIN_AUTHOR_URN }}
+          FACEBOOK_PAGE_ACCESS_TOKEN: ${{ secrets.FACEBOOK_PAGE_ACCESS_TOKEN }}
+          FACEBOOK_PAGE_ID: ${{ secrets.FACEBOOK_PAGE_ID }}
+        run: npx tsx scripts/post-social-today.ts ${{ steps.day.outputs.label }}
