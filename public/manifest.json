@@ -1,6 +1,6 @@
 {
-  "generated": "2026-02-24T11:20:49.930Z",
-  "totalItems": 5,
+  "generated": "2026-02-25T08:40:36.412Z",
+  "totalItems": 6,
   "items": [
     {
       "id": "ai-agents-the-next-wave-of-business-change-1771797372659",
@@ -70,6 +70,26 @@
           "label": "AI Tools",
           "url": "https://news.microsoft.com/europe/2026/02/05/azure-ai-sovereign-clouds-europe-launch"
         }
+      ]
+    },
+    {
+      "id": "law-firm-ai-1772008835578",
+      "slug": "law-firm-ai-1772008835578",
+      "category": "Legal Tech",
+      "noise": "Microsoft has launched \"Copilot for Regulated Cloud,\" introducing enhanced data residency options and granular administrative controls for M365 Copilot in EU regulated sectors.",
+      "translation": "Forget sending sensitive client data to the US for AI processing. Your existing M365 subscription likely now offers Copilot with EU data residency, making compliance easier. This isn't magic; it means you can finally start using AI for real work without GDPR nightmares, but only if you set it up right.",
+      "action": "I can audit your M365 setup and implement Copilot's new EU-compliant features for your firm",
+      "date": "Feb 2026",
+      "keywords": [
+        "law firm AI implementation",
+        "legal AI adoption",
+        "law firm automation",
+        "boutique law firm AI",
+        "legal practice AI compliance",
+        "GDPR AI legal",
+        "law firm data privacy AI",
+        "independent law firm technology",
+        "legal AI risk"
       ]
     },
     {
