@@ -1,7 +1,53 @@
 {
-  "generated": "2026-02-25T10:55:35.126Z",
-  "totalItems": 13,
+  "generated": "2026-02-25T18:56:05.004Z",
+  "totalItems": 15,
   "items": [
+    {
+      "id": "saaspocalypse-is-noise-for-your-smb-1772045764046",
+      "slug": "saaspocalypse-is-noise-for-your-smb-1772045764046",
+      "category": "SMB Operations",
+      "noise": "The market is abuzz with \"SaaSpocalypse,\" a narrative claiming traditional software-as-a-service (SaaS) companies are doomed. This fear, driven by AI's ability to automate code and create custom applications cheaply, has seen major software ETFs drop 30% recently.",
+      "translation": "For European SMBs like yours, this \"SaaSpocalypse\" hype is mostly noise. Your core software isn't just code; it’s years of integrated data, established workflows, compliance infrastructure, and the trust built with your clients. AI can't simply replicate these deep-seated moats overnight.",
+      "action": "My advice is clear: don't abandon your proven software. Instead, identify 1-2 specific, high-impact workflows – think initial client intake, document analysis, or internal knowledge retrieval – where AI can integrate directly. I can help you scope a 3-month pilot for €5,000-€10,000 to demonstrate tangible ROI within your existing setup.",
+      "date": "Feb 25, 2026",
+      "isoDate": "2026-02-25T18:56:04.046Z",
+      "keywords": [
+        "AI strategy",
+        "SaaS value",
+        "SMB software",
+        "digital integration",
+        "tech adoption"
+      ],
+      "sources": [
+        {
+          "label": "SaaSpocalypse Is Noise For Your SMB",
+          "url": "https://realinvestmentadvice.com/resources/blog/software-stocks-navigating-the-saaspocalypse/"
+        }
+      ]
+    },
+    {
+      "id": "android-ai-enhances-secure-mobile-productivity-1772045749765",
+      "slug": "android-ai-enhances-secure-mobile-productivity-1772045749765",
+      "category": "SMB Operations",
+      "noise": "Google I/O announced significant advancements in Android, particularly focusing on integrating Gemini Nano for powerful on-device AI capabilities. This means more privacy-centric AI features directly on your mobile devices.",
+      "translation": "Forget the hype about cloud AI for a moment. This update is crucial because \"on-device\" means AI processing happens *locally* on your phone, not in Google's data centres. For your law firm, accountancy, or consultancy, this directly addresses data sovereignty and confidentiality concerns when using AI for tasks like summarizing calls or drafting secure notes on the go. It means secure, AI-powered productivity without compromising client trust.",
+      "action": "I recommend you review your firm's mobile device policy this quarter. Identify specific tasks where on-device AI could boost individual productivity while keeping sensitive client data local. We can conduct a rapid 2-hour assessment to pinpoint these opportunities and outline a secure integration strategy.",
+      "date": "Feb 25, 2026",
+      "isoDate": "2026-02-25T18:55:49.765Z",
+      "keywords": [
+        "On-device AI",
+        "mobile productivity",
+        "data privacy",
+        "Android",
+        "secure operations"
+      ],
+      "sources": [
+        {
+          "label": "Android AI Enhances Secure Mobile Productivity",
+          "url": "https://youtube.com/watch?v=68ylaeBbdsg&amp;si=3ImMkWbDXTv5KCHM"
+        }
+      ]
+    },
     {
       "id": "ai-agents-structure-your-knowledge-automate-workflows-1772016935122",
       "slug": "ai-agents-structure-your-knowledge-automate-workflows-1772016935122",
