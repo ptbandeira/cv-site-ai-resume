@@ -2,22 +2,116 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://analog-ai.vercel.app/</loc>
+    <lastmod>2026-02-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://analog-ai.vercel.app/pulse</loc>
+    <lastmod>2026-02-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://analog-ai.vercel.app/blog/eu-ai-act-compliance.html</loc>
+    <lastmod>2026-02-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://analog-ai.vercel.app/press</loc>
+    <lastmod>2026-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://analog-ai.vercel.app/blog/eu-ai-act-compliance.html</loc>
+    <loc>https://analog-ai.vercel.app/pulse/saaspocalypse-is-noise-for-your-smb-1772045764046</loc>
+    <lastmod>2026-02-25</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://analog-ai.vercel.app/pulse/android-ai-enhances-secure-mobile-productivity-1772045749765</loc>
+    <lastmod>2026-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://analog-ai.vercel.app/pulse/ai-agents-structure-your-knowledge-automate-workflows-1772016935122</loc>
+    <lastmod>2026-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://analog-ai.vercel.app/pulse/ai-agents-are-coming-prepare-your-business-1772016917210</loc>
+    <lastmod>2026-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://analog-ai.vercel.app/pulse/google-gemini-1-5-pro-smb-impact-1772016901986</loc>
+    <lastmod>2026-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://analog-ai.vercel.app/pulse/streamlining-ai-research-for-your-business-1772016885357</loc>
+    <lastmod>2026-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://analog-ai.vercel.app/pulse/market-ai-panic-focus-on-your-real-business-1772016870402</loc>
+    <lastmod>2026-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://analog-ai.vercel.app/pulse/google-opal-workflow-automation-for-smbs-1772016854488</loc>
+    <lastmod>2026-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://analog-ai.vercel.app/pulse/your-team-s-skills-are-your-new-ai-currency-1772016840372</loc>
+    <lastmod>2026-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://analog-ai.vercel.app/pulse/ai-agents-the-next-wave-of-business-change-1771797372659</loc>
+    <lastmod>2026-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://analog-ai.vercel.app/pulse/ai-governance-updates-1771497040921</loc>
+    <lastmod>2026-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://analog-ai.vercel.app/pulse/ai-model-translation-1771932049292</loc>
+    <lastmod>2026-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://analog-ai.vercel.app/pulse/law-firm-ai-1772008835578</loc>
+    <lastmod>2026-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://analog-ai.vercel.app/pulse/legal-tech-updates-1771322203597</loc>
+    <lastmod>2026-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://analog-ai.vercel.app/pulse/smbs-win-by-applying-not-building-ai-1771797387604</loc>
+    <lastmod>2026-02-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

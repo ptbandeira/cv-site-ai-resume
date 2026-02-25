@@ -85,6 +85,63 @@ export default function PulseDetail() {
       .finally(() => setLoading(false));
   }, [slug]);
 
+  // Inject per-article meta tags for SEO and social sharing
+  useEffect(() => {
+    if (!insight) return;
+
+    const BASE = "https://analog-ai.vercel.app";
+    const articleUrl = `${BASE}/pulse/${insight.slug}`;
+    const articleTitle = `${insight.noise} | Analog AI Pulse`;
+    const articleDesc = firstSentence(insight.translation, 155);
+
+    // Page title
+    const prevTitle = document.title;
+    document.title = articleTitle;
+
+    // Helper: upsert a <meta> tag
+    function setMeta(selector: string, attr: string, value: string) {
+      let el = document.querySelector<HTMLMetaElement>(selector);
+      if (!el) {
+        el = document.createElement("meta");
+        const [attrName, attrValue] = selector.replace("meta[", "").replace("]", "").split('="');
+        el.setAttribute(attrName, attrValue?.replace('"', "") ?? "");
+        document.head.appendChild(el);
+      }
+      el.setAttribute(attr, value);
+    }
+
+    setMeta('meta[name="description"]', "content", articleDesc);
+    setMeta('meta[property="og:title"]', "content", articleTitle);
+    setMeta('meta[property="og:description"]', "content", articleDesc);
+    setMeta('meta[property="og:url"]', "content", articleUrl);
+    setMeta('meta[property="og:type"]', "content", "article");
+    setMeta('meta[name="twitter:title"]', "content", articleTitle);
+    setMeta('meta[name="twitter:description"]', "content", articleDesc);
+
+    // Canonical
+    let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.rel = "canonical";
+      document.head.appendChild(canonical);
+    }
+    canonical.href = articleUrl;
+
+    return () => {
+      // Restore homepage defaults on unmount
+      document.title = "AI Governance Consultant for Law Firms & SMBs in Europe | Analog AI";
+      setMeta('meta[name="description"]', "content", "AI governance consulting for senior leaders in regulated industries across Europe. Fractional CAIO services — EU AI Act ready, private data architecture, no vendor lock-in.");
+      setMeta('meta[property="og:title"]', "content", "AI Governance Consultant for European Law Firms & SMBs | Analog AI");
+      setMeta('meta[property="og:description"]', "content", "Helping senior leaders in regulated industries turn AI hype into governed, private, auditable workflows. Based in Warsaw. Active across Europe.");
+      setMeta('meta[property="og:url"]', "content", `${BASE}/`);
+      setMeta('meta[property="og:type"]', "content", "website");
+      setMeta('meta[name="twitter:title"]', "content", "AI Governance Consultant for European Law Firms & SMBs | Analog AI");
+      setMeta('meta[name="twitter:description"]', "content", "Helping senior leaders in regulated industries turn AI hype into governed, private, auditable workflows. Based in Warsaw. Active across Europe.");
+      const can = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+      if (can) can.href = `${BASE}/`;
+    };
+  }, [insight]);
+
   return (
     <div className="min-h-screen bg-background font-sans selection:bg-primary/20">
       <Header onOpenChat={() => setIsChatOpen(true)} />
