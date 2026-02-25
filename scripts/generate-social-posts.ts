@@ -6,6 +6,9 @@
 // Usage:   npm run social:generate
 // Env:     GEMINI_API_KEY, SITE_URL, BUFFER_ACCESS_TOKEN (optional)
 
+import { config } from 'dotenv';
+config({ path: '.env.local' });
+
 import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
