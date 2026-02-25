@@ -1,0 +1,49 @@
+name: Weekly Social Posts Generator
+
+on:
+  schedule:
+    # Every Monday at 06:00 UTC (07:00 Warsaw winter / 08:00 summer)
+    - cron: '0 6 * * 1'
+  workflow_dispatch: # Run manually from GitHub Actions tab
+
+jobs:
+  generate-social-posts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate social posts
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_FROM: ${{ secrets.RESEND_FROM }}
+        run: npm run social:generate
+
+      - name: Email posts to Pedro
+        if: ${{ env.RESEND_API_KEY != '' }}
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_FROM: ${{ secrets.RESEND_FROM }}
+        run: npm run social:email
+
+      - name: Commit generated posts
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add scripts/output/
+          git diff --staged --quiet || git commit -m "chore: weekly social posts $(date +'%Y-W%V')"
+          git push

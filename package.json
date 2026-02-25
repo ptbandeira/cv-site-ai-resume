@@ -19,7 +19,9 @@
     "content:full": "npm run generate && npm run publish",
     "digest:send": "tsx scripts/weekly-digest.ts",
     "linkedin:drafts": "tsx scripts/generate-linkedin-drafts.ts",
-    "social:generate": "tsx scripts/generate-social-posts.ts"
+    "social:generate": "tsx scripts/generate-social-posts.ts",
+    "social:email": "tsx scripts/email-social-posts.ts",
+    "social:weekly": "npm run social:generate && npm run social:email"
   },
   "dependencies": {
     "@ai-sdk/google": "^3.0.26",
