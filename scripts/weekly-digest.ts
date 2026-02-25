@@ -206,7 +206,8 @@ async function sendEmail(to: string, subject: string, html: string): Promise<voi
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: 'The Pulse <pulse@analog-ai.vercel.app>',
+      // Use RESEND_FROM if set (custom verified domain), else Resend's shared test domain
+      from: process.env.RESEND_FROM || 'The Pulse <onboarding@resend.dev>',
       to: [to],
       subject,
       html,
