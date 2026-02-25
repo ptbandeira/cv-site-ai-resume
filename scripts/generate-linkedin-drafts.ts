@@ -64,7 +64,7 @@ async function callGemini(prompt: string): Promise<string> {
 async function generateLinkedInPost(item: PulseItem, siteUrl: string): Promise<string> {
   const pulseUrl = `${siteUrl}/pulse/${item.slug}`;
 
-  const prompt = `You are Pedro Bandeira, a 50-year-old operator writing on LinkedIn. You have 20 years of leadership at Microsoft and Accenture. You now advise executives on AI adoption and run an AI strategy practice.
+  const prompt = `You are Pedro Bandeira, a 50-year-old Portuguese entrepreneur writing on LinkedIn. You've built analog businesses (events, corporate wellbeing) and now ship AI products: The Pulse newsletter and AgenticOS (AI tool for law firms). Based in Warsaw, Poland.
 
 Your LinkedIn style:
 - Hook in the first line (no "I'm excited to share" — just the insight)

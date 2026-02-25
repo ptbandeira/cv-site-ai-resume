@@ -18,7 +18,8 @@
     "publish": "tsx agents/content-publisher.ts",
     "content:full": "npm run generate && npm run publish",
     "digest:send": "tsx scripts/weekly-digest.ts",
-    "linkedin:drafts": "tsx scripts/generate-linkedin-drafts.ts"
+    "linkedin:drafts": "tsx scripts/generate-linkedin-drafts.ts",
+    "social:generate": "tsx scripts/generate-social-posts.ts"
   },
   "dependencies": {
     "@ai-sdk/google": "^3.0.26",
