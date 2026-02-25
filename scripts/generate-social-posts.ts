@@ -72,8 +72,8 @@ function nextWeekday(dayOfWeek: number, hour = 9, baseDate = new Date()): Date {
   let daysUntil = (dayOfWeek - currentDay + 7) % 7;
   if (daysUntil === 0) daysUntil = 7; // always schedule in future
   d.setDate(d.getDate() + daysUntil);
-  // Set hour in Warsaw local time (UTC+1)
-  d.setUTCHours(hour - TZ_OFFSET_H, 0, 0, 0);
+  // Set hour in local time (Warsaw), then convert to UTC for storage
+  d.setHours(hour, 0, 0, 0);
   return d;
 }
 
