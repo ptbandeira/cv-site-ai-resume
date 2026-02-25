@@ -15,7 +15,6 @@ import * as fs from 'fs';
 import * as fsAsync from 'fs/promises';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
-import { execSync } from 'child_process';
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
 
@@ -37,14 +36,37 @@ if (!SLACK_TOKEN || !CHANNEL_ID || !GEMINI_KEY) {
 
 // ─── Slack ─────────────────────────────────────────────────────────────────
 
+// Resolve channel name to ID if needed (API requires IDs, not names)
+async function resolveChannelId(nameOrId: string): Promise<string> {
+  // Already an ID (starts with C, D, or G followed by alphanumerics)
+  if (/^[CGDW][A-Z0-9]+$/i.test(nameOrId)) return nameOrId;
+  const clean = nameOrId.replace(/^#/, '');
+  console.log(`   🔍 Resolving channel name "${clean}" to ID...`);
+  let cursor: string | undefined;
+  do {
+    const params = new URLSearchParams({ limit: '200', exclude_archived: 'true', types: 'public_channel,private_channel' });
+    if (cursor) params.set('cursor', cursor);
+    const res = await fetch(`https://slack.com/api/conversations.list?${params}`, {
+      headers: { Authorization: `Bearer ${SLACK_TOKEN}` },
+    });
+    const data = await res.json() as any;
+    if (!data.ok) throw new Error(`Slack channel list error: ${data.error}\n  Fix: set SLACK_FEEDBACK_CHANNEL to the channel ID (e.g. C0AG83K8D27), not the name`);
+    const found = (data.channels ?? []).find((c: any) => c.name === clean || c.name_normalized === clean);
+    if (found) { console.log(`   ✅ Resolved: ${clean} → ${found.id}`); return found.id; }
+    cursor = data.response_metadata?.next_cursor;
+  } while (cursor);
+  throw new Error(`Channel "${clean}" not found. Check SLACK_FEEDBACK_CHANNEL secret.\n  Tip: use the channel ID directly (e.g. C0AG83K8D27) instead of the name.`);
+}
+
 async function fetchSlackUrls(): Promise<string[]> {
+  const channelId = await resolveChannelId(CHANNEL_ID!);
   const oldest = String(Math.floor(Date.now() / 1000) - 30 * 24 * 60 * 60); // last 30 days
-  const params = new URLSearchParams({ channel: CHANNEL_ID!, limit: '200', oldest });
+  const params = new URLSearchParams({ channel: channelId, limit: '200', oldest });
   const res = await fetch(`https://slack.com/api/conversations.history?${params}`, {
     headers: { Authorization: `Bearer ${SLACK_TOKEN}` },
   });
   const data = await res.json() as any;
-  if (!data.ok) throw new Error(`Slack API error: ${data.error}`);
+  if (!data.ok) throw new Error(`Slack API error: ${data.error}\n  Channel: ${channelId}\n  Tip: make sure the bot is invited to the channel (/invite @YourBotName)`);
 
   const urls: string[] = [];
   for (const msg of (data.messages ?? [])) {
@@ -173,7 +195,9 @@ TITLE: [5-8 word title, no punctuation]`;
 
   const title = get('TITLE') || 'ai-insight';
   const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '-' + Date.now();
-  const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+  const now = new Date();
+  const date = now.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  const isoDate = now.toISOString();
 
   return {
     id: slug,
@@ -183,6 +207,7 @@ TITLE: [5-8 word title, no punctuation]`;
     translation: get('TRANSLATION'),
     action: get('ACTION'),
     date,
+    isoDate,
     keywords: get('KEYWORDS').split(',').map(k => k.trim()).filter(Boolean),
     sources: [{ label: title, url }],
   };
@@ -199,7 +224,12 @@ async function regenerateManifest(): Promise<number> {
       items.push(JSON.parse(content));
     } catch (_) { /* skip corrupt files */ }
   }
-  items.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  // Sort by ISO date if available, fall back to display date string
+  items.sort((a, b) => {
+    const da = (a as any).isoDate ?? a.date;
+    const db = (b as any).isoDate ?? b.date;
+    return new Date(db).getTime() - new Date(da).getTime();
+  });
 
   const manifest = {
     generated: new Date().toISOString(),
@@ -265,21 +295,7 @@ async function main() {
 
   const total = await regenerateManifest();
   console.log(`📦 manifest.json updated — ${total} total pulse items`);
-
-  // Commit + push
-  try {
-    execSync('git add public/blog/ public/manifest.json feedback/processed-pulse-urls.txt', { cwd: ROOT, stdio: 'pipe' });
-    execSync(
-      `git commit -m "feat: ${published.length} new pulse item(s) auto-published from Slack"`,
-      { cwd: ROOT, stdio: 'pipe' }
-    );
-    execSync('git push', { cwd: ROOT, stdio: 'pipe' });
-    console.log(`\n🚀 Pushed! ${published.length} new article(s) live on the site.`);
-    console.log(`   Vercel will deploy in ~30 seconds.`);
-  } catch (err) {
-    console.error('❌ Git push failed:', (err as Error).message);
-    console.log('   Items were generated locally. Run git push manually.');
-  }
+  console.log(`\n✅ Done — ${published.length} new item(s) written. Workflow will commit + push.`);
 }
 
 main().catch(console.error);

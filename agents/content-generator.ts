@@ -150,10 +150,13 @@ SOURCE_URL: [actual URL to the news source]`;
   const sourceUrl = sourceMatch?.[1]?.trim() || '';
 
   const slug = topic.id + '-' + Date.now();
-  const date = new Date().toLocaleDateString('en-US', { 
-    year: 'numeric', 
-    month: 'short' 
+  const now = new Date();
+  const date = now.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
   });
+  const isoDate = now.toISOString();
 
   return {
     id: slug,
@@ -163,6 +166,7 @@ SOURCE_URL: [actual URL to the news source]`;
     translation,
     action,
     date,
+    isoDate,
     keywords: topic.keywords,
     sources: sourceUrl ? [{ label: topic.category, url: sourceUrl }] : undefined
   };

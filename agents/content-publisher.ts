@@ -43,8 +43,12 @@ async function getAllPulseItems(): Promise<PulseItem[]> {
       items.push(item);
     }
 
-    // Sort by date descending (newest first)
-    items.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    // Sort by ISO date descending (newest first), fall back to display date
+    items.sort((a, b) => {
+      const da = (a as any).isoDate ?? a.date;
+      const db = (b as any).isoDate ?? b.date;
+      return new Date(db).getTime() - new Date(da).getTime();
+    });
 
     return items;
   } catch (error) {
