@@ -213,27 +213,50 @@ export default function PulseIndex() {
             </p>
           </div>
 
-          {/* ── Featured Guide — EU AI Act ── */}
-          <a
-            href="/blog/eu-ai-act-compliance.html"
-            className="group flex items-start gap-4 mb-10 border border-amber-200 bg-amber-50/60 hover:bg-amber-50 rounded-sm p-5 transition-all duration-200 hover:border-amber-300 hover:shadow-sm"
-          >
-            <div className="flex-shrink-0 w-9 h-9 rounded-sm bg-amber-100 flex items-center justify-center group-hover:bg-amber-200 transition-colors">
-              <BookOpen className="w-4 h-4 text-amber-600" />
-            </div>
-            <div className="flex-1 min-w-0">
-              <span className="text-[9px] font-mono uppercase tracking-widest text-amber-600 mb-1 block">
-                Featured Guide
-              </span>
-              <p className="font-serif text-base font-medium text-foreground leading-snug mb-1 group-hover:text-amber-700 transition-colors">
-                EU AI Act Compliance for SMBs
-              </p>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                What's actually required by August 2026, for mid-market operators.
-              </p>
-            </div>
-            <ArrowRight className="flex-shrink-0 w-4 h-4 text-amber-400 group-hover:translate-x-1 transition-transform mt-1" />
-          </a>
+          {/* ── Featured Guides ── */}
+          <div className="flex flex-col gap-3 mb-10">
+            <a
+              href="/blog/eu-ai-act-compliance.html"
+              className="group flex items-start gap-4 border border-amber-200 bg-amber-50/60 hover:bg-amber-50 rounded-sm p-5 transition-all duration-200 hover:border-amber-300 hover:shadow-sm"
+            >
+              <div className="flex-shrink-0 w-9 h-9 rounded-sm bg-amber-100 flex items-center justify-center group-hover:bg-amber-200 transition-colors">
+                <BookOpen className="w-4 h-4 text-amber-600" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <span className="text-[9px] font-mono uppercase tracking-widest text-amber-600 mb-1 block">
+                  Featured Guide
+                </span>
+                <p className="font-serif text-base font-medium text-foreground leading-snug mb-1 group-hover:text-amber-700 transition-colors">
+                  EU AI Act Compliance for SMBs
+                </p>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  What's actually required by August 2026, for mid-market operators.
+                </p>
+              </div>
+              <ArrowRight className="flex-shrink-0 w-4 h-4 text-amber-400 group-hover:translate-x-1 transition-transform mt-1" />
+            </a>
+
+            <a
+              href="/blog/ai-2028-intelligence-scenario.html"
+              className="group flex items-start gap-4 border border-slate-200 bg-slate-50/60 hover:bg-slate-50 rounded-sm p-5 transition-all duration-200 hover:border-slate-300 hover:shadow-sm"
+            >
+              <div className="flex-shrink-0 w-9 h-9 rounded-sm bg-slate-100 flex items-center justify-center group-hover:bg-slate-200 transition-colors">
+                <BookOpen className="w-4 h-4 text-slate-600" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <span className="text-[9px] font-mono uppercase tracking-widest text-slate-500 mb-1 block">
+                  Scenario Analysis
+                </span>
+                <p className="font-serif text-base font-medium text-foreground leading-snug mb-1 group-hover:text-slate-700 transition-colors">
+                  The 2028 Intelligence Scenario: A Business Translation
+                </p>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  What happens if AI capability outpaces institutional adaptation — and which businesses survive.
+                </p>
+              </div>
+              <ArrowRight className="flex-shrink-0 w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform mt-1" />
+            </a>
+          </div>
 
           {/* ── Category filter ── */}
           {!loading && allItems.length > 0 && (
