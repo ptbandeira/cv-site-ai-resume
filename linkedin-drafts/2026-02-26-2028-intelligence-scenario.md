@@ -53,11 +53,9 @@ The Citrini Research scenario that prompted it: https://www.citriniresearch.com/
 
 | Mention | Where in post | LinkedIn handle/URL to use |
 |---------|--------------|---------------------------|
-| Sirona | "at @Sirona" | Check: linkedin.com/company/sirona — or your page URL once created |
-| Analog AI | "through [Analog AI]" | Link to analog-ai.com directly (or @company page once live) |
-| Miguel Palmeiro | Optional — tag on the Sirona reference | linkedin.com/in/mpalmeiro or search him |
-
-**If the Sirona LinkedIn company page isn't live yet:** Change "at @Sirona" to "at [Sirona](https://www.sirona.com.pt)" and add the website link.
+| Analog AI | "through [Analog AI]" | @Analog AI — tag the company page directly |
+| Sirona | "at @Sirona" | @Sirona — tag the company page directly |
+| Miguel Palmeiro | Optional — tag on the Sirona reference | Search and tag @Miguel Palmeiro |
 
 ---
 
