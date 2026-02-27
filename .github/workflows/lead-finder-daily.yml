@@ -26,27 +26,27 @@ jobs:
       - name: Check required secrets
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
           echo "=== Secret check ==="
           MISSING=0
           if [ -z "$SUPABASE_URL" ]; then echo "❌ SUPABASE_URL is NOT set"; MISSING=1; else echo "✅ SUPABASE_URL is set"; fi
-          if [ -z "$SUPABASE_KEY" ]; then echo "❌ SUPABASE_KEY is NOT set"; MISSING=1; else echo "✅ SUPABASE_KEY is set (${#SUPABASE_KEY} chars)"; fi
+          if [ -z "$SUPABASE_KEY" ]; then echo "❌ SUPABASE_SERVICE_ROLE_KEY is NOT set"; MISSING=1; else echo "✅ SUPABASE_SERVICE_ROLE_KEY is set (${#SUPABASE_KEY} chars)"; fi
           if [ -z "$SLACK_WEBHOOK_URL" ]; then echo "⚠️  SLACK_WEBHOOK_URL not set (Slack digest will be skipped)"; else echo "✅ SLACK_WEBHOOK_URL is set"; fi
           echo "HUBSPOT_API_KEY and APOLLO_API_KEY are optional — skipped if missing"
           if [ "$MISSING" -eq 1 ]; then
             echo ""
             echo "To fix: GitHub repo → Settings → Secrets and variables → Actions → New repository secret"
             echo "SUPABASE_URL = your project URL (e.g. https://xxxx.supabase.co)"
-            echo "SUPABASE_KEY = your anon/service role key from Supabase dashboard"
+            echo "SUPABASE_SERVICE_ROLE_KEY = service role key (NOT anon key) — bypasses RLS"
             exit 1
           fi
 
       - name: Run Lead Finder Swarm
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           HUBSPOT_API_KEY: ${{ secrets.HUBSPOT_API_KEY }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           APOLLO_API_KEY: ${{ secrets.APOLLO_API_KEY }}
