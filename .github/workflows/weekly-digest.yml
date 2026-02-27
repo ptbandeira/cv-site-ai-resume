@@ -49,11 +49,17 @@ jobs:
           SITE_URL: https://analog-ai.vercel.app
         run: npm run digest:send
 
-      - name: Generate LinkedIn drafts (past 7 days)
+      - name: Generate LinkedIn drafts — one per article (past 7 days)
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           SITE_URL: https://analog-ai.vercel.app
         run: npm run linkedin:drafts -- --days 7
+
+      - name: Generate LinkedIn weekly recap — single curated post
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SITE_URL: https://analog-ai.vercel.app
+        run: npm run linkedin:weekly -- --days 7
 
       - name: Commit LinkedIn drafts
         run: |
