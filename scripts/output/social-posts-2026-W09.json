@@ -1,0 +1,50 @@
+{
+  "generatedAt": "2026-02-25T18:24:15.141Z",
+  "weekLabel": "Week of 1 Mar 2026",
+  "posts": [
+    {
+      "type": "digest",
+      "platform": "linkedin",
+      "scheduledDay": "Monday",
+      "scheduledAt": "2026-03-01T08:00:00.000Z",
+      "text": "AI is shifting from a calculator to a clerk. It's time to delegate.\n\nThis week's Pulse"
+    },
+    {
+      "type": "digest",
+      "platform": "facebook",
+      "scheduledDay": "Monday",
+      "scheduledAt": "2026-03-01T08:00:00.000Z",
+      "text": "Heard some noise about AI agents taking over. Nonsense"
+    },
+    {
+      "type": "spotlight",
+      "platform": "linkedin",
+      "scheduledDay": "Wednesday",
+      "scheduledAt": "2026-03-03T09:00:00.000Z",
+      "text": "You're not building large software applications. But the core lesson from OpenAI’s AI agents applies directly to your",
+      "sourceSlug": "ai-agents-structure-your-knowledge-automate-workflows-1772016935122"
+    },
+    {
+      "type": "spotlight",
+      "platform": "facebook",
+      "scheduledDay": "Wednesday",
+      "scheduledAt": "2026-03-03T09:00:00.000Z",
+      "text": "OpenAI built a million lines of code with AI agents. Your business",
+      "sourceSlug": "ai-agents-structure-your-knowledge-automate-workflows-1772016935122"
+    },
+    {
+      "type": "original_take",
+      "platform": "linkedin",
+      "scheduledDay": "Friday",
+      "scheduledAt": "2026-02-26T08:00:00.000Z",
+      "text": "Most companies chasing \"AI agents\" for operations are skipping a crucial step. It's like trying to automate a"
+    },
+    {
+      "type": "original_take",
+      "platform": "facebook",
+      "scheduledDay": "Friday",
+      "scheduledAt": "2026-02-26T08:00:00.000Z",
+      "text": "I spent an hour this morning trying to fix a small client's"
+    }
+  ]
+}
