@@ -154,8 +154,10 @@ async function main() {
 
   const pack = findLatestPack();
   if (!pack) {
-    console.error('❌ No social posts JSON found. Run npm run social:generate first.');
-    process.exit(1);
+    console.warn('⚠️  No social posts JSON found. Monday generation has not run yet.');
+    console.warn('   To bootstrap: trigger the workflow manually with day=mon');
+    console.warn('   Or run locally: npm run social:generate && npm run social:post -- mon');
+    process.exit(0); // Exit cleanly — not a fatal error, just no content yet
   }
 
   console.log(`📦 Loaded: ${pack.weekLabel}`);

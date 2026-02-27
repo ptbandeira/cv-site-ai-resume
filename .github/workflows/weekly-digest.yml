@@ -20,6 +20,26 @@ jobs:
 
       - run: npm ci
 
+      - name: Check required secrets
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+        run: |
+          echo "=== Secret check ==="
+          MISSING=""
+          [ -z "$GEMINI_API_KEY" ]           && MISSING="$MISSING GEMINI_API_KEY"
+          [ -z "$SUPABASE_URL" ]             && MISSING="$MISSING SUPABASE_URL"
+          [ -z "$SUPABASE_SERVICE_ROLE_KEY" ] && MISSING="$MISSING SUPABASE_SERVICE_ROLE_KEY"
+          [ -z "$RESEND_API_KEY" ]           && MISSING="$MISSING RESEND_API_KEY"
+          if [ -n "$MISSING" ]; then
+            echo "❌ Missing GitHub Secrets:$MISSING"
+            echo "   → Go to: GitHub repo → Settings → Secrets and variables → Actions"
+            exit 1
+          fi
+          echo "✅ All secrets present"
+
       - name: Send weekly digest email
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
