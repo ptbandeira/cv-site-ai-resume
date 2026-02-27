@@ -52,13 +52,21 @@ async function callGemini(prompt: string): Promise<string> {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.8, maxOutputTokens: 600 },
+        generationConfig: {
+          temperature: 0.8,
+          maxOutputTokens: 1200,
+          thinkingConfig: { thinkingBudget: 0 },
+        },
       }),
     }
   );
   if (!res.ok) throw new Error(`Gemini API error: ${res.status} ${await res.text()}`);
   const data = await res.json();
-  return data.candidates?.[0]?.content?.parts?.[0]?.text ?? '';
+  // gemini-2.5-flash thinking mode: filter out thought parts, use only actual response
+  const parts = data.candidates?.[0]?.content?.parts ?? [];
+  const text = parts.filter((p: any) => !p.thought).map((p: any) => p.text ?? '').join('')
+               || parts.map((p: any) => p.text ?? '').join('');
+  return text;
 }
 
 async function generateLinkedInPost(item: PulseItem, siteUrl: string): Promise<string> {
