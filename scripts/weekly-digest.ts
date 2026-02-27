@@ -86,13 +86,16 @@ async function callGemini(prompt: string): Promise<string> {
           temperature: 0.7,
           maxOutputTokens: 800,
           responseMimeType: 'application/json',
+          thinkingConfig: { thinkingBudget: 0 },
         },
       }),
     }
   );
   if (!res.ok) throw new Error(`Gemini API error: ${res.status} ${await res.text()}`);
   const data = await res.json();
-  const text = data.candidates?.[0]?.content?.parts?.[0]?.text ?? '';
+  // Filter out thinking parts (gemini-2.5-flash thinking mode) — get only non-thought parts
+  const parts = data.candidates?.[0]?.content?.parts ?? [];
+  const text = parts.filter((p: any) => !p.thought).map((p: any) => p.text ?? '').join('') || parts.map((p: any) => p.text ?? '').join('');
   if (!text) {
     const finishReason = data.candidates?.[0]?.finishReason ?? 'unknown';
     throw new Error(`Gemini returned empty response. finishReason: ${finishReason}`);
