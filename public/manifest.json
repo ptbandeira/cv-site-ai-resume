@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-27T08:34:42.494Z",
+  "generated": "2026-02-27T12:56:40.677Z",
   "totalItems": 17,
   "items": [
     {
@@ -7,21 +7,25 @@
       "slug": "logistics-retail-ai-1772181281753",
       "category": "Enterprise AI",
       "noise": "Microsoft unveiled new Azure AI services for EU data residency, including private cloud Copilot deployments. This targets regulated industries ahead of the EU AI Act enforcement in August 2026.",
-      "translation": "For European mid-market, your Copilot can now live securely within EU private clouds. No more GDPR excuses for not leveraging AI with sensitive data. Stop waiting for new tools. You",
-      "action": "No action extracted",
+      "translation": "For European mid-market firms, your Copilot can now live securely within EU private clouds. No more GDPR excuses for not using AI with sensitive data. This is the architecture that actually makes AI Act compliance tractable — and if you're already paying for M365, you may already have access. The window to get this configured before August 2026 enforcement is shorter than most leadership teams think.",
+      "action": "I can audit your current M365 licencing in half a day and tell you exactly which Copilot workloads can go live with EU data residency enabled — zero new vendors, zero new contracts. Most mid-market firms I work with have 3–5 immediate use cases already paid for and not deployed. That's the starting point.",
       "date": "Feb 27, 2026",
       "isoDate": "2026-02-27T08:34:41.753Z",
       "keywords": [
-        "logistics company AI automation",
-        "retail SMB AI",
-        "supply chain AI small business",
-        "family business AI",
-        "mid-market AI adoption",
-        "operations automation SMB",
-        "manufacturing AI pilot mid-size",
-        "warehouse automation small company",
-        "AI operations management SMB",
-        "SaaS replacement automation"
+        "Microsoft Copilot EU data residency",
+        "Azure AI sovereign cloud Europe",
+        "EU AI Act compliance 2026",
+        "M365 GDPR compliance",
+        "private cloud AI mid-market",
+        "Copilot enterprise EU",
+        "AI governance regulated industries",
+        "EU AI Act August 2026"
+      ],
+      "sources": [
+        {
+          "label": "Microsoft Azure AI Sovereign Clouds for Europe",
+          "url": "https://news.microsoft.com/europe/2026/02/05/azure-ai-sovereign-clouds-europe-launch"
+        }
       ]
     },
     {

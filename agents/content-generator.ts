@@ -53,7 +53,7 @@ async function callGemini(prompt: string): Promise<string> {
   }
 
   const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -144,10 +144,16 @@ SOURCE_URL: [actual URL to the news source]`;
   const actionMatch = response.match(/ACTION:\s*(.+?)(?=SOURCE_URL:|$)/s);
   const sourceMatch = response.match(/SOURCE_URL:\s*(.+?)$/s);
 
-  const noise = noiseMatch?.[1]?.trim() || 'No noise extracted';
-  const translation = translationMatch?.[1]?.trim() || 'No translation extracted';
-  const action = actionMatch?.[1]?.trim() || 'No action extracted';
+  const noise = noiseMatch?.[1]?.trim() || '';
+  const translation = translationMatch?.[1]?.trim() || '';
+  const action = actionMatch?.[1]?.trim() || '';
   const sourceUrl = sourceMatch?.[1]?.trim() || '';
+
+  // Guard: if key fields are empty, log and skip
+  if (!noise || !translation || !action) {
+    console.warn('⚠️  Incomplete generation — one or more fields empty. Raw response:');
+    console.warn(response.slice(0, 500));
+  }
 
   const slug = topic.id + '-' + Date.now();
   const now = new Date();

@@ -229,14 +229,16 @@ export default function PulseDetail() {
                 </section>
 
                 {/* ── What to do ── */}
-                <section>
-                  <h2 className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-4">
-                    What to Do About It
-                  </h2>
-                  <p className="text-base text-foreground leading-relaxed">
-                    {insight.action}
-                  </p>
-                </section>
+                {insight.action && insight.action !== 'No action extracted' && (
+                  <section>
+                    <h2 className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-4">
+                      What to Do About It
+                    </h2>
+                    <p className="text-base text-foreground leading-relaxed">
+                      {insight.action}
+                    </p>
+                  </section>
+                )}
 
                 {/* ── Keywords ── */}
                 {insight.keywords && insight.keywords.length > 0 && (
