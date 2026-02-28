@@ -1,7 +1,28 @@
 {
-  "generated": "2026-02-27T12:56:40.677Z",
-  "totalItems": 17,
+  "generated": "2026-02-28T08:21:28.846Z",
+  "totalItems": 18,
   "items": [
+    {
+      "id": "law-firm-ai-1772266888185",
+      "slug": "law-firm-ai-1772266888185",
+      "category": "Legal Tech",
+      "noise": "European Legal Tech Association (ELTA) survey reports 70% of EU independent law firms are not ready for August 2026 EU AI Act enforcement, citing resource and guidance gaps.",
+      "translation": "The 'wait and see' strategy is dead. August 2026 is no longer hypothetical. Regulators will demand documented compliance for *any* AI use, from Copilot to contract review, focusing on data governance, transparency, and risk. No more 'we're careful' — you need a plan, not just a promise.",
+      "action": "I can conduct a rapid EU AI Act",
+      "date": "Feb 28, 2026",
+      "isoDate": "2026-02-28T08:21:28.185Z",
+      "keywords": [
+        "law firm AI implementation",
+        "legal AI adoption",
+        "law firm automation",
+        "boutique law firm AI",
+        "legal practice AI compliance",
+        "GDPR AI legal",
+        "law firm data privacy AI",
+        "independent law firm technology",
+        "legal AI risk"
+      ]
+    },
     {
       "id": "logistics-retail-ai-1772181281753",
       "slug": "logistics-retail-ai-1772181281753",
