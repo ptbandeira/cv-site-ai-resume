@@ -1,7 +1,30 @@
 {
-  "generated": "2026-02-28T08:21:28.846Z",
-  "totalItems": 18,
+  "generated": "2026-02-28T15:15:12.298Z",
+  "totalItems": 19,
   "items": [
+    {
+      "id": "block-ai-layoffs-a-warning-for-smbs-1772291711997",
+      "slug": "block-ai-layoffs-a-warning-for-smbs-1772291711997",
+      "category": "SMB Operations",
+      "noise": "Jack Dorsey's Block announced it's laying off 40% of its workforce – over 4,000 people. He claims this isn't due to financial trouble, but a strategic shift, stating AI and automation enable 'a new way of working' with leaner teams.",
+      "translation": "For my European SMB clients, this means something profound: even profitable, growing companies are fundamentally re-evaluating their operational models because of AI. This isn't just about 'big tech' hype; it's a clear signal that the efficiency gains from AI are significant enough to drive major strategic decisions, pushing all businesses to reconsider their current structures.",
+      "action": "My advice is direct: do not wait. I recommend a focused AI operational audit, identifying 2-3 core processes in your firm – think document review, client onboarding, or data analysis – where AI can genuinely deliver a 10-20% efficiency boost. Start piloting these changes within the next 3-6 months, using existing tools or targeted solutions. This isn't about immediate cuts, but about strategically re-skilling your team and future-proofing your business before the market forces your hand.",
+      "date": "Feb 28, 2026",
+      "isoDate": "2026-02-28T15:15:11.997Z",
+      "keywords": [
+        "AI efficiency",
+        "workforce strategy",
+        "operational transformation",
+        "SMB future",
+        "Jack Dorsey"
+      ],
+      "sources": [
+        {
+          "label": "Block AI layoffs a warning for SMBs",
+          "url": "https://expresso.pt/economia/economia_digital/2026-02-27-tecnologica-block-despede-40-dos-trabalhadores-a-boleia-da-ia-e-uma-das-decisoes-mais-dificeis-diz-o-ceo-jack-dorsey-2d77a286"
+        }
+      ]
+    },
     {
       "id": "law-firm-ai-1772266888185",
       "slug": "law-firm-ai-1772266888185",
