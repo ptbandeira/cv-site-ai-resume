@@ -1,7 +1,7 @@
 import "dotenv/config";
 // scripts/generate-weekly-linkedin.ts
-// Reads this week's Pulse items, picks the 3 most signal-rich,
-// writes ONE cohesive LinkedIn post in Pedro's voice with a forward-looking close.
+// Reads this week's Pulse items → picks 3 strongest signals →
+// writes ONE finished LinkedIn post: recap + Pedro's takes + forward-looking close.
 // Saves to linkedin-drafts/weekly-YYYY-MM-DD.md
 //
 // Usage:   npm run linkedin:weekly
@@ -40,7 +40,6 @@ interface PulseItem {
   date: string;
   isoDate?: string;
   keywords: string[];
-  sources?: Array<{ label: string; url: string }>;
 }
 
 // ─── Gemini ──────────────────────────────────────────────────────────────────
@@ -54,8 +53,8 @@ async function callGemini(prompt: string): Promise<string> {
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],
         generationConfig: {
-          temperature: 0.75,
-          maxOutputTokens: 1500,
+          temperature: 0.7,
+          maxOutputTokens: 2000,
           thinkingConfig: { thinkingBudget: 0 },
         },
       }),
@@ -66,41 +65,65 @@ async function callGemini(prompt: string): Promise<string> {
   const parts = data.candidates?.[0]?.content?.parts ?? [];
   const text = parts.filter((p: any) => !p.thought).map((p: any) => p.text ?? '').join('')
                || parts.map((p: any) => p.text ?? '').join('');
-  if (!text) throw new Error(`Gemini returned empty response. finishReason: ${data.candidates?.[0]?.finishReason}`);
+  if (!text) throw new Error(`Gemini returned empty. finishReason: ${data.candidates?.[0]?.finishReason}`);
   return text;
 }
 
 // ─── Generate the weekly post ─────────────────────────────────────────────────
 
-async function generateWeeklyPost(items: PulseItem[], siteUrl: string, weekDate: string): Promise<string> {
+async function generateWeeklyPost(items: PulseItem[], siteUrl: string): Promise<string> {
   const pulseIndexUrl = `${siteUrl}/pulse`;
 
-  // Give Gemini all items but ask it to pick the 3 most meaningful
   const itemsSummary = items.map((item, i) =>
     `${i + 1}. [${item.category}] ${item.translation}\n   Signal: ${item.noise}\n   My take: ${item.action}`
   ).join('\n\n');
 
-  const prompt = `You are Pedro Bandeira, a 50-year-old Portuguese entrepreneur writing a weekly LinkedIn post. You've built analog businesses (events, corporate wellbeing) and now ship AI products: The Pulse newsletter and AgenticOS (AI tool for law firms). Based in Warsaw, Poland.
+  const prompt = `You are Pedro Bandeira — 50yo Portuguese entrepreneur, AI consultant, based in Warsaw.
+You built analog businesses (events, corporate wellbeing) and now ship AI products for SMBs.
+You write The Pulse newsletter: weekly AI signal for European executives. No hype. No buzzwords.
 
-This week's Pulse had ${items.length} signals. Your job:
-1. Pick the 3 most important/connected signals from the list below
-2. Write ONE cohesive LinkedIn weekly recap post
+This week had ${items.length} signals. Write the Friday weekly recap post for LinkedIn.
 
-Your LinkedIn style:
-- Hook in the first line — a single observation that frames the whole week
-- Then cover the 3 signals, weaving them into a connected narrative (not a bullet list)
-- Use 1990s business analogies: file cabinets, switchboard operators, Rolodex, fax machines
-- Direct, Gen-X energy — no hype, no buzzwords, no exclamation marks
-- Close with ONE specific forward-looking line: what you're watching next week and why
-- 4-6 hashtags at the bottom (lowercase, specific to the themes)
-- Max 1,800 characters total
-- End with this link: ${pulseIndexUrl}
+─── TASK ───────────────────────────────────────────────────────────────────────
 
-This week's signals:
+This is a FINISHED, READY-TO-POST piece. Not a draft. Write it as if you're posting it right now.
+
+─── STRUCTURE (follow this exactly) ────────────────────────────────────────────
+
+LINE 1 — HOOK: One punchy sentence that names the theme of this week. No fluff. This is what stops the scroll.
+(blank line)
+BODY — 3 paragraphs, one per signal you choose as most significant. Each paragraph:
+  - Names what happened (1 sentence, concrete)
+  - Your real take on it (1-2 sentences, first-person, specific)
+  - What it means for a 10-50 person European firm right now (1 sentence)
+  Weave them together — this is a narrative, not a list.
+(blank line)
+RECOMMENDATION — One specific, actionable thing executives should do THIS WEEK. First-person ("If I were advising you..."). Max 2 sentences.
+(blank line)
+WHAT TO WATCH — 1-2 things you're tracking for next week and why. Keeps readers coming back. Start with "Next week I'm watching..."
+(blank line)
+CLOSE — One sentence. Pedro's voice, slightly philosophical. References the analog-to-digital shift.
+(blank line)
+LINK: ${pulseIndexUrl}
+(blank line)
+HASHTAGS: 4-5, lowercase, specific (not generic like #ai or #technology)
+
+─── PEDRO'S VOICE ───────────────────────────────────────────────────────────────
+
+- Gen-X energy: direct, a little dry, not excitable
+- Uses 1990s business analogies: Rolodex, fax machine, switchboard, filing cabinet
+- Says "I" not "we". Says "firms" not "companies". Says "people" not "talent"
+- Zero corporate speak. Zero em dashes used for decoration.
+- Numbers and specifics beat vague claims every time
+- Max 1,800 characters total for the entire post
+
+─── THIS WEEK'S SIGNALS ─────────────────────────────────────────────────────────
 
 ${itemsSummary}
 
-Output only the post text — no labels, no "Here's the post:", no preamble.`;
+─── OUTPUT ──────────────────────────────────────────────────────────────────────
+
+Output ONLY the post text. No labels. No "Here's the post:". No preamble. Start directly with the hook.`;
 
   return callGemini(prompt);
 }
@@ -112,17 +135,15 @@ async function main() {
 
   console.log(`📋 Weekly LinkedIn Recap — lookback: ${LOOKBACK_DAYS} day(s)`);
 
-  // Load manifest
   const manifestPath = path.join(ROOT, 'public', 'manifest.json');
   if (!fs.existsSync(manifestPath)) {
-    console.error('❌ manifest.json not found. Run publish first.');
+    console.error('❌ manifest.json not found.');
     process.exit(1);
   }
 
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
   const allItems: PulseItem[] = manifest.items ?? [];
 
-  // Filter to recent items
   const cutoff = new Date();
   cutoff.setDate(cutoff.getDate() - LOOKBACK_DAYS);
   const recentItems = allItems.filter(item => {
@@ -131,42 +152,39 @@ async function main() {
   });
 
   if (recentItems.length === 0) {
-    console.log(`ℹ️  No Pulse items in the last ${LOOKBACK_DAYS} day(s). Nothing to recap.`);
+    console.log(`ℹ️  No Pulse items in the last ${LOOKBACK_DAYS} day(s).`);
     process.exit(0);
   }
 
-  console.log(`📰 ${recentItems.length} Pulse items this week — generating weekly recap...`);
+  console.log(`📰 ${recentItems.length} items this week — generating weekly recap...`);
 
   if (!fs.existsSync(DRAFTS_DIR)) fs.mkdirSync(DRAFTS_DIR, { recursive: true });
 
-  // Use ISO date for filename
   const weekDate = new Date().toISOString().split('T')[0];
   const draftFile = path.join(DRAFTS_DIR, `weekly-${weekDate}.md`);
 
-  // Don't regenerate if already done today
   if (fs.existsSync(draftFile)) {
     console.log(`⏭  weekly-${weekDate}.md already exists — skipping.`);
     process.exit(0);
   }
 
-  const post = await generateWeeklyPost(recentItems, SITE_URL, weekDate);
+  const post = await generateWeeklyPost(recentItems, SITE_URL);
 
-  // Build a summary of which items were available (Gemini picks the 3)
-  const headlineList = recentItems.map(i => `- ${i.translation}`).join('\n');
+  const headlineList = recentItems.map(i => `- [${i.category}] ${i.translation}`).join('\n');
 
   const content = `---
 date: ${weekDate}
 type: weekly-recap
 items_available: ${recentItems.length}
-status: draft
+status: ready
 ---
 
-# Weekly LinkedIn Recap — ${weekDate}
+# Weekly LinkedIn Post — ${weekDate}
 
-> This is the curated weekly post. Individual article drafts are in separate files.
-> Gemini selected the 3 strongest signals from ${recentItems.length} available items.
+> Finished piece. Post to: Analog AI page + Pedro's personal page.
+> Gemini selected the 3 strongest signals from ${recentItems.length} available.
 
-## Items available this week:
+## Signals available this week
 ${headlineList}
 
 ---
@@ -178,6 +196,7 @@ ${post}
 
   fs.writeFileSync(draftFile, content, 'utf-8');
   console.log(`✅ Saved: linkedin-drafts/weekly-${weekDate}.md`);
+  console.log(`\n--- PREVIEW ---\n${post.slice(0, 300)}...\n`);
 }
 
 main().catch(err => {
