@@ -1,7 +1,29 @@
 {
-  "generated": "2026-02-28T21:14:56.019Z",
-  "totalItems": 21,
+  "generated": "2026-03-01T08:23:40.949Z",
+  "totalItems": 22,
   "items": [
+    {
+      "id": "eu-ai-act-smb-1772353420284",
+      "slug": "eu-ai-act-smb-1772353420284",
+      "category": "EU AI Act",
+      "noise": "The EU AI Act officially entered into force in June 2024, initiating staggered compliance deadlines, with high-risk AI system obligations kicking in by August 2026.",
+      "translation": "That \"future problem\" for high-risk AI? It's now less than six months away. Forget vendors selling easy buttons; your European SMB needs to be actively documenting,",
+      "action": "",
+      "date": "Mar 1, 2026",
+      "isoDate": "2026-03-01T08:23:40.284Z",
+      "keywords": [
+        "EU AI Act SME",
+        "EU AI Act small business",
+        "EU AI Act compliance deadline",
+        "AI Act August 2026",
+        "AI Act enforcement SMB",
+        "European AI law compliance",
+        "high-risk AI systems compliance",
+        "EU AI Act consultant",
+        "AI regulatory burden SMB",
+        "AI Act preparation mid-market"
+      ]
+    },
     {
       "id": "ignore-ai-tsunami-hype-focus-operations-1772313295760",
       "slug": "ignore-ai-tsunami-hype-focus-operations-1772313295760",
