@@ -21,6 +21,7 @@
     "linkedin:drafts": "tsx scripts/generate-linkedin-drafts.ts",
     "linkedin:weekly": "tsx scripts/generate-weekly-linkedin.ts",
     "linkedin:post-weekly": "tsx scripts/post-weekly-linkedin.ts",
+    "linkedin:notify-review": "tsx scripts/notify-linkedin-review.ts",
     "social:generate": "tsx scripts/generate-social-posts.ts",
     "social:email": "tsx scripts/email-social-posts.ts",
     "social:weekly": "npm run social:generate && npm run social:post -- mon",

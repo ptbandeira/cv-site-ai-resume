@@ -69,11 +69,9 @@ jobs:
           git diff --staged --quiet || git commit -m "🤖 LinkedIn drafts generated [skip ci]"
           git push
 
-      - name: Post weekly recap to LinkedIn (personal + Analog AI page)
+      - name: Send weekly recap to Slack for review
         env:
-          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
-          LINKEDIN_PERSONAL_URN: ${{ secrets.LINKEDIN_PERSONAL_URN }}
-          LINKEDIN_ORG_URN: ${{ secrets.LINKEDIN_ORG_URN }}
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SLACK_FEEDBACK_CHANNEL: ${{ secrets.SLACK_FEEDBACK_CHANNEL }}
-        run: npm run linkedin:post-weekly
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: npm run linkedin:notify-review

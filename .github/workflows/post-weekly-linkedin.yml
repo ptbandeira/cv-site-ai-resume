@@ -1,0 +1,26 @@
+name: Post Weekly LinkedIn
+
+on:
+  workflow_dispatch: # Manual trigger only — run this after reviewing the Slack notification
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - run: npm ci
+
+      - name: Post weekly recap to LinkedIn (personal + Analog AI page)
+        env:
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_PERSONAL_URN: ${{ secrets.LINKEDIN_PERSONAL_URN }}
+          LINKEDIN_ORG_URN: ${{ secrets.LINKEDIN_ORG_URN }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_FEEDBACK_CHANNEL: ${{ secrets.SLACK_FEEDBACK_CHANNEL }}
+        run: npm run linkedin:post-weekly
