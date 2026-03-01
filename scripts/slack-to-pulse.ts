@@ -58,7 +58,12 @@ async function resolveChannelId(nameOrId: string): Promise<string> {
   throw new Error(`Channel "${clean}" not found. Check SLACK_FEEDBACK_CHANNEL secret.\n  Tip: use the channel ID directly (e.g. C0AG83K8D27) instead of the name.`);
 }
 
-async function fetchSlackUrls(): Promise<string[]> {
+interface SlackEntry {
+  url: string;
+  comment: string; // Pedro's message text, with the URL stripped out — may be empty
+}
+
+async function fetchSlackEntries(): Promise<SlackEntry[]> {
   const channelId = await resolveChannelId(CHANNEL_ID!);
   const oldest = String(Math.floor(Date.now() / 1000) - 30 * 24 * 60 * 60); // last 30 days
   const params = new URLSearchParams({ channel: channelId, limit: '200', oldest });
@@ -68,21 +73,43 @@ async function fetchSlackUrls(): Promise<string[]> {
   const data = await res.json() as any;
   if (!data.ok) throw new Error(`Slack API error: ${data.error}\n  Channel: ${channelId}\n  Tip: make sure the bot is invited to the channel (/invite @YourBotName)`);
 
-  const urls: string[] = [];
+  const seen = new Set<string>();
+  const entries: SlackEntry[] = [];
+
   for (const msg of (data.messages ?? [])) {
     if (!msg.text) continue;
+
+    const msgUrls: string[] = [];
+
     // Bare URLs
     for (const m of msg.text.matchAll(/https?:\/\/[^\s>|"]+/g)) {
       const url = (m[0] as string).trim();
-      if (!url.includes('slack.com')) urls.push(url);
+      if (!url.includes('slack.com')) msgUrls.push(url);
     }
-    // Slack-formatted <url|text>
+    // Slack-formatted <url|text> or <url>
     for (const m of msg.text.matchAll(/<(https?:\/\/[^|>]+)[|>]/g)) {
       const url = m[1].trim();
-      if (!url.includes('slack.com')) urls.push(url);
+      if (!url.includes('slack.com')) msgUrls.push(url);
+    }
+
+    if (msgUrls.length === 0) continue;
+
+    // Extract Pedro's comment: strip all URLs and Slack link syntax from the message
+    const comment = msg.text
+      .replace(/<https?:\/\/[^>]+>/g, '')   // remove <url> and <url|text>
+      .replace(/https?:\/\/[^\s>|"]+/g, '') // remove bare URLs
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    for (const url of msgUrls) {
+      if (!seen.has(url)) {
+        seen.add(url);
+        entries.push({ url, comment });
+      }
     }
   }
-  return Array.from(new Set(urls));
+
+  return entries;
 }
 
 // ─── Dedup tracking ────────────────────────────────────────────────────────
@@ -168,7 +195,15 @@ interface PulseItem {
   sources: Array<{ label: string; url: string }>;
 }
 
-async function generatePulseItem(url: string, articleText: string): Promise<PulseItem> {
+async function generatePulseItem(url: string, articleText: string, pedroComment: string): Promise<PulseItem> {
+  const commentBlock = pedroComment
+    ? `\nPEDRO'S COMMENT (from Slack, when he shared this article — use this as the primary seed for ACTION, preserve his exact angle and intent):\n"${pedroComment}"\n`
+    : '';
+
+  const actionInstruction = pedroComment
+    ? `ACTION: [2-3 sentences — expand Pedro's comment above into a concrete recommendation. Keep his original angle. Add specifics: timeline, price, or next step if relevant. First-person.]`
+    : `ACTION: [2-3 sentences — Pedro's concrete recommendation, with timeline or price if relevant, first-person]`;
+
   const prompt = `You are Pedro Bandeira — 50-year-old Portuguese entrepreneur, AI consultant based in Warsaw.
 You help European SMBs (law firms, accountancies, consultancies, 10-50 staff) implement AI without the hype.
 You write with authority: direct, specific, first-person. You've seen the patterns AI-natives miss.
@@ -179,11 +214,11 @@ Article URL: ${url}
 ---
 ${articleText}
 ---
-
+${commentBlock}
 OUTPUT (plain text only, exact keys, no markdown):
 NOISE: [1-2 sentences — the headline, what happened, what was announced]
 TRANSLATION: [2-3 sentences — what this actually means for a 10-50 person European SMB owner right now]
-ACTION: [2-3 sentences — Pedro's concrete recommendation, with timeline or price if relevant, first-person]
+${actionInstruction}
 CATEGORY: [exactly one of: AI Governance, Law Firms, SMB Operations, Enterprise AI, Data Sovereignty]
 KEYWORDS: [3-5 comma-separated keywords]
 TITLE: [5-8 word title, no punctuation]`;
@@ -248,14 +283,14 @@ async function regenerateManifest(): Promise<number> {
 async function main() {
   console.log('📡 slack-to-pulse: checking #analog-ai-feedback...\n');
 
-  const allUrls = await fetchSlackUrls();
-  console.log(`   ${allUrls.length} URL(s) found in channel`);
+  const allEntries = await fetchSlackEntries();
+  console.log(`   ${allEntries.length} URL(s) found in channel`);
 
   const processed = loadProcessed();
-  const newUrls = allUrls.filter(u => !processed.has(u));
-  console.log(`   ${newUrls.length} new (not yet published)\n`);
+  const newEntries = allEntries.filter(e => !processed.has(e.url));
+  console.log(`   ${newEntries.length} new (not yet published)\n`);
 
-  if (newUrls.length === 0) {
+  if (newEntries.length === 0) {
     console.log('✅ Nothing to do — all URLs already published.');
     return;
   }
@@ -265,16 +300,17 @@ async function main() {
 
   const published: string[] = [];
 
-  for (const url of newUrls) {
+  for (const { url, comment } of newEntries) {
     const skipPatterns = ["linkedin.com", "youtube.com", "youtu.be", "twitter.com", "x.com", "instagram.com", "tiktok.com"];
     const skipMatch = skipPatterns.find(p => url.includes(p));
     if (skipMatch) { markProcessed(url); console.log(`   ⏭️  Skipped + marked done: ${skipMatch} (not scrapeable)`); continue; }
     console.log(`📰 ${url}`);
+    if (comment) console.log(`   💬 Pedro's comment: "${comment}"`);
     try {
       const articleText = await fetchArticle(url);
       console.log(`   Fetched (${articleText.length} chars)`);
 
-      const item = await generatePulseItem(url, articleText);
+      const item = await generatePulseItem(url, articleText, comment);
       console.log(`   Generated: "${item.noise.slice(0, 70)}..."`);
 
       await fsAsync.writeFile(
