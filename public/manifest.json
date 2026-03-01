@@ -1,7 +1,30 @@
 {
-  "generated": "2026-03-01T08:23:40.949Z",
-  "totalItems": 22,
+  "generated": "2026-03-01T12:32:04.131Z",
+  "totalItems": 23,
   "items": [
+    {
+      "id": "ai-agents-transform-research-and-workflows-1772368323797",
+      "slug": "ai-agents-transform-research-and-workflows-1772368323797",
+      "category": "SMB Operations",
+      "noise": "Perplexity's new \"Computer\" feature is turning heads with its advanced web interaction capabilities, while Andrej Karpathy highlighted how AI is fundamentally altering the \"vibe\" of coding due to its efficiency. Meanwhile, OpenAI secured a significant Pentagon contract, replacing Anthropic, signaling a shift in enterprise trust.",
+      "translation": "Forget the abstract talk of \"agents.\" Perplexity's \"Computer\" means your junior staff, be they paralegals or financial analysts, can soon offload complex online research and data synthesis directly to an AI. This isn't just searching; it's *acting* on information. Karpathy's observation isn't just for developers; it tells you AI is rapidly maturing in automating structured, logical tasks like report drafting or initial brief outlines. The Pentagon deal isn't about geopolitics for you; it's about validation that these major AI platforms are robust enough for sensitive, high-stakes environments, meaning stable and secure enough for your core business.",
+      "action": "My advice is clear: don't wait for the 'perfect' AI. Identify one specific, repetitive research or data-gathering task that eats up 5-10 hours a week for one of your team members. Pilot Perplexity's \"Computer\" or a similar advanced agent feature for that exact task. Set a clear success metric – time saved, accuracy improved – and expect to spend a few hundred euros on initial subscriptions for a one-month trial. The patterns I see are those who act early on specific, high-frequency tasks gain a serious edge, not those chasing every shiny new AI feature.",
+      "date": "Mar 1, 2026",
+      "isoDate": "2026-03-01T12:32:03.797Z",
+      "keywords": [
+        "Perplexity",
+        "AI agents",
+        "task automation",
+        "SMB efficiency",
+        "AI adoption"
+      ],
+      "sources": [
+        {
+          "label": "AI Agents Transform Research and Workflows",
+          "url": "https://thenewstack.io/perplexity-computer-vibe-coding-openai-anthropic-pentagon/"
+        }
+      ]
+    },
     {
       "id": "eu-ai-act-smb-1772353420284",
       "slug": "eu-ai-act-smb-1772353420284",
