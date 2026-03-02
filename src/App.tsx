@@ -10,6 +10,7 @@ import PulseIndex from "./pages/PulseIndex";
 import PulseDetail from "./pages/PulseDetail";
 import PressKit from "./pages/PressKit";
 import HowIWork from "./pages/HowIWork";
+import MeetPage from "./pages/MeetPage";
 import Proof from "./pages/Proof";
 import Tools from "./pages/Tools";
 
@@ -46,6 +47,8 @@ const App = () => (
           <Route path="/pulse" element={<PulseIndex />} />
           <Route path="/pulse/:slug" element={<PulseDetail />} />
           <Route path="/press" element={<PressKit />} />
+          <Route path="/meet" element={<MeetPage />} />
+          <Route path="/meet/:slug" element={<MeetPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
