@@ -1,0 +1,50 @@
+{
+  "generatedAt": "2026-03-02T06:59:24.239Z",
+  "weekLabel": "Week of 9 Mar 2026",
+  "posts": [
+    {
+      "type": "digest",
+      "platform": "linkedin",
+      "scheduledDay": "Monday",
+      "scheduledAt": "2026-03-09T09:00:00.000Z",
+      "text": "The \"AI tsunami\" is a distraction. The real story for European SMBs is already happening.\n\nAI isn"
+    },
+    {
+      "type": "digest",
+      "platform": "facebook",
+      "scheduledDay": "Monday",
+      "scheduledAt": "2026-03-09T09:00:00.000Z",
+      "text": "This week’s noise about AI? Mostly just that – noise"
+    },
+    {
+      "type": "spotlight",
+      "platform": "linkedin",
+      "scheduledDay": "Wednesday",
+      "scheduledAt": "2026-03-04T10:00:00.000Z",
+      "text": "You're probably thinking about \"AI agents\" all wrong. They're not abstract; they'",
+      "sourceSlug": "ai-agents-transform-research-and-workflows-1772368323797"
+    },
+    {
+      "type": "spotlight",
+      "platform": "facebook",
+      "scheduledDay": "Wednesday",
+      "scheduledAt": "2026-03-04T10:00:00.000Z",
+      "text": "Forget the abstract talk of \"AI agents.\" Perplexity's",
+      "sourceSlug": "ai-agents-transform-research-and-workflows-1772368323797"
+    },
+    {
+      "type": "original_take",
+      "platform": "linkedin",
+      "scheduledDay": "Friday",
+      "scheduledAt": "2026-03-06T09:00:00.000Z",
+      "text": "Everyone's chasing AI agents for SMBs. Most small businesses just need a better filing system first.\n\nI built"
+    },
+    {
+      "type": "original_take",
+      "platform": "facebook",
+      "scheduledDay": "Friday",
+      "scheduledAt": "2026-03-06T09:00:00.000Z",
+      "text": "I spent an hour this week with a CEO convinced AI will solve all"
+    }
+  ]
+}
