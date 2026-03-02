@@ -1,7 +1,53 @@
 {
-  "generated": "2026-03-02T08:37:02.171Z",
-  "totalItems": 24,
+  "generated": "2026-03-02T09:40:53.836Z",
+  "totalItems": 26,
   "items": [
+    {
+      "id": "sequoia-s-ai-ascent-what-it-means-1772444438289",
+      "slug": "sequoia-s-ai-ascent-what-it-means-1772444438289",
+      "category": "SMB Operations",
+      "noise": "Sequoia's recent \"AI Ascent\" event gathered top AI minds, declaring AI the biggest opportunity in human history and outlining a future dominated by an \"Agent Economy\" where AI systems collaborate.",
+      "translation": "Forget the \"biggest opportunity\" hype. What matters for your law firm or consultancy is Sequoia's insistence that value is in the *application layer*, not the underlying models. This means the powerful AI tools you *use* will drive your competitive edge, not complex internal AI development. The shift to an \"Agent Economy\" isn't about sci-fi; it's about highly autonomous AI tools giving lean teams the leverage of much larger ones, fundamentally changing how work gets done.",
+      "action": "I urge you to start experimenting with AI agents now, focusing on specific, repetitive tasks within your operations. Identify one or two workflows (e.g., initial document drafting, data synthesis for reports) where an AI agent could provide significant leverage. Begin with off-the-shelf solutions and allocate a small, dedicated team to manage and \"debug\" these new AI workflows, embracing the \"stochastic mindset\" of managing thinking systems, not just scripts.",
+      "date": "Mar 2, 2026",
+      "isoDate": "2026-03-02T09:40:38.289Z",
+      "keywords": [
+        "AI Agents",
+        "Application Layer",
+        "SMB Efficiency",
+        "Workflow Automation",
+        "AI Adoption"
+      ],
+      "sources": [
+        {
+          "label": "Sequoia's AI Ascent What It Means",
+          "url": "https://www.theaiopportunities.com/p/sequoia-ai-ascent-ai-might-be-the?utm_campaign=post&amp;utm_medium=web"
+        }
+      ]
+    },
+    {
+      "id": "google-warns-against-thin-ai-vendors-1772444423748",
+      "slug": "google-warns-against-thin-ai-vendors-1772444423748",
+      "category": "SMB Operations",
+      "noise": "Google's VP of Global Startup Organization, Darren Mowry, just warned that AI startups acting as \"LLM wrappers\" or \"AI aggregators\" are in trouble. He sees them struggling to survive as the AI market matures, comparing it to the early cloud reseller boom that quickly fizzled.",
+      "translation": "For us European SMBs – law firms, accountancies, consultancies – this is a critical signal. It means many of the slick AI tools you see advertised might be built on shaky ground. If a vendor's offering is simply putting a nice interface on top of GPT-5 or Gemini, without deep, proprietary value or specialized data, their long-term viability is questionable.",
+      "action": "This isn't new; top investors like Sequoia Capital have been sounding this alarm for a while about \"thin wrappers.\" My advice is clear: when evaluating AI vendors, ask directly: \"What proprietary data, models, or unique intellectual property do you bring that isn't just a thin layer over a public LLM?\" Demand to see their defensible \"moat\" – don't commit to solutions that are easily replicated or depend entirely on another company's core tech. Your long-term AI strategy requires stable partners.",
+      "date": "Mar 2, 2026",
+      "isoDate": "2026-03-02T09:40:23.748Z",
+      "keywords": [
+        "AI vendors",
+        "startup risk",
+        "LLM wrappers",
+        "AI aggregators",
+        "vendor selection"
+      ],
+      "sources": [
+        {
+          "label": "Google Warns Against Thin AI Vendors",
+          "url": "https://techcrunch.com/2026/02/21/google-vp-warns-that-two-types-of-ai-startups-may-not-survive/"
+        }
+      ]
+    },
     {
       "id": "law-firm-ai-1772440621350",
       "slug": "law-firm-ai-1772440621350",
