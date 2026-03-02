@@ -1,7 +1,30 @@
 {
-  "generated": "2026-03-02T09:40:53.836Z",
-  "totalItems": 26,
+  "generated": "2026-03-02T12:39:41.710Z",
+  "totalItems": 27,
   "items": [
+    {
+      "id": "making-llms-reliable-for-business-operations-1772455166296",
+      "slug": "making-llms-reliable-for-business-operations-1772455166296",
+      "category": "AI Governance",
+      "noise": "Google AI just unveiled 'STATIC,' a new framework promising a massive 948x speedup for 'constrained decoding' in Large Language Models. This means LLMs can now generate text that strictly adheres to predefined rules or datasets, without the usual performance hit.",
+      "translation": "Forget the technical jargon. What STATIC actually delivers is a robust solution to the biggest headache with LLMs: hallucination and inaccuracy. For your law firm, accountancy, or consultancy, this means you can finally deploy AI systems that *must* stick to your specific internal knowledge, client data, or compliance rules. Imagine an LLM drafting a contract or a financial report that *cannot* invent facts or use invalid terms because it's hardwired to your verified data, and it does it instantly. This moves us away from 'AI is cool but unreliable' to 'AI is a critical, trustworthy assistant.'",
+      "action": "My advice is clear: don't get caught up in building bespoke LLMs from scratch. Instead, when evaluating AI tools or platforms for your business – especially for internal knowledge management, document generation, or client communication – demand to know how they handle 'constrained decoding.' Ask vendors directly: 'How do you ensure my outputs are rigorously accurate and adhere to my specific datasets or compliance standards, without sacrificing speed?' Prioritise solutions that integrate this capability to guarantee reliability from day one. This isn't about future potential; it's about making your AI useful and safe *now*.",
+      "date": "Mar 2, 2026",
+      "isoDate": "2026-03-02T12:39:26.296Z",
+      "keywords": [
+        "Constrained decoding",
+        "LLM accuracy",
+        "AI reliability",
+        "hallucination prevention",
+        "business logic"
+      ],
+      "sources": [
+        {
+          "label": "Making LLMs Reliable for Business Operations",
+          "url": "https://share.google/YOW3gFh7JhdAibCvu"
+        }
+      ]
+    },
     {
       "id": "sequoia-s-ai-ascent-what-it-means-1772444438289",
       "slug": "sequoia-s-ai-ascent-what-it-means-1772444438289",
