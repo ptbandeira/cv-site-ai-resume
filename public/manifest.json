@@ -1,7 +1,30 @@
 {
-  "generated": "2026-03-03T09:34:57.824Z",
-  "totalItems": 30,
+  "generated": "2026-03-03T21:27:52.782Z",
+  "totalItems": 31,
   "items": [
+    {
+      "id": "free-claude-ai-courses-your-next-step-1772573256522",
+      "slug": "free-claude-ai-courses-your-next-step-1772573256522",
+      "category": "SMB Operations",
+      "noise": "Anthropic has launched Anthropic Academy, a new platform offering free online courses focused on mastering its Claude AI models. These courses, available via Skilljar and Coursera, provide official certification without requiring a paid Claude subscription.",
+      "translation": "For European SMBs, this isn't just free training; it's a strategic opportunity to upskill your team in a leading AI tool without significant cost or complexity. It means your staff can immediately gain practical, certified AI literacy, improving productivity and demystifying AI integration into daily operations.",
+      "action": "I’ve seen the immediate return from practical application. I recommend your team members dedicate a few hours weekly to these courses. Start with \"Claude 101\" for a quick win on everyday tasks, then move to \"AI Fluency Framework & Foundations\" for safe collaboration. For those building integrations or automating, the \"Developer Deep-Dives\" offer advanced skills. The value isn't just the certificate; it's the immediate, tangible efficiency gains in your operations. Find all courses at anthropic.skilljar.com.",
+      "date": "Mar 3, 2026",
+      "isoDate": "2026-03-03T21:27:36.522Z",
+      "keywords": [
+        "AI training",
+        "Claude AI",
+        "staff upskilling",
+        "productivity",
+        "free certification"
+      ],
+      "sources": [
+        {
+          "label": "Free Claude AI Courses: Your Next Step",
+          "url": "https://in.mashable.com/tech/106518/want-ai-certification-anthropics-claude-courses-are-now-free"
+        }
+      ]
+    },
     {
       "id": "nullclaw-and-choosing-right-for-your-smb-1772530482460",
       "slug": "nullclaw-and-choosing-right-for-your-smb-1772530482460",
