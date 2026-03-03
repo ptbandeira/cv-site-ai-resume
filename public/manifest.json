@@ -1,7 +1,34 @@
 {
-  "generated": "2026-03-03T01:24:11.451Z",
-  "totalItems": 28,
+  "generated": "2026-03-03T08:33:29.114Z",
+  "totalItems": 29,
   "items": [
+    {
+      "id": "pharma-sme-ai-1772526808226",
+      "slug": "pharma-sme-ai-1772526808226",
+      "category": "Pharma AI",
+      "noise": "EMA issues initial guidance for AI Act compliance in clinical trials, highlighting data governance and model transparency. Industry reports indicate significant unpreparedness among pharma SMEs for the August 2026 enforcement.",
+      "translation": "This isn't just paperwork; it means *your* AI tools, even a Copilot plugin, must prove data security and explainability. Sending trial data to non-EU servers for AI processing is now a clear liability. Generic pharma and CROs need audited, local-first AI or risk hefty fines by August 2026. This is the new cost of doing business.",
+      "action": "I can perform a rapid compliance audit of your current AI use cases (or planned ones) against the EMA's guidance and outline a concrete, local-first implementation roadmap, leveraging your existing Microsoft 365 investment.",
+      "date": "Mar 3, 2026",
+      "isoDate": "2026-03-03T08:33:28.226Z",
+      "keywords": [
+        "pharma SME AI",
+        "biotech startup AI compliance",
+        "CRO artificial intelligence",
+        "small pharma AI",
+        "clinical trial AI automation",
+        "pharma GDPR AI",
+        "pharma data privacy AI",
+        "life sciences SMB AI",
+        "regulatory affairs AI pharma"
+      ],
+      "sources": [
+        {
+          "label": "Pharma AI",
+          "url": "https://www.euobserver.com/business/pharma-ai-act-compliance-feb2026"
+        }
+      ]
+    },
     {
       "id": "ai-agents-gain-memory-transform-smb-workflows-1772501036117",
       "slug": "ai-agents-gain-memory-transform-smb-workflows-1772501036117",
