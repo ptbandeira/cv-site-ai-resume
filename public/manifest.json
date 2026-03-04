@@ -1,7 +1,30 @@
 {
-  "generated": "2026-03-04T08:32:01.251Z",
-  "totalItems": 33,
+  "generated": "2026-03-04T12:38:39.728Z",
+  "totalItems": 34,
   "items": [
+    {
+      "id": "anthropic-claude-challenges-ai-lock-in-1772627903922",
+      "slug": "anthropic-claude-challenges-ai-lock-in-1772627903922",
+      "category": "SMB Operations",
+      "noise": "Anthropic, a rival to OpenAI, just announced a new feature for Claude that makes it easier to migrate your conversational history from other chatbots like ChatGPT, Gemini, or Copilot. They also made Claude's ability to reference past conversations available to all free users.",
+      "translation": "For European SMBs like yours, this isn't just about switching bots. It's a clear signal that the AI market is maturing and competition is heating up. What AI-natives often miss is that vendor lock-in, even with AI, is a real risk. This move gives you more power: you're less tied to a single provider, making it easier to leverage the best AI for each specific task or client, without losing your firm's accumulated context.",
+      "action": "My direct advice? Don't settle for the first AI tool you tried. Dedicate a few hours next week to test Claude, specifically its ability to maintain context for complex legal or accounting tasks. Start a small, focused pilot project with one team, comparing its output directly against your current AI for a specific workflow. The goal isn't just to switch, but to ensure you're always using the most effective, adaptable tool for your business needs.",
+      "date": "Mar 4, 2026",
+      "isoDate": "2026-03-04T12:38:23.922Z",
+      "keywords": [
+        "Claude",
+        "ChatGPT",
+        "AI tools",
+        "Vendor lock-in",
+        "SMB AI strategy"
+      ],
+      "sources": [
+        {
+          "label": "Anthropic Claude Challenges AI Lock-in",
+          "url": "https://www.noticiasaominuto.com/tech/2948626/farto-do-chatgpt-a-anthropic-vai-ajuda-lo-a-trocar-companheiro-de-ia"
+        }
+      ]
+    },
     {
       "id": "logistics-retail-ai-1772613120545",
       "slug": "logistics-retail-ai-1772613120545",
