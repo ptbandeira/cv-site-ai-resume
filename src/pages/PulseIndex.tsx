@@ -7,6 +7,7 @@ import FloatingAICTA from "@/components/FloatingAICTA";
 import AIChat from "@/components/AIChat";
 import SubscribeForm from "@/components/SubscribeForm";
 
+import SubscribeModal from "@/components/SubscribeModal";
 interface PulseItem {
   id: string;
   slug: string;
@@ -216,6 +217,27 @@ export default function PulseIndex() {
           {/* ── Featured Guides ── */}
           <div className="flex flex-col gap-3 mb-10">
             <a
+              href="/blog/anthropic-skills-guide-claude.html"
+              className="group flex items-start gap-4 border border-emerald-200 bg-emerald-50/60 hover:bg-emerald-50 rounded-sm p-5 transition-all duration-200 hover:border-emerald-300 hover:shadow-sm"
+            >
+              <div className="flex-shrink-0 w-9 h-9 rounded-sm bg-emerald-100 flex items-center justify-center group-hover:bg-emerald-200 transition-colors">
+                <BookOpen className="w-4 h-4 text-emerald-600" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <span className="text-[9px] font-mono uppercase tracking-widest text-emerald-600 mb-1 block">
+                  AI Tools Guide
+                </span>
+                <p className="font-serif text-base font-medium text-foreground leading-snug mb-1 group-hover:text-emerald-700 transition-colors">
+                  Anthropic's Skills Guide: What It Means for Your Business
+                </p>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  They released a 29-page blueprint for turning Claude into a specialized ops tool. Here's the business translation — plus the downloadable PDF.
+                </p>
+              </div>
+              <ArrowRight className="flex-shrink-0 w-4 h-4 text-emerald-400 group-hover:translate-x-1 transition-transform mt-1" />
+            </a>
+
+            <a
               href="/blog/eu-ai-act-compliance.html"
               className="group flex items-start gap-4 border border-amber-200 bg-amber-50/60 hover:bg-amber-50 rounded-sm p-5 transition-all duration-200 hover:border-amber-300 hover:shadow-sm"
             >
@@ -402,6 +424,7 @@ export default function PulseIndex() {
           )}
 
           {/* ── Footer rule ── */}
+          {/* ── Footer rule ── */}
           <div className="pt-8 border-t border-stone-100 text-center">
             <p className="text-[11px] font-mono text-muted-foreground tracking-wide">
               Analysis from a 50-year-old operator — who's built analog businesses
@@ -414,6 +437,7 @@ export default function PulseIndex() {
 
       <Footer onOpenChat={() => setIsChatOpen(true)} />
       <FloatingAICTA onOpenChat={() => setIsChatOpen(true)} />
+      <SubscribeModal />
       <AIChat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
     </div>
   );
