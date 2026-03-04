@@ -1,0 +1,23 @@
+{
+  "id": "ai-agents-smart-choices-for-your-business-1772659662864",
+  "slug": "ai-agents-smart-choices-for-your-business-1772659662864",
+  "category": "SMB Operations",
+  "noise": "Google and MIT researchers recently published a paper outlining principles for scaling multi-agent AI systems, exploring how different AI agent architectures perform with varying tasks and tools. They found that simply adding more AI agents or tools doesn't always improve performance.",
+  "translation": "For you, this isn't about building complex multi-agent systems, but understanding that simply adding more AI tools or agents to a workflow doesn't automatically boost efficiency. Google's findings confirm what I've seen: more tools can create overhead, and the 'best' AI setup depends entirely on the specific task, especially for document-heavy work. There's a point of diminishing returns.",
+  "action": "My advice is simple: don't chase every new AI tool. Instead, pinpoint a single, specific task you want AI to tackle – like contract review or financial report generation. Pilot *one* AI solution, measure its real-world impact, and only then consider expanding. For my clients, this focused approach often means a 4-week engagement to define scope and prove initial ROI before any significant investment.",
+  "date": "Mar 4, 2026",
+  "isoDate": "2026-03-04T21:27:42.864Z",
+  "keywords": [
+    "AI agents",
+    "AI strategy",
+    "workflow optimization",
+    "professional services",
+    "implementation"
+  ],
+  "sources": [
+    {
+      "label": "AI Agents: Smart Choices for Your Business",
+      "url": "https://share.google/oB3dWQ11PvLEFODRC"
+    }
+  ]
+}
