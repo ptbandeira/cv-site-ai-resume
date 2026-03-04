@@ -7,7 +7,6 @@ import FloatingAICTA from "@/components/FloatingAICTA";
 import AIChat from "@/components/AIChat";
 import SubscribeForm from "@/components/SubscribeForm";
 
-import SubscribeModal from "@/components/SubscribeModal";
 interface PulseItem {
   id: string;
   slug: string;
@@ -437,7 +436,6 @@ export default function PulseIndex() {
 
       <Footer onOpenChat={() => setIsChatOpen(true)} />
       <FloatingAICTA onOpenChat={() => setIsChatOpen(true)} />
-      <SubscribeModal />
       <AIChat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
     </div>
   );
