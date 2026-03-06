@@ -112,13 +112,21 @@ export default function PulseDetail() {
       el.setAttribute(attr, value);
     }
 
+    // OG image — dynamic via Vercel Edge Function
+    const ogImageUrl = `${BASE}/api/og?title=${encodeURIComponent(firstSentence(insight.noise, 200))}&category=${encodeURIComponent(normalizeCategory(insight.category))}&date=${encodeURIComponent(formatDate(insight))}`;
+
     setMeta('meta[name="description"]', "content", articleDesc);
     setMeta('meta[property="og:title"]', "content", articleTitle);
     setMeta('meta[property="og:description"]', "content", articleDesc);
     setMeta('meta[property="og:url"]', "content", articleUrl);
     setMeta('meta[property="og:type"]', "content", "article");
+    setMeta('meta[property="og:image"]', "content", ogImageUrl);
+    setMeta('meta[property="og:image:width"]', "content", "1200");
+    setMeta('meta[property="og:image:height"]', "content", "630");
+    setMeta('meta[name="twitter:card"]', "content", "summary_large_image");
     setMeta('meta[name="twitter:title"]', "content", articleTitle);
     setMeta('meta[name="twitter:description"]', "content", articleDesc);
+    setMeta('meta[name="twitter:image"]', "content", ogImageUrl);
 
     // Canonical
     let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');

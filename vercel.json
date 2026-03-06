@@ -1,6 +1,17 @@
 {
     "rewrites": [
         {
+            "source": "/pulse/:slug",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "user-agent",
+                    "value": ".*(facebookexternalhit|Facebot|LinkedInBot|Twitterbot|WhatsApp|Slackbot|TelegramBot|Discordbot|Googlebot|bingbot).*"
+                }
+            ],
+            "destination": "/api/pulse-meta?slug=:slug"
+        },
+        {
             "source": "/((?!api/|blog/).*)",
             "destination": "/index.html"
         }
