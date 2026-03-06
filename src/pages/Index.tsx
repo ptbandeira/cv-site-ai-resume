@@ -27,14 +27,14 @@ const Index = () => {
         {/* 2. Qualifier */}
         <FilterSection />
 
-        {/* 3. Services */}
+        {/* 3. Latest intelligence — moved up for visibility */}
+        <InsightPulse />
+
+        {/* 4. Services */}
         <OfferMenu />
 
-        {/* 4. Risk framing */}
+        {/* 5. Risk framing */}
         <WhenAIGoesWrong />
-
-        {/* 5. Latest intelligence — links to /pulse */}
-        <InsightPulse />
 
         {/* 6. FAQ */}
         <StrategicFAQ />

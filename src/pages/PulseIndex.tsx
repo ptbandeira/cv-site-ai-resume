@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { ArrowRight, BookOpen } from "lucide-react";
+import { ArrowRight, BookOpen, Download } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingAICTA from "@/components/FloatingAICTA";
 import AIChat from "@/components/AIChat";
 import SubscribeForm from "@/components/SubscribeForm";
+import ShareButtons from "@/components/ShareButtons";
 
 interface PulseItem {
   id: string;
@@ -74,46 +75,42 @@ const RECENT_COUNT = 5;
 function RecentCard({ item }: { item: PulseItem }) {
   const cat = normalizeCategory(item.category);
   return (
-    <Link
-      to={`/pulse/${item.slug}`}
-      className="group flex flex-col border border-stone-150 hover:border-stone-300 bg-white hover:bg-stone-50/60 rounded-sm p-6 transition-all duration-200 hover:shadow-sm"
-    >
-      {/* Category + date */}
-      <div className="flex items-center gap-2 mb-4">
-        <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${categoryDot(cat)}`} />
-        <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
-          {cat}
-        </span>
-        <span className="text-stone-300 text-[10px] font-mono">·</span>
-        <span className="text-[10px] font-mono text-stone-400">{formatShortDate(item)}</span>
+    <div className="group flex flex-col border border-stone-150 hover:border-stone-300 bg-white hover:bg-stone-50/60 rounded-sm p-6 transition-all duration-200 hover:shadow-sm">
+      {/* Category + date + share */}
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2">
+          <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${categoryDot(cat)}`} />
+          <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+            {cat}
+          </span>
+          <span className="text-stone-300 text-[10px] font-mono">·</span>
+          <span className="text-[10px] font-mono text-stone-400">{formatShortDate(item)}</span>
+        </div>
+        <ShareButtons
+          url={`https://analog-ai.vercel.app/pulse/${item.slug}`}
+          title={firstSentence(item.noise, 80)}
+          compact
+        />
       </div>
 
-      {/* Headline */}
-      <h2 className="font-serif text-lg font-medium text-foreground leading-snug mb-3 group-hover:text-primary transition-colors">
-        {item.translation}
-      </h2>
+      <Link to={`/pulse/${item.slug}`} className="flex flex-col flex-1">
+        {/* Headline — actual news first */}
+        <h2 className="font-serif text-lg font-medium text-foreground leading-snug mb-2 group-hover:text-primary transition-colors">
+          {firstSentence(item.noise, 140)}
+        </h2>
 
-      {/* Noise teaser */}
-      <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
-        {firstSentence(item.noise, 140)}
-      </p>
-
-      {/* Action teaser — Pedro's take */}
-      <div className="border-t border-stone-100 pt-4 mt-auto">
-        <p className="text-[11px] font-mono text-stone-500 uppercase tracking-widest mb-1.5">
-          Pedro's take
+        {/* Our take — translation */}
+        <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1 italic">
+          {firstSentence(item.translation, 120)}
         </p>
-        <p className="text-xs text-muted-foreground leading-relaxed italic">
-          {firstSentence(item.action, 120)}
-        </p>
-      </div>
 
-      {/* CTA */}
-      <div className="flex items-center gap-1.5 mt-4 text-[11px] font-mono text-stone-400 group-hover:text-primary transition-colors">
-        Read full analysis
-        <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-      </div>
-    </Link>
+        {/* CTA */}
+        <div className="flex items-center gap-1.5 mt-auto text-[11px] font-mono text-stone-400 group-hover:text-primary transition-colors">
+          Read full analysis
+          <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+        </div>
+      </Link>
+    </div>
   );
 }
 
@@ -140,10 +137,10 @@ function ArchiveRow({ item }: { item: PulseItem }) {
               {cat}
             </span>
             <p className="font-serif text-sm font-medium text-foreground leading-snug group-hover:text-primary transition-colors mb-1">
-              {item.translation}
-            </p>
-            <p className="text-xs text-muted-foreground leading-relaxed line-clamp-1">
               {firstSentence(item.noise, 100)}
+            </p>
+            <p className="text-xs text-muted-foreground leading-relaxed line-clamp-1 italic">
+              {firstSentence(item.translation, 100)}
             </p>
           </div>
           <ArrowRight className="flex-shrink-0 w-3.5 h-3.5 text-stone-300 group-hover:text-primary group-hover:translate-x-1 transition-all mt-1" />
@@ -213,7 +210,18 @@ export default function PulseIndex() {
             </p>
           </div>
 
-          {/* ── Featured Guides ── */}
+          {/* ── Deep Guides ── */}
+          <div className="mb-10">
+            <div className="flex items-center gap-3 mb-5">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+                Deep Guides
+              </span>
+              <span className="flex-1 h-px bg-stone-100" />
+              <span className="text-[10px] font-mono text-stone-400">
+                Long-form analysis
+              </span>
+            </div>
+          </div>
           <div className="flex flex-col gap-3 mb-10">
             <a
               href="/blog/anthropic-skills-guide-claude.html"
@@ -344,12 +352,9 @@ export default function PulseIndex() {
                   i === 0 ? (
                     // First card spans full width
                     <div key={item.id} className="md:col-span-2">
-                      <Link
-                        to={`/pulse/${item.slug}`}
-                        className="group flex flex-col md:flex-row border border-stone-200 hover:border-stone-300 bg-white hover:bg-stone-50/60 rounded-sm p-6 transition-all duration-200 hover:shadow-sm gap-6"
-                      >
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-4">
+                      <div className="group flex flex-col border border-stone-200 hover:border-stone-300 bg-white hover:bg-stone-50/60 rounded-sm p-6 transition-all duration-200 hover:shadow-sm">
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-center gap-2">
                             <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${categoryDot(normalizeCategory(item.category))}`} />
                             <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
                               {normalizeCategory(item.category)}
@@ -360,25 +365,27 @@ export default function PulseIndex() {
                               Latest
                             </span>
                           </div>
-                          <h2 className="font-serif text-xl md:text-2xl font-medium text-foreground leading-snug mb-3 group-hover:text-primary transition-colors">
-                            {item.translation}
-                          </h2>
-                          <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                            {firstSentence(item.noise, 180)}
-                          </p>
-                          <div className="border-t border-stone-100 pt-4">
-                            <p className="text-[10px] font-mono text-stone-500 uppercase tracking-widest mb-1.5">
-                              Pedro's take
+                          <ShareButtons
+                            url={`https://analog-ai.vercel.app/pulse/${item.slug}`}
+                            title={firstSentence(item.noise, 80)}
+                            compact
+                          />
+                        </div>
+                        <Link to={`/pulse/${item.slug}`} className="flex flex-col md:flex-row gap-6">
+                          <div className="flex-1">
+                            <h2 className="font-serif text-xl md:text-2xl font-medium text-foreground leading-snug mb-3 group-hover:text-primary transition-colors">
+                              {firstSentence(item.noise, 200)}
+                            </h2>
+                            <p className="text-base text-muted-foreground leading-relaxed mb-4 italic">
+                              {firstSentence(item.translation, 180)}
                             </p>
-                            <p className="text-sm text-muted-foreground leading-relaxed italic">
-                              {firstSentence(item.action, 160)}
-                            </p>
+                            <div className="flex items-center gap-1.5 text-[11px] font-mono text-stone-400 group-hover:text-primary transition-colors">
+                              Read full analysis
+                              <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                            </div>
                           </div>
-                        </div>
-                        <div className="flex md:flex-col items-center md:items-end justify-end md:justify-between gap-4 md:w-10 flex-shrink-0">
-                          <ArrowRight className="w-4 h-4 text-stone-300 group-hover:text-primary group-hover:translate-x-1 transition-all" />
-                        </div>
-                      </Link>
+                        </Link>
+                      </div>
                     </div>
                   ) : (
                     <RecentCard key={item.id} item={item} />
@@ -386,6 +393,13 @@ export default function PulseIndex() {
                 )}
               </div>
             </section>
+          )}
+
+          {/* ── Mid-page subscribe ── */}
+          {!loading && recentItems.length > 0 && (
+            <div className="mb-14">
+              <SubscribeForm />
+            </div>
           )}
 
           {/* ── Past Issues (archive grouped by month) ── */}

@@ -5,6 +5,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingAICTA from "@/components/FloatingAICTA";
 import AIChat from "@/components/AIChat";
+import ShareButtons from "@/components/ShareButtons";
+import SubscribeForm from "@/components/SubscribeForm";
 
 interface PulseItem {
   id: string;
@@ -189,26 +191,38 @@ export default function PulseDetail() {
           {/* ── Article ── */}
           {!loading && insight && (
             <>
-              {/* Category + date */}
-              <div className="flex items-center gap-2.5 mb-6">
-                <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${categoryDot(insight.category)}`} />
-                <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
-                  {normalizeCategory(insight.category)}
-                </span>
-                <span className="text-stone-200">·</span>
-                <span className="text-[10px] font-mono text-muted-foreground">
-                  {formatDate(insight)}
-                </span>
+              {/* Category + date + share */}
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-2.5">
+                  <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${categoryDot(insight.category)}`} />
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+                    {normalizeCategory(insight.category)}
+                  </span>
+                  <span className="text-stone-200">·</span>
+                  <span className="text-[10px] font-mono text-muted-foreground">
+                    {formatDate(insight)}
+                  </span>
+                </div>
+                <ShareButtons
+                  url={`https://analog-ai.vercel.app/pulse/${insight.slug}`}
+                  title={firstSentence(insight.noise, 80)}
+                  compact
+                />
               </div>
 
-              {/* Headline */}
-              <h1 className="font-serif text-3xl md:text-4xl font-medium text-foreground leading-tight mb-8">
-                {insight.translation}
+              {/* Headline — use noise (the actual news) as the title */}
+              <h1 className="font-serif text-3xl md:text-4xl font-medium text-foreground leading-tight mb-4">
+                {firstSentence(insight.noise, 200)}
               </h1>
+
+              {/* Sub-headline — brief translation preview */}
+              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                {firstSentence(insight.translation, 160)}
+              </p>
 
               <div className="border-t border-stone-100 pt-10 space-y-10">
 
-                {/* ── The Noise (what happened) ── */}
+                {/* ── The Story (what happened) ── */}
                 <section>
                   <h2 className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-4">
                     The Story
@@ -218,7 +232,7 @@ export default function PulseDetail() {
                   </p>
                 </section>
 
-                {/* ── The Signal (why it matters) ── */}
+                {/* ── Why It Matters (our translation) ── */}
                 <section className="bg-stone-50 rounded-sm border border-stone-100 p-6">
                   <h2 className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-4">
                     Why It Matters
@@ -239,6 +253,24 @@ export default function PulseDetail() {
                     </p>
                   </section>
                 )}
+
+                {/* ── Share ── */}
+                <section className="border-t border-stone-100 pt-6">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+                      Found this useful?
+                    </span>
+                    <ShareButtons
+                      url={`https://analog-ai.vercel.app/pulse/${insight.slug}`}
+                      title={firstSentence(insight.noise, 80)}
+                    />
+                  </div>
+                </section>
+
+                {/* ── Newsletter ── */}
+                <section>
+                  <SubscribeForm />
+                </section>
 
                 {/* ── Keywords ── */}
                 {insight.keywords && insight.keywords.length > 0 && (

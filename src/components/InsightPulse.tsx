@@ -1,4 +1,4 @@
-import { ArrowRight, Activity, TrendingUp, AlertTriangle, Zap, Target } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -10,22 +10,38 @@ interface PulseItem {
   translation: string;
   action: string;
   date: string;
+  isoDate?: string;
   keywords: string[];
   sources?: Array<{ label: string; url: string }>;
 }
 
-const categoryConfig: Record<string, { color: string; iconBg: string; gradient: string; icon: React.ReactNode }> = {
-  "AI Governance":      { color: "text-amber-700",   iconBg: "bg-amber-100 text-amber-700",   gradient: "from-amber-500 to-orange-500",   icon: <AlertTriangle className="w-5 h-5" /> },
-  "Enterprise AI":      { color: "text-blue-700",    iconBg: "bg-blue-100 text-blue-700",     gradient: "from-blue-500 to-cyan-500",      icon: <Zap className="w-5 h-5" /> },
-  "Law Firms":          { color: "text-rose-700",    iconBg: "bg-rose-100 text-rose-700",     gradient: "from-rose-500 to-pink-500",      icon: <Target className="w-5 h-5" /> },
-  "Legal Technology":   { color: "text-rose-700",    iconBg: "bg-rose-100 text-rose-700",     gradient: "from-rose-500 to-pink-500",      icon: <Target className="w-5 h-5" /> },
-  "SMB Operations":     { color: "text-emerald-700", iconBg: "bg-emerald-100 text-emerald-700", gradient: "from-emerald-500 to-teal-500", icon: <TrendingUp className="w-5 h-5" /> },
-  "Data Sovereignty":   { color: "text-purple-700",  iconBg: "bg-purple-100 text-purple-700", gradient: "from-purple-500 to-violet-500",  icon: <Activity className="w-5 h-5" /> },
-  "Pharma AI":          { color: "text-emerald-700", iconBg: "bg-emerald-100 text-emerald-700", gradient: "from-emerald-500 to-teal-500", icon: <Activity className="w-5 h-5" /> },
-  "FinTech Compliance": { color: "text-purple-700",  iconBg: "bg-purple-100 text-purple-700", gradient: "from-purple-500 to-violet-500",  icon: <TrendingUp className="w-5 h-5" /> },
+function normalizeCategory(cat: string): string {
+  if (cat === "Legal Technology") return "Legal Tech";
+  return cat;
+}
+
+const CATEGORY_ACCENT: Record<string, string> = {
+  "SMB Operations": "bg-amber-400",
+  "AI Governance":  "bg-sky-400",
+  "AI Tools":       "bg-emerald-400",
+  "Legal Tech":     "bg-violet-400",
 };
 
-const defaultConfig = { color: "text-stone-700", iconBg: "bg-stone-100 text-stone-700", gradient: "from-stone-500 to-slate-500", icon: <Activity className="w-5 h-5" /> };
+function categoryDot(cat: string) {
+  return CATEGORY_ACCENT[normalizeCategory(cat)] ?? "bg-stone-400";
+}
+
+function firstSentence(text: string, maxLen = 120): string {
+  const match = text.match(/^[^.!?]+[.!?]/);
+  const sentence = match ? match[0] : text;
+  return sentence.length > maxLen ? sentence.slice(0, maxLen).trimEnd() + "…" : sentence;
+}
+
+function formatShortDate(item: PulseItem): string {
+  const d = item.isoDate ? new Date(item.isoDate) : new Date(item.date);
+  if (isNaN(d.getTime())) return item.date;
+  return d.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+}
 
 const InsightPulse = () => {
   const [pulseItems, setPulseItems] = useState<PulseItem[]>([]);
@@ -35,9 +51,8 @@ const InsightPulse = () => {
     fetch('/manifest.json')
       .then(r => r.json())
       .then(data => {
-        // Filter to items with real content, show latest 2
         const withContent = (data.items ?? []).filter((i: PulseItem) => i.noise && i.translation);
-        setPulseItems(withContent.slice(0, 2));
+        setPulseItems(withContent.slice(0, 3));
       })
       .catch(() => setPulseItems([]))
       .finally(() => setLoading(false));
@@ -45,20 +60,18 @@ const InsightPulse = () => {
 
   if (loading) {
     return (
-      <section id="insight-pulse" className="py-24 px-6 bg-secondary/30">
-        <div className="max-w-4xl mx-auto">
-          <div className="mb-12">
-            <h2 className="text-4xl md:text-5xl font-serif text-foreground mb-4">The 60-Day Pulse</h2>
+      <section id="insight-pulse" className="py-24 px-6 border-t border-stone-100">
+        <div className="max-w-3xl mx-auto">
+          <div className="mb-10">
+            <div className="h-3 w-32 bg-stone-100 rounded animate-pulse mb-4" />
+            <div className="h-8 w-64 bg-stone-100 rounded animate-pulse" />
           </div>
-          <div className="grid md:grid-cols-2 gap-8">
-            {[1, 2].map(i => (
-              <div key={i} className="bg-white border border-stone-200 rounded-2xl overflow-hidden animate-pulse">
-                <div className="h-1.5 bg-stone-200" />
-                <div className="p-6 space-y-4">
-                  <div className="h-4 bg-stone-100 rounded w-1/3" />
-                  <div className="h-3 bg-stone-100 rounded w-full" />
-                  <div className="h-3 bg-stone-100 rounded w-5/6" />
-                </div>
+          <div className="space-y-4">
+            {[1, 2, 3].map(i => (
+              <div key={i} className="border border-stone-100 rounded-sm p-5 animate-pulse">
+                <div className="h-2.5 w-20 bg-stone-100 rounded mb-3" />
+                <div className="h-5 w-3/4 bg-stone-100 rounded mb-2" />
+                <div className="h-3.5 w-full bg-stone-100 rounded" />
               </div>
             ))}
           </div>
@@ -67,89 +80,82 @@ const InsightPulse = () => {
     );
   }
 
-  if (pulseItems.length === 0) {
-    return null; // Hide section if no published content yet
-  }
+  if (pulseItems.length === 0) return null;
 
   return (
-    <section id="insight-pulse" className="py-24 px-6 bg-secondary/30">
-      <div className="max-w-4xl mx-auto">
-        <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+    <section id="insight-pulse" className="py-24 px-6 border-t border-stone-100">
+      <div className="max-w-3xl mx-auto">
+        {/* Header */}
+        <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
-            <h2 className="text-4xl md:text-5xl font-serif text-foreground mb-4">
-              The 60-Day Pulse
+            <span className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+              Signal intelligence
+            </span>
+            <h2 className="font-serif text-3xl md:text-4xl font-medium tracking-tight text-foreground mb-3">
+              The Pulse
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl">
-              Not a blog. A translation layer — cutting through AI noise to show what actually matters for your business.
+            <p className="text-muted-foreground max-w-xl leading-relaxed">
+              Cutting through AI noise — analysis for operators, not enthusiasts.
             </p>
           </div>
           <Link
             to="/pulse"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-stone-200 hover:border-primary/50 text-stone-600 hover:text-primary rounded-lg transition-all font-medium text-sm shadow-sm hover:shadow-md whitespace-nowrap"
+            className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
           >
-            View all Pulse notes
-            <ArrowRight className="w-4 h-4" />
+            View all
+            <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {pulseItems.map((insight) => {
-            const cfg = categoryConfig[insight.category] ?? defaultConfig;
+        {/* Cards */}
+        <div className="space-y-3">
+          {pulseItems.map((item) => {
+            const cat = normalizeCategory(item.category);
             return (
               <Link
-                to={`/pulse/${insight.slug}`}
-                key={insight.id}
-                className="bg-white border border-stone-200 shadow-xl shadow-stone-200/50 rounded-2xl overflow-hidden flex flex-col hover:scale-[1.02] transition-transform duration-300"
+                to={`/pulse/${item.slug}`}
+                key={item.id}
+                className="group flex items-start gap-5 border border-stone-150 hover:border-stone-300 bg-white hover:bg-stone-50/60 rounded-sm p-5 transition-all duration-200 hover:shadow-sm"
               >
-                {/* Color bar */}
-                <div className={`h-1.5 bg-gradient-to-r ${cfg.gradient}`} />
-
-                <div className="p-6 flex flex-col flex-1">
-                  {/* Icon + Date */}
-                  <div className="flex items-center justify-between mb-5">
-                    <div className={`w-10 h-10 rounded-full ${cfg.iconBg} flex items-center justify-center`}>
-                      {cfg.icon}
-                    </div>
-                    <span className="text-xs font-mono text-muted-foreground border border-border rounded-full px-3 py-1">
-                      {insight.date}
+                <div className="flex-1 min-w-0">
+                  {/* Category + date */}
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${categoryDot(cat)}`} />
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+                      {cat}
+                    </span>
+                    <span className="text-stone-200">·</span>
+                    <span className="text-[10px] font-mono text-stone-400">
+                      {formatShortDate(item)}
                     </span>
                   </div>
 
-                  {/* The Noise */}
-                  <div className="mb-4">
-                    <p className="text-[10px] font-mono uppercase tracking-wider text-stone-500 font-bold mb-1.5">
-                      The Noise
-                    </p>
-                    <p className="text-sm text-foreground font-medium leading-relaxed">
-                      {insight.noise}
-                    </p>
-                  </div>
+                  {/* Title — actual news */}
+                  <h3 className="font-serif text-base md:text-lg font-medium text-foreground leading-snug mb-1.5 group-hover:text-primary transition-colors">
+                    {firstSentence(item.noise, 140)}
+                  </h3>
 
-                  {/* The Translation */}
-                  <div className="mb-4 p-3 bg-primary/5 rounded-lg border-l-4 border-primary">
-                    <p className="text-[10px] font-mono uppercase tracking-wider text-primary font-bold mb-1.5">
-                      The Translation
-                    </p>
-                    <p className="text-sm text-foreground/80 leading-relaxed">
-                      {insight.translation}
-                    </p>
-                  </div>
-
-                  {/* The Action */}
-                  {insight.action && (
-                    <div className="mt-auto p-3 bg-emerald-50 rounded-lg border border-emerald-200">
-                      <p className="text-[10px] font-mono uppercase tracking-wider text-emerald-700 font-bold mb-1.5">
-                        The Action
-                      </p>
-                      <p className="text-sm text-emerald-800/80 leading-relaxed">
-                        {insight.action}
-                      </p>
-                    </div>
-                  )}
+                  {/* Translation — our take */}
+                  <p className="text-sm text-muted-foreground leading-relaxed italic">
+                    {firstSentence(item.translation, 120)}
+                  </p>
                 </div>
+                <ArrowRight className="flex-shrink-0 w-4 h-4 text-stone-300 group-hover:text-primary group-hover:translate-x-1 transition-all mt-3" />
               </Link>
             );
           })}
+        </div>
+
+        {/* CTA */}
+        <div className="mt-8 text-center">
+          <Link
+            to="/pulse"
+            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium bg-foreground text-background rounded-sm hover:bg-stone-700 transition-colors"
+          >
+            Read all analysis
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </div>
     </section>
