@@ -1,7 +1,30 @@
 {
-  "generated": "2026-03-05T19:11:18.593Z",
-  "totalItems": 37,
+  "generated": "2026-03-06T01:24:56.348Z",
+  "totalItems": 38,
   "items": [
+    {
+      "id": "hallucinations-are-not-a-bug-1772760280436",
+      "slug": "hallucinations-are-not-a-bug-1772760280436",
+      "category": "AI Governance",
+      "noise": "Researchers have identified \"H-Neurons\" – less than 0.1% of neurons in LLMs – that reliably predict and cause hallucinations. This groundbreaking study reveals these specific neural pathways drive the models to invent plausible but factually incorrect outputs, a behavior the researchers term \"over-compliance.\"",
+      "translation": "For your business, this isn't a headline promising an immediate fix. What it tells me, based on years in this field, is that hallucinations are not a bug to be patched but an inherent characteristic. This deeper understanding of *how* LLMs hallucinate doesn't change the immediate reality: AI will continue to generate convincing falsehoods, and you must operate under that assumption.",
+      "action": "Forget waiting for a \"cure\" for H-Neurons. Your priority is to implement rigorous human oversight. Start piloting AI on low-risk internal tasks – drafting first-pass summaries, internal research. For *any* client-facing output, a human must review and fact-check, without exception. This isn't optional; it's the cost of reliable AI integration, and you need to embed these checks into your workflows now.",
+      "date": "Mar 6, 2026",
+      "isoDate": "2026-03-06T01:24:40.436Z",
+      "keywords": [
+        "Hallucinations",
+        "AI reliability",
+        "LLMs",
+        "AI governance",
+        "Human-in-the-loop"
+      ],
+      "sources": [
+        {
+          "label": "Hallucinations Are Not a Bug",
+          "url": "https://arxiv.org/abs/2512.01797"
+        }
+      ]
+    },
     {
       "id": "ai-vendor-trust-openai-s-pentagon-deal-1772737862429",
       "slug": "ai-vendor-trust-openai-s-pentagon-deal-1772737862429",
