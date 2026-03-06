@@ -19,6 +19,7 @@ interface PulseItem {
   isoDate?: string;
   keywords: string[];
   sources?: Array<{ label: string; url: string }>;
+  image?: string; // optional hero image path (e.g. "/images/pulse/my-article.jpg")
 }
 
 function normalizeCategory(cat: string): string {
@@ -112,8 +113,10 @@ export default function PulseDetail() {
       el.setAttribute(attr, value);
     }
 
-    // OG image — dynamic via Vercel Edge Function
-    const ogImageUrl = `${BASE}/api/og?title=${encodeURIComponent(firstSentence(insight.noise, 200))}&category=${encodeURIComponent(normalizeCategory(insight.category))}&date=${encodeURIComponent(formatDate(insight))}`;
+    // OG image — use article image if available, otherwise generate dynamically
+    const ogImageUrl = insight.image
+      ? `${BASE}${insight.image}`
+      : `${BASE}/api/og?title=${encodeURIComponent(firstSentence(insight.noise, 200))}&category=${encodeURIComponent(normalizeCategory(insight.category))}&date=${encodeURIComponent(formatDate(insight))}`;
 
     setMeta('meta[name="description"]', "content", articleDesc);
     setMeta('meta[property="og:title"]', "content", articleTitle);
@@ -227,6 +230,18 @@ export default function PulseDetail() {
               <p className="text-lg text-muted-foreground leading-relaxed mb-8">
                 {firstSentence(insight.translation, 160)}
               </p>
+
+              {/* Hero image */}
+              {insight.image && (
+                <div className="mb-8 -mx-2 md:-mx-6">
+                  <img
+                    src={insight.image}
+                    alt={firstSentence(insight.noise, 100)}
+                    className="w-full rounded-sm border border-stone-100"
+                    loading="eager"
+                  />
+                </div>
+              )}
 
               <div className="border-t border-stone-100 pt-10 space-y-10">
 
