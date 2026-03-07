@@ -70,6 +70,7 @@ jobs:
           git push
 
       - name: Send weekly recap to Slack for review
+        continue-on-error: true
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SLACK_FEEDBACK_CHANNEL: ${{ secrets.SLACK_FEEDBACK_CHANNEL }}
