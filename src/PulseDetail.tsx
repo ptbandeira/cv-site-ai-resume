@@ -19,6 +19,7 @@ interface PulseItem {
   isoDate?: string;
   keywords: string[];
   sources?: Array<{ label: string; url: string }>;
+  image?: string;
 }
 
 function normalizeCategory(cat: string): string {
@@ -209,6 +210,18 @@ export default function PulseDetail() {
                   compact
                 />
               </div>
+
+              {/* Hero image */}
+              {insight.image && (
+                <div className="mb-6 -mx-2">
+                  <img
+                    src={insight.image}
+                    alt=""
+                    className="w-full h-48 md:h-64 object-cover rounded-sm border border-stone-100"
+                    loading="eager"
+                  />
+                </div>
+              )}
 
               {/* Headline — use noise (the actual news) as the title */}
               <h1 className="font-serif text-3xl md:text-4xl font-medium text-foreground leading-tight mb-4">

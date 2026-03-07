@@ -3,8 +3,8 @@
   "slug": "autonomous-ai-agents-beyond-code-1772822090501",
   "category": "SMB Operations",
   "noise": "OpenAI has launched \"Symphony,\" an open-source framework built to orchestrate autonomous AI agents for software development, automating tasks from issue tracking to code submission and verification. It's designed for structured, scalable implementation runs, emphasizing fault tolerance.",
-  "translation": "This isn't about your law firm writing its own code, or your accounting practice developing new software. What Symphony truly signifies is the rapid advancement of robust, autonomous AI agents capable of executing complex, multi-step workflows with built-in verification. The underlying engineering principles here—self-correction, structured execution, proof-of-work—are what will eventually empower powerful, industry-specific AI assistants for services like yours.",
-  "action": "My recommendation: ignore the technical jargon of \"Symphony\" itself. Instead, start identifying and meticulously documenting your most repetitive, multi-stage business processes—think client onboarding, contract review, or audit preparation. We need to prepare your operational blueprints now, so you're positioned to leverage these sophisticated agentic capabilities when they inevitably arrive for professional services, likely within the next 12 to 24 months.",
+  "translation": "This isn't about your law firm writing its own code, or your accounting practice developing new software. What Symphony truly signifies is the rapid advancement of robust, autonomous AI agents capable of executing complex, multi-step workflows with built-in verification. The underlying engineering principles here\u2014self-correction, structured execution, proof-of-work\u2014are what will eventually empower powerful, industry-specific AI assistants for services like yours.",
+  "action": "My recommendation: ignore the technical jargon of \"Symphony\" itself. Instead, start identifying and meticulously documenting your most repetitive, multi-stage business processes\u2014think client onboarding, contract review, or audit preparation. We need to prepare your operational blueprints now, so you're positioned to leverage these sophisticated agentic capabilities when they inevitably arrive for professional services, likely within the next 12 to 24 months.",
   "date": "Mar 6, 2026",
   "isoDate": "2026-03-06T18:34:50.501Z",
   "keywords": [
@@ -19,5 +19,6 @@
       "label": "Autonomous AI Agents Beyond Code",
       "url": "https://www.marktechpost.com/2026/03/05/openai-releases-symphony-an-open-source-agentic-framework-for-orchestrating-autonomous-ai-agents-through-structured-scalable-implementation-runs/"
     }
-  ]
+  ],
+  "image": "/images/pulse/autonomous-ai-agents-beyond-code-1772822090501.jpg"
 }

@@ -4,7 +4,7 @@
   "category": "SMB Operations",
   "noise": "Alibaba just open-sourced CoPaw, a 'personal agent workstation' framework. It's designed for developers to build and scale multi-channel AI workflows and memory, shifting focus from basic LLMs to more autonomous 'agentic systems'.",
   "translation": "Forget the developer jargon. For your law firm or consultancy, CoPaw signals a shift towards AI tools that actually remember context across client interactions and different platforms. This means future AI assistants won't just give generic answers; they'll learn your specific processes, hold long-term memory about your clients and cases, and crucially, let you control where that sensitive data resides, locally or in a private cloud.",
-  "action": "My advice: don't touch CoPaw yourself. This is foundational tech. Instead, spend the next 6 months identifying specific, repetitive tasks within your operations – client intake, contract review, recurring financial reports – where an AI assistant *with memory* would transform efficiency. When I talk about AI pilots, these are the kinds of specific, memory-intensive applications we’ll be targeting, likely with commercial solutions built on principles like CoPaw, costing €500-€2000/month for a small team.",
+  "action": "My advice: don't touch CoPaw yourself. This is foundational tech. Instead, spend the next 6 months identifying specific, repetitive tasks within your operations \u2013 client intake, contract review, recurring financial reports \u2013 where an AI assistant *with memory* would transform efficiency. When I talk about AI pilots, these are the kinds of specific, memory-intensive applications we\u2019ll be targeting, likely with commercial solutions built on principles like CoPaw, costing \u20ac500-\u20ac2000/month for a small team.",
   "date": "Mar 3, 2026",
   "isoDate": "2026-03-03T01:23:56.117Z",
   "keywords": [
@@ -19,5 +19,6 @@
       "label": "AI Agents Gain Memory, Transform SMB Workflows",
       "url": "https://www.marktechpost.com/2026/03/01/alibaba-team-open-sources-copaw-a-high-performance-personal-agent-workstation-for-developers-to-scale-multi-channel-ai-workflows-and-memory/"
     }
-  ]
+  ],
+  "image": "/images/pulse/ai-agents-gain-memory-transform-smb-workflows-1772501036117.jpg"
 }

@@ -3,8 +3,8 @@
   "slug": "google-warns-against-thin-ai-vendors-1772444423748",
   "category": "SMB Operations",
   "noise": "Google's VP of Global Startup Organization, Darren Mowry, just warned that AI startups acting as \"LLM wrappers\" or \"AI aggregators\" are in trouble. He sees them struggling to survive as the AI market matures, comparing it to the early cloud reseller boom that quickly fizzled.",
-  "translation": "For us European SMBs – law firms, accountancies, consultancies – this is a critical signal. It means many of the slick AI tools you see advertised might be built on shaky ground. If a vendor's offering is simply putting a nice interface on top of GPT-5 or Gemini, without deep, proprietary value or specialized data, their long-term viability is questionable.",
-  "action": "This isn't new; top investors like Sequoia Capital have been sounding this alarm for a while about \"thin wrappers.\" My advice is clear: when evaluating AI vendors, ask directly: \"What proprietary data, models, or unique intellectual property do you bring that isn't just a thin layer over a public LLM?\" Demand to see their defensible \"moat\" – don't commit to solutions that are easily replicated or depend entirely on another company's core tech. Your long-term AI strategy requires stable partners.",
+  "translation": "For us European SMBs \u2013 law firms, accountancies, consultancies \u2013 this is a critical signal. It means many of the slick AI tools you see advertised might be built on shaky ground. If a vendor's offering is simply putting a nice interface on top of GPT-5 or Gemini, without deep, proprietary value or specialized data, their long-term viability is questionable.",
+  "action": "This isn't new; top investors like Sequoia Capital have been sounding this alarm for a while about \"thin wrappers.\" My advice is clear: when evaluating AI vendors, ask directly: \"What proprietary data, models, or unique intellectual property do you bring that isn't just a thin layer over a public LLM?\" Demand to see their defensible \"moat\" \u2013 don't commit to solutions that are easily replicated or depend entirely on another company's core tech. Your long-term AI strategy requires stable partners.",
   "date": "Mar 2, 2026",
   "isoDate": "2026-03-02T09:40:23.748Z",
   "keywords": [
@@ -19,5 +19,6 @@
       "label": "Google Warns Against Thin AI Vendors",
       "url": "https://techcrunch.com/2026/02/21/google-vp-warns-that-two-types-of-ai-startups-may-not-survive/"
     }
-  ]
+  ],
+  "image": "/images/pulse/google-warns-against-thin-ai-vendors-1772444423748.jpg"
 }

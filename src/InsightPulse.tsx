@@ -13,6 +13,7 @@ interface PulseItem {
   isoDate?: string;
   keywords: string[];
   sources?: Array<{ label: string; url: string }>;
+  image?: string;
 }
 
 function normalizeCategory(cat: string): string {

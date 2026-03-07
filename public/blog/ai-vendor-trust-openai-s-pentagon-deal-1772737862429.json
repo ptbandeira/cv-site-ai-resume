@@ -4,7 +4,7 @@
   "category": "Data Sovereignty",
   "noise": "OpenAI reportedly lost 1.5 million subscribers in under 48 hours after agreeing to let the US Department of Defense use its AI models. This move contrasts sharply with rival Anthropic, which rejected a similar deal and saw its Claude chatbot rise in popularity.",
   "translation": "For your European SMB, this isn't just tech news; it's a stark reminder about AI vendor trust and data sovereignty. When you entrust your firm's data to an AI provider, you're not just buying a tool, you're buying into their values and their data handling policies. This event underscores the critical importance of understanding where your sensitive information resides and who has access to it, especially when geopolitical factors come into play.",
-  "action": "My advice is clear: don't get caught off guard. First, ensure you have a robust data export strategy for any AI tools you use – know *how* to get your data out. Second, start evaluating alternative AI vendors like Anthropic's Claude *now*, not when a crisis hits, focusing on their data policies and ethical stances. This proactive approach protects your firm's continuity and client confidentiality.",
+  "action": "My advice is clear: don't get caught off guard. First, ensure you have a robust data export strategy for any AI tools you use \u2013 know *how* to get your data out. Second, start evaluating alternative AI vendors like Anthropic's Claude *now*, not when a crisis hits, focusing on their data policies and ethical stances. This proactive approach protects your firm's continuity and client confidentiality.",
   "date": "Mar 5, 2026",
   "isoDate": "2026-03-05T19:11:02.429Z",
   "keywords": [
@@ -19,5 +19,6 @@
       "label": "AI Vendor Trust: OpenAI's Pentagon Deal",
       "url": "https://share.google/7fZJ3Hn3hwaIrbwVO"
     }
-  ]
+  ],
+  "image": "/images/pulse/ai-vendor-trust-openai-s-pentagon-deal-1772737862429.jpg"
 }

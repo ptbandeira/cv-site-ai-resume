@@ -19,6 +19,7 @@ interface PulseItem {
   isoDate?: string;
   keywords: string[];
   sources?: Array<{ label: string; url: string }>;
+  image?: string;
 }
 
 // ─── Category helpers ────────────────────────────────────────────────────────
@@ -94,6 +95,18 @@ function RecentCard({ item }: { item: PulseItem }) {
       </div>
 
       <Link to={`/pulse/${item.slug}`} className="flex flex-col flex-1">
+        {/* Thumbnail */}
+        {item.image && (
+          <div className="mb-3 -mx-1">
+            <img
+              src={item.image}
+              alt=""
+              className="w-full h-32 object-cover rounded-sm border border-stone-100"
+              loading="lazy"
+            />
+          </div>
+        )}
+
         {/* Headline — actual news first */}
         <h2 className="font-serif text-lg font-medium text-foreground leading-snug mb-2 group-hover:text-primary transition-colors">
           {firstSentence(item.noise, 140)}
@@ -372,6 +385,16 @@ export default function PulseIndex() {
                           />
                         </div>
                         <Link to={`/pulse/${item.slug}`} className="flex flex-col md:flex-row gap-6">
+                          {item.image && (
+                            <div className="md:w-64 flex-shrink-0">
+                              <img
+                                src={item.image}
+                                alt=""
+                                className="w-full h-40 md:h-full object-cover rounded-sm border border-stone-100"
+                                loading="lazy"
+                              />
+                            </div>
+                          )}
                           <div className="flex-1">
                             <h2 className="font-serif text-xl md:text-2xl font-medium text-foreground leading-snug mb-3 group-hover:text-primary transition-colors">
                               {firstSentence(item.noise, 200)}
