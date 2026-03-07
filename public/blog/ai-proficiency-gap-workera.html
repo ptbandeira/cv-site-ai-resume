@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>71% of Professionals Overestimate Their AI Skills — Here's What That Means for Your Business — Analog AI Pulse</title>
+<meta name="description" content="Most people think they're competent with AI. They're not. Stanford AI expert Kian Katanforoosh analyzed 22,000 professionals and found 71% systematically overestimate their skills. Here's the real gap—and how to close it in 90 days.">
+<meta name="keywords" content="AI proficiency, AI skills gap, Workera, AI literacy, AI training, professional upskilling, AI competency">
+<meta property="og:title" content="71% of Professionals Overestimate Their AI Skills — Here's What That Means for Your Business">
+<meta property="og:description" content="Stanford AI expert Kian Katanforoosh analyzed 22,000 professionals and found 71% systematically overestimate their skills. Here's the gap—and how to close it in 90 days.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://analog-ai.vercel.app/blog/ai-proficiency-gap-workera.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/round_chess_knight_favicon.png" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; background: #fafaf8; color: #1a1a1a; line-height: 1.75; }
+  .container { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  /* Header */
+  .category-tag { font-family: 'Arial', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #3b82f6; margin-bottom: 16px; }
+  h1 { font-size: 2.4rem; line-height: 1.2; font-weight: 700; margin-bottom: 20px; color: #111; }
+  .subtitle { font-size: 1.15rem; color: #555; font-style: italic; margin-bottom: 32px; border-left: 3px solid #3b82f6; padding-left: 16px; }
+  .byline { font-family: 'Arial', sans-serif; font-size: 13px; color: #888; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid #e5e5e5; }
+  .byline strong { color: #444; }
+
+  /* Download banner */
+  .download-banner { background: linear-gradient(135deg, #1e40af, #3b82f6); color: white; padding: 28px 32px; border-radius: 12px; margin-bottom: 48px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .download-banner .icon { font-size: 32px; flex-shrink: 0; }
+  .download-banner .text { flex: 1; min-width: 200px; }
+  .download-banner h3 { font-family: 'Arial', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .download-banner p { font-size: 13px; opacity: 0.85; margin: 0; }
+  .download-btn { display: inline-block; background: white; color: #1e40af; font-family: 'Arial', sans-serif; font-weight: 700; font-size: 14px; padding: 12px 28px; border-radius: 6px; text-decoration: none; letter-spacing: 0.5px; flex-shrink: 0; transition: transform 0.15s; }
+  .download-btn:hover { transform: translateY(-1px); }
+
+  /* Content */
+  h2 { font-size: 1.5rem; font-weight: 700; margin: 48px 0 16px; color: #111; }
+  h3 { font-size: 1.1rem; font-weight: 700; margin: 32px 0 12px; color: #333; }
+  p { margin-bottom: 20px; }
+
+  /* Callout boxes */
+  .callout { border-left: 4px solid #3b82f6; background: #eff6ff; padding: 20px 24px; margin: 32px 0; border-radius: 0 8px 8px 0; }
+  .callout-title { font-family: 'Arial', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #2563eb; margin-bottom: 8px; }
+  .callout p { margin-bottom: 0; }
+  .callout-amber { border-left-color: #f59e0b; background: #fffbeb; }
+  .callout-amber .callout-title { color: #d97706; }
+  .callout-blue { border-left-color: #3b82f6; background: #eff6ff; }
+  .callout-blue .callout-title { color: #2563eb; }
+
+  /* Table */
+  .comparison-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-family: 'Arial', sans-serif; font-size: 14px; }
+  .comparison-table th { text-align: left; padding: 10px 14px; background: #f5f5f0; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #666; border-bottom: 2px solid #e5e5e5; }
+  .comparison-table td { padding: 12px 14px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+  .comparison-table tr:hover td { background: #fafaf5; }
+
+  /* Pattern cards */
+  .pattern-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+  .pattern-card { background: white; border: 1px solid #e5e5e5; border-radius: 8px; padding: 20px; }
+  .pattern-card h4 { font-family: 'Arial', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #3b82f6; margin-bottom: 8px; }
+  .pattern-card p { font-size: 14px; color: #555; margin-bottom: 0; }
+
+  /* Use case list */
+  .use-case { padding: 16px 0; border-bottom: 1px solid #f0f0f0; }
+  .use-case:last-child { border-bottom: none; }
+  .use-case strong { color: #111; display: block; margin-bottom: 4px; }
+  .use-case span { font-size: 14px; color: #666; }
+
+  /* CTA */
+  .cta-block { background: #1a1a1a; color: white; padding: 40px; border-radius: 12px; margin-top: 64px; text-align: center; }
+  .cta-block h3 { font-size: 1.4rem; margin-bottom: 12px; color: white; }
+  .cta-block p { color: #aaa; margin-bottom: 24px; font-size: 0.95rem; }
+  .cta-button { display: inline-block; background: #3b82f6; color: white; font-family: 'Arial', sans-serif; font-weight: 700; font-size: 14px; padding: 14px 32px; border-radius: 6px; text-decoration: none; letter-spacing: 0.5px; }
+
+  /* Footer */
+  .article-footer { margin-top: 48px; padding-top: 32px; border-top: 1px solid #e5e5e5; font-family: 'Arial', sans-serif; font-size: 12px; color: #999; }
+  .article-footer a { color: #3b82f6; text-decoration: none; }
+
+  /* Back link */
+  .back-link { font-family: 'Arial', sans-serif; font-size: 13px; color: #888; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 32px; }
+  .back-link:hover { color: #444; }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 1.8rem; }
+    .pattern-grid { grid-template-columns: 1fr; }
+    .download-banner { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<a href="/pulse" class="back-link">&larr; Back to Pulse</a>
+
+<div class="category-tag">AI Skills</div>
+
+<h1>71% of Professionals Overestimate Their AI Skills — Here's What That Means for Your Business</h1>
+
+<div class="subtitle">Most people think they're competent with AI. They're not. A Stanford expert analyzed 22,000 professionals and found something revealing. Here's the gap—and how to close it in 90 days.</div>
+
+<div class="byline">
+  <strong>Pedro Bandeira</strong> · Analog AI Pulse · March 7, 2026 · 11 min read
+</div>
+
+<!-- Download Banner -->
+<div class="download-banner">
+  <div class="icon">📊</div>
+  <div class="text">
+    <h3>Download the Workera AI Proficiency Framework</h3>
+    <p>The 90-day upskilling plan, the 71% gap analysis, and the 5 reasons AI agents fail (PDF, 892 KB)</p>
+  </div>
+  <a href="/downloads/ai-proficiency-gap-workera.pdf" class="download-btn" download>Download PDF</a>
+</div>
+
+<h2>The Noise</h2>
+
+<p>AI is everywhere. Every business is investing. Every person claims they're "using AI daily." Confidence is high. Competence, less so.</p>
+
+<p>Kian Katanforoosh, CEO of Workera and Stanford AI lecturer, just analyzed 22,000 professionals across multiple industries. The finding: "71% of them were overestimating their AI skills." Not a little. Systematically. Most people can prompt ChatGPT. Almost none understand what's actually happening inside.</p>
+
+<p>This isn't abstract. If you're a CEO or operations leader, this gap is already affecting your bottom line. Your team thinks they're competent. They're not. That false confidence means no one is upskilling. Productivity gains are stuck. And the gap between your company and competitors who take this seriously is widening fast.</p>
+
+<h2>The Translation</h2>
+
+<h3>What the 71% gap actually looks like</h3>
+
+<p>The research comes from Workera's assessment platform, which has tested over a million people on AI competency. Here's the pattern they keep seeing:</p>
+
+<p>Someone reports they're an 8 out of 10 at using AI. They get assessed. They're actually a 4. When they see the data—not a lecture, not a judgment, just the number—behavior changes. Because seeing your actual level creates urgency. The denial dissolves.</p>
+
+<div class="callout">
+  <div class="callout-title">The core problem</div>
+  <p>"People generally overestimate how good they are at AI, how much they know about AI. And that's a big problem because then they don't feel the need to learn." This creates a vicious cycle: confidence without competence means no investment in improvement. And the gap keeps growing.</p>
+</div>
+
+<p>What's the difference between someone who thinks they're competent and someone who actually is?</p>
+
+<p>Think about driving. Most people know how to operate a car. They push the accelerator, turn the wheel, hit the brake. But they don't know how the engine works. They can't diagnose a problem. They can't optimize performance.</p>
+
+<p>Same with AI. Right now, most professionals are "driving the car" — they can write a prompt to ChatGPT. But they don't understand the engine. They don't know what a large language model actually is. They've never heard of RAG or fine-tuning or how agents actually function. They couldn't have a conversation with their IT team about implementation options if they tried.</p>
+
+<div class="callout callout-blue">
+  <div class="callout-title">The gap manifests as three blind spots</div>
+  <p><strong>Awareness:</strong> Ask someone to name 10 products that use AI in their daily life. Most can name 3. They think AI is ChatGPT and maybe Copilot. They don't see it in Netflix recommendations, email spam filters, Google Maps, their phone's camera. If you can't identify where AI is, you can't leverage it. <strong>Tool usage:</strong> Most people treat AI as a search engine. "What is X?" That's Google. The real power is giving AI context—your documents, your data, your situation—and asking it to analyze or draft or think. It's a thinking partner, not a search engine. <strong>Action:</strong> Almost nobody understands that AI agents can take autonomous actions. They think AI is chat. But AI can read contracts, route information, send emails, execute workflows. That's where the productivity unlock lives.</p>
+</div>
+
+<h3>The 90-day reality check</h3>
+
+<p>The good news: you don't need months to shift the needle. The bad news: it requires genuine structure, not just "exposure to AI."</p>
+
+<p>Here's the framework that actually works—the 30-30-30 approach:</p>
+
+<table class="comparison-table">
+  <tr>
+    <th>Phase</th>
+    <th>The Work</th>
+    <th>The Outcome</th>
+  </tr>
+  <tr>
+    <td><strong>Days 1-30: Learn Foundations</strong></td>
+    <td>Understand what you're actually dealing with. Not how to use ChatGPT—how AI works. LLMs, transformers, capabilities, fine-tuning, RAG, agents. Vocabulary first. Code is optional. Concepts are mandatory.</td>
+    <td>You can talk to your IT team and CEO with shared language. You understand the constraints and possibilities, not just the hype.</td>
+  </tr>
+  <tr>
+    <td><strong>Days 31-60: Honest Assessment</strong></td>
+    <td>Take an assessment. Be honest about gaps. At Workera and other platforms, you'll see: "I thought I was an 8/10, I'm actually a 4." That's when behavior shifts.</td>
+    <td>No more denial. You know exactly where you are and where you need to be. Motivation follows clarity.</td>
+  </tr>
+  <tr>
+    <td><strong>Days 61-90: Build Habit</strong></td>
+    <td>5 minutes a day. Every single day. Read about AI. Try a new tool. Experiment. The compound effect over 30 days is massive.</td>
+    <td>Learning becomes a reflex. You're in the top 1% globally. Most people give up on day two.</td>
+  </tr>
+</table>
+
+<p>That's it. 90 days of structured effort puts you ahead of 99% of the professional world. Not because you're a genius. Because you're consistent and most people aren't.</p>
+
+<h3>Why 95% of AI agents fail (and how to avoid it)</h3>
+
+<p>The noise around AI agents is deafening. Everyone's promising autonomous systems that handle customer support, process documents, manage workflows. But in practice, 95% of implementations fail. Not because the technology is broken. Because organizations fail at implementation.</p>
+
+<p>Here are the five reasons agents crash:</p>
+
+<div class="pattern-grid">
+  <div class="pattern-card">
+    <h4>1. Scope Creep</h4>
+    <p>Starting too ambitious. "We want an agent that runs our entire customer support." Too big. Start with one small, repeatable process. Master it. Then expand.</p>
+  </div>
+  <div class="pattern-card">
+    <h4>2. Data Mess</h4>
+    <p>Your documents are scattered. Processes aren't documented. Systems don't talk to each other. Agents need clean inputs to produce clean outputs. Fix your data first.</p>
+  </div>
+  <div class="pattern-card">
+    <h4>3. No Human Oversight</h4>
+    <p>Companies remove humans entirely and wonder why the agent makes mistakes. Keep humans in the loop. Especially in the beginning. This isn't replacement. It's amplification.</p>
+  </div>
+  <div class="pattern-card">
+    <h4>4. Build vs. Buy Confusion</h4>
+    <p>Building custom agents from scratch is expensive and slow. Off-the-shelf agent platforms exist and work. Use them. Save engineering time for competitive advantage.</p>
+  </div>
+</div>
+
+<p>The fifth failure point deserves its own callout: most companies don't measure. They don't track whether the agent actually produces better results than the human process. You need metrics. "Is this 20% faster? 15% cheaper? Higher quality?" Without measurement, you're flying blind.</p>
+
+<div class="callout callout-amber">
+  <div class="callout-title">Real example: Workera's own agent implementation</div>
+  <p>When a new enterprise customer onboards, there are 15 manual steps. Check contract details. Approve. Set up the customer in the system. Generate onboarding emails. Create learning paths. Workera built an agent that handles about 80% automatically. A human still reviews key decisions. Result: time dropped from 2 days to 3 hours. Quality is actually more consistent. This is the template—not replacement, but massive efficiency gain with human judgment still intact.</p>
+</div>
+
+<h3>The skill that AI cannot replace: agency</h3>
+
+<p>In a world of increasingly powerful AI, what separates the people who thrive from those who get replaced?</p>
+
+<p>It's not technical skill. It's agency. The ability to identify a problem, figure out how to solve it, and execute. To take initiative without being told. To iterate and improve. AI can do a lot of things. It cannot want things. It cannot set goals. It cannot decide what matters. That's uniquely human.</p>
+
+<p>Here's the hard truth: if you're the kind of person who waits to be told what to do—who needs a manager to hand you tasks—AI actually replaces you faster. Because you're essentially doing what an AI agent could do. But if you have agency, if you can look at a situation, decide what to do, and get it done, AI amplifies your capabilities massively.</p>
+
+<p>The skills that die are purely execution. Input → process → output, no judgment required. AI does that better and faster. The skills that survive are judgment, creativity, relationship building, complex problem solving, ethical reasoning. These require understanding context and nuance. AI is bad at this.</p>
+
+<p>And there's a third category: new bridge skills. Prompt engineering, AI workflow design, knowing when to trust AI and when not to. These are the in-demand skills right now.</p>
+
+<h3>Why Gen Z isn't actually ahead (and universities are in trouble)</h3>
+
+<p>This breaks the narrative. You'd think digital natives would dominate AI. They're not.</p>
+
+<p>Gen Z is very good at consuming AI. Using ChatGPT. Generating content. But they're weak on fundamentals. They don't understand how AI works. They don't have the critical thinking to evaluate AI output. They trust it too much. And many lack the professional skills—writing, communication, project management—that you need to use AI effectively in a work context.</p>
+
+<p>They're fluent in the interface but illiterate in the concepts. When AI fails—and it does—they don't know why and they can't fix it. That's a problem.</p>
+
+<p>As for universities: the value is declining unless you're at a top-tier school where the brand, network, and peer group are the draw. The bundle is breaking apart. Content is becoming commoditized (most university lectures are less good than what's free online). The curriculum iteration cycle is too slow. By the time a university updates a program, the world has already moved on. We'll see more micro-credentials, more continuous learning, more on-the-job training. The degree becomes less important than what you can actually do.</p>
+
+<h3>Vibe coding hype vs. reality</h3>
+
+<p>There's an ongoing wave of hype around "vibe coding"—describe what you want in natural language, AI builds it. Powerful concept. Messy reality.</p>
+
+<p>Most vibe-coded products are demos, not products. The gap between "it works on my laptop" and "it works at scale with real users" is enormous. Real software requires reliability, security, performance, user experience, support. Engineering discipline. You cannot handwave these with prompts.</p>
+
+<p>Vibe coding is amazing for prototyping, for internal tools, for MVPs. But for products that compete in the market? You still need engineering. The bar is high. Calendly is actually powerful. Thousands of features. To replace Calendly, you'd need to build something significantly better. A weekend of vibe coding won't get you there.</p>
+
+<h3>Three moves for 2026 (and beyond)</h3>
+
+<p>If you're 25-40 years old, ambitious, and want to actually benefit from the AI shift, here's what to do:</p>
+
+<div class="use-case">
+  <strong>Move 1: Learn the foundations</strong>
+  <span>30 days. Understand LLMs, transformers, capabilities, fine-tuning, RAG, agents. Not code. Concepts. This is the baseline.</span>
+</div>
+
+<div class="use-case">
+  <strong>Move 2: Assess yourself honestly</strong>
+  <span>Take an assessment. See where you actually are vs. where you think you are. The gap itself becomes your roadmap.</span>
+</div>
+
+<div class="use-case">
+  <strong>Move 3: Build a daily learning habit</strong>
+  <span>5 minutes a day for 30 days. Read posts from people you trust. Try a new tool. Experiment. Most people quit on day two. Don't be most people.</span>
+</div>
+
+<p>If you focus for a day, you're in the top X% of the world. For a week non-stop, top 10%. For a month, top 1%. To get to top 0.1%, you need to maintain the habit longer. But that 0.1% exists. You could be there.</p>
+
+<h3>What this means for CEO strategy</h3>
+
+<p>If you're running operations, here's what to think about:</p>
+
+<p><strong>First, measure your company's AI literacy.</strong> Workera and others have tools. You can't improve what you don't measure. Many companies are in a state of false confidence—they think their team is competent, they're not.</p>
+
+<p><strong>Second, identify your biggest process bottlenecks.</strong> Where are you spending the most human hours on repetitive, rules-based work? That's where AI ROI is highest. Start there, not with the tasks you hope AI can do.</p>
+
+<p><strong>Third, invest in upskilling your existing people.</strong> The market for AI talent is extremely competitive and expensive. It's much more cost-effective to take your existing team and invest in their development.</p>
+
+<p>The data is clear: companies that invest in AI literacy and have a systematic approach to upskilling outperform. The ones that fail are those that buy Copilot licenses for everyone and think that's enough. That's like giving everyone a piano and expecting them to play Beethoven. You need training.</p>
+
+<div class="callout">
+  <div class="callout-title">The inequality risk</div>
+  <p>Here's what keeps experts up at night: companies and countries that have access to AI and invest in upskilling will thrive. Those that don't will fall behind. And that gap could become very dangerous. This isn't just about individual skills. It's about institutional capability and competitive advantage on a macro scale.</p>
+</div>
+
+<h2>The Bottom Line</h2>
+
+<p>2026 isn't the year AI replaces everyone. It's the year the gap between the competent and the delusional becomes undeniable.</p>
+
+<p>71% of professionals overestimate their AI skills. That's not a judgment. It's data. And it creates an opportunity. If you invest 90 days in real learning—not passive exposure, but structured work—you'll be ahead of 99% of the market. Most people won't. Most people will stay comfortable with false confidence.</p>
+
+<p>The question isn't whether AI will change your business. It's whether you'll be the one driving that change or reacting to it.</p>
+
+<!-- Download Banner (bottom) -->
+<div class="download-banner" style="margin-top: 48px;">
+  <div class="icon">📊</div>
+  <div class="text">
+    <h3>Get the Full Framework</h3>
+    <p>The 90-day upskilling plan, failure modes breakdown, and assessment framework (PDF, 892 KB)</p>
+  </div>
+  <a href="/downloads/ai-proficiency-gap-workera.pdf" class="download-btn" download>Download PDF</a>
+</div>
+
+<div class="cta-block">
+  <h3>Building AI-proficient teams?</h3>
+  <p>We help companies assess AI literacy, design upskilling programs, and implement AI agents that actually work—across law firms, consultancies, and knowledge-intensive businesses.</p>
+  <a href="/" class="cta-button">Talk to Analog AI</a>
+</div>
+
+<div class="article-footer">
+  <p><strong>Analog AI Pulse</strong> — Weekly intelligence on AI developments that actually matter for European businesses.</p>
+  <p style="margin-top: 8px;"><a href="/pulse">Browse all issues</a> · <a href="/">About Analog AI</a></p>
+  <p style="margin-top: 16px; font-size: 11px;">© 2026 Analog AI. Based on a conversation between Kian Katanforoosh (CEO, Workera; Stanford AI lecturer) and Anna Tur (Silicon Valley Girl), recorded at Davos, March 2026.</p>
+</div>
+
+</div>
+
+</body>
+<!-- Email Gate for PDF Downloads (v2) -->
+<style>
+  .email-gate-overlay { display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.4); backdrop-filter:blur(4px); align-items:center; justify-content:center; }
+  .email-gate-overlay.active { display:flex; }
+  .email-gate-box { background:#fff; border:1px solid #e7e5e4; border-radius:4px; max-width:420px; width:calc(100% - 32px); padding:32px; box-shadow:0 20px 60px rgba(0,0,0,0.15); }
+  .email-gate-box h3 { font-family:'Georgia',serif; font-size:18px; font-weight:600; margin:0 0 8px; color:#1a1a1a; }
+  .email-gate-box .subtitle { font-size:13px; color:#78716c; margin:0 0 20px; line-height:1.5; }
+  .email-gate-box input[type="email"] { width:100%; box-sizing:border-box; padding:12px 16px; font-size:14px; font-family:'SF Mono','Fira Code',monospace; border:1px solid #d6d3d1; border-radius:4px; outline:none; transition:border 0.2s; }
+  .email-gate-box input[type="email"]:focus { border-color:#a8a29e; }
+  .email-gate-box .gate-submit { width:100%; margin-top:12px; padding:12px; font-size:12px; font-family:'SF Mono','Fira Code',monospace; letter-spacing:0.08em; text-transform:uppercase; background:#1a1a1a; color:#fff; border:none; border-radius:4px; cursor:pointer; transition:background 0.2s; }
+  .email-gate-box .gate-submit:hover { background:#44403c; }
+  .email-gate-box .gate-submit:disabled { opacity:0.4; cursor:not-allowed; }
+  .email-gate-box .gate-close { display:block; width:100%; text-align:center; margin-top:16px; font-size:12px; font-family:'SF Mono','Fira Code',monospace; color:#a8a29e; background:none; border:none; cursor:pointer; }
+  .email-gate-box .gate-close:hover { color:#57534e; }
+  .email-gate-box .gate-fine { font-size:10px; font-family:'SF Mono','Fira Code',monospace; color:#a8a29e; margin-top:12px; text-align:center; }
+  .email-gate-box .gate-error { font-size:12px; color:#ef4444; font-family:'SF Mono','Fira Code',monospace; margin-top:8px; }
+</style>
+
+<div class="email-gate-overlay" id="emailGate">
+  <div class="email-gate-box">
+    <h3>Download PDF</h3>
+    <p class="subtitle">Enter your email to download. You'll also get the weekly Pulse digest — signal only, no noise.</p>
+    <form id="gateForm">
+      <input type="email" id="gateEmail" placeholder="your@email.com" required />
+      <button type="submit" class="gate-submit" id="gateBtn">Subscribe & Download</button>
+      <div class="gate-error" id="gateError" style="display:none;"></div>
+      <p class="gate-fine">Unsubscribe anytime. No spam, ever.</p>
+    </form>
+    <button class="gate-close" onclick="document.getElementById('emailGate').classList.remove('active')">Maybe later</button>
+  </div>
+</div>
+
+<script>
+(function() {
+  var STORAGE_KEY = 'pulse_subscriber_email';
+  var pendingUrl = null;
+  var SUPABASE_URL = null;
+  var SUPABASE_KEY = null;
+
+  try {
+    var metaUrl = document.querySelector('meta[name="supabase-url"]');
+    var metaKey = document.querySelector('meta[name="supabase-key"]');
+    if (metaUrl) SUPABASE_URL = metaUrl.content;
+    if (metaKey) SUPABASE_KEY = metaKey.content;
+  } catch(e) {}
+
+  function triggerDownload(url) {
+    if (!url) return;
+    var link = document.createElement('a');
+    link.href = url;
+    link.download = url.split('/').pop() || 'guide.pdf';
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    setTimeout(function() { document.body.removeChild(link); }, 200);
+  }
+
+  document.querySelectorAll('.download-btn, a[href$=".pdf"][download]').forEach(function(btn) {
+    var pdfHref = btn.getAttribute('href');
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      var stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        triggerDownload(pdfHref);
+        return;
+      }
+      pendingUrl = pdfHref;
+      document.getElementById('emailGate').classList.add('active');
+      document.getElementById('gateEmail').focus();
+    });
+  });
+
+  document.getElementById('emailGate').addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('active');
+  });
+
+  document.getElementById('gateForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var email = document.getElementById('gateEmail').value.trim().toLowerCase();
+    if (!email) return;
+
+    var btn = document.getElementById('gateBtn');
+    var errorEl = document.getElementById('gateError');
+    btn.disabled = true;
+    btn.textContent = 'Subscribing\u2026';
+    errorEl.style.display = 'none';
+
+    var savePromise = Promise.resolve();
+    if (SUPABASE_URL && SUPABASE_KEY) {
+      savePromise = fetch(SUPABASE_URL + '/rest/v1/subscribers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_KEY,
+          'Authorization': 'Bearer ' + SUPABASE_KEY,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ email: email, source: 'pdf-download' })
+      }).then(function(r) {
+        if (!r.ok && r.status !== 409) throw new Error('Failed');
+      }).catch(function() {});
+    }
+
+    savePromise.then(function() {
+      localStorage.setItem(STORAGE_KEY, email);
+      document.getElementById('emailGate').classList.remove('active');
+      btn.disabled = false;
+      btn.textContent = 'Subscribe & Download';
+      if (pendingUrl) {
+        setTimeout(function() { triggerDownload(pendingUrl); pendingUrl = null; }, 300);
+      }
+    }).catch(function() {
+      errorEl.textContent = 'Something went wrong. Try again.';
+      errorEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Subscribe & Download';
+    });
+  });
+})();
+</script>
+</html>

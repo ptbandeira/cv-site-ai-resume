@@ -23,6 +23,20 @@ interface Guide {
 
 const GUIDES: Guide[] = [
   {
+    slug: "ai-proficiency-gap-workera",
+    title: "71% of Professionals Overestimate Their AI Skills — Here's What That Means for Your Business",
+    subtitle: "AI Skills Guide",
+    description:
+      "Workera tested 22,000 professionals and found most can't accurately gauge their own AI proficiency. A Stanford AI lecturer breaks down the 90-day fix, why 95% of AI agents fail, and the one skill that actually survives automation.",
+    category: "AI Skills",
+    categoryColor: "blue",
+    readTime: "11 min read",
+    date: "March 2026",
+    image: "/images/guides/ai-proficiency-gap-workera.jpg",
+    htmlUrl: "/blog/ai-proficiency-gap-workera.html",
+    pdfUrl: "/downloads/ai-proficiency-gap-workera.pdf",
+  },
+  {
     slug: "anthropic-skills-guide-claude",
     title: "Anthropic's Skills Guide: What It Means for Your Business",
     subtitle: "AI Tools Guide",
@@ -67,6 +81,13 @@ const GUIDES: Guide[] = [
 ];
 
 const colorMap: Record<string, { border: string; bg: string; text: string; icon: string; hoverBg: string }> = {
+  blue: {
+    border: "border-blue-200",
+    bg: "bg-blue-50",
+    text: "text-blue-700",
+    icon: "text-blue-600 bg-blue-100",
+    hoverBg: "hover:border-blue-300",
+  },
   emerald: {
     border: "border-emerald-200",
     bg: "bg-emerald-50",
