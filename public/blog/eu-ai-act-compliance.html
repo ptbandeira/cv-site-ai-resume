@@ -376,7 +376,6 @@
   var SUPABASE_URL = null;
   var SUPABASE_KEY = null;
 
-  // Try to read Supabase config from meta tags or env
   try {
     var metaUrl = document.querySelector('meta[name="supabase-url"]');
     var metaKey = document.querySelector('meta[name="supabase-key"]');
@@ -385,24 +384,30 @@
   } catch(e) {}
 
   function triggerDownload(url) {
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = '';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    if (!url) return;
+    // Use window.open for reliable PDF download
+    var link = document.createElement('a');
+    link.href = url;
+    link.download = url.split('/').pop() || 'guide.pdf';
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    setTimeout(function() { document.body.removeChild(link); }, 200);
   }
 
-  // Intercept all download buttons
+  // Intercept ALL download buttons — always prevent default, handle download ourselves
   document.querySelectorAll('.download-btn, a[href$=".pdf"][download]').forEach(function(btn) {
+    var pdfHref = btn.getAttribute('href');
     btn.addEventListener('click', function(e) {
+      e.preventDefault(); // Always prevent — we handle the download
       var stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
-        // Already subscribed — allow download
+        // Already subscribed — download directly
+        triggerDownload(pdfHref);
         return;
       }
-      e.preventDefault();
-      pendingUrl = btn.href || btn.getAttribute('href');
+      // Not subscribed — show gate
+      pendingUrl = pdfHref;
       document.getElementById('emailGate').classList.add('active');
       document.getElementById('gateEmail').focus();
     });
@@ -422,10 +427,9 @@
     var btn = document.getElementById('gateBtn');
     var errorEl = document.getElementById('gateError');
     btn.disabled = true;
-    btn.textContent = 'Subscribing…';
+    btn.textContent = 'Subscribing\u2026';
     errorEl.style.display = 'none';
 
-    // Save to Supabase if configured
     var savePromise = Promise.resolve();
     if (SUPABASE_URL && SUPABASE_KEY) {
       savePromise = fetch(SUPABASE_URL + '/rest/v1/subscribers', {
@@ -438,10 +442,8 @@
         },
         body: JSON.stringify({ email: email, source: 'pdf-download' })
       }).then(function(r) {
-        if (!r.ok && r.status !== 409) throw new Error('Failed to save');
-      }).catch(function() {
-        // Silently continue — localStorage is the fallback
-      });
+        if (!r.ok && r.status !== 409) throw new Error('Failed');
+      }).catch(function() {});
     }
 
     savePromise.then(function() {
@@ -449,12 +451,10 @@
       document.getElementById('emailGate').classList.remove('active');
       btn.disabled = false;
       btn.textContent = 'Subscribe & Download';
-      // Trigger download
       if (pendingUrl) {
-        setTimeout(function() { triggerDownload(pendingUrl); }, 300);
-        pendingUrl = null;
+        setTimeout(function() { triggerDownload(pendingUrl); pendingUrl = null; }, 300);
       }
-    }).catch(function(err) {
+    }).catch(function() {
       errorEl.textContent = 'Something went wrong. Try again.';
       errorEl.style.display = 'block';
       btn.disabled = false;
