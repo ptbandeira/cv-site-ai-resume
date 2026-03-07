@@ -13,6 +13,7 @@ import HowIWork from "./pages/HowIWork";
 import MeetPage from "./pages/MeetPage";
 import Proof from "./pages/Proof";
 import Tools from "./pages/Tools";
+import Guides from "./pages/Guides";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +47,7 @@ const App = () => (
           <Route path="/tools" element={<Tools />} />
           <Route path="/pulse" element={<PulseIndex />} />
           <Route path="/pulse/:slug" element={<PulseDetail />} />
+          <Route path="/guides" element={<Guides />} />
           <Route path="/press" element={<PressKit />} />
           <Route path="/meet" element={<MeetPage />} />
           <Route path="/meet/:slug" element={<MeetPage />} />

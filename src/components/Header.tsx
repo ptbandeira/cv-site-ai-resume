@@ -116,6 +116,12 @@ const Header = ({ onOpenChat }: HeaderProps) => {
             Pulse
           </Link>
           <Link
+            to="/guides"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Guides
+          </Link>
+          <Link
             to="/how-i-work"
             className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
@@ -160,6 +166,13 @@ const Header = ({ onOpenChat }: HeaderProps) => {
               className="block w-full text-left font-medium text-muted-foreground hover:text-foreground"
             >
               Pulse
+            </Link>
+            <Link
+              to="/guides"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block w-full text-left font-medium text-muted-foreground hover:text-foreground"
+            >
+              Guides
             </Link>
             <Link
               to="/how-i-work"
