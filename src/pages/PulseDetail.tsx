@@ -113,10 +113,10 @@ export default function PulseDetail() {
       el.setAttribute(attr, value);
     }
 
-    // OG image — use article image if available, otherwise generate dynamically
+    // OG image — use article image
     const ogImageUrl = insight.image
       ? `${BASE}${insight.image}`
-      : `${BASE}/api/og?title=${encodeURIComponent(firstSentence(insight.noise, 200))}&category=${encodeURIComponent(normalizeCategory(insight.category))}&date=${encodeURIComponent(formatDate(insight))}`;
+      : `${BASE}/images/pulse/default-og.jpg`;
 
     setMeta('meta[name="description"]', "content", articleDesc);
     setMeta('meta[property="og:title"]', "content", articleTitle);

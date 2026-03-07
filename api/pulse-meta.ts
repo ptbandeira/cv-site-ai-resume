@@ -59,10 +59,10 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
   const description = firstSentence(item.translation, 155);
   const category = normalizeCategory(item.category);
 
-  // Use article image for OG if available, otherwise generate dynamically
+  // Use static article image
   const ogImage = item.image
     ? `${BASE}${item.image}`
-    : `${BASE}/api/og?title=${encodeURIComponent(firstSentence(item.noise, 200))}&category=${encodeURIComponent(category)}&date=${encodeURIComponent(item.date)}`;
+    : `${BASE}/images/pulse/default-og.jpg`;
 
   const html = `<!DOCTYPE html>
 <html lang="en">
