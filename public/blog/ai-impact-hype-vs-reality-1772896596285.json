@@ -1,0 +1,23 @@
+{
+  "id": "ai-impact-hype-vs-reality-1772896596285",
+  "slug": "ai-impact-hype-vs-reality-1772896596285",
+  "category": "SMB Operations",
+  "noise": "Anthropic, the company behind the Claude AI model, just published a significant paper introducing \"observed exposure,\" a new metric tracking how AI is *actually* being used in professional settings, not just its theoretical capabilities. Their data reveals AI is far from reaching its full potential in real-world applications.",
+  "translation": "For you, a European SMB owner, this cuts through a lot of the noise. It confirms what I've been saying: the immediate, widespread job displacement predicted by some AI evangelists isn't happening. The gap between what AI *can* do and what people *are actually using it for* is substantial. Your most experienced, highly-paid staff aren't being replaced tomorrow; their roles are evolving.",
+  "action": "My advice is direct: stop worrying about theoretical AI capabilities. Focus on the practical. Identify 2-3 repetitive, high-volume tasks within your operations – especially those handled by senior staff – and pilot a specific AI tool for *actual automation or augmentation*. I typically guide clients through a 4-week focused implementation to prove real-world ROI, not just potential.",
+  "date": "Mar 7, 2026",
+  "isoDate": "2026-03-07T15:16:36.285Z",
+  "keywords": [
+    "AI adoption",
+    "workforce planning",
+    "operational efficiency",
+    "observed exposure",
+    "strategic implementation"
+  ],
+  "sources": [
+    {
+      "label": "AI Impact Hype vs Reality",
+      "url": "https://www.anthropic.com/research/labor-market-impacts"
+    }
+  ]
+}

@@ -39,3 +39,4 @@ https://share.google/7fZJ3Hn3hwaIrbwVO
 https://arxiv.org/abs/2512.01797
 https://x.com/MilkRoadAI/status/2029695379642400891?s=20
 https://www.marktechpost.com/2026/03/05/openai-releases-symphony-an-open-source-agentic-framework-for-orchestrating-autonomous-ai-agents-through-structured-scalable-implementation-runs/
+https://www.anthropic.com/research/labor-market-impacts
