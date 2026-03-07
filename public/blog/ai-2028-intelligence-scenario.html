@@ -148,6 +148,16 @@
     By <strong>Pedro Bandeira</strong> · Analog AI · February 2026 · 11 min read
   </div>
 
+  <!-- Download Banner -->
+  <div style="background:linear-gradient(135deg,#334155,#475569);color:white;padding:28px 32px;border-radius:12px;margin-bottom:48px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+    <div style="font-size:32px;flex-shrink:0;">📄</div>
+    <div style="flex:1;min-width:200px;">
+      <h3 style="font-family:Arial,sans-serif;font-size:16px;font-weight:700;margin:0 0 4px;">Download This Scenario as PDF</h3>
+      <p style="font-size:13px;opacity:0.85;margin:0;">The 2028 Intelligence Scenario — full business translation, offline-ready (PDF)</p>
+    </div>
+    <a href="/downloads/ai-2028-intelligence-scenario.pdf" class="download-btn" download style="display:inline-block;background:white;color:#334155;font-family:Arial,sans-serif;font-weight:700;font-size:14px;padding:12px 28px;border-radius:6px;text-decoration:none;letter-spacing:0.5px;flex-shrink:0;">Download PDF</a>
+  </div>
+
   <p>In February 2026, Citrini Research — a financial research firm followed closely by institutional investors — published a scenario analysis that I haven't been able to stop thinking about. Not because it's doom-mongering. Because it's engineering.</p>
 
   <p>The piece is written as a fictional memo dated June 2028. It traces, step by step, how AI capability could transmit from "software disruption" through to "the US mortgage market faces a structural crisis." It names specific companies as examples. It models the feedback loops. It identifies exactly where the system has no natural brake.</p>
@@ -329,4 +339,130 @@
 
 </div>
 </body>
+<!-- Email Gate for PDF Downloads -->
+<style>
+  .email-gate-overlay { display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.4); backdrop-filter:blur(4px); align-items:center; justify-content:center; }
+  .email-gate-overlay.active { display:flex; }
+  .email-gate-box { background:#fff; border:1px solid #e7e5e4; border-radius:4px; max-width:420px; width:calc(100% - 32px); padding:32px; box-shadow:0 20px 60px rgba(0,0,0,0.15); }
+  .email-gate-box h3 { font-family:'Georgia',serif; font-size:18px; font-weight:600; margin:0 0 8px; color:#1a1a1a; }
+  .email-gate-box .subtitle { font-size:13px; color:#78716c; margin:0 0 20px; line-height:1.5; }
+  .email-gate-box input[type="email"] { width:100%; box-sizing:border-box; padding:12px 16px; font-size:14px; font-family:'SF Mono','Fira Code',monospace; border:1px solid #d6d3d1; border-radius:4px; outline:none; transition:border 0.2s; }
+  .email-gate-box input[type="email"]:focus { border-color:#a8a29e; }
+  .email-gate-box .gate-submit { width:100%; margin-top:12px; padding:12px; font-size:12px; font-family:'SF Mono','Fira Code',monospace; letter-spacing:0.08em; text-transform:uppercase; background:#1a1a1a; color:#fff; border:none; border-radius:4px; cursor:pointer; transition:background 0.2s; }
+  .email-gate-box .gate-submit:hover { background:#44403c; }
+  .email-gate-box .gate-submit:disabled { opacity:0.4; cursor:not-allowed; }
+  .email-gate-box .gate-close { display:block; width:100%; text-align:center; margin-top:16px; font-size:12px; font-family:'SF Mono','Fira Code',monospace; color:#a8a29e; background:none; border:none; cursor:pointer; }
+  .email-gate-box .gate-close:hover { color:#57534e; }
+  .email-gate-box .gate-fine { font-size:10px; font-family:'SF Mono','Fira Code',monospace; color:#a8a29e; margin-top:12px; text-align:center; }
+  .email-gate-box .gate-error { font-size:12px; color:#ef4444; font-family:'SF Mono','Fira Code',monospace; margin-top:8px; }
+</style>
+
+<div class="email-gate-overlay" id="emailGate">
+  <div class="email-gate-box">
+    <h3>Download PDF Guide</h3>
+    <p class="subtitle">Enter your email to download. You'll also get the weekly Pulse digest — signal only, no noise.</p>
+    <form id="gateForm">
+      <input type="email" id="gateEmail" placeholder="your@email.com" required />
+      <button type="submit" class="gate-submit" id="gateBtn">Subscribe & Download</button>
+      <div class="gate-error" id="gateError" style="display:none;"></div>
+      <p class="gate-fine">Unsubscribe anytime. No spam, ever.</p>
+    </form>
+    <button class="gate-close" onclick="document.getElementById('emailGate').classList.remove('active')">Maybe later</button>
+  </div>
+</div>
+
+<script>
+(function() {
+  var STORAGE_KEY = 'pulse_subscriber_email';
+  var pendingUrl = null;
+  var SUPABASE_URL = null;
+  var SUPABASE_KEY = null;
+
+  // Try to read Supabase config from meta tags or env
+  try {
+    var metaUrl = document.querySelector('meta[name="supabase-url"]');
+    var metaKey = document.querySelector('meta[name="supabase-key"]');
+    if (metaUrl) SUPABASE_URL = metaUrl.content;
+    if (metaKey) SUPABASE_KEY = metaKey.content;
+  } catch(e) {}
+
+  function triggerDownload(url) {
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = '';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  // Intercept all download buttons
+  document.querySelectorAll('.download-btn, a[href$=".pdf"][download]').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      var stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        // Already subscribed — allow download
+        return;
+      }
+      e.preventDefault();
+      pendingUrl = btn.href || btn.getAttribute('href');
+      document.getElementById('emailGate').classList.add('active');
+      document.getElementById('gateEmail').focus();
+    });
+  });
+
+  // Close on backdrop click
+  document.getElementById('emailGate').addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('active');
+  });
+
+  // Form submit
+  document.getElementById('gateForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var email = document.getElementById('gateEmail').value.trim().toLowerCase();
+    if (!email) return;
+
+    var btn = document.getElementById('gateBtn');
+    var errorEl = document.getElementById('gateError');
+    btn.disabled = true;
+    btn.textContent = 'Subscribing…';
+    errorEl.style.display = 'none';
+
+    // Save to Supabase if configured
+    var savePromise = Promise.resolve();
+    if (SUPABASE_URL && SUPABASE_KEY) {
+      savePromise = fetch(SUPABASE_URL + '/rest/v1/subscribers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_KEY,
+          'Authorization': 'Bearer ' + SUPABASE_KEY,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ email: email, source: 'pdf-download' })
+      }).then(function(r) {
+        if (!r.ok && r.status !== 409) throw new Error('Failed to save');
+      }).catch(function() {
+        // Silently continue — localStorage is the fallback
+      });
+    }
+
+    savePromise.then(function() {
+      localStorage.setItem(STORAGE_KEY, email);
+      document.getElementById('emailGate').classList.remove('active');
+      btn.disabled = false;
+      btn.textContent = 'Subscribe & Download';
+      // Trigger download
+      if (pendingUrl) {
+        setTimeout(function() { triggerDownload(pendingUrl); }, 300);
+        pendingUrl = null;
+      }
+    }).catch(function(err) {
+      errorEl.textContent = 'Something went wrong. Try again.';
+      errorEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Subscribe & Download';
+    });
+  });
+})();
+</script>
 </html>

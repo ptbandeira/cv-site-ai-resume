@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { ArrowRight, BookOpen, Download } from "lucide-react";
+import { ArrowRight, BookOpen, Download, FileText } from "lucide-react";
+import PdfDownloadGate from "@/components/PdfDownloadGate";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingAICTA from "@/components/FloatingAICTA";
@@ -223,81 +224,161 @@ export default function PulseIndex() {
             </p>
           </div>
 
-          {/* ── Deep Guides ── */}
-          <div className="mb-10">
-            <div className="flex items-center gap-3 mb-5">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
-                Deep Guides
-              </span>
-              <span className="flex-1 h-px bg-stone-100" />
-              <span className="text-[10px] font-mono text-stone-400">
-                Long-form analysis
-              </span>
+          {/* ── Deep Guides (visually separated from signal feed) ── */}
+          <section className="mb-16 border border-stone-200 rounded-sm bg-white overflow-hidden">
+            {/* Section header */}
+            <div className="px-6 py-4 border-b border-stone-100 bg-stone-50/40">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-sm bg-foreground flex items-center justify-center">
+                    <FileText className="w-4 h-4 text-background" />
+                  </div>
+                  <div>
+                    <h2 className="text-xs font-mono uppercase tracking-widest text-foreground font-medium">
+                      Deep Guides
+                    </h2>
+                    <p className="text-[10px] font-mono text-muted-foreground mt-0.5">
+                      Long-form analysis · downloadable PDFs
+                    </p>
+                  </div>
+                </div>
+                <span className="text-[9px] font-mono uppercase tracking-widest text-stone-400 border border-stone-200 rounded-sm px-2 py-1">
+                  3 Guides
+                </span>
+              </div>
             </div>
-          </div>
-          <div className="flex flex-col gap-3 mb-10">
-            <a
-              href="/blog/anthropic-skills-guide-claude.html"
-              className="group flex items-start gap-4 border border-emerald-200 bg-emerald-50/60 hover:bg-emerald-50 rounded-sm p-5 transition-all duration-200 hover:border-emerald-300 hover:shadow-sm"
-            >
-              <div className="flex-shrink-0 w-9 h-9 rounded-sm bg-emerald-100 flex items-center justify-center group-hover:bg-emerald-200 transition-colors">
-                <BookOpen className="w-4 h-4 text-emerald-600" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <span className="text-[9px] font-mono uppercase tracking-widest text-emerald-600 mb-1 block">
-                  AI Tools Guide
-                </span>
-                <p className="font-serif text-base font-medium text-foreground leading-snug mb-1 group-hover:text-emerald-700 transition-colors">
-                  Anthropic's Skills Guide: What It Means for Your Business
-                </p>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  They released a 29-page blueprint for turning Claude into a specialized ops tool. Here's the business translation — plus the downloadable PDF.
-                </p>
-              </div>
-              <ArrowRight className="flex-shrink-0 w-4 h-4 text-emerald-400 group-hover:translate-x-1 transition-transform mt-1" />
-            </a>
 
-            <a
-              href="/blog/eu-ai-act-compliance.html"
-              className="group flex items-start gap-4 border border-amber-200 bg-amber-50/60 hover:bg-amber-50 rounded-sm p-5 transition-all duration-200 hover:border-amber-300 hover:shadow-sm"
-            >
-              <div className="flex-shrink-0 w-9 h-9 rounded-sm bg-amber-100 flex items-center justify-center group-hover:bg-amber-200 transition-colors">
-                <BookOpen className="w-4 h-4 text-amber-600" />
+            {/* Guide cards */}
+            <div className="divide-y divide-stone-100">
+              {/* Guide 1: Anthropic Skills */}
+              <div className="p-6 hover:bg-stone-50/40 transition-colors">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-sm bg-emerald-100 flex items-center justify-center">
+                    <BookOpen className="w-5 h-5 text-emerald-600" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-[9px] font-mono uppercase tracking-widest text-emerald-600 mb-1 block">
+                      AI Tools Guide
+                    </span>
+                    <a
+                      href="/blog/anthropic-skills-guide-claude.html"
+                      className="group"
+                    >
+                      <p className="font-serif text-lg font-medium text-foreground leading-snug mb-1.5 group-hover:text-emerald-700 transition-colors">
+                        Anthropic's Skills Guide: What It Means for Your Business
+                      </p>
+                    </a>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                      They released a 29-page blueprint for turning Claude into a specialized ops tool. Here's the business translation.
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <a
+                        href="/blog/anthropic-skills-guide-claude.html"
+                        className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        Read article
+                        <ArrowRight className="w-3 h-3" />
+                      </a>
+                      <span className="text-stone-200">|</span>
+                      <PdfDownloadGate
+                        pdfUrl="/downloads/anthropic-skills-guide-claude.pdf"
+                        title="Anthropic Skills Guide"
+                        variant="button"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="flex-1 min-w-0">
-                <span className="text-[9px] font-mono uppercase tracking-widest text-amber-600 mb-1 block">
-                  Featured Guide
-                </span>
-                <p className="font-serif text-base font-medium text-foreground leading-snug mb-1 group-hover:text-amber-700 transition-colors">
-                  EU AI Act Compliance for SMBs
-                </p>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  What's actually required by August 2026, for mid-market operators.
-                </p>
-              </div>
-              <ArrowRight className="flex-shrink-0 w-4 h-4 text-amber-400 group-hover:translate-x-1 transition-transform mt-1" />
-            </a>
 
-            <a
-              href="/blog/ai-2028-intelligence-scenario.html"
-              className="group flex items-start gap-4 border border-slate-200 bg-slate-50/60 hover:bg-slate-50 rounded-sm p-5 transition-all duration-200 hover:border-slate-300 hover:shadow-sm"
-            >
-              <div className="flex-shrink-0 w-9 h-9 rounded-sm bg-slate-100 flex items-center justify-center group-hover:bg-slate-200 transition-colors">
-                <BookOpen className="w-4 h-4 text-slate-600" />
+              {/* Guide 2: EU AI Act */}
+              <div className="p-6 hover:bg-stone-50/40 transition-colors">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-sm bg-amber-100 flex items-center justify-center">
+                    <BookOpen className="w-5 h-5 text-amber-600" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-[9px] font-mono uppercase tracking-widest text-amber-600 mb-1 block">
+                      Compliance Guide
+                    </span>
+                    <a
+                      href="/blog/eu-ai-act-compliance.html"
+                      className="group"
+                    >
+                      <p className="font-serif text-lg font-medium text-foreground leading-snug mb-1.5 group-hover:text-amber-700 transition-colors">
+                        EU AI Act Compliance for SMBs
+                      </p>
+                    </a>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                      What's actually required by August 2026, for mid-market operators.
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <a
+                        href="/blog/eu-ai-act-compliance.html"
+                        className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        Read article
+                        <ArrowRight className="w-3 h-3" />
+                      </a>
+                      <span className="text-stone-200">|</span>
+                      <PdfDownloadGate
+                        pdfUrl="/downloads/eu-ai-act-compliance.pdf"
+                        title="EU AI Act Compliance Guide"
+                        variant="button"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="flex-1 min-w-0">
-                <span className="text-[9px] font-mono uppercase tracking-widest text-slate-500 mb-1 block">
-                  Scenario Analysis
-                </span>
-                <p className="font-serif text-base font-medium text-foreground leading-snug mb-1 group-hover:text-slate-700 transition-colors">
-                  The 2028 Intelligence Scenario: A Business Translation
-                </p>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  What happens if AI capability outpaces institutional adaptation — and which businesses survive.
-                </p>
+
+              {/* Guide 3: 2028 Scenario */}
+              <div className="p-6 hover:bg-stone-50/40 transition-colors">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-sm bg-slate-100 flex items-center justify-center">
+                    <BookOpen className="w-5 h-5 text-slate-600" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-[9px] font-mono uppercase tracking-widest text-slate-500 mb-1 block">
+                      Scenario Analysis
+                    </span>
+                    <a
+                      href="/blog/ai-2028-intelligence-scenario.html"
+                      className="group"
+                    >
+                      <p className="font-serif text-lg font-medium text-foreground leading-snug mb-1.5 group-hover:text-slate-700 transition-colors">
+                        The 2028 Intelligence Scenario: A Business Translation
+                      </p>
+                    </a>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                      What happens if AI capability outpaces institutional adaptation — and which businesses survive.
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <a
+                        href="/blog/ai-2028-intelligence-scenario.html"
+                        className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        Read article
+                        <ArrowRight className="w-3 h-3" />
+                      </a>
+                      <span className="text-stone-200">|</span>
+                      <PdfDownloadGate
+                        pdfUrl="/downloads/ai-2028-intelligence-scenario.pdf"
+                        title="2028 Intelligence Scenario"
+                        variant="button"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
-              <ArrowRight className="flex-shrink-0 w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform mt-1" />
-            </a>
+            </div>
+          </section>
+
+          {/* ── Visual separator between articles and signal feed ── */}
+          <div className="mb-10 flex items-center gap-4">
+            <span className="flex-1 h-px bg-stone-200" />
+            <span className="text-[9px] font-mono uppercase tracking-widest text-stone-400 px-2">
+              Signal Feed
+            </span>
+            <span className="flex-1 h-px bg-stone-200" />
           </div>
 
           {/* ── Category filter ── */}
