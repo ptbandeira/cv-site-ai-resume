@@ -151,7 +151,7 @@ async function fetchArticle(url: string): Promise<string> {
 async function callGemini(prompt: string): Promise<string> {
   await sleep(5000); // Rate-limit guard
   const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -169,7 +169,7 @@ async function callGemini(prompt: string): Promise<string> {
     console.log(`   ⏳ 429: ${msg}. Waiting ${waitSecs}s then retrying...`);
     await sleep(waitSecs * 1000);
     const res2 = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`,
       { method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.7, maxOutputTokens: 4096 } }) }
     );
