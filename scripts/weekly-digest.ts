@@ -76,7 +76,7 @@ function getDateRange(items: PulseItem[]): string {
 
 async function callGemini(prompt: string): Promise<string> {
   const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -85,17 +85,17 @@ async function callGemini(prompt: string): Promise<string> {
         generationConfig: {
           temperature: 0.7,
           maxOutputTokens: 800,
-          responseMimeType: 'application/json',
-          thinkingConfig: { thinkingBudget: 0 },
         },
       }),
     }
   );
-  if (!res.ok) throw new Error(`Gemini API error: ${res.status} ${await res.text()}`);
+  if (!res.ok) {
+    const errBody = await res.text();
+    throw new Error(`Gemini API error: ${res.status} ${errBody}`);
+  }
   const data = await res.json();
-  // Filter out thinking parts (gemini-2.5-flash thinking mode) — get only non-thought parts
   const parts = data.candidates?.[0]?.content?.parts ?? [];
-  const text = parts.filter((p: any) => !p.thought).map((p: any) => p.text ?? '').join('') || parts.map((p: any) => p.text ?? '').join('');
+  const text = parts.map((p: any) => p.text ?? '').join('');
   if (!text) {
     const finishReason = data.candidates?.[0]?.finishReason ?? 'unknown';
     throw new Error(`Gemini returned empty response. finishReason: ${finishReason}`);
@@ -130,9 +130,19 @@ Pedro's voice examples:
 - No fluff. No "exciting developments". No "landscape is evolving".`;
 
   const text = await callGemini(prompt);
-  const jsonMatch = text.match(/\{[\s\S]*\}/);
-  if (!jsonMatch) throw new Error('Gemini returned non-JSON response for digest');
-  return JSON.parse(jsonMatch[0]);
+  // Try to extract JSON — Gemini may wrap it in markdown fences
+  const cleaned = text.replace(/```json?\n?/g, '').replace(/```\n?/g, '').trim();
+  const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
+  if (!jsonMatch) {
+    console.error('Gemini raw response:', text.slice(0, 500));
+    throw new Error('Gemini returned non-JSON response for digest');
+  }
+  try {
+    return JSON.parse(jsonMatch[0]);
+  } catch (parseErr) {
+    console.error('JSON parse failed. Extracted:', jsonMatch[0].slice(0, 300));
+    throw new Error(`Failed to parse Gemini JSON: ${parseErr}`);
+  }
 }
 
 // ─── Build HTML email ────────────────────────────────────────────────────────

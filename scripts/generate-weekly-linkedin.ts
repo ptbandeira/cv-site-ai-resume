@@ -46,7 +46,7 @@ interface PulseItem {
 
 async function callGemini(prompt: string): Promise<string> {
   const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -55,7 +55,6 @@ async function callGemini(prompt: string): Promise<string> {
         generationConfig: {
           temperature: 0.7,
           maxOutputTokens: 2000,
-          thinkingConfig: { thinkingBudget: 0 },
         },
       }),
     }
@@ -63,8 +62,7 @@ async function callGemini(prompt: string): Promise<string> {
   if (!res.ok) throw new Error(`Gemini API error: ${res.status} ${await res.text()}`);
   const data = await res.json();
   const parts = data.candidates?.[0]?.content?.parts ?? [];
-  const text = parts.filter((p: any) => !p.thought).map((p: any) => p.text ?? '').join('')
-               || parts.map((p: any) => p.text ?? '').join('');
+  const text = parts.map((p: any) => p.text ?? '').join('');
   if (!text) throw new Error(`Gemini returned empty. finishReason: ${data.candidates?.[0]?.finishReason}`);
   return text;
 }

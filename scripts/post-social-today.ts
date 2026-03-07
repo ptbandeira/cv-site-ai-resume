@@ -82,26 +82,27 @@ async function postToLinkedIn(text: string): Promise<void> {
     return;
   }
 
+  // New Posts API (replaces deprecated /v2/ugcPosts)
   const body = {
     author: LI_AUTHOR,
+    commentary: text,
+    visibility: 'PUBLIC',
+    distribution: {
+      feedDistribution: 'MAIN_FEED',
+      targetEntities: [],
+      thirdPartyDistributionChannels: [],
+    },
     lifecycleState: 'PUBLISHED',
-    specificContent: {
-      'com.linkedin.ugc.ShareContent': {
-        shareCommentary: { text },
-        shareMediaCategory: 'NONE',
-      },
-    },
-    visibility: {
-      'com.linkedin.ugc.MemberNetworkVisibility': 'PUBLIC',
-    },
+    isReshareDisabledByAuthor: false,
   };
 
-  const res = await fetch('https://api.linkedin.com/v2/ugcPosts', {
+  const res = await fetch('https://api.linkedin.com/rest/posts', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${LI_TOKEN}`,
       'Content-Type': 'application/json',
       'X-Restli-Protocol-Version': '2.0.0',
+      'LinkedIn-Version': '202602',
     },
     body: JSON.stringify(body),
   });
@@ -111,8 +112,9 @@ async function postToLinkedIn(text: string): Promise<void> {
     throw new Error(`LinkedIn API ${res.status}: ${err}`);
   }
 
-  const data = await res.json();
-  console.log(`   ✅ LinkedIn posted — ID: ${data.id}`);
+  // 201 response, post ID in x-restli-id header
+  const postId = res.headers.get('x-restli-id') || 'created';
+  console.log(`   ✅ LinkedIn posted — ID: ${postId}`);
 }
 
 // ─── Facebook ─────────────────────────────────────────────────────────────────
