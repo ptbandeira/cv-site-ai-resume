@@ -1,0 +1,27 @@
+{
+  "id": "pharma-sme-ai-1772871785829",
+  "slug": "pharma-sme-ai-1772871785829",
+  "category": "Pharma AI",
+  "noise": "The European Medicines Agency (EMA) and national regulators have released joint guidance clarifying AI Act compliance for clinical trial data processing, emphasizing strict data governance requirements for all AI deployments in pharma, especially for SMEs.",
+  "translation": "For smaller European CROs and biotechs, this means cloud-first AI strategies with US providers are now a non-starter for sensitive data. The 'experiment first, regulate later' era is over. Your AI tools must keep data within EU borders, ideally on-premise or sovereign cloud, to meet the August 2026 deadline. No more sending client data to US servers without serious legal risk.",
+  "action": "I can assess your current AI/data infrastructure against the new EMA guidance. We'll identify compliance gaps and outline a pragmatic local-first AI roadmap, often starting with your existing Microsoft 365 Copilot licenses, in 1-3 weeks. Don't wait until summer.",
+  "date": "Mar 7, 2026",
+  "isoDate": "2026-03-07T08:23:05.829Z",
+  "keywords": [
+    "pharma SME AI",
+    "biotech startup AI compliance",
+    "CRO artificial intelligence",
+    "small pharma AI",
+    "clinical trial AI automation",
+    "pharma GDPR AI",
+    "pharma data privacy AI",
+    "life sciences SMB AI",
+    "regulatory affairs AI pharma"
+  ],
+  "sources": [
+    {
+      "label": "Pharma AI",
+      "url": "https://www.ema.europa.eu/en/documents/guideline/guidance-ai-clinical-trials-data-governance-2026-02.pdf"
+    }
+  ]
+}
