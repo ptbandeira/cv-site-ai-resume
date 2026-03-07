@@ -76,12 +76,17 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
   <meta property="og:url" content="${articleUrl}" />
   <meta property="og:image" content="${esc(ogImage)}" />
   <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
+  <meta property="og:image:height" content="675" />
+  <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:site_name" content="Analog AI — The Pulse" />
+  <meta property="article:section" content="${esc(category)}" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@abandeirado" />
+  <meta name="twitter:creator" content="@abandeirado" />
   <meta name="twitter:title" content="${esc(title)}" />
   <meta name="twitter:description" content="${esc(description)}" />
   <meta name="twitter:image" content="${esc(ogImage)}" />
+  <meta name="twitter:image:alt" content="${esc(category)} — Analog AI Pulse" />
   <link rel="canonical" href="${articleUrl}" />
   <meta http-equiv="refresh" content="0;url=${articleUrl}" />
 </head>
