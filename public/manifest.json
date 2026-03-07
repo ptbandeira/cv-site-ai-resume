@@ -23,7 +23,8 @@
           "label": "AI Impact Hype vs Reality",
           "url": "https://www.anthropic.com/research/labor-market-impacts"
         }
-      ]
+      ],
+      "image": "/images/pulse/ai-impact-hype-vs-reality-1772896596285.jpg"
     },
     {
       "id": "pharma-sme-ai-1772871785829",
@@ -50,7 +51,8 @@
           "label": "Pharma AI",
           "url": "https://www.ema.europa.eu/en/documents/guideline/guidance-ai-clinical-trials-data-governance-2026-02.pdf"
         }
-      ]
+      ],
+      "image": "/images/pulse/pharma-sme-ai-1772871785829.jpg"
     },
     {
       "id": "autonomous-ai-agents-beyond-code-1772822090501",

@@ -1,12 +1,23 @@
 {
     "rewrites": [
         {
+            "source": "/pulse",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "user-agent",
+                    "value": ".*(facebookexternalhit|Facebot|LinkedInBot|Twitterbot|WhatsApp|Slackbot|TelegramBot|Discordbot|Googlebot|bingbot|Applebot|DuckDuckBot|YandexBot).*"
+                }
+            ],
+            "destination": "/api/pulse-listing-meta"
+        },
+        {
             "source": "/pulse/:slug",
             "has": [
                 {
                     "type": "header",
                     "key": "user-agent",
-                    "value": ".*(facebookexternalhit|Facebot|LinkedInBot|Twitterbot|WhatsApp|Slackbot|TelegramBot|Discordbot|Googlebot|bingbot).*"
+                    "value": ".*(facebookexternalhit|Facebot|LinkedInBot|Twitterbot|WhatsApp|Slackbot|TelegramBot|Discordbot|Googlebot|bingbot|Applebot|DuckDuckBot|YandexBot).*"
                 }
             ],
             "destination": "/api/pulse-meta?slug=:slug"
