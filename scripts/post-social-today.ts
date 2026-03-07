@@ -74,12 +74,22 @@ function resolveDay(arg?: string): string | null {
   return dayNames[new Date().getDay()];
 }
 
+// ─── Auth error detection ─────────────────────────────────────────────────────
+
+const AUTH_ERROR_CODES = [401, 403];
+
+function isAuthError(status: number, body: string): boolean {
+  if (AUTH_ERROR_CODES.includes(status)) return true;
+  const lower = body.toLowerCase();
+  return lower.includes('revoked') || lower.includes('expired') || lower.includes('invalid_token');
+}
+
 // ─── LinkedIn ─────────────────────────────────────────────────────────────────
 
-async function postToLinkedIn(text: string): Promise<void> {
+async function postToLinkedIn(text: string): Promise<'posted' | 'skipped' | 'auth_error'> {
   if (!LI_TOKEN || !LI_AUTHOR) {
     console.log('   ⚠️  LinkedIn: no token/author — skipping');
-    return;
+    return 'skipped';
   }
 
   // New Posts API (replaces deprecated /v2/ugcPosts)
@@ -109,20 +119,26 @@ async function postToLinkedIn(text: string): Promise<void> {
 
   if (!res.ok) {
     const err = await res.text();
+    if (isAuthError(res.status, err)) {
+      console.warn(`   ⚠️  LinkedIn auth error (${res.status}) — token may be expired/revoked. Skipping.`);
+      console.warn(`      → Re-authenticate at https://linkedin.com/developers and update LINKEDIN_ACCESS_TOKEN secret`);
+      return 'auth_error';
+    }
     throw new Error(`LinkedIn API ${res.status}: ${err}`);
   }
 
   // 201 response, post ID in x-restli-id header
   const postId = res.headers.get('x-restli-id') || 'created';
   console.log(`   ✅ LinkedIn posted — ID: ${postId}`);
+  return 'posted';
 }
 
 // ─── Facebook ─────────────────────────────────────────────────────────────────
 
-async function postToFacebook(text: string): Promise<void> {
+async function postToFacebook(text: string): Promise<'posted' | 'skipped' | 'auth_error'> {
   if (!FB_TOKEN || !FB_PAGE_ID) {
     console.log('   ⚠️  Facebook: no token/page-id — skipping');
-    return;
+    return 'skipped';
   }
 
   const url = `https://graph.facebook.com/v21.0/${FB_PAGE_ID}/feed`;
@@ -134,11 +150,17 @@ async function postToFacebook(text: string): Promise<void> {
 
   if (!res.ok) {
     const err = await res.text();
+    if (isAuthError(res.status, err)) {
+      console.warn(`   ⚠️  Facebook auth error (${res.status}) — token may be expired/revoked. Skipping.`);
+      console.warn(`      → Regenerate token at https://developers.facebook.com and update FACEBOOK_PAGE_ACCESS_TOKEN secret`);
+      return 'auth_error';
+    }
     throw new Error(`Facebook API ${res.status}: ${err}`);
   }
 
   const data = await res.json();
   console.log(`   ✅ Facebook posted — ID: ${data.id}`);
+  return 'posted';
 }
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
@@ -174,6 +196,8 @@ async function main() {
   console.log(`   Found ${todaysPosts.length} posts for ${targetDay}:\n`);
 
   let posted = 0;
+  let skipped = 0;
+  let authErrors = 0;
   let failed = 0;
 
   for (const post of todaysPosts) {
@@ -181,12 +205,19 @@ async function main() {
     console.log(`   Preview: ${post.text.slice(0, 80)}...`);
 
     try {
+      let result: 'posted' | 'skipped' | 'auth_error';
       if (post.platform === 'linkedin') {
-        await postToLinkedIn(post.text);
+        result = await postToLinkedIn(post.text);
       } else if (post.platform === 'facebook') {
-        await postToFacebook(post.text);
+        result = await postToFacebook(post.text);
+      } else {
+        console.warn(`   ⚠️  Unknown platform: ${post.platform} — skipping`);
+        result = 'skipped';
       }
-      posted++;
+
+      if (result === 'posted') posted++;
+      else if (result === 'auth_error') authErrors++;
+      else skipped++;
     } catch (err: any) {
       console.error(`   ❌ ${err.message}`);
       failed++;
@@ -196,7 +227,14 @@ async function main() {
     await new Promise(r => setTimeout(r, 1000));
   }
 
-  console.log(`\n🎯 Done — ${posted} posted, ${failed} failed.`);
+  console.log(`\n🎯 Done — ${posted} posted, ${skipped} skipped, ${authErrors} auth errors, ${failed} failed.`);
+
+  if (authErrors > 0) {
+    console.warn('\n⚠️  Some posts were skipped due to expired/revoked tokens.');
+    console.warn('   Update your API tokens in GitHub repository secrets to resume posting.');
+  }
+
+  // Only exit(1) on real failures (code bugs, network errors) — NOT auth issues
   if (failed > 0) process.exit(1);
 }
 
