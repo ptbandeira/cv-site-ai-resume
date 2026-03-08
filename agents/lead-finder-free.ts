@@ -163,10 +163,10 @@ async function fetchHackerNews(): Promise<RawArticle[]> {
   const articles: RawArticle[] = [];
   try {
     const queries = [
-      'small law firm AI',
-      'accounting firm automation',
-      'professional services AI implementation',
-      'small business AI struggling',
+      'law firm AI implementation challenges',
+      'accounting firm document automation workflow',
+      'legal tech adoption small firms',
+      'professional services AI overwhelmed manual',
     ];
     const since = Math.floor(Date.now() / 1000) - 7 * 24 * 3600;
 
@@ -228,42 +228,44 @@ async function qualifyLeadsWithGemini(articles: RawArticle[]): Promise<GeminiLea
 His ICP (Ideal Customer Profile):
 - Small/boutique law firms, accounting practices, insurance brokerages
 - 1-50 employees, traditional operations, NOT tech-forward
-- Based in Europe (priority: Portugal, Spain, Poland, UK)
+- Based in Europe (priority: Portugal, Spain, Poland, UK; also France, Germany, Italy)
 - Firms that are BEHIND their competitors on technology adoption
-- Firms expressing pain: overwhelmed, losing clients, manual processes
+- Firms expressing pain: overwhelmed, losing clients, manual processes, compliance burden
 
-What Pedro does NOT want:
-- Big Law (100+ lawyers), Big 4 accounting, Fortune 500
-- VC-funded startups, AI tool companies, SaaS vendors
-- Pure media/opinion articles with no company mentioned
-- General "AI is changing everything" articles with no specific firm
+What to EXCLUDE (truly irrelevant):
+- Big Law (Linklaters, Clifford Chance, Allen & Overy, etc.), Big 4 (Deloitte, PwC, KPMG, EY)
+- Fortune 500 companies, VC-funded tech startups, AI tool vendors selling to firms
+- Pure product launches by tech companies (not stories ABOUT firms using/struggling with tech)
+- Articles with zero connection to professional services
 
 HEADLINES TO ANALYZE:
 ${headlineList}
 
 For EACH headline, determine:
-1. Does it mention or reference a SPECIFIC small/mid firm that matches Pedro's ICP?
-2. Or is it a SECTOR SIGNAL (e.g., "law firms are adopting AI") that Pedro can use to reach out to similar firms in that market?
-3. Or is it IRRELEVANT (big tech, general news, not actionable)?
+1. HOT: Mentions a SPECIFIC named small/mid firm with a clear pain signal (struggling, manual process, behind competitors, seeking AI help, compliance challenge). Extract the actual company name.
+2. SECTOR_SIGNAL: Describes a TREND affecting a whole sector Pedro targets (e.g. "EU law firms slow on AI", "Polish accounting firms facing digitisation deadline"). Pedro uses these as cold-outreach triggers — they are VALUABLE, include them generously.
+3. IRRELEVANT: About Big Law, Big Tech, VC startups, or has zero professional-services connection. SKIP these only.
 
-OUTPUT FORMAT — JSON array, one object per RELEVANT headline only (skip irrelevant ones):
+KEY INSIGHT: A SECTOR_SIGNAL about "law firms in Poland struggling with EU AI Act" = Pedro can reach out to any Polish kancelaria tomorrow. Include ALL sector signals from Pedro's markets — they are actionable.
+
+OUTPUT FORMAT — JSON array, one object per relevant headline (HOT or SECTOR_SIGNAL), skip only truly irrelevant ones:
 [
   {
     "headline_index": 0,
     "company_name": "Smith & Associates" or "SECTOR_SIGNAL",
     "industry": "legal" or "finance" or "healthcare" or "other",
     "priority": "hot" or "warm" or "cold",
-    "why_actionable": "Small Portuguese law firm mentioned as struggling with client management",
-    "outreach_angle": "Pedro could offer AI workflow audit, referencing their public pain point"
+    "why_actionable": "One sentence on why this matters for Pedro",
+    "outreach_angle": "Specific angle Pedro could use in a cold email or LinkedIn message"
   }
 ]
 
 PRIORITY RULES:
-- HOT: Specific company name + clear pain signal (struggling, behind, seeking help, hiring for AI)
-- WARM: Sector signal in Pedro's market (sector adopting AI → reach out to the ones NOT mentioned)
-- COLD: Tangentially relevant, needs more research
+- HOT: Specific named firm + clear pain or intent signal (struggling, behind, seeking help, hiring for AI, compliance deadline)
+- WARM: Sector signal in Pedro's markets (EU, PL, PT, ES, UK, FR, DE, IT) — always WARM, never cold
+- COLD: Tangentially relevant sector signal outside Pedro's primary markets
 
-Be aggressive about filtering — Pedro gets 20+ headlines/day. Only surface the ones worth his 30 seconds of attention.
+Lean toward INCLUSION over exclusion — a false positive (Pedro ignores it in 5 seconds) costs nothing; a false negative (missed hot lead) costs real money.
 Output ONLY valid JSON. No explanation text.`;
 
     try {
@@ -363,8 +365,9 @@ function buildLeads(articles: RawArticle[], geminiResults: GeminiLeadResult[]): 
     const article = articles[idx];
 
     const isSectorSignal = result.company_name === 'SECTOR_SIGNAL';
+    // Clean, scannable format: "📡 Poland · Legal" + short outreach angle
     const companyName = isSectorSignal
-      ? `📡 [${article.market}] ${result.why_actionable.slice(0, 60)}`
+      ? `📡 ${article.market} · ${result.industry} — ${result.outreach_angle.slice(0, 55)}`
       : result.company_name;
 
     const priority = (['hot', 'warm', 'cold'] as const).includes(result.priority as any)

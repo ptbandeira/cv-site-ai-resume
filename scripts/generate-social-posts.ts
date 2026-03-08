@@ -284,12 +284,21 @@ async function main() {
 
   console.log(`📰 Loaded ${items.length} articles from manifest.`);
 
+  // Sort newest-first BEFORE any filtering or fallback slicing.
+  // Critical: manifest.json accumulates ALL historical items. Without sorting,
+  // items.slice(0, 5) can return content from years ago if manifest isn't ordered.
+  const sortedItems = [...items].sort(
+    (a, b) =>
+      new Date(b.isoDate ?? b.date).getTime() -
+      new Date(a.isoDate ?? a.date).getTime()
+  );
+
   // Get this week's items (last 7 days), fall back to most recent 5
   const oneWeekAgo = new Date();
   oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-  const weekItems = items.filter(i => new Date(i.isoDate ?? i.date) >= oneWeekAgo);
-  const sourceItems = weekItems.length >= 2 ? weekItems : items.slice(0, 5);
-  const spotlightItem = sourceItems[0]; // Most recent article for spotlight
+  const weekItems = sortedItems.filter(i => new Date(i.isoDate ?? i.date) >= oneWeekAgo);
+  const sourceItems = weekItems.length >= 2 ? weekItems : sortedItems.slice(0, 5);
+  const spotlightItem = sourceItems[0]; // Most recent article (guaranteed by sort above)
 
   console.log(`   Using ${sourceItems.length} recent items for context.`);
   console.log(`   Spotlight: "${spotlightItem.translation.slice(0, 60)}..."\n`);
