@@ -64,11 +64,46 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
     ? `${BASE}${item.image}`
     : `${BASE}/images/pulse/default-og.jpg`;
 
+  // Article JSON-LD for search engine crawlers
+  const isoDate = item.isoDate ?? new Date(item.date).toISOString();
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": firstSentence(item.noise, 110),
+    "description": description,
+    "url": articleUrl,
+    "image": ogImage,
+    "datePublished": isoDate,
+    "dateModified": isoDate,
+    "articleSection": category,
+    "keywords": (item.keywords ?? []).join(", "),
+    "author": {
+      "@type": "Person",
+      "name": "Pedro Bandeira",
+      "url": BASE,
+      "jobTitle": "AI Operations Strategist"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Analog AI",
+      "url": BASE,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${BASE}/favicon.ico`
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": articleUrl
+    }
+  };
+
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <title>${esc(title)}</title>
+  <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
   <meta name="description" content="${esc(description)}" />
   <meta property="og:type" content="article" />
   <meta property="og:title" content="${esc(title)}" />

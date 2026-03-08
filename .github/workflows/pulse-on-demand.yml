@@ -29,10 +29,13 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: npm run pulse:from-slack
 
+      - name: Regenerate sitemap
+        run: npm run sitemap
+
       - name: Commit and push
         run: |
           git config user.name "Pulse Bot"
           git config user.email "bot@analog-ai.vercel.app"
-          git add public/blog/ public/manifest.json feedback/processed-pulse-urls.txt
+          git add public/blog/ public/manifest.json public/sitemap.xml feedback/processed-pulse-urls.txt
           git diff --staged --quiet || git commit -m "🤖 New pulse item published from Slack [skip ci]"
           git push
