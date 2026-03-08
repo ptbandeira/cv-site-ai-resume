@@ -40,10 +40,18 @@ jobs:
       - name: Publish manifest + sitemap
         run: npm run publish
 
+      - name: Generate images for new Pulse items
+        env:
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+        run: |
+          pip install Pillow --quiet
+          python3 generate-images.py
+
       - name: Commit and push
         run: |
           git config user.name "Pulse Bot"
           git config user.email "bot@analog-ai.vercel.app"
-          git add public/blog/ public/manifest.json public/sitemap.xml
+          git add public/blog/ public/manifest.json public/sitemap.xml public/images/pulse/
           git diff --staged --quiet || git commit -m "🤖 Auto-generate Pulse content [skip ci]"
+          git pull --rebase origin main
           git push

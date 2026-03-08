@@ -324,22 +324,43 @@ def generate_fallback_image(slug: str, category: str, date: str, noise: str) -> 
     return img
 
 
+def derive_query_from_item(item: dict) -> str:
+    """Derive a Pexels search query from pulse item metadata when slug isn't in ARTICLE_QUERIES."""
+    category = item.get('category', '')
+    keywords = item.get('keywords', [])
+
+    CATEGORY_VISUAL = {
+        'SMB Operations': 'small business office professional',
+        'Legal Technology': 'law firm lawyer office',
+        'Legal Tech': 'law firm lawyer office',
+        'EU AI Act': 'european parliament regulation',
+        'AI Governance': 'government policy documents',
+        'Enterprise AI': 'corporate technology office',
+        'Pharma AI': 'pharmaceutical laboratory research',
+        'Data Sovereignty': 'data center security',
+        'AI Tools': 'technology laptop productivity',
+    }
+    base = CATEGORY_VISUAL.get(category, 'business technology professional')
+
+    # Pick up to 2 short, visual keywords (skip generic/abstract ones)
+    skip_words = {'ai', 'llm', 'gpt', 'api', 'saas', 'b2b'}
+    visual_kws = [
+        k for k in keywords[:6]
+        if len(k.split()) <= 3 and k.lower() not in skip_words
+    ][:2]
+
+    if visual_kws:
+        return f"{' '.join(visual_kws)} {base.split()[0]}"
+    return base
+
+
 def main():
     # Check for API key
     api_key = os.environ.get('PEXELS_API_KEY', '')
     if not api_key:
-        print("=" * 60)
-        print("ERROR: PEXELS_API_KEY environment variable not set!")
+        print("⚠️  PEXELS_API_KEY not set — will use Picsum photo fallback for all items.")
+        print("   Get a free key at https://www.pexels.com/api/ for topic-matched photos.")
         print()
-        print("Get a free key in 1 minute:")
-        print("  1. Go to https://www.pexels.com/api/")
-        print("  2. Sign up / log in")
-        print("  3. Click 'Your API Key' → copy it")
-        print("  4. Run:")
-        print("     export PEXELS_API_KEY='your-key-here'")
-        print("     python3 generate-images.py")
-        print("=" * 60)
-        return
 
     with open('public/manifest.json', 'r') as f:
         data = json.load(f)
@@ -359,9 +380,19 @@ def main():
         date = item.get('date', '')
         output_path = os.path.join(output_dir, f"{slug}.jpg")
 
-        query = ARTICLE_QUERIES.get(slug, "business technology office")
+        # Skip items that already have a good image (>50KB = real photo, not fallback)
+        if os.path.exists(output_path) and os.path.getsize(output_path) > 50_000:
+            print(f"[{i+1}/{len(items)}] ✓ Skip {slug[:50]} (image exists)")
+            continue
+
+        # Use hardcoded query if available, otherwise derive from item metadata
+        if slug in ARTICLE_QUERIES:
+            query = ARTICLE_QUERIES[slug]
+        else:
+            query = derive_query_from_item(item)
+
         print(f"[{i+1}/{len(items)}] {slug[:50]}...")
-        print(f"  Query: {query}")
+        print(f"  Query: {query} {'(derived)' if slug not in ARTICLE_QUERIES else ''}")
 
         photo_data = download_pexels_photo(query, api_key)
 
