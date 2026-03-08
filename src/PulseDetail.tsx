@@ -130,7 +130,56 @@ export default function PulseDetail() {
     }
     canonical.href = articleUrl;
 
+    // JSON-LD Article structured data
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": firstSentence(insight.noise, 110),
+      "description": articleDesc,
+      "url": articleUrl,
+      "datePublished": insight.isoDate || insight.date,
+      "dateModified": insight.isoDate || insight.date,
+      "author": {
+        "@type": "Person",
+        "name": "Pedro Bandeira",
+        "url": "https://analog-ai.vercel.app",
+        "jobTitle": "Fractional CAIO & AI Governance Advisor",
+        "sameAs": [
+          "https://www.linkedin.com/in/ptbandeira/",
+          "https://github.com/ptbandeira"
+        ]
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Analog AI",
+        "url": "https://analog-ai.vercel.app",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://analog-ai.vercel.app/Chess_Knight_logo_transparent.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": articleUrl
+      },
+      "articleSection": insight.category,
+      "keywords": insight.keywords?.join(", ") || "",
+      ...(insight.image ? { "image": insight.image } : {})
+    };
+
+    let ldScript = document.querySelector<HTMLScriptElement>('script[data-article-jsonld]');
+    if (!ldScript) {
+      ldScript = document.createElement("script");
+      ldScript.type = "application/ld+json";
+      ldScript.setAttribute("data-article-jsonld", "true");
+      document.head.appendChild(ldScript);
+    }
+    ldScript.textContent = JSON.stringify(jsonLd);
+
     return () => {
+      // Remove article JSON-LD on unmount
+      const ld = document.querySelector('script[data-article-jsonld]');
+      if (ld) ld.remove();
       // Restore homepage defaults on unmount
       document.title = "AI Governance Consultant for Law Firms & SMBs in Europe | Analog AI";
       setMeta('meta[name="description"]', "content", "AI governance consulting for senior leaders in regulated industries across Europe. Fractional CAIO services — EU AI Act ready, private data architecture, no vendor lock-in.");

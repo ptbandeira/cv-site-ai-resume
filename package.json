@@ -15,7 +15,8 @@
     "feedback:sync": "tsx scripts/read-slack-feedback.ts",
     "pulse:from-slack": "tsx scripts/slack-to-pulse.ts",
     "generate": "tsx agents/content-generator.ts",
-    "publish": "tsx agents/content-publisher.ts",
+    "publish": "tsx agents/content-publisher.ts && tsx scripts/generate-sitemap.ts",
+    "sitemap": "tsx scripts/generate-sitemap.ts",
     "content:full": "npm run generate && npm run publish",
     "digest:send": "tsx scripts/weekly-digest.ts",
     "linkedin:drafts": "tsx scripts/generate-linkedin-drafts.ts",
@@ -111,7 +112,7 @@
     "tsx": "^4.21.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.38.0",
-    "vite": "^5.4.19",
+    "vite": "^5.4.21",
     "vitest": "^3.2.4"
   }
 }

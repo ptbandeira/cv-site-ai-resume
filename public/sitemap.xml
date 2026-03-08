@@ -2,33 +2,81 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://analog-ai.vercel.app/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://analog-ai.vercel.app/pulse</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://analog-ai.vercel.app/press</loc>
-    <lastmod>2026-02-25</lastmod>
+    <loc>https://analog-ai.vercel.app/how-i-work</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://analog-ai.vercel.app/proof</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://analog-ai.vercel.app/tools</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://analog-ai.vercel.app/guides</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://analog-ai.vercel.app/fit</loc>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://analog-ai.vercel.app/press</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://analog-ai.vercel.app/meet</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://analog-ai.vercel.app/blog/eu-ai-act-compliance.html</loc>
-    <lastmod>2026-02-20</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://analog-ai.vercel.app/blog/ai-2028-intelligence-scenario.html</loc>
-    <lastmod>2026-02-26</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://analog-ai.vercel.app/pulse/claude-ai-your-firm-s-new-digital-coworker-1772918102311</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://analog-ai.vercel.app/pulse/ai-sells-work-not-software-1772918087839</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://analog-ai.vercel.app/pulse/ai-impact-hype-vs-reality-1772896596285</loc>
@@ -248,37 +296,37 @@
   </url>
   <url>
     <loc>https://analog-ai.vercel.app/pulse/ai-agents-the-next-wave-of-business-change-1771797372659</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://analog-ai.vercel.app/pulse/ai-governance-updates-1771497040921</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://analog-ai.vercel.app/pulse/ai-model-translation-1771932049292</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://analog-ai.vercel.app/pulse/law-firm-ai-1772008835578</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://analog-ai.vercel.app/pulse/legal-tech-updates-1771322203597</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://analog-ai.vercel.app/pulse/smbs-win-by-applying-not-building-ai-1771797387604</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

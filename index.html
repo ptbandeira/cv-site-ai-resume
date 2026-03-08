@@ -33,6 +33,16 @@
     href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap"
     rel="stylesheet">
 
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    // Initial config — SPA page views handled by React hook (usePageTracking)
+    gtag('config', 'G-XXXXXXXXXX', { send_page_view: false });
+  </script>
+
   <!-- JSON-LD: ProfessionalService schema for GEO -->
   <script type="application/ld+json">
   {
