@@ -16,7 +16,9 @@ declare global {
   }
 }
 
-const GA_ID = import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined;
+// Fallback to the ID hardcoded in index.html so production works even when
+// VITE_GA_MEASUREMENT_ID is not set in Vercel environment variables.
+const GA_ID = (import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined) ?? "G-CTHY3GYTER";
 
 export function usePageTracking() {
   const location = useLocation();
