@@ -1,0 +1,23 @@
+{
+  "id": "law-firm-ai-1773045454678",
+  "slug": "law-firm-ai-1773045454678",
+  "category": "Legal Tech",
+  "noise": "The Spanish Data Protection Authority issued detailed guidance on how agentic AI systems must comply with GDPR requirements. This specifies rules for autonomous AI processing of personal data.",
+  "translation": "This isn't just theory. It's a concrete warning for any EU law firm using or planning advanced AI, especially those allowing AI to act autonomously with client data. GDPR enforcement is real, and August 2026 for the EU AI Act is coming. Your firm's AI strategy must respect data sovereignty and privacy by design, not just hope for the best.",
+  "action": "I can help your firm audit current AI use cases against this guidance and prepare for the EU AI Act, focusing on secure, compliant, local-first deployment. Let's talk before the clock runs out.",
+  "date": "Mar 9, 2026",
+  "isoDate": "2026-03-09T08:37:34.678Z",
+  "keywords": [
+    "law firm data privacy AI",
+    "law firm AI implementation",
+    "legal AI adoption",
+    "law firm automation",
+    "independent law firm technology"
+  ],
+  "sources": [
+    {
+      "label": "Inside Privacy",
+      "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNc3FEbkZaVWF1WUwyeG1ZMnRsTldXbUtrOXVNWjlqdWhuLVlhZ1E1cDVNdXlMVzcyQXlUUl9lWTg5dmdJdjZDLUJhZUt1RDdUUDNHYnQ1VkdoSDlIaFZ3dkhqTGM1MWZ6aHlVRnZ0b3ZVZmlFODEwbjNobC1kRUF6SWtkU3VqLUc0SVVTZG1CSWRaVHBrU284Z29mM2FFdUdOa0FSekVKSl9SYVBZRFZzQ3BnbmZIRTJQVXJtU3I4cTM1bzhtQm5pVXJWR2p4dlltaXVZMFFMb3MxT0E?oc=5"
+    }
+  ]
+}
