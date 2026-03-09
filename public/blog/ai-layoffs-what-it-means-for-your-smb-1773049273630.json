@@ -1,0 +1,23 @@
+{
+  "id": "ai-layoffs-what-it-means-for-your-smb-1773049273630",
+  "slug": "ai-layoffs-what-it-means-for-your-smb-1773049273630",
+  "category": "SMB Operations",
+  "noise": "Jack Dorsey's Block recently laid off 4,000 employees, citing \"intelligence tools\" as enabling a significantly smaller team. This included a machine learning engineer who built fraud detection AI, only to find his own role automated away.",
+  "translation": "This news, while dramatic for a tech giant, isn't a direct signal for European SMBs to fear immediate mass AI-driven layoffs. For you, it means recognizing that repetitive, rules-based tasks in areas like finance, compliance, or data analysis are becoming prime candidates for AI augmentation, not necessarily replacement. The focus shifts to doing more with existing staff by offloading mundane work.",
+  "action": "Start by identifying the 2-3 most repetitive, time-consuming tasks in your firm – the ones your team dislikes. I recommend a focused 3-month pilot project, empowering your existing staff with specific AI tools to automate these tasks, rather than replacing them. This isn't about cutting headcount, it's about freeing up your valuable human talent for higher-value work.",
+  "date": "Mar 9, 2026",
+  "isoDate": "2026-03-09T09:41:13.630Z",
+  "keywords": [
+    "AI implementation",
+    "workforce efficiency",
+    "task automation",
+    "SMB strategy",
+    "job evolution"
+  ],
+  "sources": [
+    {
+      "label": "AI Layoffs: What It Means For Your SMB",
+      "url": "https://futurism.com/artificial-intelligence/machine-learning-engineer-safe-ai-layoffs"
+    }
+  ]
+}
