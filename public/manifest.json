@@ -1,7 +1,30 @@
 {
-  "generated": "2026-03-09T09:41:29.613Z",
-  "totalItems": 47,
+  "generated": "2026-03-09T12:42:55.356Z",
+  "totalItems": 48,
   "items": [
+    {
+      "id": "ai-agents-automate-expert-tasks-prepare-your-smb-1773060159234",
+      "slug": "ai-agents-automate-expert-tasks-prepare-your-smb-1773060159234",
+      "category": "SMB Operations",
+      "noise": "We're seeing a new wave of open-source AI coding agents, like OpenCode and Aider, emerge. These tools are designed to act as intelligent co-pilots for developers, automating tasks from writing new code to debugging and refactoring existing software.",
+      "translation": "While your law firm or consultancy doesn't have software developers, this trend is profoundly relevant. It signals that AI agents are rapidly maturing beyond simple automation to handle complex, expert-level tasks that typically require human skill. This isn't about coding for you; it's about the blueprint for future AI tools that will soon be tackling legal drafting, financial analysis, and strategic recommendations.",
+      "action": "My advice is clear: do not chase these specific coding tools. Instead, prepare your organisation for the inevitable arrival of *your* sector's AI agents. Start by meticulously mapping your internal processes and identifying the high-volume, repetitive tasks that demand expert judgment. Crucially, begin structuring and standardising your internal data now – it is the fuel these future AI agents will need to perform effectively.",
+      "date": "Mar 9, 2026",
+      "isoDate": "2026-03-09T12:42:39.234Z",
+      "keywords": [
+        "AI agents",
+        "expert tasks",
+        "process automation",
+        "data readiness",
+        "future work"
+      ],
+      "sources": [
+        {
+          "label": "AI Agents Automate Expert Tasks: Prepare Your SMB",
+          "url": "https://thenewstack.io/open-source-coding-agents-like-opencode-cline-and-aider-are-solving-a-huge-headache-for-developers/"
+        }
+      ]
+    },
     {
       "id": "ai-layoffs-what-it-means-for-your-smb-1773049273630",
       "slug": "ai-layoffs-what-it-means-for-your-smb-1773049273630",
