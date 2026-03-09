@@ -1,0 +1,50 @@
+{
+  "generatedAt": "2026-03-09T07:03:10.007Z",
+  "weekLabel": "Week of 16 Mar 2026",
+  "posts": [
+    {
+      "type": "digest",
+      "platform": "linkedin",
+      "scheduledDay": "Monday",
+      "scheduledAt": "2026-03-16T09:00:00.000Z",
+      "text": "The AI conversation shifted from \"tools\" to \"colleagues\" this week. But don't confuse that with"
+    },
+    {
+      "type": "digest",
+      "platform": "facebook",
+      "scheduledDay": "Monday",
+      "scheduledAt": "2026-03-16T09:00:00.000Z",
+      "text": "Forget buying AI tools. Soon, your competitors won't be"
+    },
+    {
+      "type": "spotlight",
+      "platform": "linkedin",
+      "scheduledDay": "Wednesday",
+      "scheduledAt": "2026-03-11T10:00:00.000Z",
+      "text": "The new AI tools are not your 'coworkers.' They are digital switchboard operators.\n\nTech outlets are pushing",
+      "sourceSlug": "claude-ai-your-firm-s-new-digital-coworker-1772918102311"
+    },
+    {
+      "type": "spotlight",
+      "platform": "facebook",
+      "scheduledDay": "Wednesday",
+      "scheduledAt": "2026-03-11T10:00:00.000Z",
+      "text": "\"Coworker\" AI? Don't fall for",
+      "sourceSlug": "claude-ai-your-firm-s-new-digital-coworker-1772918102311"
+    },
+    {
+      "type": "original_take",
+      "platform": "linkedin",
+      "scheduledDay": "Friday",
+      "scheduledAt": "2026-03-13T09:00:00.000Z",
+      "text": "Most companies chase the \"big AI transformation.\" They’re looking for a silver bullet. They're looking"
+    },
+    {
+      "type": "original_take",
+      "platform": "facebook",
+      "scheduledDay": "Friday",
+      "scheduledAt": "2026-03-13T09:00:00.000Z",
+      "text": "I spent half my week digging through old contracts for Agentic"
+    }
+  ]
+}
