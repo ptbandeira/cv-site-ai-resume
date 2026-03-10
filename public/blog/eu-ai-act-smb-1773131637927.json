@@ -1,0 +1,23 @@
+{
+  "id": "eu-ai-act-smb-1773131637927",
+  "slug": "eu-ai-act-smb-1773131637927",
+  "category": "EU AI Act",
+  "noise": "The EU AI Act requires that AI-driven decisions must be reconstructable. If an AI system's decision-making process cannot be fully traced and explained, its deployment will be prohibited.",
+  "translation": "Forget \"black box\" AI. For European SMBs, especially in pharma or legal, this means your AI tools must log every step, every data point, every parameter change. Come August 2026, if an auditor asks how your AI made a call, \"magic\" won't cut it. Your internal processes need to evolve now.",
+  "action": "I can assess your current AI use cases and data pipelines, identifying compliance gaps for the EU AI Act's replayability mandate. We'll map out a local-first, governed execution strategy for your specific business.",
+  "date": "Mar 10, 2026",
+  "isoDate": "2026-03-10T08:33:57.927Z",
+  "keywords": [
+    "AI Act August 2026",
+    "EU AI Act compliance deadline",
+    "European AI law compliance",
+    "AI Act enforcement SMB",
+    "AI Act preparation mid-market"
+  ],
+  "sources": [
+    {
+      "label": "The Recursive",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOMkpkVm4zcTE2S2t3ZkQ5VVZPVWdmMkhKclJ5SWUzampYdk1fMmoycVo4XzJ2bUFQQkk0LTBiX2lLUmgzNmRJa20xaHRwMXZDa1VOZUxtdHE5S1JHeVpTVnhUZkFmRmZQSDRSY09LWng5emFuMDJaRXk4a1VJTUdaMG1CZzE?oc=5"
+    }
+  ]
+}

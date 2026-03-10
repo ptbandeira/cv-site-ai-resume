@@ -67,6 +67,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://analog-ai.vercel.app/pulse/pharma-sme-ai-1773131664227</loc>
+    <lastmod>2026-03-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://analog-ai.vercel.app/pulse/eu-ai-act-smb-1773131637927</loc>
+    <lastmod>2026-03-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://analog-ai.vercel.app/pulse/ai-agents-automate-expert-tasks-prepare-your-smb-1773060159234</loc>
     <lastmod>2026-03-09</lastmod>
     <changefreq>monthly</changefreq>
