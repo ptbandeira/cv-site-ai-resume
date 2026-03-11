@@ -1,7 +1,30 @@
 {
-  "generated": "2026-03-11T08:34:13.513Z",
-  "totalItems": 51,
+  "generated": "2026-03-11T09:35:59.894Z",
+  "totalItems": 52,
   "items": [
+    {
+      "id": "amazon-s-ai-chaos-your-governance-imperative-1773221743663",
+      "slug": "amazon-s-ai-chaos-your-governance-imperative-1773221743663",
+      "category": "AI Governance",
+      "noise": "Amazon, the e-commerce behemoth, has admitted that extensive use of AI coding tools is causing significant outages across its core retail and AWS businesses. They've linked these incidents to \"Gen-AI assisted changes\" and a lack of established best practices, now requiring senior engineers to sign off on AI-generated code.",
+      "translation": "For your 10-50 person law firm, accountancy, or consultancy, this isn't just a \"big tech\" problem. It means that pushing AI adoption without clear governance, human oversight, and established best practices—even for seemingly minor tasks—can lead to costly errors and reputational damage. Speed without control is a dangerous gamble, regardless of your company size.",
+      "action": "My advice is simple: before you even think about scaling AI tools, focus on robust AI governance. Implement a \"human-in-the-loop\" policy for any AI-generated output, especially client-facing work or internal critical processes. I recommend starting with a pilot project in a low-risk area, defining clear review protocols, and training your team on *when* to trust AI, not just *how* to use it.",
+      "date": "Mar 11, 2026",
+      "isoDate": "2026-03-11T09:35:43.664Z",
+      "keywords": [
+        "AI governance",
+        "human oversight",
+        "implementation risks",
+        "SMB AI",
+        "operational resilience"
+      ],
+      "sources": [
+        {
+          "label": "Amazon's AI Chaos Your Governance Imperative",
+          "url": "https://share.google/BjLvkV8tVNTM2ZenR"
+        }
+      ]
+    },
     {
       "id": "don-t-let-login-walls-dictate-your-ai-strategy-1773191838458",
       "slug": "don-t-let-login-walls-dictate-your-ai-strategy-1773191838458",
