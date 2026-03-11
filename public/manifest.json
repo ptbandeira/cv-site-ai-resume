@@ -1,7 +1,30 @@
 {
-  "generated": "2026-03-10T08:34:25.676Z",
-  "totalItems": 50,
+  "generated": "2026-03-11T01:17:34.780Z",
+  "totalItems": 51,
   "items": [
+    {
+      "id": "don-t-let-login-walls-dictate-your-ai-strategy-1773191838458",
+      "slug": "don-t-let-login-walls-dictate-your-ai-strategy-1773191838458",
+      "category": "SMB Operations",
+      "noise": "An announcement or update from Meta, likely concerning their \"Meta AI\" initiatives, has appeared on Facebook, but the full content is inaccessible behind a mandatory login screen, showing only the Meta © 2026 footer.",
+      "translation": "This isn't just about Meta; it's a common pattern. For a European SMB owner, it means vital information or new AI tools are often hidden behind platform walls, requiring personal accounts or deep engagement. You can't base strategic decisions on content you can't freely access or verify without jumping through hoops, which creates unnecessary friction and potential data privacy risks.",
+      "action": "My advice is clear: When evaluating AI, always prioritize open-source information, direct vendor documentation, and reputable, independent industry analysis. Avoid making business-critical decisions based on opaque, login-gated social media content. Build an internal knowledge base that isn't dependent on external platform access. This saves time and protects your firm's data integrity.",
+      "date": "Mar 11, 2026",
+      "isoDate": "2026-03-11T01:17:18.458Z",
+      "keywords": [
+        "Information access",
+        "Gated content",
+        "Platform reliance",
+        "AI strategy",
+        "Digital literacy"
+      ],
+      "sources": [
+        {
+          "label": "Don't Let Login Walls Dictate Your AI Strategy",
+          "url": "https://www.facebook.com/photo.php?fbid=1367368195431963&amp;set=a.642107707958019&amp;type=3"
+        }
+      ]
+    },
     {
       "id": "pharma-sme-ai-1773131664227",
       "slug": "pharma-sme-ai-1773131664227",
