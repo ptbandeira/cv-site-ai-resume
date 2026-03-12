@@ -1,0 +1,23 @@
+{
+  "id": "eu-ai-act-smb-1773304551171",
+  "slug": "eu-ai-act-smb-1773304551171",
+  "category": "EU AI Act",
+  "noise": "The Recursive reports on a core requirement of the EU AI Act: the \"Replayability Test.\" It mandates that if an AI's decision-making process cannot be fully reconstructed, the system cannot be deployed.",
+  "translation": "This is not about AI performance, it's about accountability. For regulated European businesses, if your AI can't clearly show *how* it reached a critical decision, it's a compliance risk. Your black-box AI tools are now liabilities. This is a fundamental governance shift.",
+  "action": "I help European SMBs build auditable AI pipelines for regulated processes. We can assess your current systems and implement the 'replayability' framework needed for EU AI Act compliance. Let's get your AI ready to ship safely.",
+  "date": "Mar 12, 2026",
+  "isoDate": "2026-03-12T08:35:51.171Z",
+  "keywords": [
+    "EU AI Act consultant",
+    "EU AI Act small business",
+    "AI Act enforcement SMB",
+    "AI Act preparation mid-market",
+    "AI regulatory burden SMB"
+  ],
+  "sources": [
+    {
+      "label": "The Recursive",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOMkpkVm4zcTE2S2t3ZkQ5VVZPVWdmMkhKclJ5SWUzampYdk1fMmoycVo4XzJ2bUFQQkk0LTBiX2lLUmgzNmRJa20xaHRwMXZDa1VOZUxtdHE5S1JHeVpTVnhUZkFmRmZQSDRSY09LWng5emFuMDJaRXk4a1VJTUdaMG1CZzE?oc=5"
+    }
+  ]
+}

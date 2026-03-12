@@ -1,0 +1,23 @@
+{
+  "id": "pharma-sme-ai-1773304575758",
+  "slug": "pharma-sme-ai-1773304575758",
+  "category": "Pharma AI",
+  "noise": "Regolo's research reveals 75% of EU businesses inadvertently expose customer data to foreign surveillance. This highlights a significant data privacy gap across European operations.",
+  "translation": "For small to mid-sized pharma, CROs, or biotechs in Europe, this isn't just a compliance issue; it’s a foundational risk. Using US-based cloud AI tools without proper data residency safeguards means your sensitive data could be legally accessed by foreign governments. Your \"transformation\" might just be a compliance nightmare waiting for the EU AI Act to bite. I've seen this movie before, with different tech, same plot.",
+  "action": "I can audit your current data flows and AI tool usage against EU data sovereignty requirements in 1-3 days, identifying immediate risks and practical, local-first deployment options.",
+  "date": "Mar 12, 2026",
+  "isoDate": "2026-03-12T08:36:15.758Z",
+  "keywords": [
+    "pharma GDPR AI",
+    "clinical trial AI automation",
+    "regulatory affairs AI pharma",
+    "small pharma AI",
+    "CRO artificial intelligence"
+  ],
+  "sources": [
+    {
+      "label": "The Malaysian Reserve",
+      "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxPd1NVbG42S19fWjY0djNNRGpkVDNzNFl0ek9PaGtNOGlOeUI3UEJzTXNBb2RCYzc3S0tMU085SWdvSWpxcTFJVlhHamNGQkc2RXlQNkNLRnhJTFZ0XzROUW41bGM2TDFkOUoxbmlHVEdoaktZckh3TnJEd3hxMU9DRWN2ZFkzY3BtZnpvTmxYLWczQUN1dVRKX2I1U1lleFpCNmNEMncyeUFPVlpSQmNtb19hNmlKaFM0UW1mZnh5cklpMlZsOFdYT1M4dnRXRm1FbURtR0pFanRSbUNnSjBSN1ZoZmw?oc=5"
+    }
+  ]
+}
