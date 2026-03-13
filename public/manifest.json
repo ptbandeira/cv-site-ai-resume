@@ -1,7 +1,30 @@
 {
-  "generated": "2026-03-12T08:36:17.196Z",
-  "totalItems": 56,
+  "generated": "2026-03-13T08:33:47.816Z",
+  "totalItems": 57,
   "items": [
+    {
+      "id": "law-firm-ai-1773390812100",
+      "slug": "law-firm-ai-1773390812100",
+      "category": "Legal Tech",
+      "noise": "Legal AI provider Harvey recently underscored the critical importance of robust governance frameworks for advanced legal AI agents, as reported by TipRanks.",
+      "translation": "Don't just plug in AI and hope for the best. This isn't about *if* you use AI, but *how* you control it. For European firms, the EU AI Act makes governance non-negotiable. Without it, you're not gaining efficiency; you're just adding unmanaged risk to client data.",
+      "action": "I can audit your current M365 setup to identify immediate, governed AI use cases that respect data sovereignty, preparing your firm for EU AI Act compliance in 1-3 weeks. Stop experimenting, start executing responsibly.",
+      "date": "Mar 13, 2026",
+      "isoDate": "2026-03-13T08:33:32.100Z",
+      "keywords": [
+        "legal practice AI compliance",
+        "independent law firm technology",
+        "law firm AI implementation",
+        "boutique law firm AI",
+        "legal AI adoption"
+      ],
+      "sources": [
+        {
+          "label": "TipRanks",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNelI3dFk4QWZOdDZ5RHhJRGtEc0VwUVRfQWRrb0VxS2ozZ0wyMVB3RlE5RGl0YUw0dTJBRkxRREkxSUpkcTl5MDlPTm14ek5tZlJNRXNoUGlFaF9TY2lnZmIzMU5aRERZQlBadFUxbFdNdjE3N1BsVVJuSzh1OGttYjN5VkVBck95dkNqY1NlTDhFbEplZ3NxSFhvTENDWjZXR2NzWFNsWTI?oc=5"
+        }
+      ]
+    },
     {
       "id": "pharma-sme-ai-1773304575758",
       "slug": "pharma-sme-ai-1773304575758",
