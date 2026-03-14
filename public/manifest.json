@@ -1,7 +1,76 @@
 {
-  "generated": "2026-03-13T08:33:47.816Z",
-  "totalItems": 57,
+  "generated": "2026-03-14T08:28:47.078Z",
+  "totalItems": 60,
   "items": [
+    {
+      "id": "pharma-sme-ai-1773476925664",
+      "slug": "pharma-sme-ai-1773476925664",
+      "category": "Pharma AI",
+      "noise": "Pharmaceutical Executive highlights \"Shadow AI,\" where employees utilize unapproved AI tools without IT oversight. The article details its increasing impact on pharma companies, posing risks to data security and compliance.",
+      "translation": "This isn't just IT's problem; it’s a board-level risk. Your people are already using AI tools for quick tasks, often with sensitive data, completely bypassing governance. With the EU AI Act enforcement in August 2026, uncontrolled AI usage means hefty fines and IP loss. You're likely paying for Copilot, but using it correctly? Doubtful.",
+      "action": "I can help you audit existing AI use, implement secure, governed Copilot workflows within Microsoft 365, and build an",
+      "date": "Mar 14, 2026",
+      "isoDate": "2026-03-14T08:28:45.664Z",
+      "keywords": [
+        "clinical trial AI automation",
+        "small pharma AI",
+        "pharma data privacy AI",
+        "regulatory affairs AI pharma",
+        "life sciences SMB AI"
+      ],
+      "sources": [
+        {
+          "label": "Pharmaceutical Executive",
+          "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE9TamJ5bUt6djAtdnNXQ2gtR1BGNkFDTS1EcU44a19idGptZjJCN2ZpbENIOGdHNWQzUW5xWkVxUXhVVVdqMHRkY3B2ZURLMGVTX2ZxV1JTdFVDWDNpT1JndUdpRmlXUDdPYkRuZg?oc=5"
+        }
+      ]
+    },
+    {
+      "id": "law-firm-ai-1773476912643",
+      "slug": "law-firm-ai-1773476912643",
+      "category": "Legal Tech",
+      "noise": "Anthropic's top lawyer suggests the billable hour may be nearing its end due to AI's impact on legal service delivery. This signals a potential shift in law firm compensation models.",
+      "translation": "For independent European law firms, this isn't just tech talk. It means clients will expect more value, not just more hours. Your firm's survival hinges on leveraging AI to deliver fixed-fee services or alternative models efficiently, before your competitors do. The old ways are becoming unsustainable.",
+      "action": "I can help you audit your current workflows to identify where Microsoft 365 Copilot, already paid for, can cut billable hours by 15-20% *today*, without sending client data to US servers. Let's make your firm future-ready, compliantly.",
+      "date": "Mar 14, 2026",
+      "isoDate": "2026-03-14T08:28:32.643Z",
+      "keywords": [
+        "law firm AI implementation",
+        "legal AI adoption",
+        "independent law firm technology",
+        "legal practice AI compliance",
+        "law firm automation"
+      ],
+      "sources": [
+        {
+          "label": "LawFuel",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOU1ZrUGYtQkxqS1JhTkRtS1lzOFJQYk4yOERTWG1Jc2pJNWhobDMzV3JiVDByc1piVmZDV3pLZDBFbVZXaW0zaWMxVnhLNDM2azZzd3VVT3hJdGNkT2I2Vms5V1o1ZnlPcHNIV2dSbnF4T3g5d2l0TVU2cUowQkxzaEVJTnlNQzJUVGE2bFVOaUpGYTlma3JzTkJR?oc=5"
+        }
+      ]
+    },
+    {
+      "id": "eu-ai-act-smb-1773476900860",
+      "slug": "eu-ai-act-smb-1773476900860",
+      "category": "EU AI Act",
+      "noise": "The EU Council agreed on its position regarding the Artificial Intelligence Act, aiming to streamline rules for AI deployment across member states. This marks a key step towards final legislation.",
+      "translation": "The EU AI Act isn't theoretical; it's locking in. This \"streamlining\" means the core obligations are set. For your European SMB, August 2026 is rapidly approaching. Waiting for full clarity is a luxury you don't have. Start auditing your AI use, especially with client data.",
+      "action": "I can conduct a rapid AI compliance audit for your firm in 1-3 days. We'll identify immediate risks, leverage your existing M365, and ensure data sovereignty for regulated use cases, avoiding unnecessary tools.",
+      "date": "Mar 14, 2026",
+      "isoDate": "2026-03-14T08:28:20.860Z",
+      "keywords": [
+        "high-risk AI systems compliance",
+        "EU AI Act SME",
+        "EU AI Act small business",
+        "AI Act preparation mid-market",
+        "EU AI Act consultant"
+      ],
+      "sources": [
+        {
+          "label": "consilium.europa.eu",
+          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNTGN5VTVMY2tHSmx3SllEOFN1a0FKRkprd24xdS1fQVVjRlpsbGh5Rml2VngwMndDQUtMcmNkc2x2N1pIUlJ6bzB6SHhKVUxZNzBsV1N1T2czcWhQak1GZFFGX1hHd1ZKVHRTTk5YTW9CV0xYLTJPMS1XdFoyWnlVaXdwMUpwOWs5OEw0N2U4T0VqOUxoRDRvQjJzYjZSZlZHT19iTVYzbW4zOUh0UEVQSzU0c0hVVlM2YUJTc1VjN1FfN0pVb1lnV3B2TXBreVVXUFBoRg?oc=5"
+        }
+      ]
+    },
     {
       "id": "law-firm-ai-1773390812100",
       "slug": "law-firm-ai-1773390812100",

@@ -1,0 +1,23 @@
+{
+  "id": "pharma-sme-ai-1773476925664",
+  "slug": "pharma-sme-ai-1773476925664",
+  "category": "Pharma AI",
+  "noise": "Pharmaceutical Executive highlights \"Shadow AI,\" where employees utilize unapproved AI tools without IT oversight. The article details its increasing impact on pharma companies, posing risks to data security and compliance.",
+  "translation": "This isn't just IT's problem; it’s a board-level risk. Your people are already using AI tools for quick tasks, often with sensitive data, completely bypassing governance. With the EU AI Act enforcement in August 2026, uncontrolled AI usage means hefty fines and IP loss. You're likely paying for Copilot, but using it correctly? Doubtful.",
+  "action": "I can help you audit existing AI use, implement secure, governed Copilot workflows within Microsoft 365, and build an",
+  "date": "Mar 14, 2026",
+  "isoDate": "2026-03-14T08:28:45.664Z",
+  "keywords": [
+    "clinical trial AI automation",
+    "small pharma AI",
+    "pharma data privacy AI",
+    "regulatory affairs AI pharma",
+    "life sciences SMB AI"
+  ],
+  "sources": [
+    {
+      "label": "Pharmaceutical Executive",
+      "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE9TamJ5bUt6djAtdnNXQ2gtR1BGNkFDTS1EcU44a19idGptZjJCN2ZpbENIOGdHNWQzUW5xWkVxUXhVVVdqMHRkY3B2ZURLMGVTX2ZxV1JTdFVDWDNpT1JndUdpRmlXUDdPYkRuZg?oc=5"
+    }
+  ]
+}
